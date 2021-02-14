@@ -1,0 +1,34 @@
+<mat-toolbar color="primary" class="opena3xx-toolbar">
+  <button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+  <h1 class="opena3xx-app-name">OpenA3XX Configurator - Admin Interface</h1>
+</mat-toolbar>
+
+<mat-sidenav-container class="opena3xx-container" autosize>
+  <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+		<mat-nav-list>
+			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
+				<mat-icon mat-list-icon>home</mat-icon>
+      		</mat-list-item>
+      		<mat-list-item (click)="clickManageHardwarePanels()" class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Hardware Panels</span>
+				<mat-icon mat-list-icon>dashboard</mat-icon>
+			</mat-list-item>
+			<mat-list-item (click)="clickManageHardwareInputTypes()" class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Hardware Input Types</span>
+				<mat-icon mat-list-icon>login</mat-icon>
+			</mat-list-item>
+			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Hardware Output Types</span>
+				<mat-icon mat-list-icon>logout</mat-icon>
+			</mat-list-item>
+		</mat-nav-list>
+    <mat-nav-list>
+</mat-nav-list>
+	</mat-sidenav>
+
+	<div class="opena3xx-sidenav-content">
+		<router-outlet></router-outlet>
+	</div>
+
+</mat-sidenav-container>
