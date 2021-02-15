@@ -32,6 +32,9 @@ export class AppComponent {
     }
   }
 
+  clickDashboard(){
+    this.router.navigateByUrl(`/dashboard`);
+  }
   clickManageHardwarePanels(){
     this.router.navigateByUrl(`/manage/hardware-panels`);
   }
@@ -43,4 +46,5 @@ export class AppComponent {
   clickManageHardwareOutputTypes(){
     this.router.navigateByUrl(`/manage/hardware-output-types`);
   }
+
 }

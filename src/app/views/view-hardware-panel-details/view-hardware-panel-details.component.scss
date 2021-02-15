@@ -1,0 +1,43 @@
+mat-toolbar{
+    margin-bottom:15px;
+}
+
+mat-toolbar.hardware-inputs, mat-toolbar.hardware-outputs {
+    margin-top:15px;
+}
+
+table{
+    width:100%;
+}
+
+mat-grid-list{
+    .mat-grid-tile {
+        .data-wrapper{
+            border:1px solid #d0d0d0;
+            padding:5px;
+            position:relative;
+            background-color:#ffffff;
+            width: 88%;
+            height: 88%;
+            border-radius:5px;
+            .title{
+                position: absolute;
+                top:20px;
+                width:97%;
+                text-align: center;
+            }
+            .value{
+                position: absolute;
+                width: 97%;
+                top:70px;
+                font-size: 28px;
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+        .data-wrapper:hover{
+            background-color:#efefef;
+        }
+    }
+
+}

@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditHardwareInputTypeComponent } from './components/edit-hardware-input-type/edit-hardware-input-type.component';
-import { EditHardwareOutputTypeComponent } from './components/edit-hardware-output-type/edit-hardware-output-type.component';
-import { ManageHardwareInputTypesComponent } from './components/manage-hardware-input-types/manage-hardware-input-types.component';
-import { ManageHardwareOutputTypesComponent } from './components/manage-hardware-output-types/manage-hardware-output-types.component';
-import { ManageHardwarePanelsComponent } from './components/manage-hardware-panels/manage-hardware-panels.component';
-import { ViewHardwarePanelDetailsComponent } from './components/view-hardware-panel-details/view-hardware-panel-details.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { EditHardwareInputTypeComponent } from './views/edit-hardware-input-type/edit-hardware-input-type.component';
+import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
+import { ManageHardwareInputTypesComponent } from './views/manage-hardware-input-types/manage-hardware-input-types.component';
+import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-output-types/manage-hardware-output-types.component';
+import { ManageHardwarePanelsComponent } from './views/manage-hardware-panels/manage-hardware-panels.component';
+import { ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
 
 const routes: Routes = [{
   path: '',
-  redirectTo: 'manage/hardware-panels',
+  redirectTo: 'dashboard',
   pathMatch: 'full'
+},
+{
+  path: 'dashboard',
+  component: DashboardComponent
 },
 {
   path: 'manage/hardware-panels',

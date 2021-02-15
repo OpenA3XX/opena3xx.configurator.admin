@@ -6,7 +6,7 @@
 <mat-sidenav-container class="opena3xx-container" autosize>
   <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
 		<mat-nav-list>
-			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+			<mat-list-item (click)="clickDashboard()"  class="parent">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
 				<mat-icon mat-list-icon>home</mat-icon>
       		</mat-list-item>

@@ -1,0 +1,145 @@
+<h4>View Hardware Panel Details</h4>
+
+<mat-toolbar>
+    <mat-icon>info</mat-icon>&nbsp;
+    <span>General Information</span>
+</mat-toolbar>
+
+<mat-grid-list cols="8" rowHeight="6:3">
+    <mat-grid-tile>
+        <div class="data-wrapper">
+            <div class="title">
+                Hardware Panel Name
+            </div>
+            <div class="value">
+                MCDU Device
+            </div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="data-wrapper">
+            <div class="title">
+                Hardware Panel Identifier
+            </div>
+            <div class="value">
+                1
+            </div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="data-wrapper">
+            <div class="title">
+                Manufacturer
+            </div>
+            <div class="value">
+                Airbus
+            </div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="data-wrapper">
+            <div class="title">
+                Aircraft Model
+            </div>
+            <div class="value">
+                A320-NEO
+            </div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="data-wrapper">
+            <div class="title">
+                Cockpit Area
+            </div>
+            <div class="value">
+                Pedestal
+            </div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="data-wrapper">
+            <div class="title">
+                Panel Owner
+            </div>
+            <div class="value">
+                Pilot
+            </div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="data-wrapper">
+            <div class="title">
+                Total Inputs
+            </div>
+            <div class="value">
+                72
+            </div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="data-wrapper">
+            <div class="title">
+                Total Outputs
+            </div>
+            <div class="value">
+                3
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+
+<mat-toolbar class="hardware-inputs">
+    <mat-icon>login</mat-icon>&nbsp;
+    <span>Hardware Inputs</span>
+</mat-toolbar>
+<table mat-table [dataSource]="inputsDataSource">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hardwareInputType">
+        <th mat-header-cell *matHeaderCellDef> Input Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.hardwareInputType}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedInputColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedInputColumns;"></tr>
+</table>
+
+<mat-toolbar class="hardware-outputs">
+    <mat-icon>logout</mat-icon>&nbsp;
+    <span>Hardware Outputs</span>
+</mat-toolbar>
+
+<table mat-table [dataSource]="outputsDataSource">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hardwareOutputType">
+        <th mat-header-cell *matHeaderCellDef> Output Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.hardwareOutputType}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedOutputColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedOutputColumns;"></tr>
+</table>
+
+
+
+
+

@@ -1,19 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { HardwareOutputTypeDto } from 'src/app/models/hardware.output.type.dto';
 import { filter, map, tap } from 'rxjs/operators';
 import { HttpService } from 'src/app/services/http.service';
 import {NgForm} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { SaveSuccessDialog } from '../save-success-dialog/save-success-dialog.component';
+import { SaveSuccessDialog } from '../../components/save-success-dialog/save-success-dialog.component';
 
 @Component({
-  selector: 'opena3xx-edit-hardware-input-type',
-  templateUrl: './edit-hardware-input-type.component.html',
-  styleUrls: ['./edit-hardware-input-type.component.scss']
+  selector: 'opena3xx-edit-hardware-output-type',
+  templateUrl: './edit-hardware-output-type.component.html',
+  styleUrls: ['./edit-hardware-output-type.component.scss']
 })
 
-export class EditHardwareInputTypeComponent implements OnInit {
+export class EditHardwareOutputTypeComponent implements OnInit {
 
   idParam!: Number;
   public data!: any;
@@ -33,7 +34,7 @@ export class EditHardwareInputTypeComponent implements OnInit {
       this.idParam = params.id;
     });
     
-    this.httpService.getHardwareInputTypeById(this.idParam)
+    this.httpService.getHardwareOutputTypeById(this.idParam)
     .pipe(
       tap(data => console.log('Data received', data)),
       filter(x => !!x),
@@ -41,17 +42,14 @@ export class EditHardwareInputTypeComponent implements OnInit {
     ).subscribe();
   }
 
-  updateHardwareInputType(f: NgForm){
+  updateHardwareOutputType(f: NgForm){
     console.log(this.data);
-    this.httpService.updateHardwareInputType(this.data).subscribe();
+    this.httpService.updateHardwareOutputType(this.data).subscribe();
 
     this.dialog.open(SaveSuccessDialog);
   }
 
   goBack(){
-    this.router.navigateByUrl(`/manage/hardware-input-types`)
+    this.router.navigateByUrl(`/manage/hardware-output-types`)
   }
 }
-
-
-
