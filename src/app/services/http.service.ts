@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Data } from "@angular/router";
 import { HardwareInputTypeDto } from "../models/hardware.input.type.dto";
+import { HardwareOutputTypeDto } from "../models/hardware.output.type.dto";
 
 @Injectable()
 export class HttpService {
@@ -29,5 +29,18 @@ export class HttpService {
 
   updateHardwareInputType(hardwareInputTypeDto: HardwareInputTypeDto){
     return this.http.patch(`${this.BASE_URL}/hardware-input-types`, hardwareInputTypeDto);
+  }
+
+
+  getAllHardwareOutputTypes(){
+    return this.http.get(`${this.BASE_URL}/hardware-output-types`)
+  }
+
+  getHardwareOutputTypeById(id: Number){
+    return this.http.get(`${this.BASE_URL}/hardware-output-types/${id}`)
+  }
+
+  updateHardwareOutputType(hardwareOutputTypeDto: HardwareOutputTypeDto){
+    return this.http.patch(`${this.BASE_URL}/hardware-output-types`, hardwareOutputTypeDto);
   }
 }

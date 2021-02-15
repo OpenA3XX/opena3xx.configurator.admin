@@ -1,0 +1,37 @@
+<h4>Edit Hardware Output Type Component</h4>
+
+
+<mat-toolbar>
+    <button mat-flat-button color="primary" (click)="goBack()">
+        Back
+    </button>
+</mat-toolbar>
+
+
+
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="updateHardwareOutputType(f)" novalidate>
+      <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Hardware Output Type Identifier</mat-label>
+            <input matInput placeholder="Placeholder" disabled [ngModel]="data.id" name="id">
+            <mat-icon matSuffix>format_list_numbered</mat-icon>
+            <mat-hint>This field is uneditable. The reason is the identifier is generated automatically by the system.</mat-hint>
+          </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Hardware Output Type Name</mat-label>
+          <input matInput placeholder="Placeholder" [(ngModel)]="data.name"  name="name">
+          <mat-icon matSuffix>text_format</mat-icon>
+          <mat-hint>Enter the name of the hardware Output type that describe the pyhiscal Output type</mat-hint>
+        </mat-form-field>
+      </p>    
+      <p>
+        <button mat-flat-button color="warn">
+            <mat-icon mat-list-icon>save</mat-icon>
+            Save
+        </button>
+      </p>
+  </form>
+</div>

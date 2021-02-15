@@ -12,7 +12,10 @@ import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ManageHardwareInputTypesComponent } from './components/manage-hardware-input-types/manage-hardware-input-types.component';
 import { ViewHardwarePanelDetailsComponent } from './components/view-hardware-panel-details/view-hardware-panel-details.component';
-import { EditHardwareInputTypeComponent, SaveSuccessDialog } from './components/edit-hardware-input-type/edit-hardware-input-type.component';
+import { EditHardwareInputTypeComponent } from './components/edit-hardware-input-type/edit-hardware-input-type.component';
+import { ManageHardwareOutputTypesComponent } from './components/manage-hardware-output-types/manage-hardware-output-types.component';
+import { EditHardwareOutputTypeComponent } from './components/edit-hardware-output-type/edit-hardware-output-type.component';
+import { SaveSuccessDialog } from './components/save-success-dialog/save-success-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +24,9 @@ import { EditHardwareInputTypeComponent, SaveSuccessDialog } from './components/
     ManageHardwarePanelsComponent,
     ViewHardwarePanelDetailsComponent,
     ManageHardwareInputTypesComponent,
-    EditHardwareInputTypeComponent
-    
+    EditHardwareInputTypeComponent,
+    ManageHardwareOutputTypesComponent,
+    EditHardwareOutputTypeComponent 
   ],
   imports: [
     BrowserModule,
