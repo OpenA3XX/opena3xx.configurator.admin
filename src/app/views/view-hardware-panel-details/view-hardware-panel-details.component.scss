@@ -25,14 +25,21 @@ mat-grid-list{
                 top:20px;
                 width:97%;
                 text-align: center;
+                color:#505050;
+                font-weight: bold;
+                font-size: 16px;
             }
             .value{
                 position: absolute;
                 width: 97%;
-                top:70px;
-                font-size: 28px;
+                top: 68px;
+                font-size: 36px;
                 text-align: center;
                 font-weight: bold;
+                line-height: 33px;
+            }
+            .value.small{
+                font-size: 20px;
             }
         }
         .data-wrapper:hover{

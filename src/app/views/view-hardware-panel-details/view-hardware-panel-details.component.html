@@ -11,8 +11,8 @@
             <div class="title">
                 Hardware Panel Name
             </div>
-            <div class="value">
-                MCDU Device
+            <div class="value small">
+                {{hardwarePanelDto.name}}
             </div>
         </div>
     </mat-grid-tile>
@@ -22,7 +22,7 @@
                 Hardware Panel Identifier
             </div>
             <div class="value">
-                1
+                {{hardwarePanelDto.id}}
             </div>
         </div>
     </mat-grid-tile>
@@ -32,7 +32,7 @@
                 Manufacturer
             </div>
             <div class="value">
-                Airbus
+                {{hardwarePanelDto.aircraftModel}}
             </div>
         </div>
     </mat-grid-tile>
@@ -42,7 +42,7 @@
                 Aircraft Model
             </div>
             <div class="value">
-                A320-NEO
+                {{hardwarePanelDto.manufacturer}}
             </div>
         </div>
     </mat-grid-tile>
@@ -52,7 +52,7 @@
                 Cockpit Area
             </div>
             <div class="value">
-                Pedestal
+                {{hardwarePanelDto.cockpitArea}}
             </div>
         </div>
     </mat-grid-tile>
@@ -62,7 +62,7 @@
                 Panel Owner
             </div>
             <div class="value">
-                Pilot
+                {{hardwarePanelDto.owner}}
             </div>
         </div>
     </mat-grid-tile>
@@ -72,7 +72,7 @@
                 Total Inputs
             </div>
             <div class="value">
-                72
+                {{hardwarePanelDto.totalInputs}}
             </div>
         </div>
     </mat-grid-tile>
@@ -82,7 +82,7 @@
                 Total Outputs
             </div>
             <div class="value">
-                3
+                {{hardwarePanelDto.totalOutputs}}
             </div>
         </div>
     </mat-grid-tile>

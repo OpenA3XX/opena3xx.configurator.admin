@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { filter, map, tap } from 'rxjs/operators';
+import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/models/hardware.panel.dto';
+import { HttpService } from 'src/app/services/http.service';
 
 
 @Component({
@@ -9,46 +13,40 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 
 export class ViewHardwarePanelDetailsComponent implements OnInit {
-    ngOnInit(): void {
-      const inputs = [{
-        id: 1,
-        name: "LSK 1",
-        hardwareInputType: "Push to Make Button"
-      },{
-        id: 2,
-        name: "LSK 2",
-        hardwareInputType: "Push to Make Button"
-      },{
-        id: 3,
-        name: "LSK 3",
-        hardwareInputType: "Push to Make Button"
-      }];
-      this.inputsDataSource = new MatTableDataSource<HardwareInputDto>(inputs);
 
-      const outputs = [{
-        id: 1,
-        name: "Power LED",
-        hardwareOutputType: "LED"
-      }];
-      this.outputsDataSource = new MatTableDataSource<HardwareOutputDto>(outputs);
-    }
-    
+    idParam!: Number;
+    public hardwarePanelDto: any;
     public displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType'];
     public displayedOutputColumns: string[] = ['id', 'name', 'hardwareOutputType'];
     inputsDataSource = new MatTableDataSource<HardwareInputDto>();
     outputsDataSource = new MatTableDataSource<HardwareOutputDto>();
 
 
-}
 
-export interface HardwareInputDto{
-  id: number,
-  name: string,
-  hardwareInputType: string
-}
+    constructor(private httpService: HttpService, private router: Router){
 
-export interface HardwareOutputDto{
-  id: number,
-  name: string,
-  hardwareOutputType: string
+    }
+
+    ngOnInit(): void {
+
+      this.router.routerState.root.queryParams.subscribe(params => {
+        console.log('Received Query Params', params)
+        this.idParam = params.id;
+      });
+
+      this.httpService.getAllHardwarePanelDetails(this.idParam)
+      .pipe(
+        tap(data => console.log('Data received', data)),
+        filter(x => !!x),
+        map(data_received => {
+          this.hardwarePanelDto = data_received
+          this.inputsDataSource = new MatTableDataSource<HardwareInputDto>(this.hardwarePanelDto.hardwareInputs);
+          this.outputsDataSource = new MatTableDataSource<HardwareOutputDto>(this.hardwarePanelDto.hardwareOutputs);
+        })
+      ).subscribe();
+
+
+    }
+    
+
 }

@@ -3,7 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { HttpService } from 'src/app/services/http.service';
 import { filter, map, tap } from 'rxjs/operators';
-import { HardwarePanelDto } from '../../models/hardware.panel.dto';
+import { HardwarePanelOverviewDto } from '../../models/hardware.panel.dto';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
 
   public displayedColumns: string[] = ['id', 'name', 'aircraftModel', 'manufacturer', 'cockpitArea', 'owner', 'details'];
-  dataSource = new MatTableDataSource<HardwarePanelDto>();
+  dataSource = new MatTableDataSource<HardwarePanelOverviewDto>();
   public data: any;
 
   constructor(
@@ -31,13 +31,13 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    this.httpService.getAllHardwarePanelDetails()
+    this.httpService.getAllHardwarePanelOverviewDetails()
     .pipe(
       tap(data => console.log('Data received', data)),
       filter(x => !!x),
       map(data_received => {
         this.data = data_received
-        this.dataSource = new MatTableDataSource<HardwarePanelDto>(this.data)
+        this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data)
       })
     ).subscribe();
   }

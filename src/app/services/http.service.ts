@@ -15,9 +15,13 @@ export class HttpService {
     return this.http.get(url);
   }
 
-  getAllHardwarePanelDetails(){
-      return this.http.get(`${this.BASE_URL}/hardware-panel/details/all`)
+  getAllHardwarePanelOverviewDetails(){
+      return this.http.get(`${this.BASE_URL}/hardware-panel/overview/all`)
   }
+
+  getAllHardwarePanelDetails(id: Number){
+    return this.http.get(`${this.BASE_URL}/hardware-panel/details/${id}`)
+}
 
   getAllHardwareInputTypes(){
     return this.http.get(`${this.BASE_URL}/hardware-input-types`)
