@@ -47,6 +47,16 @@ body { margin: 0; font-family: "Inter", Roboto, "Helvetica Neue", sans-serif; }
   background:#0061ed;
 }
 
+.mat-stroked-button.mat-primary{
+  color:#0061ed;
+  border-color:#0061ed;
+}
+
+.mat-stroked-button.mat-warn{
+  color:#f44336;
+  border-color:#f44336;
+}
+
 .mat-drawer-container {
   background-color: #fdfdfd !important;
 }

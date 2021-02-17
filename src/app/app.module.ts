@@ -17,12 +17,16 @@ import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-outp
 import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
 import { SaveSuccessDialog } from './components/save-success-dialog/save-success-dialog.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { ViewHardwareInputSelectorsDialogComponent } from './components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
+import { MapHardwareInputSelectorsDialogComponent } from './components/map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     SaveSuccessDialog,
+    ViewHardwareInputSelectorsDialogComponent,
+    MapHardwareInputSelectorsDialogComponent,
     ManageHardwarePanelsComponent,
     ViewHardwarePanelDetailsComponent,
     ManageHardwareInputTypesComponent,

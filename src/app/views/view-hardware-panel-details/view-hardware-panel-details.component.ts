@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
+import { MapHardwareInputSelectorsDialogComponent } from 'src/app/components/map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
+import { ViewHardwareInputSelectorsDialogComponent } from 'src/app/components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
 import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/models/hardware.panel.dto';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -16,14 +19,18 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
 
     idParam!: Number;
     public hardwarePanelDto: any;
-    public displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType'];
+    public displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType', 'action'];
     public displayedOutputColumns: string[] = ['id', 'name', 'hardwareOutputType'];
     inputsDataSource = new MatTableDataSource<HardwareInputDto>();
     outputsDataSource = new MatTableDataSource<HardwareOutputDto>();
+    
 
-
-
-    constructor(private httpService: HttpService, private router: Router){
+    constructor
+    (
+      private httpService: HttpService, 
+      private router: Router,
+      public viewHardwareInputSelectorsDialog: MatDialog
+    ){
 
     }
 
@@ -45,7 +52,20 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
         })
       ).subscribe();
 
+    }
 
+    showInputSelectorDetails(data: HardwareInputDto){
+        this.viewHardwareInputSelectorsDialog.open(ViewHardwareInputSelectorsDialogComponent, {
+          data: data,
+          width: '600px'
+        });
+    }
+
+    mapInputSelector(data: HardwareInputDto){
+        this.viewHardwareInputSelectorsDialog.open(MapHardwareInputSelectorsDialogComponent, {
+          data: data,
+          width: '900px'
+        });
     }
     
 

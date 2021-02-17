@@ -26,6 +26,13 @@ export interface HardwareInputDto{
   id: Number,
   name: String,
   hardwareInputType: String
+  inputSelectors: HardwareInputSelectorDto[]
+
+}
+
+export interface HardwareInputSelectorDto{
+  id: Number,
+  name: String
 }
 
 export interface HardwareOutputDto{

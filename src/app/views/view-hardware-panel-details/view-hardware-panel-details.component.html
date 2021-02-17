@@ -69,10 +69,10 @@
     <mat-grid-tile>
         <div class="data-wrapper">
             <div class="title">
-                Total Inputs
+                Total Inputs[Discrete]
             </div>
             <div class="value">
-                {{hardwarePanelDto.totalInputs}}
+                {{hardwarePanelDto.totalInputs}}[{{hardwarePanelDto.totalInputsDiscrete}}]
             </div>
         </div>
     </mat-grid-tile>
@@ -106,9 +106,28 @@
     </ng-container>
 
     <ng-container matColumnDef="hardwareInputType">
-        <th mat-header-cell *matHeaderCellDef> Input Type </th>
-        <td mat-cell *matCellDef="let element"> {{element.hardwareInputType}} </td>
+        <th mat-header-cell *matHeaderCellDef> Discrete Inputs & Input Type </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.hardwareInputType}} input type.
+        </td>
     </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+            <button (click)="showInputSelectorDetails(element)" 
+                mat-stroked-button color="primary">
+                <mat-icon mat-list-icon>remove_red_eye</mat-icon>
+                View {{element.hardwareInputSelectors.length}} Discrete Input(s)
+            </button>
+            <button (click)="mapInputSelector(element)" 
+                mat-stroked-button color="warn">
+                <mat-icon mat-list-icon>link</mat-icon>
+                Map {{element.hardwareInputSelectors.length}} Discrete Input(s)
+            </button>
+        </td>
+    </ng-container>
+    
 
     <tr mat-header-row *matHeaderRowDef="displayedInputColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedInputColumns;"></tr>
