@@ -19,6 +19,8 @@ import { SaveSuccessDialog } from './components/save-success-dialog/save-success
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ViewHardwareInputSelectorsDialogComponent } from './components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
 import { MapHardwareInputSelectorsDialogComponent } from './components/map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
+import { MapHardwareOutputSelectorsDialogComponent } from './components/map-hardware-output-selectors-dialog/map-hardware-output-selectors-dialog.component';
+import { ViewHardwareOutputSelectorsDialogComponent } from './components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { MapHardwareInputSelectorsDialogComponent } from './components/map-hardw
     DashboardComponent,
     SaveSuccessDialog,
     ViewHardwareInputSelectorsDialogComponent,
+    ViewHardwareOutputSelectorsDialogComponent,
     MapHardwareInputSelectorsDialogComponent,
+    MapHardwareOutputSelectorsDialogComponent,
     ManageHardwarePanelsComponent,
     ViewHardwarePanelDetailsComponent,
     ManageHardwareInputTypesComponent,

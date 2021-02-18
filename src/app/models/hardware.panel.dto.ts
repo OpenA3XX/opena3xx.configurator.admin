@@ -39,4 +39,10 @@ export interface HardwareOutputDto{
   id: Number,
   name: String,
   hardwareOutputType: String
+  outputSelectors: HardwareOutputSelectorDto[]
+}
+
+export interface HardwareOutputSelectorDto{
+  id: Number,
+  name: String
 }

@@ -4,7 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
 import { MapHardwareInputSelectorsDialogComponent } from 'src/app/components/map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
+import { MapHardwareOutputSelectorsDialogComponent } from 'src/app/components/map-hardware-output-selectors-dialog/map-hardware-output-selectors-dialog.component';
 import { ViewHardwareInputSelectorsDialogComponent } from 'src/app/components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
+import { ViewHardwareOutputSelectorsDialogComponent } from 'src/app/components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
 import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/models/hardware.panel.dto';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -20,7 +22,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
     idParam!: Number;
     public hardwarePanelDto: any;
     public displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType', 'action'];
-    public displayedOutputColumns: string[] = ['id', 'name', 'hardwareOutputType'];
+    public displayedOutputColumns: string[] = ['id', 'name', 'hardwareOutputType', 'action'];
     inputsDataSource = new MatTableDataSource<HardwareInputDto>();
     outputsDataSource = new MatTableDataSource<HardwareOutputDto>();
     
@@ -29,7 +31,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
     (
       private httpService: HttpService, 
       private router: Router,
-      public viewHardwareInputSelectorsDialog: MatDialog
+      public viewHardwareInputOutputSelectorsDialog: MatDialog
     ){
 
     }
@@ -55,14 +57,28 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
     }
 
     showInputSelectorDetails(data: HardwareInputDto){
-        this.viewHardwareInputSelectorsDialog.open(ViewHardwareInputSelectorsDialogComponent, {
+        this.viewHardwareInputOutputSelectorsDialog.open(ViewHardwareInputSelectorsDialogComponent, {
           data: data,
           width: '600px'
         });
     }
 
     mapInputSelector(data: HardwareInputDto){
-        this.viewHardwareInputSelectorsDialog.open(MapHardwareInputSelectorsDialogComponent, {
+        this.viewHardwareInputOutputSelectorsDialog.open(MapHardwareInputSelectorsDialogComponent, {
+          data: data,
+          width: '900px'
+        });
+    }
+
+    showOutputSelectorDetails(data: HardwareInputDto){
+        this.viewHardwareInputOutputSelectorsDialog.open(ViewHardwareOutputSelectorsDialogComponent, {
+          data: data,
+          width: '600px'
+        });
+    }
+
+    mapOutputSelector(data: HardwareInputDto){
+        this.viewHardwareInputOutputSelectorsDialog.open(MapHardwareOutputSelectorsDialogComponent, {
           data: data,
           width: '900px'
         });

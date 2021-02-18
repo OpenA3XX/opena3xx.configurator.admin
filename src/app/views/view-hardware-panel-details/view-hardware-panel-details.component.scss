@@ -10,6 +10,16 @@ table{
     width:100%;
     button{
         margin-left:10px;
+        width:300px;
+    }
+    .mat-column-id{
+        width:200px;
+    }
+    .mat-column-name{
+        width:400px;
+    }
+    .mat-column-hardwareOutputType, .mat-column-hardwareInputType{
+        width:400px;
     }
 }
 
