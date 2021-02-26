@@ -51,12 +51,26 @@ body { margin: 0; font-family: "Inter", Roboto, "Helvetica Neue", sans-serif; }
   color:#0061ed;
   border-color:#0061ed;
 }
-
+.mat-stroked-button.mat-primary:hover{
+  background-color:#0061ed;
+  color:#ffffff;
+}
 .mat-stroked-button.mat-warn{
   color:#f44336;
   border-color:#f44336;
 }
-
+.mat-stroked-button.mat-warn:hover{
+  background-color:#f44336;
+  color:#ffffff;
+}
+.mat-stroked-button.mat-accent{
+  color:#1a8f47;
+  border-color:#1a8f47;
+}
+.mat-stroked-button.mat-accent:hover{
+  background-color:#1a8f47;
+  color:#ffffff;
+}
 .mat-drawer-container {
   background-color: #fdfdfd !important;
 }

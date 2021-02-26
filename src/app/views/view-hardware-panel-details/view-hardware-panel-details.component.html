@@ -126,6 +126,11 @@
                 <mat-icon mat-list-icon>link</mat-icon>
                 Map {{element.hardwareInputSelectors.length}} Discrete Input(s)
             </button>
+            <button (click)="mapInputSelector(element)" 
+                mat-stroked-button color="accent">
+                <mat-icon mat-list-icon>laptop</mat-icon>
+                Sim Link {{element.hardwareInputSelectors.length}} Discrete Input(s)
+            </button>
         </td>
     </ng-container>
     
@@ -168,6 +173,11 @@
                 mat-stroked-button color="warn">
                 <mat-icon mat-list-icon>link</mat-icon>
                 Map {{element.hardwareOutputSelectors.length}} Discrete Output(s)
+            </button>
+            <button (click)="mapOutputSelector(element)" 
+                mat-stroked-button color="accent">
+                <mat-icon mat-list-icon>laptop</mat-icon>
+                Sim Link {{element.hardwareOutputSelectors.length}} Discrete Output(s)
             </button>
         </td>
     </ng-container>
