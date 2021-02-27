@@ -51,6 +51,12 @@ body { margin: 0; font-family: "Inter", Roboto, "Helvetica Neue", sans-serif; }
   color:#0061ed;
   border-color:#0061ed;
 }
+.mat-form-field.mat-focused .mat-form-field-ripple{
+  background-color:#0061ed;
+}
+.mat-form-field.mat-focused .mat-form-field-label{
+  color:#0061ed;
+}
 .mat-stroked-button.mat-primary:hover{
   background-color:#0061ed;
   color:#ffffff;
@@ -77,4 +83,20 @@ body { margin: 0; font-family: "Inter", Roboto, "Helvetica Neue", sans-serif; }
 
 tr.mat-row:hover{
   background-color: #f0f0f0;
+}
+
+.mat-expansion-panel-header.mat-expanded{
+  padding-bottom:5px;
+  background-color: #ffffff;
+}
+
+button.mat-focus-indicator{
+  background: transparent;
+}
+.mat-focus-indicator{
+  background-color: #ffffff;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-dsiabled=true]){
+  background-color: #ffffff;
 }

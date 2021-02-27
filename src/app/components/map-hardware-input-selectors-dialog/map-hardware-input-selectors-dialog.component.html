@@ -1,13 +1,10 @@
 <h1>Map {{hardwareInputSelector.name}} - {{hardwareInputSelector.hardwareInputType}} </h1>
 
-<mat-expansion-panel hideToggle *ngFor="let a of hardwareInputSelector.hardwareInputSelectors; let index = index">
+<mat-expansion-panel expanded *ngFor="let a of hardwareInputSelector.hardwareInputSelectors; let index = index">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Hardware Input Selector mapping for
+        Hardware Input Selector mapping - {{hardwareInputSelector.hardwareInputSelectors[index].name}}
       </mat-panel-title>
-      <mat-panel-description>
-        <button mat-flat-button color="warn"><mat-icon mat-list-icon>login</mat-icon>&nbsp;&nbsp;{{hardwareInputSelector.hardwareInputSelectors[index].name}}</button>
-      </mat-panel-description>
     </mat-expansion-panel-header>
     <p>
         <mat-form-field appearance="fill">

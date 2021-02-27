@@ -10,7 +10,7 @@ table{
     width:100%;
     button{
         margin-left:10px;
-        width:250px;
+        width:185px;
     }
     .mat-column-id{
         width:200px;
@@ -22,12 +22,12 @@ table{
         width:400px;
     }
     tr.mat-row:hover{
-        td{
-            font-weight: bold;
-        }
-        button{
-            font-weight:bold;
-        }
+        // td{
+        //     font-weight: bold;
+        // }
+        // button{
+        //     font-weight:bold;
+        // }
     }
 }
 

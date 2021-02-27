@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
+import { LinkHardwareInputSelectorsDialogComponent } from 'src/app/components/link-hardware-input-selectors-dialog/link-hardware-input-selectors-dialog.component';
 import { MapHardwareInputSelectorsDialogComponent } from 'src/app/components/map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
 import { MapHardwareOutputSelectorsDialogComponent } from 'src/app/components/map-hardware-output-selectors-dialog/map-hardware-output-selectors-dialog.component';
 import { ViewHardwareInputSelectorsDialogComponent } from 'src/app/components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
@@ -69,6 +70,13 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
           width: '900px'
         });
     }
+
+    linkInputSelector(data: HardwareInputDto){
+      this.viewHardwareInputOutputSelectorsDialog.open(LinkHardwareInputSelectorsDialogComponent, {
+        data: data,
+        width: '900px'
+      });
+  }
 
     showOutputSelectorDetails(data: HardwareInputDto){
         this.viewHardwareInputOutputSelectorsDialog.open(ViewHardwareOutputSelectorsDialogComponent, {

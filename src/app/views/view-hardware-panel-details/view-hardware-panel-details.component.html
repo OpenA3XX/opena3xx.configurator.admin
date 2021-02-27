@@ -119,17 +119,17 @@
             <button (click)="showInputSelectorDetails(element)" 
                 mat-stroked-button color="primary">
                 <mat-icon mat-list-icon>remove_red_eye</mat-icon>
-                View {{element.hardwareInputSelectors.length}} Discrete Input(s)
+                View {{element.hardwareInputSelectors.length}} Input(s)
             </button>
             <button (click)="mapInputSelector(element)" 
                 mat-stroked-button color="warn">
                 <mat-icon mat-list-icon>link</mat-icon>
-                Map {{element.hardwareInputSelectors.length}} Discrete Input(s)
+                Map {{element.hardwareInputSelectors.length}} Input(s)
             </button>
-            <button (click)="mapInputSelector(element)" 
+            <button (click)="linkInputSelector(element)" 
                 mat-stroked-button color="accent">
                 <mat-icon mat-list-icon>laptop</mat-icon>
-                Sim Link {{element.hardwareInputSelectors.length}} Discrete Input(s)
+                Sim Link {{element.hardwareInputSelectors.length}} Input(s)
             </button>
         </td>
     </ng-container>
@@ -167,17 +167,17 @@
             <button (click)="showOutputSelectorDetails(element)" 
                 mat-stroked-button color="primary">
                 <mat-icon mat-list-icon>remove_red_eye</mat-icon>
-                View {{element.hardwareOutputSelectors.length}} Discrete Output(s)
+                View {{element.hardwareOutputSelectors.length}} Output(s)
             </button>
             <button (click)="mapOutputSelector(element)" 
                 mat-stroked-button color="warn">
                 <mat-icon mat-list-icon>link</mat-icon>
-                Map {{element.hardwareOutputSelectors.length}} Discrete Output(s)
+                Map {{element.hardwareOutputSelectors.length}} Output(s)
             </button>
             <button (click)="mapOutputSelector(element)" 
                 mat-stroked-button color="accent">
                 <mat-icon mat-list-icon>laptop</mat-icon>
-                Sim Link {{element.hardwareOutputSelectors.length}} Discrete Output(s)
+                Sim Link {{element.hardwareOutputSelectors.length}} Output(s)
             </button>
         </td>
     </ng-container>
