@@ -47,4 +47,8 @@ export class HttpService {
   updateHardwareOutputType(hardwareOutputTypeDto: HardwareOutputTypeDto){
     return this.http.patch(`${this.BASE_URL}/hardware-output-types`, hardwareOutputTypeDto);
   }
+
+  getAllSimulatorEvents(){
+    return this.http.get(`${this.BASE_URL}/simulator-event/all`)
+  }
 }

@@ -1,43 +1,38 @@
 <h1>Link {{hardwareInputSelector.name}} - {{hardwareInputSelector.hardwareInputType}} </h1>
 
 <mat-expansion-panel expanded *ngFor="let a of hardwareInputSelector.hardwareInputSelectors; let index = index">
-    <mat-expansion-panel-header>
-        <mat-panel-title>
-            Link Input Selector Mapping - {{hardwareInputSelector.hardwareInputSelectors[index].name}}
-        </mat-panel-title>
-    </mat-expansion-panel-header>
-    <div [formGroup]="stateForm">
+    <form [formGroup]="options" #f="ngForm" (ngSubmit)="saveInputSelectorSimMapping(f)" novalidate>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Link Input Selector Mapping - {{hardwareInputSelector.hardwareInputSelectors[index].name}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+            <p>
+                <mat-form-field appearance="fill">
+                    <mat-label>Integration using</mat-label>
+                    <mat-select [(value)]="selected" required>
+                        <mat-option value="0">SimConnect - Direct</mat-option>
+                        <mat-option selected value="1">SimConnect - WASM Gauge</mat-option>
+                        <mat-option value="2">FSUIPC</mat-option>
+                        <mat-option value="3">Websockets</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="fill">
+                    <mat-label>Simulator Event</mat-label>
+                    <mat-select [(value)]="selected" required>
+                        <mat-option *ngFor="let simEvent of simEvents" [value]="simEvent.id">
+                            {{simEvent.friendlyName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>This is the hint for Hardware Board Identifier</mat-hint>
+                </mat-form-field>
+            </p>
+        </div>
         <p>
-            <mat-form-field appearance="fill">
-                <mat-label>Link through</mat-label>
-                <mat-select [(value)]="selected" required>
-                    <mat-option value="0">SimConnect - Direct</mat-option>
-                    <mat-option selected value="1">SimConnect - WASM Gauge</mat-option>
-                    <mat-option value="2">FSUIPC</mat-option>
-                    <mat-option value="3">Websockets</mat-option>
-                </mat-select>
-            </mat-form-field>
+            <button mat-flat-button color="primary"><mat-icon mat-list-icon>save</mat-icon>Save</button>    
         </p>
-        <p>
-            <mat-form-field appearance="fill">
-                <mat-label>Simulator Event name</mat-label>
-                <input type="text"
-                    matInput
-                    formControlName="stateGroup"
-                    required
-                    [matAutocomplete]="autoGroup">
-                <mat-autocomplete #autoGroup="matAutocomplete">
-                    <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
-                    <mat-option *ngFor="let name of group.names" [value]="name">
-                        {{name}}
-                    </mat-option>
-                </mat-optgroup>
-                </mat-autocomplete>
-                <mat-hint>This is the hint for Hardware Board Identifier</mat-hint>
-            </mat-form-field>
-        </p>
-    </div>
-    <p>
-        <button mat-flat-button color="primary"><mat-icon mat-list-icon>save</mat-icon>Save</button>    
-    </p>
+    </form>
 </mat-expansion-panel>

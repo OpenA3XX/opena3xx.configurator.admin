@@ -1,120 +1,41 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { HardwareInputDto } from "src/app/models/hardware.panel.dto";
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {startWith, map} from 'rxjs/operators';
-
+import { HttpService } from "src/app/services/http.service";
+import { filter, map, tap } from 'rxjs/operators';
+import {FormGroup, NgForm} from '@angular/forms';
 @Component({
     selector: 'opena3xx-link-hardware-input-selectors-dialog',
     templateUrl: "./link-hardware-input-selectors-dialog.component.html",
     styleUrls: ["./link-hardware-input-selectors-dialog.component.scss"]
   })
-  export class LinkHardwareInputSelectorsDialogComponent {
+export class LinkHardwareInputSelectorsDialogComponent implements OnInit {
 
-    selected = "DirectSimconnect";
-    
-    stateForm: FormGroup = this._formBuilder.group({
-      stateGroup: '',
-    });
+  selected = "1";
   
-    stateGroups: StateGroup[] = [{
-      letter: 'A',
-      names: ['Alabama', 'Alaska', 'Arizona', 'Arkansas']
-    }, {
-      letter: 'C',
-      names: ['California', 'Colorado', 'Connecticut']
-    }, {
-      letter: 'D',
-      names: ['Delaware']
-    }, {
-      letter: 'F',
-      names: ['Florida']
-    }, {
-      letter: 'G',
-      names: ['Georgia']
-    }, {
-      letter: 'H',
-      names: ['Hawaii']
-    }, {
-      letter: 'I',
-      names: ['Idaho', 'Illinois', 'Indiana', 'Iowa']
-    }, {
-      letter: 'K',
-      names: ['Kansas', 'Kentucky']
-    }, {
-      letter: 'L',
-      names: ['Louisiana']
-    }, {
-      letter: 'M',
-      names: ['Maine', 'Maryland', 'Massachusetts', 'Michigan',
-        'Minnesota', 'Mississippi', 'Missouri', 'Montana']
-    }, {
-      letter: 'N',
-      names: ['Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
-        'New Mexico', 'New York', 'North Carolina', 'North Dakota']
-    }, {
-      letter: 'O',
-      names: ['Ohio', 'Oklahoma', 'Oregon']
-    }, {
-      letter: 'P',
-      names: ['Pennsylvania']
-    }, {
-      letter: 'R',
-      names: ['Rhode Island']
-    }, {
-      letter: 'S',
-      names: ['South Carolina', 'South Dakota']
-    }, {
-      letter: 'T',
-      names: ['Tennessee', 'Texas']
-    }, {
-      letter: 'U',
-      names: ['Utah']
-    }, {
-      letter: 'V',
-      names: ['Vermont', 'Virginia']
-    }, {
-      letter: 'W',
-      names: ['Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
-    }];
+  public simEvents :any;
+  public simEventGroups: any;
+
+  public hardwareInputSelector : any
   
-    stateGroupOptions: Observable<StateGroup[]>;
-
-
-    public hardwareInputSelector : any
-    
-    constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, private _formBuilder: FormBuilder) { 
-        this.hardwareInputSelector = data;
-        console.log("Dialog Component", data);
-
-        this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => this._filterGroup(value))
-        );
-        
-    }
-
-    private _filterGroup(value: string): StateGroup[] {
-      if (value) {
-        return this.stateGroups
-          .map(group => ({letter: group.letter, names: _filter(group.names, value)}))
-          .filter(group => group.names.length > 0);
-      }
-  
-      return this.stateGroups;
-    }
-
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, private httpService: HttpService) { 
+      this.hardwareInputSelector = data;
+      console.log("Dialog Component", data);
   }
 
-  export interface StateGroup {
-    letter: string;
-    names: string[];
+  ngOnInit(): void {
+    this.httpService.getAllSimulatorEvents()
+    .pipe(
+      tap(data => console.log('Data received', data)),
+      filter(x => !!x),
+      map(data_received => {
+        this.simEvents = data_received;
+      })
+    ).subscribe();
   }
 
-  export const _filter = (opt: string[], value: string): string[] => {
-    const filterValue = value.toLowerCase();
-  
-    return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
-  };
+  saveInputSelectorSimMapping(f: NgForm){
+    console.log(f);
+  }
+}
+
