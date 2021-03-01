@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { HardwareInputDto } from "src/app/models/hardware.panel.dto";
+import { HardwareInputDto, IntegrationType, SimulatorEventDto } from "src/app/models/hardware.panel.dto";
 import { HttpService } from "src/app/services/http.service";
 import { filter, map, tap } from 'rxjs/operators';
 import {FormGroup, NgForm} from '@angular/forms';
@@ -10,26 +10,40 @@ import {FormGroup, NgForm} from '@angular/forms';
     styleUrls: ["./link-hardware-input-selectors-dialog.component.scss"]
   })
 export class LinkHardwareInputSelectorsDialogComponent implements OnInit {
-
-  selected = "1";
-  
-  public simEvents :any;
-  public simEventGroups: any;
-
+ 
+  public simEventDtoList: SimulatorEventDto[];
   public hardwareInputSelector : any
-  
+  public integrationTypeList: IntegrationType[];
+  public defaultIntegration: any;
+
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, private httpService: HttpService) { 
       this.hardwareInputSelector = data;
-      console.log("Dialog Component", data);
+      this.simEventDtoList = [];
+      this.integrationTypeList = [];
+      this.integrationTypeList.push({
+        id: 0,
+        name: "SimConnect - Direct"
+      });
+      this.integrationTypeList.push({
+        id: 1,
+        name: "SimConnect - WASM Gauge"
+      });
+      this.integrationTypeList.push({
+        id: 2,
+        name: "FSUIPC"
+      });
+      this.integrationTypeList.push({
+        id: 3,
+        name: "Websockets"
+      });
   }
 
   ngOnInit(): void {
     this.httpService.getAllSimulatorEvents()
     .pipe(
-      tap(data => console.log('Data received', data)),
-      filter(x => !!x),
       map(data_received => {
-        this.simEvents = data_received;
+        this.simEventDtoList = data_received as SimulatorEventDto[];
       })
     ).subscribe();
   }
@@ -38,4 +52,6 @@ export class LinkHardwareInputSelectorsDialogComponent implements OnInit {
     console.log(f);
   }
 }
+
+
 

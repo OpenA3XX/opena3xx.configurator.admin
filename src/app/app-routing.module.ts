@@ -6,6 +6,7 @@ import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-ty
 import { ManageHardwareInputTypesComponent } from './views/manage-hardware-input-types/manage-hardware-input-types.component';
 import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-output-types/manage-hardware-output-types.component';
 import { ManageHardwarePanelsComponent } from './views/manage-hardware-panels/manage-hardware-panels.component';
+import { SettingsComponent } from './views/settings/settings.component';
 import { ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
 
 const routes: Routes = [{
@@ -40,6 +41,10 @@ const routes: Routes = [{
 {
   path: 'edit/hardware-output-type',
   component: EditHardwareOutputTypeComponent
+},
+{
+  path: 'settings',
+  component: SettingsComponent
 }];
 
 @NgModule({

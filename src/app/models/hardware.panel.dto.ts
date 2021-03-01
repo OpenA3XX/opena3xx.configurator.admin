@@ -46,3 +46,21 @@ export interface HardwareOutputSelectorDto{
   id: Number,
   name: String
 }
+
+export interface SimulatorEventDto{
+  id: Number,
+  friendlyName: String,
+  eventName: String,
+  simulatorEventType: Number,
+  simulatorEventTypeName: String,
+  simulatorSoftware: Number,
+  simulatorSoftwareName: String,
+  simulatorEventSdkType: Number,
+  simulatorEventSdkTypeName: String,
+  eventCode: String
+}
+
+export interface IntegrationType{
+  id: Number,
+  name: String
+}

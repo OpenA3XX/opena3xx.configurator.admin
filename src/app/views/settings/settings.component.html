@@ -1,0 +1,74 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="updateSettings(f)" novalidate>
+    <div class="inner-container">
+    <h5>RabbitMQ Configuration</h5>
+    <p>
+      <mat-form-field appearance="standard">
+          <mat-label>RabbitMQ Host</mat-label>
+          <input matInput placeholder="Placeholder" [ngModel]="rabbitmqhost" name="opena3xx.amqp.host">
+          <mat-icon matSuffix>format_list_numbered</mat-icon>
+          <mat-hint>This is the RabbitMQ Host: Normally this should be set as 127.0.0.1 or localhost</mat-hint>
+        </mat-form-field>
+    </p>  
+    <p>
+      <mat-form-field appearance="standard">
+          <mat-label>RabbitMQ Port</mat-label>
+          <input matInput placeholder="Placeholder" [ngModel]="rabbitmqhost" name="opena3xx.amqp.port">
+          <mat-icon matSuffix>format_list_numbered</mat-icon>
+          <mat-hint>This is the RabbitMQ Port. The default port is 5672 for messaging protocol</mat-hint>
+        </mat-form-field>
+    </p> 
+    <p>
+      <mat-form-field appearance="standard">
+          <mat-label>RabbitMQ Username</mat-label>
+          <input matInput placeholder="Placeholder" [ngModel]="rabbitmqhost" name="opena3xx.amqp.username">
+          <mat-icon matSuffix>format_list_numbered</mat-icon>
+          <mat-hint>RabbitMQ Authentication Username Configration</mat-hint>
+        </mat-form-field>
+    </p>   
+    <p>
+      <mat-form-field appearance="standard">
+          <mat-label>RabbitMQ Password</mat-label>
+          <input type="password" matInput placeholder="Placeholder" [ngModel]="rabbitmqhost" name="opena3xx.amqp.password">
+          <mat-icon matSuffix>format_list_numbered</mat-icon>
+          <mat-hint>RabbitMQ Authentication Password Configration</mat-hint>
+        </mat-form-field>
+    </p>  
+    <p>
+      <mat-form-field appearance="standard">
+          <mat-label>RabbitMQ Virtual Host</mat-label>
+          <input matInput placeholder="Placeholder" [ngModel]="rabbitmqhost" name="opena3xx.amqp.password">
+          <mat-icon matSuffix>format_list_numbered</mat-icon>
+          <mat-hint>RabbitMQ Virtual Host</mat-hint>
+        </mat-form-field>
+    </p>  
+    </div>
+    <div class="inner-container">
+    <h5>System Logging (SEQ)</h5>
+    <p>
+      <mat-form-field appearance="standard">
+          <mat-label>SEQ Host</mat-label>
+          <input matInput placeholder="Placeholder" [ngModel]="rabbitmqhost" name="opena3xx.amqp.host">
+          <mat-icon matSuffix>format_list_numbered</mat-icon>
+          <mat-hint>This is the SEQ Host Address. Normally this should be set as 127.0.0.1 or localhost</mat-hint>
+        </mat-form-field>
+    </p>  
+    <p>
+      <mat-form-field appearance="standard">
+          <mat-label>SEQ Port</mat-label>
+          <input matInput placeholder="Placeholder" [ngModel]="rabbitmqhost" name="opena3xx.amqp.port">
+          <mat-icon matSuffix>format_list_numbered</mat-icon>
+          <mat-hint>This is the SEQ Port.</mat-hint>
+        </mat-form-field>
+    </p> 
+
+    
+    </div>
+    <p>
+      <button mat-flat-button color="warn">
+          <mat-icon mat-list-icon>save</mat-icon>
+          Save
+      </button>
+    </p>
+  </form>
+</div>

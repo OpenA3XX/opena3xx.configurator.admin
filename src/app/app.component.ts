@@ -68,5 +68,8 @@ export class AppComponent {
   clickManageHardwareOutputTypes(){
     this.router.navigateByUrl(`/manage/hardware-output-types`);
   }
+  clickSettings(){
+    this.router.navigateByUrl(`/settings`);
+  }
 
 }

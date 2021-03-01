@@ -1,5 +1,6 @@
 <h1>Link {{hardwareInputSelector.name}} - {{hardwareInputSelector.hardwareInputType}} </h1>
 
+<form #f="ngForm" (ngSubmit)="saveInputSelectorSimMapping(f)" novalidate>
 <mat-expansion-panel expanded *ngFor="let a of hardwareInputSelector.hardwareInputSelectors; let index = index">
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -7,32 +8,30 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div>
-            <form #f="ngForm" (ngSubmit)="saveInputSelectorSimMapping(f)" novalidate>
-                <p>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Integration using</mat-label>
-                        <mat-select required>
-                            <mat-option value="0">SimConnect - Direct</mat-option>
-                            <mat-option selected value="1">SimConnect - WASM Gauge</mat-option>
-                            <mat-option value="2">FSUIPC</mat-option>
-                            <mat-option value="3">Websockets</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Simulator Event</mat-label>
-                        <mat-select  required>
-                            <mat-option *ngFor="let simEvent of simEvents" [value]="simEvent.id">
-                                {{simEvent.friendlyName}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-hint>This is the hint for Hardware Board Identifier</mat-hint>
-                    </mat-form-field>
-                </p>
-            </form>
+            <p>
+                <mat-form-field appearance="fill">
+                    <mat-label>Integration using</mat-label>
+                    <mat-select required>
+                        <mat-option *ngFor="let integrationType of integrationTypeList; let index = index" value="{{ integrationType.id }}">
+                            {{ integrationType.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="fill">
+                    <mat-label>Simulator Event</mat-label>
+                    <mat-select required>
+                        <mat-option *ngFor="let simEventDto of simEventDtoList" [value]="simEventDto.id">
+                            {{simEventDto.friendlyName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>This is the hint for Hardware Board Identifier</mat-hint>
+                </mat-form-field>
+            </p>
+            <p>
+                <button mat-flat-button color="primary"><mat-icon mat-list-icon>save</mat-icon>Save</button>    
+            </p>
         </div>
-        <p>
-            <button mat-flat-button color="primary"><mat-icon mat-list-icon>save</mat-icon>Save</button>    
-        </p>
 </mat-expansion-panel>
+</form>

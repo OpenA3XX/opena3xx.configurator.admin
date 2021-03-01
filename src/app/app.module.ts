@@ -22,6 +22,7 @@ import { MapHardwareInputSelectorsDialogComponent } from './components/map-hardw
 import { MapHardwareOutputSelectorsDialogComponent } from './components/map-hardware-output-selectors-dialog/map-hardware-output-selectors-dialog.component';
 import { ViewHardwareOutputSelectorsDialogComponent } from './components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
 import { LinkHardwareInputSelectorsDialogComponent } from './components/link-hardware-input-selectors-dialog/link-hardware-input-selectors-dialog.component';
+import { SettingsComponent } from './views/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { LinkHardwareInputSelectorsDialogComponent } from './components/link-har
     ManageHardwareInputTypesComponent,
     EditHardwareInputTypeComponent,
     ManageHardwareOutputTypesComponent,
-    EditHardwareOutputTypeComponent 
+    EditHardwareOutputTypeComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
