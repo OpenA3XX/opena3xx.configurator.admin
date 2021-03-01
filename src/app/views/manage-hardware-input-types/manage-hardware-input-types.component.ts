@@ -16,6 +16,7 @@ export class ManageHardwareInputTypesComponent implements OnInit {
     public displayedColumns: string[] = ['id', 'name', 'details'];
     dataSource = new MatTableDataSource<HardwareInputTypeDto>();
     public data: any;
+    
   
     constructor(
       private httpService: HttpService,

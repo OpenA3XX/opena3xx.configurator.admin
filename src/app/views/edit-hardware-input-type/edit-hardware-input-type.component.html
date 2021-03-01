@@ -10,7 +10,7 @@
 
 
 <div class="container">
-    <form #f="ngForm" (ngSubmit)="updateHardwareInputType(f)" novalidate>
+    <form #f="ngForm" (ngSubmit)="updateHardwareInputType(f)" novalidate *ngIf="data">
 <p>
     <mat-form-field appearance="standard">
         <mat-label>Hardware Input Type Identifier</mat-label>

@@ -49,7 +49,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
         tap(data => console.log('Data received', data)),
         filter(x => !!x),
         map(data_received => {
-          this.hardwarePanelDto = data_received
+          this.hardwarePanelDto = data_received;
           this.inputsDataSource = new MatTableDataSource<HardwareInputDto>(this.hardwarePanelDto.hardwareInputs);
           this.outputsDataSource = new MatTableDataSource<HardwareOutputDto>(this.hardwarePanelDto.hardwareOutputs);
         })
