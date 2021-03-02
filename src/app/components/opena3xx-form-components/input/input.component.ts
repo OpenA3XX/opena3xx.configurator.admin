@@ -10,6 +10,7 @@ import { FieldConfig } from "../../../models/field.interface";
   <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
     <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{validation.message}}</mat-error>
   </ng-container>
+  <mat-hint>{{field.hint}}</mat-hint>
 </mat-form-field>
 `,
   styles: []

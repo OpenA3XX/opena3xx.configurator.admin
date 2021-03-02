@@ -6,6 +6,7 @@ import { FieldConfig } from "../../../models/field.interface";
   template: `
 <div class="full-width margin-top" [formGroup]="group" >
 <mat-checkbox [formControlName]="field.name">{{field.label}}</mat-checkbox>
+<mat-hint>{{field.hint}}</mat-hint>
 </div>
 `,
   styles: []

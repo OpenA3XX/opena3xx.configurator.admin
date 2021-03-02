@@ -7,7 +7,7 @@ import { FieldConfig } from "../../../models/field.interface";
   <h5>
   {{field.label}}
   </h5>`,
-  styles: ["h5 { font-size:20px; margin-top:20px; }"]
+  styles: ["h5 { font-size:20px; border-bottom:1px dashed #d0d0d0; }"]
 })
 export class HeadingComponent implements OnInit {
   field: FieldConfig;

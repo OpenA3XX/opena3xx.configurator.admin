@@ -31,6 +31,7 @@ export class SettingsComponent implements OnInit {
       label: "RabbitMQ Host Address",
       inputType: "text",
       name: "opena3xx-amqp-host",
+      hint: "Rabbit MQ Host Address is the IP Address where RabbitMQ is running.",
       validations: [
         {
           name: "required",
@@ -49,6 +50,7 @@ export class SettingsComponent implements OnInit {
       label: "RabbitMQ Port",
       inputType: "text",
       name: "opena3xx-amqp-port",
+      hint: "Rabbit MQ Port is the port which RabbitMQ is running on. Default is 5672",
       validations: [
         {
           name: "required",
@@ -69,6 +71,7 @@ export class SettingsComponent implements OnInit {
       label: "RabbitMQ Username",
       inputType: "text",
       name: "opena3xx-amqp-username",
+      hint: "Rabbit MQ Username used for authencation",
       validations: [
         {
           name: "required",
@@ -82,6 +85,7 @@ export class SettingsComponent implements OnInit {
       label: "RabbitMQ Password",
       inputType: "password",
       name: "opena3xx-amqp-password",
+      hint: "Rabbit MQ Password used for authencation",
       validations: [
         {
           name: "required",
@@ -95,6 +99,7 @@ export class SettingsComponent implements OnInit {
       label: "RabbitMQ Virtual Host",
       inputType: "text",
       name: "opena3xx-amqp-vhost",
+      hint: "Rabbit MQ vhost used for authencation",
       validations: [
         {
           name: "required",
@@ -112,6 +117,7 @@ export class SettingsComponent implements OnInit {
       label: "SEQ Host Address",
       inputType: "text",
       name: "opena3xx-seq-host",
+      hint: "SEQ IP Address",
       validations: [
         {
           name: "required",
@@ -130,6 +136,7 @@ export class SettingsComponent implements OnInit {
       label: "SEQ Port",
       inputType: "text",
       name: "opena3xx-seq-port",
+      hint: "SEQ Port",
       validations: [
         {
           name: "required",
@@ -147,7 +154,7 @@ export class SettingsComponent implements OnInit {
     },
     {
       type: "button",
-      label: "Save"
+      label: "Save All Settings"
     }
   ];
 
