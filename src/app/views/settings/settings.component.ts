@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DynamicFormComponent } from 'src/app/components/opena3xx-form-components/dynamic-form/dynamic-form.component';
 import { FieldConfig } from 'src/app/models/field.interface';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'opena3xx-settings',
@@ -16,10 +17,15 @@ import { FieldConfig } from 'src/app/models/field.interface';
 
 export class SettingsComponent implements OnInit {
 
-  @ViewChild(DynamicFormComponent) form!: DynamicFormComponent;
+  @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
 
 
-  settingsConfig: FieldConfig[] = [
+  dataLoaded: Boolean = false;
+
+  settingsConfig: FieldConfig[] = [{
+      type:"heading",
+      label: "RabbitMQ Configuration"
+    },
     {
       type: "input",
       label: "RabbitMQ Host Address",
@@ -98,6 +104,10 @@ export class SettingsComponent implements OnInit {
       ]
     },
     {
+      type:"heading",
+      label: "SEQ Configuration"
+    },
+    {
       type: "input",
       label: "SEQ Host Address",
       inputType: "text",
@@ -145,16 +155,22 @@ export class SettingsComponent implements OnInit {
   (
     public dialog: MatDialog,
     private httpService: HttpService,
-    private router: Router
+    private router: Router,
   ){
 
+    this.httpService.getAllSimulatorEvents()
+    .pipe(
+      map(data_received => {
+        this.dataLoaded = true;
+      })
+    ).subscribe();
   }
 
   ngOnInit(): void {
   }
 
   goBack(){
-    this.router.navigateByUrl(`/manage/hardware-input-types`)
+    this.router.navigateByUrl(`/`)
   }
 
   submit(value: any) {

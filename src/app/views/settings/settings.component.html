@@ -1,15 +1,5 @@
 <div class="container">
-  <!-- <form #f="ngForm" (ngSubmit)="updateSettings(f)" novalidate>
-    <div class="inner-container">
-    <h5>RabbitMQ Configuration</h5>
-
-    
-    
-    </div>
-    <div class="inner-container">
-    <h5>System Logging (SEQ)</h5>
-   
-  </form> -->
-  <dynamic-form [fields]="settingsConfig" (submit)="submit($event)">
+  <dynamic-form *ngIf="dataLoaded" [fields]="settingsConfig" (submit)="submit($event)">
   </dynamic-form>
 </div>
+
