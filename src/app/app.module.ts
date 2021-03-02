@@ -23,6 +23,14 @@ import { MapHardwareOutputSelectorsDialogComponent } from './components/map-hard
 import { ViewHardwareOutputSelectorsDialogComponent } from './components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
 import { LinkHardwareInputSelectorsDialogComponent } from './components/link-hardware-input-selectors-dialog/link-hardware-input-selectors-dialog.component';
 import { SettingsComponent } from './views/settings/settings.component';
+import { InputComponent } from './components/opena3xx-form-components/input/input.component';
+import { ButtonComponent } from './components/opena3xx-form-components/button/button.component';
+import { SelectComponent } from './components/opena3xx-form-components/select/select.component';
+import { DateComponent } from './components/opena3xx-form-components/date/date.component';
+import { CheckboxComponent } from './components/opena3xx-form-components/checkbox/checkbox.component';
+import { DynamicFieldDirective } from './components/opena3xx-form-components/dynamic-field/dynamic-field.directive';
+import { DynamicFormComponent } from './components/opena3xx-form-components/dynamic-form/dynamic-form.component';
+import { RadiobuttonComponent } from './components/opena3xx-form-components/radiobutton/radiobutton.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +48,15 @@ import { SettingsComponent } from './views/settings/settings.component';
     EditHardwareInputTypeComponent,
     ManageHardwareOutputTypesComponent,
     EditHardwareOutputTypeComponent,
-    SettingsComponent
+    SettingsComponent,
+    InputComponent,
+    ButtonComponent,
+    SelectComponent,
+    DateComponent,
+    RadiobuttonComponent,
+    CheckboxComponent,
+    DynamicFieldDirective,
+    DynamicFormComponent
   ],
   imports: [
     BrowserModule,
@@ -49,8 +65,8 @@ import { SettingsComponent } from './views/settings/settings.component';
     HttpClientModule,
     MatNativeDateModule,
     MaterialModule,
-    FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     HttpService,
