@@ -54,7 +54,13 @@ export class DynamicFormComponent implements OnInit {
   createControl() {
     const group = this.fb.group({});
     this.fields.forEach(field => {
-      if (field.type === "button") return;
+      if (field.type === "button" || field.type === "heading") return;
+
+      if(field.value == "true"){
+        field.value = true;
+      }else if(field.value == "false"){
+        field.value = false;
+      }
       const control = this.fb.control(
         field.value,
         this.bindValidations(field.validations || [])
@@ -68,7 +74,15 @@ export class DynamicFormComponent implements OnInit {
     if (validations.length > 0) {
       const validList = [];
       validations.forEach(valid => {
-        validList.push(valid.validator);
+        if(valid.name == "required"){
+          validList.push(Validators.required);
+        }else if(valid.name == "pattern"){
+          validList.push(Validators.pattern(valid.pattern));
+        }
+        else{
+          validList.push(valid.validator);
+        }
+        
       });
       return Validators.compose(validList);
     }

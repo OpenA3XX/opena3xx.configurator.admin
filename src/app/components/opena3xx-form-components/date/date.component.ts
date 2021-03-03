@@ -8,11 +8,10 @@ import { FieldConfig } from "../../../models/field.interface";
 <input autocomplete="off" matInput [matDatepicker]="picker" [formControlName]="field.name" [placeholder]="field.label">
 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 <mat-datepicker #picker></mat-datepicker>
-<mat-hint></mat-hint>
+<mat-hint>{{field.hint}}</mat-hint>
 <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
 <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{validation.message}}</mat-error>
 </ng-container>
-<mat-hint>{{field.hint}}</mat-hint>
 </mat-form-field>
 `,
   styles: []

@@ -51,4 +51,8 @@ export class HttpService {
   getAllSimulatorEvents(){
     return this.http.get(`${this.BASE_URL}/simulator-event/all`)
   }
+
+  getSettingsForm(){
+    return this.http.get(`${this.BASE_URL}/forms/settings`)
+  }
 }
