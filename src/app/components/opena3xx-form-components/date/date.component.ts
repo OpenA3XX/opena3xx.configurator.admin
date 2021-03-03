@@ -17,8 +17,8 @@ import { FieldConfig } from "../../../models/field.interface";
   styles: []
 })
 export class DateComponent implements OnInit {
-  field: FieldConfig;
-  group: FormGroup;
+  field!: FieldConfig;
+  group!: FormGroup;
   constructor() {}
   ngOnInit() {}
 }

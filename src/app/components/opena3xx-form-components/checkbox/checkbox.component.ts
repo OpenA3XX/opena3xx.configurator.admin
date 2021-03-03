@@ -6,14 +6,14 @@ import { FieldConfig } from "../../../models/field.interface";
   template: `
 <div class="full-width margin-top" [formGroup]="group" >
 <mat-checkbox [formControlName]="field.name">{{field.label}}</mat-checkbox>
-<mat-hint>{{field.hint}}</mat-hint>
 </div>
+<mat-hint>{{field.hint}}</mat-hint>
 `,
-  styles: []
+  styles: ["mat-hint{ font-size:75%;}"]
 })
 export class CheckboxComponent implements OnInit {
-  field: FieldConfig;
-  group: FormGroup;
+  field!: FieldConfig;
+  group!: FormGroup;
   constructor() {}
   ngOnInit() {}
 }
