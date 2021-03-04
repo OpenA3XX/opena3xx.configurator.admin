@@ -69,6 +69,10 @@ body { margin: 0; font-family: "Inter", Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field.mat-focused .mat-form-field-label{
   color:#0061ed;
 }
+
+.mat-simple-snackbar-action{
+  color: #ffffff;
+}
 .mat-stroked-button.mat-primary:hover{
   background-color:#0061ed;
   color:#ffffff;

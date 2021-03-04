@@ -15,6 +15,8 @@ import { DateComponent } from "../date/date.component";
 import { RadiobuttonComponent } from "../radiobutton/radiobutton.component";
 import { CheckboxComponent } from "../checkbox/checkbox.component";
 import { HeadingComponent } from "../heading/heading.component";
+import { SlideToggleComponent } from "../slide-toggle/slide-toggle.component";
+import { SliderComponent } from "../slider/slider.component";
 
 const componentMapper = {
   input: InputComponent,
@@ -23,7 +25,9 @@ const componentMapper = {
   date: DateComponent,
   radiobutton: RadiobuttonComponent,
   checkbox: CheckboxComponent,
-  heading: HeadingComponent
+  heading: HeadingComponent,
+  slidertoggle: SlideToggleComponent,
+  slider: SliderComponent
 };
 @Directive({
   selector: "[dynamicField]"

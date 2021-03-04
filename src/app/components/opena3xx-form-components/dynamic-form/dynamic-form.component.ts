@@ -61,6 +61,7 @@ export class DynamicFormComponent implements OnInit {
       }else if(field.value == "false"){
         field.value = false;
       }
+
       const control = this.fb.control(
         field.value,
         this.bindValidations(field.validations || [])

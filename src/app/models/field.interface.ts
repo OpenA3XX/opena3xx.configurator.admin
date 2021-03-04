@@ -13,4 +13,7 @@ export interface FieldConfig {
   value?: any;
   validations?: Validator[];
   hint?: string;
+  stepValue?:string,
+  minValue?:string,
+  maxValue?:string
 }

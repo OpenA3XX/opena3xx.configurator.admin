@@ -32,6 +32,8 @@ import { DynamicFieldDirective } from './components/opena3xx-form-components/dyn
 import { DynamicFormComponent } from './components/opena3xx-form-components/dynamic-form/dynamic-form.component';
 import { RadiobuttonComponent } from './components/opena3xx-form-components/radiobutton/radiobutton.component';
 import { HeadingComponent } from './components/opena3xx-form-components/heading/heading.component';
+import { SlideToggleComponent } from './components/opena3xx-form-components/slide-toggle/slide-toggle.component';
+import { SliderComponent } from './components/opena3xx-form-components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { HeadingComponent } from './components/opena3xx-form-components/heading/
     RadiobuttonComponent,
     CheckboxComponent,
     HeadingComponent,
+    SlideToggleComponent,
+    SliderComponent,
     DynamicFieldDirective,
     DynamicFormComponent
   ],
