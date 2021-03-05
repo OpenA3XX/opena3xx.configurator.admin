@@ -61,6 +61,9 @@ export class HttpService {
   getSettingsForm(){
     return this.http.get(`${this.BASE_URL}/forms/settings`);
   }
+  getSimLinkInputSelectorForm(hardwareInputSelectorId: number){
+    return this.http.get(`${this.BASE_URL}/forms/sim-link/input-selector/${hardwareInputSelectorId}`);
+  }
 
   getAllConfiguration(){
     return this.http.get(`${this.BASE_URL}/configuration`);

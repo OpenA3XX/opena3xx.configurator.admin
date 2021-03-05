@@ -28,6 +28,8 @@ import { FieldConfig } from "../../../models/field.interface";
 export class DynamicFormComponent implements OnInit {
   @Input() fields: FieldConfig[] = [];
 
+  @Input() identifier!: number;
+
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
@@ -45,6 +47,9 @@ export class DynamicFormComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     if (this.form.valid) {
+      if(this.identifier != undefined){
+        this.form.value.identifier = this.identifier;
+      }
       this.submit.emit(this.form.value);
     } else {
       this.validateAllFormFields(this.form);
