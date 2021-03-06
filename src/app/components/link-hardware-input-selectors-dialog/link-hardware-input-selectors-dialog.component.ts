@@ -12,8 +12,8 @@ import { FieldConfig } from "src/app/models/field.interface";
 export class LinkHardwareInputSelectorsDialogComponent implements OnInit {
  
   public simEventDtoList: SimulatorEventDto[];
-  public hardwareInputSelector : any
-  public simLinkInputSelectorFields:  FieldConfig[] = []
+  public hardwareInputSelector : any;
+  public simLinkInputSelectorFields:  FieldConfig[] = [];
   dataLoaded: Boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, private httpService: HttpService) { 

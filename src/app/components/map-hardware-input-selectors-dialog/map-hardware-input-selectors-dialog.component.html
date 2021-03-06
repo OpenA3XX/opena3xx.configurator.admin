@@ -6,7 +6,9 @@
         Hardware Input Selector mapping - {{hardwareInputSelector.hardwareInputSelectors[index].name}}
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>
+    <dynamic-form *ngIf="dataLoaded" [identifier]="hardwareInputSelector.hardwareInputSelectors[index].id" [fields]="hardwareBoardSelectorFields" (submit)="submit($event)">
+    </dynamic-form>
+    <!-- <p>
         <mat-form-field appearance="fill">
             <mat-label>Hardware Board Identifier</mat-label>
             <mat-select required>
@@ -58,5 +60,5 @@
     </p>
     <p>
         <button mat-flat-button color="primary"><mat-icon mat-list-icon>save</mat-icon>Save</button>    
-    </p>
+    </p> -->
 </mat-expansion-panel>

@@ -7,7 +7,8 @@ export interface FieldConfig {
   label?: string;
   name?: string;
   inputType?: string;
-  options?: {[key: string]: string};
+  //options?: {[key: string]: string};
+  options?: OptionList[];
   collections?: any;
   type?: string;
   value?: any;
@@ -16,4 +17,9 @@ export interface FieldConfig {
   stepValue?:string,
   minValue?:string,
   maxValue?:string
+}
+
+export interface OptionList{
+  key: string;
+  value: string;
 }

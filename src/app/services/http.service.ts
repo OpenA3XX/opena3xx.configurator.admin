@@ -64,6 +64,9 @@ export class HttpService {
   getSimLinkInputSelectorForm(hardwareInputSelectorId: number){
     return this.http.get(`${this.BASE_URL}/forms/sim-link/input-selector/${hardwareInputSelectorId}`);
   }
+  getHardwareBoardForHardwareInputSelectorForm(hardwareInputSelectorId: number){
+    return this.http.get(`${this.BASE_URL}/forms/hardware-board-link/input-selector/${hardwareInputSelectorId}`);
+  }
 
   getAllConfiguration(){
     return this.http.get(`${this.BASE_URL}/configuration`);
