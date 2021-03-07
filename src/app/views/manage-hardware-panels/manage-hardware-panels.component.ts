@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { HttpService } from 'src/app/services/http.service';
 import { filter, map, tap } from 'rxjs/operators';
 import { HardwarePanelOverviewDto } from '../../models/hardware.panel.dto';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'opena3xx-manage-hardware-panels',
@@ -19,7 +19,7 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
   public data: any;
 
   constructor(
-    private httpService: HttpService,
+    private dataService: DataService,
     public router: Router
   ){
 
@@ -31,7 +31,7 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    this.httpService.getAllHardwarePanelOverviewDetails()
+    this.dataService.getAllHardwarePanelOverviewDetails()
     .pipe(
       tap(data => console.log('Data received', data)),
       filter(x => !!x),

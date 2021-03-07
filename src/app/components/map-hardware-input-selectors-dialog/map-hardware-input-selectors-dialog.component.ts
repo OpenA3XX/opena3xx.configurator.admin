@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FieldConfig } from "src/app/models/field.interface";
 import { HardwareInputDto } from "src/app/models/hardware.panel.dto";
-import { HttpService } from "src/app/services/http.service";
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import * as _ from "lodash";
+import { DataService } from "src/app/services/data.service";
 
 @Component({
     selector: 'opena3xx-map-hardware-input-selectors-dialog',
@@ -20,7 +20,7 @@ import * as _ from "lodash";
     dataLoaded: Boolean = false;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, 
-    private httpService: HttpService,
+    private dataService: DataService,
     private _snackBar: MatSnackBar
     ) { 
         this.hardwareInputSelector = data;
@@ -28,7 +28,7 @@ import * as _ from "lodash";
     }
 
     ngOnInit(): void {
-      this.httpService.getHardwareBoardForHardwareInputSelectorForm(this.hardwareInputSelector.id)
+      this.dataService.getHardwareBoardForHardwareInputSelectorForm(this.hardwareInputSelector.id)
       .pipe(
         map(data_received => {
           this.hardwareBoardSelectorFields = data_received as FieldConfig[];

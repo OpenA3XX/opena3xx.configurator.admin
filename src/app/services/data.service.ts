@@ -2,11 +2,12 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { HardwareInputTypeDto } from "../models/hardware.input.type.dto";
 import { HardwareOutputTypeDto } from "../models/hardware.output.type.dto";
+import { ConfigurationService } from "./configuration.service";
 
 @Injectable()
-export class HttpService {
+export class DataService {
 
-  private BASE_URL = "http://localhost:5000";
+  private BASE_URL;
 
   private httpOptions: any = {
     headers: new HttpHeaders({
@@ -14,7 +15,8 @@ export class HttpService {
     })
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configurationService: ConfigurationService) {
+    this.BASE_URL = configurationService.getApiBaseUrl();
   }
 
   get(url: string) {

@@ -9,7 +9,7 @@ import { MapHardwareOutputSelectorsDialogComponent } from 'src/app/components/ma
 import { ViewHardwareInputSelectorsDialogComponent } from 'src/app/components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
 import { ViewHardwareOutputSelectorsDialogComponent } from 'src/app/components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
 import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/models/hardware.panel.dto';
-import { HttpService } from 'src/app/services/http.service';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
 
     constructor
     (
-      private httpService: HttpService, 
+      private dataService: DataService, 
       private router: Router,
       public viewHardwareInputOutputSelectorsDialog: MatDialog
     ){
@@ -44,7 +44,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
         this.idParam = params.id;
       });
 
-      this.httpService.getAllHardwarePanelDetails(this.idParam)
+      this.dataService.getAllHardwarePanelDetails(this.idParam)
       .pipe(
         tap(data => console.log('Data received', data)),
         filter(x => !!x),

@@ -12,7 +12,7 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
-import { FieldConfig } from "../../../models/field.interface";
+import { FieldConfig } from "../../../../models/field.interface";
 
 @Component({
   exportAs: "dynamicForm",
@@ -31,6 +31,7 @@ export class DynamicFormComponent implements OnInit {
   @Input() identifier!: number;
 
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
+
 
   form: FormGroup;
 

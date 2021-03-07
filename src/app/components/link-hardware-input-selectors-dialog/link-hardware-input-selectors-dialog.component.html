@@ -1,15 +1,13 @@
 <h1>Link {{hardwareInputSelector.name}} - {{hardwareInputSelector.hardwareInputType}} </h1>
 
 <mat-expansion-panel expanded *ngFor="let a of hardwareInputSelector.hardwareInputSelectors; let index = index">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Link Input Selector Mapping - {{hardwareInputSelector.hardwareInputSelectors[index].name}}
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div>
-            <div class="container">
-                <dynamic-form *ngIf="dataLoaded" [identifier]="hardwareInputSelector.hardwareInputSelectors[index].id" [fields]="simLinkInputSelectorFields" (submit)="submit($event)">
-                </dynamic-form>
-            </div>
-        </div>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Link Input Selector Mapping - {{hardwareInputSelector.hardwareInputSelectors[index].name}}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container">
+        <opena3xx-link-hardware-input-selectors-form [hardwareInputSelectorId]="hardwareInputSelector.hardwareInputSelectors[index].id">
+        </opena3xx-link-hardware-input-selectors-form>
+    </div>
 </mat-expansion-panel>

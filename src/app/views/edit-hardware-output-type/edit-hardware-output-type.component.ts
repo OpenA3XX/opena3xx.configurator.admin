@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { HardwareOutputTypeDto } from 'src/app/models/hardware.output.type.dto';
 import { filter, map, tap } from 'rxjs/operators';
-import { HttpService } from 'src/app/services/http.service';
 import {NgForm} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveSuccessDialog } from '../../components/save-success-dialog/save-success-dialog.component';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'opena3xx-edit-hardware-output-type',
@@ -22,7 +21,7 @@ export class EditHardwareOutputTypeComponent implements OnInit {
   constructor
   (
     public dialog: MatDialog,
-    private httpService: HttpService,
+    private dataService: DataService,
     private router: Router
   ){
 
@@ -34,7 +33,7 @@ export class EditHardwareOutputTypeComponent implements OnInit {
       this.idParam = params.id;
     });
     
-    this.httpService.getHardwareOutputTypeById(this.idParam)
+    this.dataService.getHardwareOutputTypeById(this.idParam)
     .pipe(
       tap(data => console.log('Data received', data)),
       filter(x => !!x),
@@ -44,7 +43,7 @@ export class EditHardwareOutputTypeComponent implements OnInit {
 
   updateHardwareOutputType(f: NgForm){
     console.log(this.data);
-    this.httpService.updateHardwareOutputType(this.data).subscribe();
+    this.dataService.updateHardwareOutputType(this.data).subscribe();
 
     this.dialog.open(SaveSuccessDialog);
   }

@@ -2,9 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HardwareInputTypeDto } from 'src/app/models/hardware.input.type.dto';
-import { HttpService } from 'src/app/services/http.service';
 import { filter, map, tap } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'opena3xx-manage-hardware-input-types',
@@ -19,7 +19,7 @@ export class ManageHardwareInputTypesComponent implements OnInit {
     
   
     constructor(
-      private httpService: HttpService,
+      private dataService: DataService,
       public router: Router
     ){
   
@@ -31,7 +31,7 @@ export class ManageHardwareInputTypesComponent implements OnInit {
     }
   
     ngOnInit(): void {
-      this.httpService.getAllHardwareInputTypes()
+      this.dataService.getAllHardwareInputTypes()
       .pipe(
         tap(data => console.log('Data received', data)),
         filter(x => !!x),
