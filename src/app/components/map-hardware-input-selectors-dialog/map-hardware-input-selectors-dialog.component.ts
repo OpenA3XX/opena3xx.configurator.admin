@@ -4,6 +4,8 @@ import { FieldConfig } from "src/app/models/field.interface";
 import { HardwareInputDto } from "src/app/models/hardware.panel.dto";
 import { HttpService } from "src/app/services/http.service";
 import { map } from 'rxjs/operators';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import * as _ from "lodash";
 
 @Component({
     selector: 'opena3xx-map-hardware-input-selectors-dialog',
@@ -17,7 +19,10 @@ import { map } from 'rxjs/operators';
     public hardwareBoardSelectorFields: FieldConfig[] = [];
     dataLoaded: Boolean = false;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, private httpService: HttpService) { 
+    constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, 
+    private httpService: HttpService,
+    private _snackBar: MatSnackBar
+    ) { 
         this.hardwareInputSelector = data;
         console.log("Dialog Component", data);
     }
@@ -33,7 +38,12 @@ import { map } from 'rxjs/operators';
     }
 
     submit(formData: any) {
-      console.log(formData)
+      var index = _.find(this.hardwareInputSelector.hardwareInputSelectors, (o) => {
+        return o.id == formData.identifier
+      });
+      this._snackBar.open(`Mapping for ${this.hardwareInputSelector.name} => State ${index.name} saved successfully`, "Ok", {
+        duration: 5000
+      });
     }
-    
+
   }

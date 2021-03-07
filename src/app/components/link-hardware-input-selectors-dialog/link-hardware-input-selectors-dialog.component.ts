@@ -4,6 +4,8 @@ import { HardwareInputDto, IntegrationType, SimulatorEventDto } from "src/app/mo
 import { HttpService } from "src/app/services/http.service";
 import { map } from 'rxjs/operators';
 import { FieldConfig } from "src/app/models/field.interface";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import * as _ from "lodash";
 @Component({
     selector: 'opena3xx-link-hardware-input-selectors-dialog',
     templateUrl: "./link-hardware-input-selectors-dialog.component.html",
@@ -16,7 +18,10 @@ export class LinkHardwareInputSelectorsDialogComponent implements OnInit {
   public simLinkInputSelectorFields:  FieldConfig[] = [];
   dataLoaded: Boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, private httpService: HttpService) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {data: HardwareInputDto}, 
+  private httpService: HttpService,
+  private _snackBar: MatSnackBar 
+  ) { 
       this.hardwareInputSelector = data;
       this.simEventDtoList = [];
   }
@@ -33,6 +38,12 @@ export class LinkHardwareInputSelectorsDialogComponent implements OnInit {
 
   submit(formData: any) {
     console.log(formData)
+    var index = _.find(this.hardwareInputSelector.hardwareInputSelectors, (o) => {
+      return o.id == formData.identifier
+    });
+    this._snackBar.open(`Simulator Linking for ${this.hardwareInputSelector.name} => State ${index.name} saved successfully`, "Ok", {
+      duration: 5000
+    });
   }
 }
 
