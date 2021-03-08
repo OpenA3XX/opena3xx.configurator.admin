@@ -15,7 +15,6 @@ import { ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-d
 import { EditHardwareInputTypeComponent } from './views/edit-hardware-input-type/edit-hardware-input-type.component';
 import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-output-types/manage-hardware-output-types.component';
 import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
-import { SaveSuccessDialog } from './components/save-success-dialog/save-success-dialog.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ViewHardwareInputSelectorsDialogComponent } from './components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
 import { MapHardwareInputSelectorsDialogComponent } from './components/map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
@@ -42,7 +41,6 @@ import { ConfigurationService } from './services/configuration.service';
   declarations: [
     AppComponent,
     DashboardComponent,
-    SaveSuccessDialog,
     ViewHardwareInputSelectorsDialogComponent,
     ViewHardwareOutputSelectorsDialogComponent,
     MapHardwareInputSelectorsDialogComponent,
@@ -84,7 +82,7 @@ import { ConfigurationService } from './services/configuration.service';
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AppComponent, SaveSuccessDialog],
+  entryComponents: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
 @Component({
-  selector: "app-slide-toggle",
+  selector: "opena3xx-slide-toggle",
   template: `<div class="full-width margin-top" [formGroup]="group">
                 <mat-slide-toggle [placeholder]="field.label" [formControlName]="field.name">
                   {{field.label}}

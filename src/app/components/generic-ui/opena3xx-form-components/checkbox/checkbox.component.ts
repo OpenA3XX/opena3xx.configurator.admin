@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
 @Component({
-  selector: "app-checkbox",
+  selector: "opena3xx-checkbox",
   template: `
 <div class="full-width margin-top" [formGroup]="group" >
 <mat-checkbox [formControlName]="field.name">{{field.label}}</mat-checkbox>

@@ -33,8 +33,8 @@ const componentMapper = {
   selector: "[dynamicField]"
 })
 export class DynamicFieldDirective implements OnInit {
-  @Input() field: FieldConfig;
-  @Input() group: FormGroup;
+  @Input() field!: FieldConfig;
+  @Input() group!: FormGroup;
   componentRef: any;
   constructor(
     private resolver: ComponentFactoryResolver,

@@ -2,10 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
 import {NgForm} from '@angular/forms';
-import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { SaveSuccessDialog } from '../../components/save-success-dialog/save-success-dialog.component';
 import { DataService } from 'src/app/services/data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'opena3xx-edit-hardware-output-type',
@@ -20,9 +18,9 @@ export class EditHardwareOutputTypeComponent implements OnInit {
 
   constructor
   (
-    public dialog: MatDialog,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ){
 
   }
@@ -45,7 +43,9 @@ export class EditHardwareOutputTypeComponent implements OnInit {
     console.log(this.data);
     this.dataService.updateHardwareOutputType(this.data).subscribe();
 
-    this.dialog.open(SaveSuccessDialog);
+    this._snackBar.open("Hardware Output Type Saved Successfully", "Ok", {
+      duration: 5000
+    });
   }
 
   goBack(){

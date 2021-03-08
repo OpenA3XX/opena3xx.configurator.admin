@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
 @Component({
-  selector: "app-date",
+  selector: "opena3xx-date",
   template: `
 <mat-form-field appearance="standard" class="full-width margin-top" [formGroup]="group">
 <input autocomplete="off" matInput [matDatepicker]="picker" [formControlName]="field.name" [placeholder]="field.label">

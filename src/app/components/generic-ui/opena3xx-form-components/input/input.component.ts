@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
 @Component({
-  selector: "app-input",
+  selector: "opena3xx-input",
   template: `
 <mat-form-field appearance="standard" class="full-width" [formGroup]="group">
   <mat-label>{{field.label}}</mat-label>

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
 @Component({
-  selector: "app-radiobutton",
+  selector: "opena3xx-radiobutton",
   template: `
 <div class="full-width margin-top" [formGroup]="group">
 <label class="radio-label-padding">{{field.label}}:</label>

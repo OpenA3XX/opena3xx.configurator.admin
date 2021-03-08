@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
 @Component({
-  selector: "app-heading",
+  selector: "opena3xx-heading",
   template: `
   <h5>
   {{field.label}}

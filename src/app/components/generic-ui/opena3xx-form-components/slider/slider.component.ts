@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
 @Component({
-  selector: "app-slider",
+  selector: "opena3xx-slider",
   template: `<div class="full-width margin-top" [formGroup]="group">
                 <label class="radio-label-padding">{{field.label}}:</label>
                 <mat-slider 
