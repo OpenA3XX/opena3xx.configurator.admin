@@ -9,3 +9,13 @@ mat-expansion-panel{
         float:right;
     }
 }
+
+.mat-flat-button + .mat-flat-button {
+    margin-left: 8px;
+    float:right;
+  }
+
+.mat-flat-button.mat-accent{
+    background-color: #ff8d0b;
+    color: #ffffff;
+}

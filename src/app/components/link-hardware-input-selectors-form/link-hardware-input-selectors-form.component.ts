@@ -18,6 +18,8 @@ export class LinkHardwareInputSelectorsFormComponent implements OnInit{
   public hardwareInputSelector : any;
   linkHardwareInputSelectorsForm: FormGroup;
 
+  public simulatorEventTestInProgress: boolean = false;
+
   public simulatorEventsFieldConfig : FieldConfig = {
       type: "select",
       label: "Simulator Event",
@@ -103,9 +105,22 @@ export class LinkHardwareInputSelectorsFormComponent implements OnInit{
       control!.markAsTouched({ onlySelf: true });
     });
   }
+
+  onSimulatorEventTest(){
+    this.simulatorEventTestInProgress = true;
+  }
+
+  onSave(){
+    this.simulatorEventTestInProgress = false;
+  }
+
   onSubmit(formData: any) {
-    
     if(this.linkHardwareInputSelectorsForm.valid){
+      if(this.simulatorEventTestInProgress){
+        console.log("Test Sim Event");
+      }else{
+        console.log("Save Sim Event")
+      }
       console.log("HardwareInputSelectorId", this.hardwareInputSelectorId, "FormData", this.linkHardwareInputSelectorsForm.value)
     }
     else{
