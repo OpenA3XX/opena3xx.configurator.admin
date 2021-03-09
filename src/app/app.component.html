@@ -6,7 +6,7 @@
 <mat-sidenav-container class="opena3xx-container" autosize>
 	<!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
   <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
-	  	<img *ngIf="isExpanded || isShowing" src="../assets/logo.png" width="100px" style="margin:18px 10px 10px 63px" />
+	  	<img *ngIf="isExpanded || isShowing" src="assets/logo.png" width="100px" style="margin:18px 10px 10px 63px" />
 		<mat-nav-list>
 			<mat-list-item (click)="clickDashboard()"  class="parent" title="Home">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
