@@ -44,6 +44,10 @@
 				<span class="full-width" *ngIf="isExpanded || isShowing">Monitoring</span>
 				<mat-icon mat-list-icon>bar_chart</mat-icon>
 			</mat-list-item>
+			<mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Console">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Console</span>
+				<mat-icon mat-list-icon>web_asset</mat-icon>
+			</mat-list-item>
 			<mat-list-item (click)="clickSettings()" class="parent" title="Settings">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Settings</span>
 				<mat-icon mat-list-icon>settings</mat-icon>
