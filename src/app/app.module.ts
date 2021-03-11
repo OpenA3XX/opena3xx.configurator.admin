@@ -33,7 +33,7 @@ import { RadiobuttonComponent } from './components/generic-ui/opena3xx-form-comp
 import { HeadingComponent } from './components/generic-ui/opena3xx-form-components/heading/heading.component';
 import { SlideToggleComponent } from './components/generic-ui/opena3xx-form-components/slide-toggle/slide-toggle.component';
 import { SliderComponent } from './components/generic-ui/opena3xx-form-components/slider/slider.component';
-import { LinkHardwareInputSelectorsFormComponent } from './components/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
+import { LinkHardwareInputSelectorsFormComponent } from './components/forms/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
 import { ConfigurationService } from './services/configuration.service';
 
 

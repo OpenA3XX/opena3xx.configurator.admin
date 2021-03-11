@@ -29,7 +29,7 @@ export class DataService {
 
   getAllHardwarePanelDetails(id: Number){
     return this.http.get(`${this.BASE_URL}/hardware-panel/details/${id}`);
-}
+  }
 
   getAllHardwareInputTypes(){
     return this.http.get(`${this.BASE_URL}/hardware-input-types`);
@@ -60,6 +60,14 @@ export class DataService {
     return this.http.get(`${this.BASE_URL}/simulator-event/all`);
   }
 
+  getAllSimulatorEventsByIntegrationType(integrationTypeId: number){
+    return this.http.get(`${this.BASE_URL}/simulator-event?integrationTypeId=${integrationTypeId}`);
+  }
+
+  getAllIntegrationTypes(){
+    return this.http.get(`${this.BASE_URL}/simulator-event/integration-types/all`);
+  }
+
   getSettingsForm(){
     return this.http.get(`${this.BASE_URL}/forms/settings`);
   }
@@ -77,5 +85,13 @@ export class DataService {
   updateAllConfiguration(data: any){
     console.log(data);
     return this.http.post<any>(`${this.BASE_URL}/configuration`, data);
+  }
+
+  linkSimulatorEventToHardwareInputSelector(hardwareInputSelectorId: number, simulatorEventId: number){
+    return this.http.post<any>(`${this.BASE_URL}/simulator-event/link/hardware-input-selector/${hardwareInputSelectorId}/${simulatorEventId}`, {});
+  }
+
+  getHardwareInputSelectorDetails(hardwareInputSelectorId: number){
+    return this.http.get(`${this.BASE_URL}/hardware-input-selectors/${hardwareInputSelectorId}`);
   }
 }

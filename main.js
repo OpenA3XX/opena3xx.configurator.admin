@@ -6,9 +6,9 @@ const {app, BrowserWindow} = require('electron')
 
     function createWindow () {
       mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        icon: path.join(__dirname + '/assets/app-icons/icons/png/512x512.png'),
+        width: 1600,
+        height: 1000,
+        icon: path.join(__dirname + '/dist/assets/app-icons/icons/png/512x512.png'),
         webPreferences: {
           nodeIntegration: true
         }
@@ -21,12 +21,13 @@ const {app, BrowserWindow} = require('electron')
           slashes: true
         })
       );
-      // Open the DevTools.
-      mainWindow.webContents.openDevTools()
+
+      mainWindow.autoHideMenuBar = true;
 
       mainWindow.on('closed', function () {
         mainWindow = null
       })
+
     }
 
     app.on('ready', createWindow)
