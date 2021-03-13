@@ -94,4 +94,8 @@ export class DataService {
   getHardwareInputSelectorDetails(hardwareInputSelectorId: number){
     return this.http.get(`${this.BASE_URL}/hardware-input-selectors/${hardwareInputSelectorId}`);
   }
+
+  sendSimulatorTestEvent(simulatorEventId: number){
+    return this.http.put<any>(`${this.BASE_URL}/simulator-event/test/${simulatorEventId}`,{});
+  }
 }

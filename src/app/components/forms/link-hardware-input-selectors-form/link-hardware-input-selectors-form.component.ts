@@ -51,7 +51,7 @@ export class LinkHardwareInputSelectorsFormComponent{
   }
 
   public eventDetails: string;
-  
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: HardwareInputDto,
     formBuilder: FormBuilder,
@@ -115,7 +115,12 @@ export class LinkHardwareInputSelectorsFormComponent{
   onSubmit(formData: any) {
     if(this.linkHardwareInputSelectorsForm.valid){
       if(this.simulatorEventTestInProgress){
-        console.log("Test Sim Event");
+        this.dataService.sendSimulatorTestEvent(this.linkHardwareInputSelectorsForm.value.simulatorEvents).toPromise()
+        .then(()=>{
+          this._snackBar.open("Simulator Test Event Sent Successfully", "Ok", {
+            duration: 3000
+          });
+        });
       }else{
         this.dataService.linkSimulatorEventToHardwareInputSelector(this.hardwareInputSelectorId, this.linkHardwareInputSelectorsForm.value.simulatorEvents).toPromise()
         .then(()=>{
