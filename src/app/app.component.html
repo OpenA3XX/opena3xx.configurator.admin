@@ -1,6 +1,8 @@
 <mat-toolbar color="primary" class="opena3xx-toolbar">
   <button mat-icon-button (click)="toggle()"><mat-icon>menu</mat-icon></button>
   <h1 class="opena3xx-app-name">OpenA3XX Configurator</h1>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="toggle()" matBadge="1" matBadgeColor="accent" matBadgeSize="small"><mat-icon>notification_important</mat-icon></button>
 </mat-toolbar>
 
 <mat-sidenav-container class="opena3xx-container" autosize>
@@ -47,6 +49,10 @@
 			<mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Console">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Console</span>
 				<mat-icon mat-list-icon>web_asset</mat-icon>
+			</mat-list-item>
+			<mat-list-item (click)="clickSettings()" class="parent" title="Notifications">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Notifications</span>
+				<mat-icon matBadgeSize="small" matBadgePosition="before" matBadge="1" matBadgeColor="accent" mat-list-icon>notification_important</mat-icon>
 			</mat-list-item>
 			<mat-list-item (click)="clickSettings()" class="parent" title="Settings">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Settings</span>

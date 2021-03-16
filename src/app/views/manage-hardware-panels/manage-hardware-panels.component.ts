@@ -5,6 +5,7 @@ import { filter, map, tap } from 'rxjs/operators';
 import { HardwarePanelOverviewDto } from '../../models/hardware.panel.dto';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'opena3xx-manage-hardware-panels',
@@ -17,10 +18,12 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
   public displayedColumns: string[] = ['id', 'name', 'aircraftModel', 'manufacturer', 'cockpitArea', 'owner', 'details'];
   dataSource = new MatTableDataSource<HardwarePanelOverviewDto>();
   public data: any;
+  public data_loaded: boolean = false;
 
   constructor(
     private dataService: DataService,
-    public router: Router
+    public router: Router,
+    private _snackBar: MatSnackBar
   ){
 
   }
@@ -38,6 +41,10 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
       map(data_received => {
         this.data = data_received
         this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data)
+        this.data_loaded = true;
+        this._snackBar.open("Data Loading Completed", "Ok", {
+          duration: 1000
+        });
       })
     ).subscribe();
   }

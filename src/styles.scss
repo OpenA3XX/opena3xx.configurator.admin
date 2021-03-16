@@ -53,6 +53,10 @@ body { margin: 0; font-family: "Inter", Roboto, "Helvetica Neue", sans-serif; }
   background:#0061ed;
 }
 
+.mat-badge-accent .mat-badge-content{
+  background-color: #f44336;
+}
+
 .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple{
   background:#0061ed;
 }

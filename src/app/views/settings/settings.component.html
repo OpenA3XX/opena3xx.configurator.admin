@@ -1,3 +1,7 @@
+<mat-toolbar>
+  <mat-icon>settings</mat-icon>&nbsp;
+  <span>Settings</span>
+</mat-toolbar>
 <div class="container">
   <dynamic-form *ngIf="dataLoaded" [fields]="settingsConfig" (submit)="submit($event)">
   </dynamic-form>

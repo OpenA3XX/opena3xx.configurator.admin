@@ -38,3 +38,12 @@
 .submenu.expanded {
     transform: scaleY(1);
 }
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-sidenav{
+    box-shadow: -20px 0px 34px #a0a0a0;
+}
+
