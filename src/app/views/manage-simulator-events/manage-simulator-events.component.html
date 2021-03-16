@@ -1,0 +1,57 @@
+<h4>Manage Simulator Events Component</h4>
+
+<mat-toolbar>
+    <button mat-flat-button color="primary">
+        <mat-icon mat-list-icon>add</mat-icon>
+        Add Simulator Event
+    </button>
+</mat-toolbar>
+
+<div class="loader">
+    <mat-progress-bar mode="indeterminate" *ngIf="data_loaded == false" ></mat-progress-bar>
+</div>
+<table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="friendlyName">
+      <th mat-header-cell *matHeaderCellDef> Friendly Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.friendlyName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="eventName">
+        <th mat-header-cell *matHeaderCellDef> Event name </th>
+        <td mat-cell *matCellDef="let element"> {{element.eventName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="simulatorEventTypeName">
+        <th mat-header-cell *matHeaderCellDef> Simulator Event Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.simulatorEventTypeName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="simulatorSoftwareName">
+        <th mat-header-cell *matHeaderCellDef> Simulator Software </th>
+        <td mat-cell *matCellDef="let element"> {{element.simulatorSoftwareName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="simulatorEventSdkTypeName">
+        <th mat-header-cell *matHeaderCellDef> Simulator Event SDK Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.simulatorEventSdkTypeName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element"> 
+            <button mat-flat-button color="primary" (click)="onEditClick(element.id)">
+                <mat-icon mat-list-icon>edit</mat-icon>
+                Edit
+            </button>
+        </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

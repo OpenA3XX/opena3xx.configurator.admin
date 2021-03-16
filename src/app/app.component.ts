@@ -71,5 +71,8 @@ export class AppComponent {
   clickSettings(){
     this.router.navigateByUrl(`/settings`);
   }
+  clickManageSimulatorEvents(){
+    this.router.navigateByUrl(`/manage/simulator-events`);
+  }
 
 }

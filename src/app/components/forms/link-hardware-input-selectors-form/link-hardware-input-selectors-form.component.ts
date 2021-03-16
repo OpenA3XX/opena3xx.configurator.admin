@@ -89,7 +89,7 @@ export class LinkHardwareInputSelectorsFormComponent{
           _.each(data,(entry)=>{
             this.simulatorEventsFieldConfig.options.push({
               key: entry.id.toString(),
-              value: `Name: ${entry.friendlyName} => ${entry.eventCode}`
+              value: `${entry.eventName} => ${entry.eventCode}`
             });
           });
           this.linkHardwareInputSelectorsForm.controls["simulatorEvents"].setValue(hardwareInputSelectorDetails.simulatorEventDto.id.toString());
@@ -118,7 +118,7 @@ export class LinkHardwareInputSelectorsFormComponent{
         this.dataService.sendSimulatorTestEvent(this.linkHardwareInputSelectorsForm.value.simulatorEvents).toPromise()
         .then(()=>{
           this._snackBar.open("Simulator Test Event Sent Successfully", "Ok", {
-            duration: 3000
+            duration: 1000
           });
         });
       }else{
@@ -142,7 +142,7 @@ export class LinkHardwareInputSelectorsFormComponent{
         _.each(data,(entry)=>{
           this.simulatorEventsFieldConfig.options.push({
             key: entry.id.toString(),
-            value: `Name: ${entry.friendlyName} => ${entry.eventCode}`
+            value: `${entry.eventName} => ${entry.eventCode}`
           });
         });
         console.log(data);
@@ -155,5 +155,6 @@ export class LinkHardwareInputSelectorsFormComponent{
 export interface SimulatorEventItemDto{
   id: number,
   friendlyName: string,
+  eventName: string,
   eventCode: string
 }

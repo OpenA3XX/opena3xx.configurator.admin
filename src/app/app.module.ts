@@ -35,6 +35,7 @@ import { SlideToggleComponent } from './components/generic-ui/opena3xx-form-comp
 import { SliderComponent } from './components/generic-ui/opena3xx-form-components/slider/slider.component';
 import { LinkHardwareInputSelectorsFormComponent } from './components/forms/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
 import { ConfigurationService } from './services/configuration.service';
+import { ManageSimulatorEventsComponent } from './views/manage-simulator-events/manage-simulator-events.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ConfigurationService } from './services/configuration.service';
     SliderComponent,
     DynamicFieldDirective,
     DynamicFormComponent,
-    LinkHardwareInputSelectorsFormComponent
+    LinkHardwareInputSelectorsFormComponent,
+    ManageSimulatorEventsComponent
   ],
   imports: [
     BrowserModule,
