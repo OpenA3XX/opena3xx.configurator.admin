@@ -35,6 +35,13 @@ export class AppComponent {
     }
   }
 
+  fullscreen(){
+    var elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    }
+  }
+
   toggle(){
     this.isExpanded = !this.isExpanded;
     this.cookieService.set("opena3xx.sidemenu.visibility.state", this.isExpanded.toString());

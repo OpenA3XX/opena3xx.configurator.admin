@@ -1,14 +1,18 @@
 <mat-toolbar color="primary" class="opena3xx-toolbar">
-  <button mat-icon-button (click)="toggle()"><mat-icon>menu</mat-icon></button>
+  <button mat-icon-button (click)="toggle()">
+	  	<mat-icon *ngIf="isExpanded">menu_open</mat-icon>
+		<mat-icon *ngIf="!isExpanded">menu</mat-icon>
+	</button>
   <h1 class="opena3xx-app-name">OpenA3XX Configurator</h1>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="toggle()" matBadge="1" matBadgeColor="accent" matBadgeSize="small"><mat-icon>notification_important</mat-icon></button>
+  <button matTooltip="Notifications" mat-icon-button (click)="toggle()" matBadge="1" matBadgeColor="accent" matBadgeSize="small"><mat-icon>notification_important</mat-icon></button>
+  <button matTooltip="Enable Fullscreen" mat-icon-button (click)="fullscreen()"  matBadgeColor="accent" ><mat-icon>fullscreen</mat-icon></button>
 </mat-toolbar>
 
 <mat-sidenav-container class="opena3xx-container" autosize>
 	<!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
   <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
-	  	<img *ngIf="isExpanded || isShowing" src="assets/logo.png" width="100px" style="margin:18px 10px 10px 63px" />
+	  	<img (click)="clickDashboard()" *ngIf="isExpanded || isShowing" src="assets/logo.png" width="100px" style="margin:18px 10px 10px 63px" />
 		<mat-nav-list>
 			<mat-list-item (click)="clickDashboard()"  class="parent" title="Home">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
@@ -50,7 +54,7 @@
 				<span class="full-width" *ngIf="isExpanded || isShowing">Console</span>
 				<mat-icon mat-list-icon>web_asset</mat-icon>
 			</mat-list-item>
-			<mat-list-item (click)="clickSettings()" class="parent" title="Notifications">
+			<mat-list-item matTooltip="1 Pending Notification" matTooltipPosition="after" (click)="clickSettings()" class="parent" title="Notifications">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Notifications</span>
 				<mat-icon matBadgeSize="small" matBadgePosition="before" matBadge="1" matBadgeColor="accent" mat-list-icon>notification_important</mat-icon>
 			</mat-list-item>
