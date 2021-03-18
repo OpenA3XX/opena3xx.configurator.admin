@@ -15,8 +15,10 @@ import { DataService } from './services/data.service';
 export class AppComponent {
 
   isExpanded = true;
+  isRightMenuExpanded = true;
   showSubmenu: boolean = false;
   isShowing = false;
+  isRightMenuShowing = false;
   showSubSubMenu: boolean = false;
   isFullscreen : boolean = false;
   apiAvailabilityStatus : boolean = false;
@@ -50,12 +52,18 @@ export class AppComponent {
 
   toggle(){
     this.isExpanded = !this.isExpanded;
-    this.cookieService.set("opena3xx.sidemenu.visibility.state", this.isExpanded.toString());
+    this.cookieService.set("opena3xx.sidemenu.left.visibility.state", this.isExpanded.toString());
+  }
+
+  toggleRight(){
+    this.isRightMenuExpanded = !this.isRightMenuExpanded;
+    this.cookieService.set("opena3xx.sidemenu.right.visibility.state", this.isRightMenuExpanded.toString());
   }
   constructor(public router: Router, 
     private cookieService: CookieService,
     private dataService: DataService){
-    this.isExpanded = this.toBoolean(this.cookieService.get("opena3xx.sidemenu.visibility.state"));
+    this.isExpanded = this.toBoolean(this.cookieService.get("opena3xx.sidemenu.left.visibility.state"));
+    this.isRightMenuExpanded = this.toBoolean(this.cookieService.get("opena3xx.sidemenu.right.visibility.state"));
     this.checkApiHealth();
     setInterval( () => {
         this.checkApiHealth()

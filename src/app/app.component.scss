@@ -43,10 +43,6 @@
     flex: 1 1 auto;
 }
 
-mat-sidenav{
-    box-shadow: -20px 0px 34px #a0a0a0;
-}
-
 img:hover{
     cursor: pointer;
 }
@@ -80,4 +76,16 @@ img:hover{
 @keyframes fadeIn {
     0% {opacity:0;}
     100% {opacity:1;}
+}
+
+.opena3xx-sidenav-right{
+    mat-icon.ok{
+        color:#068c06;
+    }
+    mat-icon.error{
+        color:#da372b;
+    }
+    span{
+        text-align: right;
+    }
 }
