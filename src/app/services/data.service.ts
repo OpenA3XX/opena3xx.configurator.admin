@@ -98,4 +98,9 @@ export class DataService {
   sendSimulatorTestEvent(simulatorEventId: number){
     return this.http.put<any>(`${this.BASE_URL}/simulator-event/test/${simulatorEventId}`,{});
   }
+  checkApiHealth(){
+    return this.http.get(`${this.BASE_URL}/core/heartbeat/ping`, {
+      responseType: "text"
+    });
+  }
 }

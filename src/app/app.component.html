@@ -1,12 +1,26 @@
+<div class="api-status" *ngIf="!apiAvailabilityStatus">
+	<p>
+		<mat-icon>
+			error
+		</mat-icon>
+		Cannot communicate with OpenA3XX Peripheral API.
+	</p>
+</div>
 <mat-toolbar color="primary" class="opena3xx-toolbar">
+	
   <button mat-icon-button (click)="toggle()">
 	  	<mat-icon *ngIf="isExpanded">menu_open</mat-icon>
 		<mat-icon *ngIf="!isExpanded">menu</mat-icon>
 	</button>
   <h1 class="opena3xx-app-name">OpenA3XX Configurator</h1>
   <span class="spacer"></span>
-  <button matTooltip="Notifications" mat-icon-button (click)="toggle()" matBadge="1" matBadgeColor="accent" matBadgeSize="small"><mat-icon>notification_important</mat-icon></button>
-  <button matTooltip="Enable Fullscreen" mat-icon-button (click)="fullscreen()"  matBadgeColor="accent" ><mat-icon>fullscreen</mat-icon></button>
+  <button matTooltip="Notifications" mat-icon-button (click)="toggle()" matBadge="1" matBadgeColor="accent" matBadgeSize="small">
+	  <mat-icon>notification_important</mat-icon>
+  </button>
+  <button matTooltip="Toggle Fullscreen" mat-icon-button (click)="fullscreen()"  matBadgeColor="accent" >
+	  <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
+	  <mat-icon *ngIf="isFullscreen">close_fullscreen</mat-icon>
+	</button>
 </mat-toolbar>
 
 <mat-sidenav-container class="opena3xx-container" autosize>

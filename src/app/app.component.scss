@@ -50,3 +50,34 @@ mat-sidenav{
 img:hover{
     cursor: pointer;
 }
+
+.api-status{
+    background-color: #3b8bff;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    width: 20%;
+    padding: 10px;
+    border-radius: 0px 0px 30px 30px;
+    p{
+        color:#fff;
+        padding:0;
+        margin:0;
+        text-align: center;
+    }
+    mat-icon{
+        position:absolute;
+        top: 16%;
+        left: 10%;
+    }
+    animation: fadeIn ease 3s;
+    -webkit-animation: fadeIn ease 3s;
+    -moz-animation: fadeIn ease 3s;
+    -o-animation: fadeIn ease 3s;
+    -ms-animation: fadeIn ease 3s;
+}
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}

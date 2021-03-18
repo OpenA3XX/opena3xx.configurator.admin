@@ -13,7 +13,7 @@ import { DataService } from "src/app/services/data.service";
     styleUrls: ["./manage-simulator-events.component.scss"]
 })
 export class ManageSimulatorEventsComponent  implements OnInit {
-    public displayedColumns: string[] = ['id', 'friendlyName', 'eventName', 'simulatorEventTypeName', 'simulatorSoftwareName','simulatorEventSdkTypeName', 'details'];
+    public displayedColumns: string[] = ['id', 'friendlyName', 'eventName', 'simulatorEventTypeName', 'simulatorSoftwareName','simulatorEventSdkTypeName', 'details', 'info'];
     dataSource = new MatTableDataSource<SimulatorEventDto>();
     public data: any;
     public data_loaded: boolean = false;
