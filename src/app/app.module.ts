@@ -36,6 +36,8 @@ import { SliderComponent } from './components/generic-ui/opena3xx-form-component
 import { LinkHardwareInputSelectorsFormComponent } from './components/forms/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
 import { ConfigurationService } from './services/configuration.service';
 import { ManageSimulatorEventsComponent } from './views/manage-simulator-events/manage-simulator-events.component';
+import { AddHardwareInputTypeComponent } from './views/add-hardware-input-type/add-hardware-input-type.component';
+import { AddHardwareOutputTypeComponent } from './views/add-hardware-output-type/add-hardware-output-type.component';
 
 
 @NgModule({
@@ -50,8 +52,10 @@ import { ManageSimulatorEventsComponent } from './views/manage-simulator-events/
     ManageHardwarePanelsComponent,
     ViewHardwarePanelDetailsComponent,
     ManageHardwareInputTypesComponent,
+    AddHardwareInputTypeComponent,
     EditHardwareInputTypeComponent,
     ManageHardwareOutputTypesComponent,
+    AddHardwareOutputTypeComponent,
     EditHardwareOutputTypeComponent,
     SettingsComponent,
     InputComponent,

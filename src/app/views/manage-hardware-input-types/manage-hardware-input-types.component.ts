@@ -47,4 +47,8 @@ export class ManageHardwareInputTypesComponent implements OnInit {
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
     }
+
+    addHardwareInputType(){
+      this.router.navigateByUrl(`/add/hardware-input-type`);
+    }
   }

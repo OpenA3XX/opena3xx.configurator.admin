@@ -103,4 +103,12 @@ export class DataService {
       responseType: "text"
     });
   }
+
+  addHardwareInputType(hardwareInputTypeDto: HardwareInputTypeDto){
+    return this.http.post<HardwareInputTypeDto>(`${this.BASE_URL}/hardware-input-types`, hardwareInputTypeDto)
+  }
+
+  addHardwareOutputType(hardwareInputTypeDto: HardwareInputTypeDto){
+    return this.http.post<HardwareInputTypeDto>(`${this.BASE_URL}/hardware-output-types`, hardwareInputTypeDto)
+  }
 }

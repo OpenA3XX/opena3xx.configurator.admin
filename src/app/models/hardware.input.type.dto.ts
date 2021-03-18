@@ -1,5 +1,5 @@
 export interface HardwareInputTypeDto {
-  id: number;
+  id?: number;
   name: string;
 }
 

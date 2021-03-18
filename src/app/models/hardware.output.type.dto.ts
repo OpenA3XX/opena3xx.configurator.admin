@@ -1,4 +1,4 @@
 export interface HardwareOutputTypeDto {
-  id: number;
+  id?: number;
   name: string;
 }

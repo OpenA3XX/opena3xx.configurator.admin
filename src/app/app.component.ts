@@ -59,7 +59,7 @@ export class AppComponent {
     this.checkApiHealth();
     setInterval( () => {
         this.checkApiHealth()
-   }, 5000);
+   }, 3000);
     
   }
 

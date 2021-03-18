@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddHardwareInputTypeComponent } from './views/add-hardware-input-type/add-hardware-input-type.component';
+import { AddHardwareOutputTypeComponent } from './views/add-hardware-output-type/add-hardware-output-type.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { EditHardwareInputTypeComponent } from './views/edit-hardware-input-type/edit-hardware-input-type.component';
 import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
@@ -36,12 +38,20 @@ const routes: Routes = [{
   component: EditHardwareInputTypeComponent
 },
 {
+  path: 'add/hardware-input-type',
+  component: AddHardwareInputTypeComponent
+},
+{
   path: 'manage/hardware-output-types',
   component: ManageHardwareOutputTypesComponent
 },
 {
   path: 'edit/hardware-output-type',
   component: EditHardwareOutputTypeComponent
+},
+{
+  path: 'add/hardware-output-type',
+  component: AddHardwareOutputTypeComponent
 },
 {
   path: 'settings',

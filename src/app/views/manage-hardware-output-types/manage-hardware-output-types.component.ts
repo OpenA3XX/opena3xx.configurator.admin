@@ -45,4 +45,8 @@ export class ManageHardwareOutputTypesComponent implements OnInit {
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
     }
+
+    addHardwareOutputType(){
+      this.router.navigateByUrl(`/add/hardware-output-type`);
+    }
   }
