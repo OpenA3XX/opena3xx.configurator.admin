@@ -102,5 +102,9 @@ export class AppComponent {
   clickManageSimulatorEvents(){
     this.router.navigateByUrl(`/manage/simulator-events`);
   }
+  clickManageHardwareBoards(){
+    
+    this.router.navigateByUrl(`/manage/hardware-boards`);
+  }
 
 }

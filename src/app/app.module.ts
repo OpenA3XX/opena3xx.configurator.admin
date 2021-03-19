@@ -38,6 +38,8 @@ import { ConfigurationService } from './services/configuration.service';
 import { ManageSimulatorEventsComponent } from './views/manage-simulator-events/manage-simulator-events.component';
 import { AddHardwareInputTypeComponent } from './views/add-hardware-input-type/add-hardware-input-type.component';
 import { AddHardwareOutputTypeComponent } from './views/add-hardware-output-type/add-hardware-output-type.component';
+import { RegisterHardwareBoardComponent } from './views/register-hardware-board/register-hardware-board.component';
+import { ManageHardwareBoardsComponent } from './views/manage-hardware-boards/manage-hardware-board.component';
 
 
 @NgModule({
@@ -70,7 +72,9 @@ import { AddHardwareOutputTypeComponent } from './views/add-hardware-output-type
     DynamicFieldDirective,
     DynamicFormComponent,
     LinkHardwareInputSelectorsFormComponent,
-    ManageSimulatorEventsComponent
+    ManageSimulatorEventsComponent,
+    RegisterHardwareBoardComponent,
+    ManageHardwareBoardsComponent
   ],
   imports: [
     BrowserModule,

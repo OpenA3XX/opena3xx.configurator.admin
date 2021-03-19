@@ -34,7 +34,6 @@ export class ManageSimulatorEventsComponent  implements OnInit {
     ngOnInit(): void {
       this.dataService.getAllSimulatorEvents()
       .pipe(
-        tap(data => console.log('Data received', data)),
         filter(x => !!x),
         map(data_received => {
           this.data = data_received
@@ -45,6 +44,7 @@ export class ManageSimulatorEventsComponent  implements OnInit {
           });
         })
       ).subscribe();
+      
     }
   
     @ViewChild(MatPaginator) paginator!: MatPaginator;

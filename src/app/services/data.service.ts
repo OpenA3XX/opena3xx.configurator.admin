@@ -111,4 +111,8 @@ export class DataService {
   addHardwareOutputType(hardwareInputTypeDto: HardwareInputTypeDto){
     return this.http.post<HardwareInputTypeDto>(`${this.BASE_URL}/hardware-output-types`, hardwareInputTypeDto)
   }
+
+  getAllHardwareBoards(){
+    return this.http.get(`${this.BASE_URL}/hardware-boards/all`);
+  }
 }
