@@ -2,3 +2,56 @@
     <mat-icon>developer_board</mat-icon>&nbsp;
     <span>Register Hardware Board</span>
 </mat-toolbar>
+<mat-toolbar>
+    <button mat-flat-button color="primary" (click)="goBack()">
+        Back
+    </button>
+</mat-toolbar>
+
+<mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Register Hardware Board
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container">
+        <form [formGroup]="registerHardwareBoardForm" (submit)="onSubmit($event)">
+
+            <opena3xx-input 
+                [field]="boardNameFieldConfig" 
+                [group]="registerHardwareBoardForm">
+            </opena3xx-input>
+            
+            <opena3xx-slider
+                [field]="totalExtendersFieldConfig" 
+                [group]="registerHardwareBoardForm"
+                (onSliderValueChange)="onSliderValueChange($event)"
+                >
+            </opena3xx-slider>
+
+
+            <mat-form-field appearance="standard" class="full-width">
+                <mat-label>Total I/O Count:</mat-label>
+                <input autocomplete="off" matInput type="text" disabled value="{{totalDiscreteInputOutput}}">
+                <mat-hint>This is calculated based on how much IO Extender Buses are set on the board. (Total IOs = Total Extenders x 16)</mat-hint>
+              </mat-form-field>
+
+
+            <!-- <opena3xx-forms-select [field]="integrationTypeFieldConfig" [group]="linkHardwareInputSelectorsForm" (onSelectChange)="onIntegrationTypeChange($event)">
+            </opena3xx-forms-select>
+        
+            <opena3xx-forms-select [field]="simulatorEventsFieldConfig" [group]="linkHardwareInputSelectorsForm">
+            </opena3xx-forms-select> -->
+            
+        
+            <div class="full-width margin-top">
+                <button type="submit" mat-flat-button color="primary">
+                    <mat-icon>check</mat-icon>
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</mat-expansion-panel>
+
+

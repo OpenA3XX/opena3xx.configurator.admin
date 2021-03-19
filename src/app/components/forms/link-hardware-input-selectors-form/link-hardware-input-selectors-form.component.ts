@@ -97,6 +97,7 @@ export class LinkHardwareInputSelectorsFormComponent{
       }
     });
   }
+  
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
