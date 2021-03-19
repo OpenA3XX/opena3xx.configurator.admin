@@ -1,8 +1,10 @@
 import { Component, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSlider } from "@angular/material/slider";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { FieldConfig } from "src/app/models/field.interface";
+import { DataService } from "src/app/services/data.service";
 
 
 @Component({
@@ -31,9 +33,9 @@ export class RegisterHardwareBoardComponent implements OnInit{
 
       public totalExtendersFieldConfig : FieldConfig = {
         type: "slider",
-        label: "Total Extenders",
-        name: "totalExtenders",
-        hint: "Select Total Extenders",
+        label: "Total I²C Extenders on board",
+        name: "hardwareBusExtendersCount",
+        hint: "Select Total Extenders (MCP23017)",
         minValue: "1",
         maxValue: "8",
         value:1,
@@ -41,12 +43,15 @@ export class RegisterHardwareBoardComponent implements OnInit{
       }
 
       constructor(formBuilder: FormBuilder,
-        private router: Router)
+        private router: Router,
+        private dataService: DataService,
+        private _snackBar: MatSnackBar
+        )
       {
         
         this.registerHardwareBoardForm = formBuilder.group({
             name : [, { validators: [Validators.required], updateOn: "change" }],
-            totalExtenders : [, { validators: [Validators.required], updateOn: "change" }]
+            hardwareBusExtendersCount : [, { validators: [Validators.required], updateOn: "change" }]
           });
         //this.registerHardwareBoardForm.controls["totalExtenders"].setValue(1);
         this.totalDiscreteInputOutput = 16; //Default
@@ -58,7 +63,11 @@ export class RegisterHardwareBoardComponent implements OnInit{
 
       onSubmit(formData: any) {
         if(this.registerHardwareBoardForm.valid){
-            console.log(this.registerHardwareBoardForm.value)
+            this.dataService.addHardwareBoards(this.registerHardwareBoardForm.value).toPromise().then(()=>{
+                this._snackBar.open("Hardware Board Registed Successfully", "Ok", {
+                    duration: 5000
+                  });
+            })
         }else{
             this.validateAllFormFields(this.registerHardwareBoardForm);
         }

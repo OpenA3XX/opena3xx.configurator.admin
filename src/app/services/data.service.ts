@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { HardwareBoardDto } from "../models/hardware.board.dto";
 import { HardwareInputTypeDto } from "../models/hardware.input.type.dto";
 import { HardwareOutputTypeDto } from "../models/hardware.output.type.dto";
 import { ConfigurationService } from "./configuration.service";
@@ -114,5 +115,9 @@ export class DataService {
 
   getAllHardwareBoards(){
     return this.http.get(`${this.BASE_URL}/hardware-boards/all`);
+  }
+
+  addHardwareBoards(harwareBoardDto: HardwareBoardDto){
+    return this.http.post<HardwareBoardDto>(`${this.BASE_URL}/hardware-boards/add`, harwareBoardDto);
   }
 }
