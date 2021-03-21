@@ -120,4 +120,8 @@ export class DataService {
   addHardwareBoards(harwareBoardDto: HardwareBoardDto){
     return this.http.post<HardwareBoardDto>(`${this.BASE_URL}/hardware-boards/add`, harwareBoardDto);
   }
+
+  getHardwareBoardDetails(id: number){
+    return this.http.get(`${this.BASE_URL}/hardware-boards/${id}`);
+  }
 }

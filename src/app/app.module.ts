@@ -40,6 +40,7 @@ import { AddHardwareInputTypeComponent } from './views/add-hardware-input-type/a
 import { AddHardwareOutputTypeComponent } from './views/add-hardware-output-type/add-hardware-output-type.component';
 import { RegisterHardwareBoardComponent } from './views/register-hardware-board/register-hardware-board.component';
 import { ManageHardwareBoardsComponent } from './views/manage-hardware-boards/manage-hardware-board.component';
+import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-hardware-input-selectors-form/map-hardware-input-selectors-form.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ManageHardwareBoardsComponent } from './views/manage-hardware-boards/ma
     LinkHardwareInputSelectorsFormComponent,
     ManageSimulatorEventsComponent,
     RegisterHardwareBoardComponent,
-    ManageHardwareBoardsComponent
+    ManageHardwareBoardsComponent,
+    MapHardwareInputSelectorsFormComponent
   ],
   imports: [
     BrowserModule,
