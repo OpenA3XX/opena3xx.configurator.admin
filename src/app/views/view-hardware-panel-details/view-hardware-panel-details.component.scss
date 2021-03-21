@@ -46,14 +46,14 @@ mat-grid-list{
                 top:20px;
                 width:97%;
                 text-align: center;
-                color:#505050;
+                color:#00205c;
                 font-weight: bold;
                 font-size: 16px;
             }
             .value{
                 position: absolute;
                 width: 97%;
-                top: 68px;
+                top: 64px;
                 font-size: 36px;
                 text-align: center;
                 font-weight: bold;
@@ -68,4 +68,11 @@ mat-grid-list{
         }
     }
 
+}
+
+
+.sub-menu-navigation{
+    button{
+        margin-right:10px
+    }
 }
