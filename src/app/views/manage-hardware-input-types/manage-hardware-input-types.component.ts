@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { HardwareInputTypeDto } from 'src/app/models/hardware.input.type.dto';
 import { filter, map, tap } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { DataService } from 'src/app/services/data.service';
+import { HardwareInputTypeDto } from "../../models/models";
 
 @Component({
   selector: 'opena3xx-manage-hardware-input-types',

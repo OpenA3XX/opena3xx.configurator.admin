@@ -4,7 +4,7 @@ import { filter, map, tap } from 'rxjs/operators';
 import {NgForm} from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HardwareOutputTypeDto } from 'src/app/models/hardware.output.type.dto';
+import { HardwareOutputTypeDto } from 'src/app/models/models';
 
 @Component({
   selector: 'opena3xx-add-hardware-output-type',

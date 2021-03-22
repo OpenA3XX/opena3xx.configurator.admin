@@ -2,10 +2,10 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { filter, map, tap } from 'rxjs/operators';
-import { HardwarePanelOverviewDto } from '../../models/hardware.panel.dto';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HardwarePanelOverviewDto } from 'src/app/models/models';
 
 @Component({
   selector: 'opena3xx-manage-hardware-panels',

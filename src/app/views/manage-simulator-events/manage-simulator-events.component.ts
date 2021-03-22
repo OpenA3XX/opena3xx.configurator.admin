@@ -4,7 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { filter, map, tap } from "rxjs/operators";
-import { SimulatorEventDto } from "src/app/models/simulator.event.dto";
+import { SimulatorEventDto } from "src/app/models/models";
 import { DataService } from "src/app/services/data.service";
 
 @Component({

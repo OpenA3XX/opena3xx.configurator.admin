@@ -1,11 +1,11 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { HardwareInputDto } from "src/app/models/hardware.panel.dto";
 import { FieldConfig, OptionList } from "src/app/models/field.interface";
 import * as _ from "lodash";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DataService } from "src/app/services/data.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { HardwareInputDto } from "src/app/models/models";
 
 @Component({
   selector: 'opena3xx-link-hardware-input-selectors-form',

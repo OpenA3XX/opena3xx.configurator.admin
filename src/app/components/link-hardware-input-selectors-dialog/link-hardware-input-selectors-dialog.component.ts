@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { HardwareInputDto, IntegrationType, SimulatorEventDto } from "src/app/models/hardware.panel.dto";
 import * as _ from "lodash";
+import { HardwareInputDto } from "src/app/models/models";
 @Component({
     selector: 'opena3xx-link-hardware-input-selectors-dialog',
     templateUrl: "./link-hardware-input-selectors-dialog.component.html",

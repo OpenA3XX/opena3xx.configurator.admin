@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { HardwareOutputDto } from "src/app/models/hardware.panel.dto";
+import { HardwareOutputDto } from "../../models/models";
 
 @Component({
     selector: 'opena3xx-map-hardware-output-selectors-dialog',

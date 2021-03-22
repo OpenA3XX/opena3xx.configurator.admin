@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
-import { HardwareBoardDto } from "src/app/models/hardware.board.dto";
+import { HardwareBoardDto } from "src/app/models/models";
 import { DataService } from "src/app/services/data.service";
 
 

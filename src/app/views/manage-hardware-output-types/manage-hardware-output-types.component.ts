@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { HardwareOutputTypeDto } from 'src/app/models/hardware.output.type.dto';
 import { filter, map, tap } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { DataService } from 'src/app/services/data.service';
+import { HardwareOutputTypeDto } from 'src/app/models/models';
 
 @Component({
   selector: 'opena3xx-manage-hardware-output-types',

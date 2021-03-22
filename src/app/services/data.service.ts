@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { HardwareBoardDto } from "../models/hardware.board.dto";
-import { HardwareInputTypeDto } from "../models/hardware.input.type.dto";
-import { HardwareOutputTypeDto } from "../models/hardware.output.type.dto";
+import { HardwareBoardDto, HardwareInputTypeDto, HardwareOutputTypeDto, LinkExtenderBitToHardwareInputSelectorDto } from "../models/models";
 import { ConfigurationService } from "./configuration.service";
 
 @Injectable()
@@ -123,5 +121,9 @@ export class DataService {
 
   getHardwareBoardDetails(id: number){
     return this.http.get(`${this.BASE_URL}/hardware-boards/${id}`);
+  }
+
+  linkExtenderBitToHardwareInputSelector(linkExtenderBitToHardwareInputSelectorDto: LinkExtenderBitToHardwareInputSelectorDto){
+    return this.http.post<LinkExtenderBitToHardwareInputSelectorDto>(`${this.BASE_URL}/hardware-boards/link/hardware-input-selector`, linkExtenderBitToHardwareInputSelectorDto);
   }
 }

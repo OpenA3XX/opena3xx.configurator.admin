@@ -1,12 +1,12 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { HardwareInputDto } from "src/app/models/hardware.panel.dto";
+import { HardwareBoardDetailsDto, HardwareInputDto, LinkExtenderBitToHardwareInputSelectorDto } from "src/app/models/models";
 import { FieldConfig, OptionList } from "src/app/models/field.interface";
 import * as _ from "lodash";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DataService } from "src/app/services/data.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { HardwareBoardDto } from "src/app/models/hardware.board.dto";
+import { HardwareBoardDto } from "src/app/models/models";
 @Component({
   selector: 'opena3xx-map-hardware-input-selectors-form',
   templateUrl: './map-hardware-input-selectors-form.component.html',
@@ -107,12 +107,20 @@ export class MapHardwareInputSelectorsFormComponent{
 
   onSubmit(formData: any) {
     if(this.mapHardwareInputSelectorsForm.valid){
-        // this.dataService.linkSimulatorEventToHardwareInputSelector(this.hardwareInputSelectorId, this.linkHardwareInputSelectorsForm.value.simulatorEvents).toPromise()
-        // .then(()=>{
-        //   this._snackBar.open("Linking Saved Successfully", "Ok", {
-        //     duration: 3000
-        //   });
-        // });
+
+      var linkExtenderBitToHardwareInputSelector: LinkExtenderBitToHardwareInputSelectorDto = {
+        hardwareBoardId:this.mapHardwareInputSelectorsForm.value.hardwareBoards,
+        hardwareExtenderBusBitId:this.mapHardwareInputSelectorsForm.value.hardwareBusExtenderBits,
+        hardwareExtenderBusId: this.mapHardwareInputSelectorsForm.value.hardwareBusExtenders,
+        hardwareInputSelectorId:this.hardwareInputSelectorId
+      }
+
+
+      this.dataService.linkExtenderBitToHardwareInputSelector(linkExtenderBitToHardwareInputSelector).toPromise().then(()=>{
+          this._snackBar.open("Linking Saved Successfully", "Ok", {
+            duration: 3000
+          });
+      });
       console.log(this.hardwareInputSelectorId,  this.mapHardwareInputSelectorsForm.value)
     }
     else{
@@ -121,8 +129,16 @@ export class MapHardwareInputSelectorsFormComponent{
   }
 
   onHardwareBoardSelectChange(selectChangeEvent: any){
+    this.loadIoExtenderData(selectChangeEvent.value)
+  }
+
+  onIoExtenderSelectChange(selectChangeEvent: any){
+    this.loadIoExtenderBitsData(selectChangeEvent.value)
+  }
+
+  loadIoExtenderData(hardwareBoardId: number){
     this.ioExtenderFieldConfig.options = [];
-    this.dataService.getHardwareBoardDetails(selectChangeEvent.value).toPromise()
+    this.dataService.getHardwareBoardDetails(hardwareBoardId).toPromise()
     .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto)=>{
       console.log(hardwareBoardDetailsDto)
       _.each(hardwareBoardDetailsDto.ioExtenderBuses,(ioExtender)=>{
@@ -136,12 +152,12 @@ export class MapHardwareInputSelectorsFormComponent{
     this.mapHardwareInputSelectorsForm.controls["hardwareBusExtenders"].reset();
   }
 
-  onIoExtenderSelectChange(selectChangeEvent: any){
+  loadIoExtenderBitsData(extenderId: number){
     this.ioExtenderBitFieldConfig.options = [];
     this.dataService.getHardwareBoardDetails(1).toPromise()
     .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto)=>{
       _.each(hardwareBoardDetailsDto.ioExtenderBuses,(ioExtender)=>{
-        if(ioExtender.id == selectChangeEvent.value){
+        if(ioExtender.id == extenderId){
           _.each(ioExtender.ioExtenderBusBits,(ioExtenderBit)=>{
             var optionList : OptionList = {
               key: ioExtenderBit.id.toString(),
@@ -157,21 +173,3 @@ export class MapHardwareInputSelectorsFormComponent{
   }
 }
 
-export interface HardwareBoardDetailsDto{
-  id: number,
-  name: string
-  ioExtenderBuses: IOExtenderBusDto[]
-}
-
-export interface IOExtenderBusDto{
-  id: number,
-  name: string
-  ioExtenderBusBits: IOExtenderBitDto[]
-}
-
-export interface IOExtenderBitDto{
-  id: number,
-  name: string,
-  hardwareInputSelectorFullName: string,
-  hardwareOutputSelectorFullName: string
-}

@@ -8,7 +8,7 @@ import { MapHardwareInputSelectorsDialogComponent } from 'src/app/components/map
 import { MapHardwareOutputSelectorsDialogComponent } from 'src/app/components/map-hardware-output-selectors-dialog/map-hardware-output-selectors-dialog.component';
 import { ViewHardwareInputSelectorsDialogComponent } from 'src/app/components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
 import { ViewHardwareOutputSelectorsDialogComponent } from 'src/app/components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
-import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/models/hardware.panel.dto';
+import { HardwareInputDto, HardwareOutputDto } from 'src/app/models/models';
 import { DataService } from 'src/app/services/data.service';
 
 
