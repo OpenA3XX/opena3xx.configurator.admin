@@ -118,7 +118,7 @@ export interface HardwareBoardDetailsDto{
     WebSockets
   }
 
-  export interface LinkExtenderBitToHardwareInputSelectorDto{
+  export interface MapExtenderBitToHardwareInputSelectorDto{
     hardwareInputSelectorId : number,
     hardwareBoardId : number,
     hardwareExtenderBusId : number,

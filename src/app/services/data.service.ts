@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { HardwareBoardDto, HardwareInputTypeDto, HardwareOutputTypeDto, LinkExtenderBitToHardwareInputSelectorDto } from "../models/models";
+import { HardwareBoardDto, HardwareInputTypeDto, HardwareOutputTypeDto, MapExtenderBitToHardwareInputSelectorDto } from "../models/models";
 import { ConfigurationService } from "./configuration.service";
 
 @Injectable()
@@ -123,7 +123,11 @@ export class DataService {
     return this.http.get(`${this.BASE_URL}/hardware-boards/${id}`);
   }
 
-  linkExtenderBitToHardwareInputSelector(linkExtenderBitToHardwareInputSelectorDto: LinkExtenderBitToHardwareInputSelectorDto){
-    return this.http.post<LinkExtenderBitToHardwareInputSelectorDto>(`${this.BASE_URL}/hardware-boards/link/hardware-input-selector`, linkExtenderBitToHardwareInputSelectorDto);
+  mapExtenderBitToHardwareInputSelector(linkExtenderBitToHardwareInputSelectorDto: MapExtenderBitToHardwareInputSelectorDto){
+    return this.http.post<MapExtenderBitToHardwareInputSelectorDto>(`${this.BASE_URL}/hardware-boards/link/hardware-input-selector`, linkExtenderBitToHardwareInputSelectorDto);
+  }
+
+  getHardwareBoardAssociationForHardwareInputSelector(hardwareInputSelectorId: number){
+    return this.http.get(`${this.BASE_URL}/hardware-boards/hardware-input-selector/${hardwareInputSelectorId}`);
   }
 }
