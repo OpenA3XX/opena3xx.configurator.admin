@@ -11,7 +11,7 @@ import { ManageHardwarePanelsComponent } from './views/manage-hardware-panels/ma
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ManageHardwareInputTypesComponent } from './views/manage-hardware-input-types/manage-hardware-input-types.component';
-import { ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
+import { DeleteHardwareInputDialog, ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
 import { EditHardwareInputTypeComponent } from './views/edit-hardware-input-type/edit-hardware-input-type.component';
 import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-output-types/manage-hardware-output-types.component';
 import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
@@ -76,7 +76,8 @@ import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-h
     ManageSimulatorEventsComponent,
     RegisterHardwareBoardComponent,
     ManageHardwareBoardsComponent,
-    MapHardwareInputSelectorsFormComponent
+    MapHardwareInputSelectorsFormComponent,
+    DeleteHardwareInputDialog
   ],
   imports: [
     BrowserModule,

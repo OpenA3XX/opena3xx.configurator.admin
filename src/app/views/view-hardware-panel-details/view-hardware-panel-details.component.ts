@@ -32,7 +32,8 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
     (
       private dataService: DataService, 
       private router: Router,
-      public viewHardwareInputOutputSelectorsDialog: MatDialog
+      public viewHardwareInputOutputSelectorsDialog: MatDialog,
+      public deleteHardwareInputDialog: MatDialog
     ){
 
     }
@@ -92,5 +93,35 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
         });
     }
     
+    deleteHardwareInput(hardwareInput){
+      this.deleteHardwareInputDialog.open(DeleteHardwareInputDialog)
+    }
+
+}
+
+
+
+@Component({
+  selector: 'opena3xx-delete-hardware-input-dialog-confirm',
+  template: `
+<h1 mat-dialog-title>Confirmation</h1>
+  <div mat-dialog-content>Are you sure you want to delete the selected Hardware Input?</div>
+  <mat-form-field class="example-full-width">
+  <input matInput placeholder="Enter the word DELETEME to confirm the deletion" value="">
+  </mat-form-field>
+  <div mat-dialog-actions>
+  <button mat-button >Yes</button>
+  <button mat-button mat-flat-button color="primary">No</button>
+</div>
+  `,
+  styles:[`
+
+    mat-form-field{
+      width:100%;
+      margin-top:15px;
+    }
+  `]
+})
+export class DeleteHardwareInputDialog {
 
 }

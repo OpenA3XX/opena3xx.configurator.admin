@@ -10,7 +10,14 @@ table{
     width:100%;
     button{
         margin-left:10px;
-        width:185px;
+        width:204px;
+    }
+    button.small{
+        width:50px  ;
+    }
+    button.small:hover{
+        background-color:#505050;
+        color: #ffffff;
     }
     .mat-column-id{
         width:200px;
@@ -75,4 +82,5 @@ mat-grid-list{
     button{
         margin-right:10px
     }
+    
 }
