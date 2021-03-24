@@ -39,6 +39,9 @@
     <mat-icon *ngIf="isRightMenuExpanded">menu</mat-icon>
     <mat-icon *ngIf="!isRightMenuExpanded">menu_open</mat-icon>
   </button>
+  <button *ngIf="isElectron" mat-icon-button (click)="exit()">
+    <mat-icon>close</mat-icon>
+  </button>
 </mat-toolbar>
 
 <mat-sidenav-container class="opena3xx-container" autosize>

@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent, ExitAppDialog } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -78,6 +78,7 @@ import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-h
     ManageHardwareBoardsComponent,
     MapHardwareInputSelectorsFormComponent,
     DeleteHardwareInputDialog,
+    ExitAppDialog,
   ],
   imports: [
     BrowserModule,

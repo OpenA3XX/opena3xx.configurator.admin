@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from './services/data.service';
+import { MatDialog } from '@angular/material/dialog';
 
 /**
  * @title Autosize sidenav
@@ -65,7 +65,8 @@ export class AppComponent {
   constructor(
     public router: Router,
     private cookieService: CookieService,
-    private dataService: DataService
+    private dataService: DataService,
+    private dialog: MatDialog
   ) {
     this.isExpanded = this.toBoolean(
       this.cookieService.get('opena3xx.sidemenu.left.visibility.state')
@@ -100,7 +101,7 @@ export class AppComponent {
       });
   }
   exit() {
-    window.close();
+    this.dialog.open(ExitAppDialog);
   }
   clickDashboard() {
     this.router.navigateByUrl(`/dashboard`);
@@ -124,5 +125,22 @@ export class AppComponent {
   }
   clickManageHardwareBoards() {
     this.router.navigateByUrl(`/manage/hardware-boards`);
+  }
+}
+
+@Component({
+  selector: 'opena3xx-exit-app-dialog',
+  template: `
+    <h1 mat-dialog-title>Confirmation</h1>
+    <div mat-dialog-content>Are you sure you want to exit OpenA3XX Configurator App?</div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="exit()">Yes</button>
+      <button mat-button mat-flat-button color="primary" mat-dialog-close>No</button>
+    </div>
+  `,
+})
+export class ExitAppDialog {
+  exit() {
+    window.close();
   }
 }
