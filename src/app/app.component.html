@@ -1,112 +1,155 @@
 <div class="api-status" *ngIf="!apiAvailabilityStatus">
-	<p>
-		<mat-icon>
-			error
-		</mat-icon>
-		Cannot communicate with OpenA3XX Peripheral API.
-	</p>
+  <p>
+    <mat-icon> error </mat-icon>
+    Cannot communicate with OpenA3XX Peripheral API.
+  </p>
 </div>
 <mat-toolbar color="primary" class="opena3xx-toolbar">
-	
   <button mat-icon-button (click)="toggle()">
-	  	<mat-icon *ngIf="isExpanded">menu_open</mat-icon>
-		<mat-icon *ngIf="!isExpanded">menu</mat-icon>
+    <mat-icon *ngIf="isExpanded">menu_open</mat-icon>
+    <mat-icon *ngIf="!isExpanded">menu</mat-icon>
   </button>
+  <div
+    class="windows-draggable"
+    style="position: absolute; left: 50px; width: 80%; height: 50px"
+  ></div>
+
   <h1 class="opena3xx-app-name">OpenA3XX Configurator</h1>
   <span class="spacer"></span>
-  <button matTooltip="Notifications" mat-icon-button (click)="toggle()" matBadge="1" matBadgeColor="accent" matBadgeSize="small">
-	  <mat-icon>notification_important</mat-icon>
+  <button
+    matTooltip="Notifications"
+    mat-icon-button
+    (click)="toggle()"
+    matBadge="1"
+    matBadgeColor="accent"
+    matBadgeSize="small"
+  >
+    <mat-icon>notification_important</mat-icon>
   </button>
-  <button matTooltip="Toggle Fullscreen" mat-icon-button (click)="fullscreen()"  matBadgeColor="accent" >
-	  <mat-icon *ngIf="!isFullscreen">settings_overscan</mat-icon>
-	  <mat-icon *ngIf="isFullscreen">close_fullscreen</mat-icon>
+  <button
+    matTooltip="Toggle Fullscreen"
+    mat-icon-button
+    (click)="fullscreen()"
+    matBadgeColor="accent"
+  >
+    <mat-icon *ngIf="!isFullscreen">settings_overscan</mat-icon>
+    <mat-icon *ngIf="isFullscreen">close_fullscreen</mat-icon>
   </button>
   <button mat-icon-button (click)="toggleRight()">
-	<mat-icon *ngIf="isRightMenuExpanded">menu</mat-icon>
-  <mat-icon *ngIf="!isRightMenuExpanded">menu_open</mat-icon>
-</button>
+    <mat-icon *ngIf="isRightMenuExpanded">menu</mat-icon>
+    <mat-icon *ngIf="!isRightMenuExpanded">menu_open</mat-icon>
+  </button>
 </mat-toolbar>
 
 <mat-sidenav-container class="opena3xx-container" autosize>
-	<!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
-  	<mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
-	  	<img (click)="clickDashboard()" *ngIf="isExpanded || isShowing" src="assets/logo.png" width="100px" style="margin:18px 10px 10px 63px" />
-		<mat-nav-list>
-			<mat-list-item (click)="clickDashboard()"  class="parent" title="Home">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
-				<mat-icon mat-list-icon>home</mat-icon>
-      		</mat-list-item>
-			<mat-list-item (click)="clickManageHardwarePanels()" class="parent" title="Aircraft Models">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Aircraft Models</span>
-				<mat-icon mat-list-icon>airplanemode_active</mat-icon>
-			</mat-list-item>
-      		<mat-list-item (click)="clickManageHardwarePanels()" class="parent" title="Hardware Panels">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Hardware Panels</span>
-				<mat-icon mat-list-icon>dashboard</mat-icon>
-			</mat-list-item>
-			<mat-list-item (click)="clickManageHardwareInputTypes()" class="parent" title="Hardware Input Types">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Hardware Input Types</span>
-				<mat-icon mat-list-icon>login</mat-icon>
-			</mat-list-item>
-			<mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Hardware Output Types">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Hardware Output Types</span>
-				<mat-icon mat-list-icon>logout</mat-icon>
-			</mat-list-item>
-			<mat-list-item (click)="clickManageHardwareBoards()" class="parent" title="Hardware Boards">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Hardware Boards</span>
-				<mat-icon mat-list-icon>developer_board</mat-icon>
-			</mat-list-item>
-			<mat-list-item (click)="clickManageSimulatorEvents()" class="parent" title="Simulator Events">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Simulator Events</span>
-				<mat-icon mat-list-icon>laptop</mat-icon>
-			</mat-list-item>
-			<mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Connectivity">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Connectivity</span>
-				<mat-icon mat-list-icon>cell_wifi</mat-icon>
-			</mat-list-item>
-			<mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Monitoring">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Monitoring</span>
-				<mat-icon mat-list-icon>bar_chart</mat-icon>
-			</mat-list-item>
-			<mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Console">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Console</span>
-				<mat-icon mat-list-icon>web_asset</mat-icon>
-			</mat-list-item>
-			<mat-list-item matTooltip="1 Pending Notification" matTooltipPosition="after" (click)="clickSettings()" class="parent" title="Notifications">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Notifications</span>
-				<mat-icon matBadgeSize="small" matBadgePosition="before" matBadge="1" matBadgeColor="accent" mat-list-icon>notification_important</mat-icon>
-			</mat-list-item>
-			<mat-list-item (click)="clickSettings()" class="parent" title="Settings">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Settings</span>
-				<mat-icon mat-list-icon>settings</mat-icon>
-			</mat-list-item>
-		</mat-nav-list>
-	</mat-sidenav>
+  <!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
+  <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
+    <img
+      (click)="clickDashboard()"
+      *ngIf="isExpanded || isShowing"
+      src="assets/logo.png"
+      width="100px"
+      style="margin: 18px 10px 10px 63px"
+    />
+    <mat-nav-list>
+      <mat-list-item (click)="clickDashboard()" class="parent" title="Home">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
+        <mat-icon mat-list-icon>home</mat-icon>
+      </mat-list-item>
+      <mat-list-item (click)="clickManageHardwarePanels()" class="parent" title="Aircraft Models">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Aircraft Models</span>
+        <mat-icon mat-list-icon>airplanemode_active</mat-icon>
+      </mat-list-item>
+      <mat-list-item (click)="clickManageHardwarePanels()" class="parent" title="Hardware Panels">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Hardware Panels</span>
+        <mat-icon mat-list-icon>dashboard</mat-icon>
+      </mat-list-item>
+      <mat-list-item
+        (click)="clickManageHardwareInputTypes()"
+        class="parent"
+        title="Hardware Input Types"
+      >
+        <span class="full-width" *ngIf="isExpanded || isShowing">Hardware Input Types</span>
+        <mat-icon mat-list-icon>login</mat-icon>
+      </mat-list-item>
+      <mat-list-item
+        (click)="clickManageHardwareOutputTypes()"
+        class="parent"
+        title="Hardware Output Types"
+      >
+        <span class="full-width" *ngIf="isExpanded || isShowing">Hardware Output Types</span>
+        <mat-icon mat-list-icon>logout</mat-icon>
+      </mat-list-item>
+      <mat-list-item (click)="clickManageHardwareBoards()" class="parent" title="Hardware Boards">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Hardware Boards</span>
+        <mat-icon mat-list-icon>developer_board</mat-icon>
+      </mat-list-item>
+      <mat-list-item (click)="clickManageSimulatorEvents()" class="parent" title="Simulator Events">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Simulator Events</span>
+        <mat-icon mat-list-icon>laptop</mat-icon>
+      </mat-list-item>
+      <mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Connectivity">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Connectivity</span>
+        <mat-icon mat-list-icon>cell_wifi</mat-icon>
+      </mat-list-item>
+      <mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Monitoring">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Monitoring</span>
+        <mat-icon mat-list-icon>bar_chart</mat-icon>
+      </mat-list-item>
+      <mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Console">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Console</span>
+        <mat-icon mat-list-icon>web_asset</mat-icon>
+      </mat-list-item>
 
-	<div class="opena3xx-sidenav-content">
-		<router-outlet></router-outlet>
-	</div>
+      <mat-list-item
+        matTooltip="1 Pending Notification"
+        matTooltipPosition="after"
+        (click)="clickSettings()"
+        class="parent"
+        title="Notifications"
+      >
+        <span class="full-width" *ngIf="isExpanded || isShowing">Notifications</span>
+        <mat-icon
+          matBadgeSize="small"
+          matBadgePosition="before"
+          matBadge="1"
+          matBadgeColor="accent"
+          mat-list-icon
+          >notification_important</mat-icon
+        >
+      </mat-list-item>
+      <mat-list-item (click)="clickSettings()" class="parent" title="Settings">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Settings</span>
+        <mat-icon mat-list-icon>settings</mat-icon>
+      </mat-list-item>
+      <mat-list-item (click)="exit()" class="parent" title="Exit" *ngIf="isElectron">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Quit App</span>
+        <mat-icon mat-list-icon>exit_to_app</mat-icon>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
 
-	<mat-sidenav mode="side" opened="true" position="end" class="opena3xx-sidenav-right">
-		<mat-nav-list>
-			<mat-list-item  *ngIf="isRightMenuExpanded || isRightMenuShowing" class="parent" title="Home">
-				<span class="full-width"  style="font-weight: bold;">System Status</span>
-      		</mat-list-item>
-			<mat-list-item  class="parent" title="Flight Simulator 2020">
-				<span class="full-width" *ngIf="isRightMenuExpanded || isRightMenuShowing">MSFS 2020</span>
-				<mat-icon mat-list-icon class="error">flight</mat-icon>
-      		</mat-list-item>
-			<mat-list-item  class="parent" title="RabbitMQ">
-				<span class="full-width" *ngIf="isRightMenuExpanded || isRightMenuShowing">RabbitMQ</span>
-				<mat-icon mat-list-icon class="ok">mail</mat-icon>
-      		</mat-list-item>
-			<mat-list-item  class="parent" title="SEQ">
-				<span class="full-width" *ngIf="isRightMenuExpanded || isRightMenuShowing">SEQ</span>
-				<mat-icon mat-list-icon class="ok">format_align_left</mat-icon>
-      		</mat-list-item>
-			
-		</mat-nav-list>
-	</mat-sidenav>
-	
+  <div class="opena3xx-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
 
+  <mat-sidenav mode="side" opened="true" position="end" class="opena3xx-sidenav-right">
+    <mat-nav-list>
+      <mat-list-item *ngIf="isRightMenuExpanded || isRightMenuShowing" class="parent" title="Home">
+        <span class="full-width" style="font-weight: bold">System Status</span>
+      </mat-list-item>
+      <mat-list-item class="parent" title="Flight Simulator 2020">
+        <span class="full-width" *ngIf="isRightMenuExpanded || isRightMenuShowing">MSFS 2020</span>
+        <mat-icon mat-list-icon class="error">flight</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent" title="RabbitMQ">
+        <span class="full-width" *ngIf="isRightMenuExpanded || isRightMenuShowing">RabbitMQ</span>
+        <mat-icon mat-list-icon class="ok">mail</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent" title="SEQ">
+        <span class="full-width" *ngIf="isRightMenuExpanded || isRightMenuShowing">SEQ</span>
+        <mat-icon mat-list-icon class="ok">format_align_left</mat-icon>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
 </mat-sidenav-container>

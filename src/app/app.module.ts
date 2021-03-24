@@ -1,17 +1,18 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ManageHardwarePanelsComponent } from './views/manage-hardware-panels/manage-hardware-panels.component';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ManageHardwareInputTypesComponent } from './views/manage-hardware-input-types/manage-hardware-input-types.component';
-import { DeleteHardwareInputDialog, ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
+import { ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
+import { DeleteHardwareInputDialog } from './components/delete-hardware-input-dialog/delete-hardware-input-dialog.component';
 import { EditHardwareInputTypeComponent } from './views/edit-hardware-input-type/edit-hardware-input-type.component';
 import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-output-types/manage-hardware-output-types.component';
 import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
@@ -41,7 +42,6 @@ import { AddHardwareOutputTypeComponent } from './views/add-hardware-output-type
 import { RegisterHardwareBoardComponent } from './views/register-hardware-board/register-hardware-board.component';
 import { ManageHardwareBoardsComponent } from './views/manage-hardware-boards/manage-hardware-board.component';
 import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-hardware-input-selectors-form/map-hardware-input-selectors-form.component';
-
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-h
     RegisterHardwareBoardComponent,
     ManageHardwareBoardsComponent,
     MapHardwareInputSelectorsFormComponent,
-    DeleteHardwareInputDialog
+    DeleteHardwareInputDialog,
   ],
   imports: [
     BrowserModule,
@@ -87,15 +87,15 @@ import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-h
     MatNativeDateModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     DataService,
     ConfigurationService,
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent],
   entryComponents: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}
