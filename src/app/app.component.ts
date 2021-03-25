@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from './services/data.service';
 import { MatDialog } from '@angular/material/dialog';
+import { CoreHelper } from './helpers/core-helper';
 
 /**
  * @title Autosize sidenav
@@ -13,37 +14,23 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  isElectron = false;
-  isExpanded = true;
-  isRightMenuExpanded = true;
+  isElectron: boolean = false;
+  isExpanded: boolean = true;
+  isRightMenuExpanded: boolean = true;
   showSubmenu: boolean = false;
-  isShowing = false;
-  isRightMenuShowing = false;
+  isShowing: boolean = false;
+  isRightMenuShowing: boolean = false;
   showSubSubMenu: boolean = false;
   isFullscreen: boolean = false;
   apiAvailabilityStatus: boolean = false;
 
-  private toBoolean(value?: string): boolean {
-    if (!value) {
-      return false;
-    }
-
-    switch (value.toLocaleLowerCase()) {
-      case 'true':
-      case '1':
-      case 'on':
-      case 'yes':
-        return true;
-      default:
-        return false;
-    }
-  }
+  private apiHealthPollingTime: number = 5000;
 
   fullscreen() {
-    var elem = document.documentElement;
+    var element = document.documentElement;
     if (!this.isFullscreen) {
       this.isFullscreen = true;
-      elem.requestFullscreen();
+      element.requestFullscreen();
     } else {
       this.isFullscreen = false;
       document.exitFullscreen();
@@ -66,34 +53,29 @@ export class AppComponent {
     public router: Router,
     private cookieService: CookieService,
     private dataService: DataService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private coreHelper: CoreHelper
   ) {
-    this.isExpanded = this.toBoolean(
+    this.isExpanded = this.coreHelper.toBoolean(
       this.cookieService.get('opena3xx.sidemenu.left.visibility.state')
     );
-    this.isRightMenuExpanded = this.toBoolean(
+    this.isRightMenuExpanded = this.coreHelper.toBoolean(
       this.cookieService.get('opena3xx.sidemenu.right.visibility.state')
     );
-
-    console.log(this.isExpanded);
 
     this.checkApiHealth();
     setInterval(() => {
       this.checkApiHealth();
-    }, 5000);
+    }, this.apiHealthPollingTime);
 
-    let userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.indexOf(' electron/') > -1) {
-      this.isElectron = true;
-    }
+    this.isElectron = this.coreHelper.isRunningAsApp();
   }
 
   private checkApiHealth() {
     this.dataService
       .checkApiHealth()
-      .toPromise()
-      .then((data) => {
-        if (data === 'Pong from OpenA3XX') {
+      .then((state: boolean) => {
+        if (state) {
           this.apiAvailabilityStatus = true;
         } else {
           this.apiAvailabilityStatus = false;

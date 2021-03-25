@@ -42,6 +42,7 @@ import { AddHardwareOutputTypeComponent } from './views/add-hardware-output-type
 import { RegisterHardwareBoardComponent } from './views/register-hardware-board/register-hardware-board.component';
 import { ManageHardwareBoardsComponent } from './views/manage-hardware-boards/manage-hardware-board.component';
 import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-hardware-input-selectors-form/map-hardware-input-selectors-form.component';
+import { CoreHelper } from './helpers/core-helper';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-h
   ],
   providers: [
     DataService,
+    CoreHelper,
     ConfigurationService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
