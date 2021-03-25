@@ -74,6 +74,9 @@ export class AppComponent {
     this.isRightMenuExpanded = this.toBoolean(
       this.cookieService.get('opena3xx.sidemenu.right.visibility.state')
     );
+
+    console.log(this.isExpanded);
+
     this.checkApiHealth();
     setInterval(() => {
       this.checkApiHealth();

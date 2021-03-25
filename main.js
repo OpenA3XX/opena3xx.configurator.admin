@@ -2,16 +2,23 @@ const { app, BrowserWindow } = require('electron');
 const url = require('url');
 const path = require('path');
 
+try {
+  require('electron-reloader')(module);
+} catch (_) {}
+
 let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1600,
-    height: 1000,
+    width: 2400,
+    height: 1200,
+    minWidth: 2400,
+    minHeight: 1200,
     frame: false,
     icon: path.join(__dirname + '/dist/assets/app-icons/icons/png/512x512.png'),
     webPreferences: {
       nodeIntegration: true,
+      devTools: true,
     },
   });
 

@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:electron": "ng build --base-href ./ && electron .",
-    "publish:electron": "electron-packager . OpenA3XX Configurator --all"
+    "publish:electron": "electron-packager . OpenA3XX Configurator --all",
+    "serve:electron": "electron ."
   },
   "private": true,
   "dependencies": {
@@ -41,6 +42,7 @@
     "codelyzer": "^6.0.1",
     "electron": "^12.0.2",
     "electron-packager": "^15.2.0",
+    "electron-reloader": "^1.2.0",
     "eslint": "^7.22.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.1.0",
