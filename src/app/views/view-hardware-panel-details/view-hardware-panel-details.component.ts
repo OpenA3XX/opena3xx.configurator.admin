@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { filter, map, tap } from 'rxjs/operators';
 import { LinkHardwareInputSelectorsDialogComponent } from 'src/app/components/link-hardware-input-selectors-dialog/link-hardware-input-selectors-dialog.component';
 import { MapHardwareInputSelectorsDialogComponent } from 'src/app/components/map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
 import { MapHardwareOutputSelectorsDialogComponent } from 'src/app/components/map-hardware-output-selectors-dialog/map-hardware-output-selectors-dialog.component';
@@ -19,7 +18,7 @@ import { DeleteHardwareInputDialog } from '../../components/delete-hardware-inpu
 })
 export class ViewHardwarePanelDetailsComponent implements OnInit {
   idParam!: number;
-  public hardwarePanelDto: HardwarePanelDto;
+  public hardwarePanelDto!: HardwarePanelDto;
   public displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType', 'action'];
   public displayedOutputColumns: string[] = ['id', 'name', 'hardwareOutputType', 'action'];
   inputsDataSource = new MatTableDataSource<HardwareInputDto>();
@@ -40,19 +39,16 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
 
     this.dataService
       .getAllHardwarePanelDetails(this.idParam)
-      .pipe(
-        filter((x) => !!x),
-        map((data_received: HardwarePanelDto) => {
-          this.hardwarePanelDto = data_received;
-          this.inputsDataSource = new MatTableDataSource<HardwareInputDto>(
-            this.hardwarePanelDto.hardwareInputs
-          );
-          this.outputsDataSource = new MatTableDataSource<HardwareOutputDto>(
-            this.hardwarePanelDto.hardwareOutputs
-          );
-        })
-      )
-      .subscribe();
+      .toPromise()
+      .then((dataReceived: HardwarePanelDto) => {
+        this.hardwarePanelDto = dataReceived;
+        this.inputsDataSource = new MatTableDataSource<HardwareInputDto>(
+          this.hardwarePanelDto.hardwareInputs
+        );
+        this.outputsDataSource = new MatTableDataSource<HardwareOutputDto>(
+          this.hardwarePanelDto.hardwareOutputs
+        );
+      });
     return;
   }
 
@@ -70,21 +66,21 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
     });
   }
 
-  linkInputSelector(data: HardwareInputDto) {
+  linkInputSelector(data: HardwareInputDto): void {
     this.viewHardwareInputOutputSelectorsDialog.open(LinkHardwareInputSelectorsDialogComponent, {
       data: data,
       width: '900px',
     });
   }
 
-  showOutputSelectorDetails(data: HardwareInputDto) {
+  showOutputSelectorDetails(data: HardwareInputDto): void {
     this.viewHardwareInputOutputSelectorsDialog.open(ViewHardwareOutputSelectorsDialogComponent, {
       data: data,
       width: '600px',
     });
   }
 
-  mapOutputSelector(data: HardwareInputDto) {
+  mapOutputSelector(data: HardwareInputDto): void {
     this.viewHardwareInputOutputSelectorsDialog.open(MapHardwareOutputSelectorsDialogComponent, {
       data: data,
       width: '900px',

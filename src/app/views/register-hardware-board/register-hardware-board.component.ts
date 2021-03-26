@@ -84,6 +84,6 @@ export class RegisterHardwareBoardComponent implements OnInit {
   }
 
   onSliderValueChange(slider: MatSlider) {
-    this.totalDiscreteInputOutput = slider.value * 16;
+    if (slider.value != null) this.totalDiscreteInputOutput = slider.value * 16;
   }
 }

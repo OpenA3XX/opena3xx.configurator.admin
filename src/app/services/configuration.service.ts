@@ -6,7 +6,7 @@ export class ConfigurationService {
 
   constructor() {}
 
-  getApiBaseUrl() {
+  getApiBaseUrl(): string {
     return this.API_BASE_URL;
   }
 }

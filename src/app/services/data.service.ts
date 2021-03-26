@@ -1,17 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import {
   HardwareBoardDto,
   HardwareInputTypeDto,
   HardwareOutputTypeDto,
+  HardwarePanelDto,
   MapExtenderBitToHardwareInputSelectorDto,
 } from '../models/models';
 import { ConfigurationService } from './configuration.service';
 
 @Injectable()
 export class DataService {
-  private BASE_URL;
+  private BASE_URL: string;
 
   private httpOptions: any = {
     headers: new HttpHeaders({
@@ -32,7 +32,7 @@ export class DataService {
   }
 
   getAllHardwarePanelDetails(id: Number) {
-    return this.http.get(`${this.BASE_URL}/hardware-panel/details/${id}`);
+    return this.http.get<HardwarePanelDto>(`${this.BASE_URL}/hardware-panel/details/${id}`);
   }
 
   getAllHardwareInputTypes() {

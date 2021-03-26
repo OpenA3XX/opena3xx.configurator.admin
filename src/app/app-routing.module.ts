@@ -14,67 +14,68 @@ import { RegisterHardwareBoardComponent } from './views/register-hardware-board/
 import { SettingsComponent } from './views/settings/settings.component';
 import { ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
 
-const routes: Routes = [{
-  path: '',
-  redirectTo: 'dashboard',
-  pathMatch: 'full'
-},
-{
-  path: 'dashboard',
-  component: DashboardComponent
-},
-{
-  path: 'manage/hardware-panels',
-  component: ManageHardwarePanelsComponent
-},
-{
-  path: 'view/hardware-panel-details',
-  component: ViewHardwarePanelDetailsComponent
-},
-{
-  path: 'manage/hardware-input-types',
-  component: ManageHardwareInputTypesComponent
-},
-{
-  path: 'edit/hardware-input-type',
-  component: EditHardwareInputTypeComponent
-},
-{
-  path: 'add/hardware-input-type',
-  component: AddHardwareInputTypeComponent
-},
-{
-  path: 'manage/hardware-output-types',
-  component: ManageHardwareOutputTypesComponent
-},
-{
-  path: 'edit/hardware-output-type',
-  component: EditHardwareOutputTypeComponent
-},
-{
-  path: 'add/hardware-output-type',
-  component: AddHardwareOutputTypeComponent
-},
-{
-  path: 'settings',
-  component: SettingsComponent
-},
-{
-  path: 'manage/simulator-events',
-  component: ManageSimulatorEventsComponent
-},
-{
-  path: 'manage/hardware-boards',
-  component: ManageHardwareBoardsComponent
-},
-{
-  path: 'register/hardware-board',
-  component: RegisterHardwareBoardComponent
-}
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
+  {
+    path: 'manage/hardware-panels',
+    component: ManageHardwarePanelsComponent,
+  },
+  {
+    path: 'view/hardware-panel-details',
+    component: ViewHardwarePanelDetailsComponent,
+  },
+  {
+    path: 'manage/hardware-input-types',
+    component: ManageHardwareInputTypesComponent,
+  },
+  {
+    path: 'edit/hardware-input-type',
+    component: EditHardwareInputTypeComponent,
+  },
+  {
+    path: 'add/hardware-input-type',
+    component: AddHardwareInputTypeComponent,
+  },
+  {
+    path: 'manage/hardware-output-types',
+    component: ManageHardwareOutputTypesComponent,
+  },
+  {
+    path: 'edit/hardware-output-type',
+    component: EditHardwareOutputTypeComponent,
+  },
+  {
+    path: 'add/hardware-output-type',
+    component: AddHardwareOutputTypeComponent,
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+  },
+  {
+    path: 'manage/simulator-events',
+    component: ManageSimulatorEventsComponent,
+  },
+  {
+    path: 'manage/hardware-boards',
+    component: ManageHardwareBoardsComponent,
+  },
+  {
+    path: 'register/hardware-board',
+    component: RegisterHardwareBoardComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
