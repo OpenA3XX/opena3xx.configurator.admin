@@ -1,65 +1,70 @@
-<h1>Map {{hardwareOutputSelector.name}} - {{hardwareOutputSelector.hardwareOutputType}} </h1>
+<h1>Map {{ hardwareOutputSelector.name }} - {{ hardwareOutputSelector.hardwareOutputType }}</h1>
 
-<mat-expansion-panel hideToggle *ngFor="let a of hardwareOutputSelector.hardwareOutputSelectors; let index = index">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Hardware Output Selector mapping for
-      </mat-panel-title>
-      <mat-panel-description>
-        <button mat-flat-button color="warn"><mat-icon mat-list-icon>login</mat-icon>&nbsp;&nbsp;{{hardwareOutputSelector.hardwareOutputSelectors[index].name}}</button>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>
-        <mat-form-field appearance="fill">
-            <mat-label>Hardware Board Identifier</mat-label>
-            <mat-select required>
-                <mat-option value="1234-1234-1234-1234">1234-1234-1234-1234</mat-option>
-                <mat-option value="2345-2345-2345-2345">2345-2345-2345-2345</mat-option>
-            </mat-select>
-            <mat-hint>This is the hint for Hardware Board Identifier</mat-hint>
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field appearance="fill">
-            <mat-label>Hardware Board IO Extender Bus</mat-label>
-            <mat-select required>
-                <mat-option value="Extender Bus 1">Extender Bus 1</mat-option>
-                <mat-option value="Extender Bus 2">Extender Bus 2</mat-option>
-                <mat-option value="Extender Bus 3">Extender Bus 3</mat-option>
-                <mat-option value="Extender Bus 4">Extender Bus 4</mat-option>
-                <mat-option value="Extender Bus 5">Extender Bus 5</mat-option>
-                <mat-option value="Extender Bus 6">Extender Bus 6</mat-option>
-                <mat-option value="Extender Bus 7">Extender Bus 7</mat-option>
-                <mat-option value="Extender Bus 8">Extender Bus 8</mat-option>
-            </mat-select>
-            <mat-hint>This is the hint for Hardware Board IO Extender Identifier</mat-hint>
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field appearance="fill">
-            <mat-label>Hardware Board IO Extender Bus Bit</mat-label>
-            <mat-select required>
-                <mat-option value="Bit 0">Bit 0</mat-option>
-                <mat-option value="Bit 1">Bit 1</mat-option>
-                <mat-option value="Bit 2">Bit 2</mat-option>
-                <mat-option value="Bit 3">Bit 3</mat-option>
-                <mat-option value="Bit 4">Bit 4</mat-option>
-                <mat-option value="Bit 5">Bit 5</mat-option>
-                <mat-option value="Bit 6">Bit 6</mat-option>
-                <mat-option value="Bit 7">Bit 7</mat-option>
-                <mat-option value="Bit 8">Bit 8</mat-option>
-                <mat-option value="Bit 9">Bit 9</mat-option>
-                <mat-option value="Bit 10">Bit 10</mat-option>
-                <mat-option value="Bit 11">Bit 11</mat-option>
-                <mat-option value="Bit 12">Bit 12</mat-option>
-                <mat-option value="Bit 13">Bit 13</mat-option>
-                <mat-option value="Bit 14">Bit 14</mat-option>
-                <mat-option value="Bit 15">Bit 15</mat-option>
-            </mat-select>
-            <mat-hint>This is the hint forHardware Board IO Extender Bus Bit Identifier</mat-hint>
-        </mat-form-field>
-    </p>
-    <p>
-        <button mat-flat-button color="primary"><mat-icon mat-list-icon>save</mat-icon>Save</button>    
-    </p>
+<mat-expansion-panel
+  hideToggle
+  *ngFor="let a of hardwareOutputSelector.hardwareOutputSelectors; let index = index"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title> Hardware Output Selector mapping for </mat-panel-title>
+    <mat-panel-description>
+      <button mat-flat-button color="warn">
+        <mat-icon mat-list-icon>login</mat-icon>&nbsp;&nbsp;{{
+          hardwareOutputSelector.hardwareOutputSelectors[index].name
+        }}
+      </button>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Hardware Board Identifier</mat-label>
+      <mat-select required>
+        <mat-option value="1234-1234-1234-1234">1234-1234-1234-1234</mat-option>
+        <mat-option value="2345-2345-2345-2345">2345-2345-2345-2345</mat-option>
+      </mat-select>
+      <mat-hint>This is the hint for Hardware Board Identifier</mat-hint>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Hardware Board IO Extender Bus</mat-label>
+      <mat-select required>
+        <mat-option value="Extender Bus 1">Extender Bus 1</mat-option>
+        <mat-option value="Extender Bus 2">Extender Bus 2</mat-option>
+        <mat-option value="Extender Bus 3">Extender Bus 3</mat-option>
+        <mat-option value="Extender Bus 4">Extender Bus 4</mat-option>
+        <mat-option value="Extender Bus 5">Extender Bus 5</mat-option>
+        <mat-option value="Extender Bus 6">Extender Bus 6</mat-option>
+        <mat-option value="Extender Bus 7">Extender Bus 7</mat-option>
+        <mat-option value="Extender Bus 8">Extender Bus 8</mat-option>
+      </mat-select>
+      <mat-hint>This is the hint for Hardware Board IO Extender Identifier</mat-hint>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Hardware Board IO Extender Bus Bit</mat-label>
+      <mat-select required>
+        <mat-option value="Bit 0">Bit 0</mat-option>
+        <mat-option value="Bit 1">Bit 1</mat-option>
+        <mat-option value="Bit 2">Bit 2</mat-option>
+        <mat-option value="Bit 3">Bit 3</mat-option>
+        <mat-option value="Bit 4">Bit 4</mat-option>
+        <mat-option value="Bit 5">Bit 5</mat-option>
+        <mat-option value="Bit 6">Bit 6</mat-option>
+        <mat-option value="Bit 7">Bit 7</mat-option>
+        <mat-option value="Bit 8">Bit 8</mat-option>
+        <mat-option value="Bit 9">Bit 9</mat-option>
+        <mat-option value="Bit 10">Bit 10</mat-option>
+        <mat-option value="Bit 11">Bit 11</mat-option>
+        <mat-option value="Bit 12">Bit 12</mat-option>
+        <mat-option value="Bit 13">Bit 13</mat-option>
+        <mat-option value="Bit 14">Bit 14</mat-option>
+        <mat-option value="Bit 15">Bit 15</mat-option>
+      </mat-select>
+      <mat-hint>This is the hint forHardware Board IO Extender Bus Bit Identifier</mat-hint>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-flat-button color="primary"><mat-icon mat-list-icon>save</mat-icon>Save</button>
+  </p>
 </mat-expansion-panel>

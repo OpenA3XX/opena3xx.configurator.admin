@@ -14,12 +14,12 @@ export interface FieldConfig {
   value?: any;
   validations?: Validator[];
   hint?: string;
-  stepValue?:string,
-  minValue?:string,
-  maxValue?:string
+  stepValue?: string;
+  minValue?: string;
+  maxValue?: string;
 }
 
-export interface OptionList{
+export interface OptionList {
   key: string;
   value: string;
 }

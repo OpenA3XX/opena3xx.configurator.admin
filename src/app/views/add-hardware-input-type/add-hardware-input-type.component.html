@@ -3,15 +3,11 @@
   <span>Add Hardware Input Type</span>
 </mat-toolbar>
 <mat-toolbar>
-    <button mat-flat-button color="primary" (click)="goBack()">
-        Back
-    </button>
+  <button mat-flat-button color="primary" (click)="goBack()">Back</button>
 </mat-toolbar>
 <mat-expansion-panel expanded>
   <mat-expansion-panel-header>
-      <mat-panel-title>
-          Add Hardware Input Type
-      </mat-panel-title>
+    <mat-panel-title> Add Hardware Input Type </mat-panel-title>
   </mat-expansion-panel-header>
   <div class="container">
     <div class="container">
@@ -19,20 +15,27 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Hardware Input Type Name</mat-label>
-            <input matInput placeholder="Placeholder" [(ngModel)]="hardwareInputTypeName"  name="name" placeholder="Enter Hardware Input Type Name">
+            <input
+              matInput
+              placeholder="Placeholder"
+              [(ngModel)]="hardwareInputTypeName"
+              name="name"
+              placeholder="Enter Hardware Input Type Name"
+            />
             <mat-icon matSuffix>text_format</mat-icon>
-            <mat-hint>Enter the name of the hardware input type that describe the pyhiscal input type</mat-hint>
+            <mat-hint
+              >Enter the name of the hardware input type that describe the pyhiscal input
+              type</mat-hint
+            >
           </mat-form-field>
-        </p>    
+        </p>
         <p>
-        <button mat-flat-button color="primary">
+          <button mat-flat-button color="primary">
             <mat-icon mat-list-icon>check</mat-icon>
             Save
-        </button>
+          </button>
         </p>
       </form>
-    </div>    
+    </div>
   </div>
 </mat-expansion-panel>
-
-

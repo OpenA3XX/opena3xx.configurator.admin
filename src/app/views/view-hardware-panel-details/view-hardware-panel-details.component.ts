@@ -91,8 +91,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
     });
   }
 
-  deleteHardwareInput(hardwareInput) {
-    console.log(typeof hardwareInput);
+  deleteHardwareInput(hardwareInput: HardwareInputDto) {
     const dialogRef = this.dialog.open(DeleteHardwareInputDialog);
     dialogRef.componentInstance.hardwareInput = hardwareInput;
   }

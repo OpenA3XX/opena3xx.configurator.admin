@@ -1,15 +1,12 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
-export class ConfigurationService{
+export class ConfigurationService {
+  private API_BASE_URL = 'http://localhost:5000';
 
-    private API_BASE_URL = "http://localhost:5000";
+  constructor() {}
 
-    constructor(){
-
-    }
-
-    getApiBaseUrl(){
-        return this.API_BASE_URL;
-    }
+  getApiBaseUrl() {
+    return this.API_BASE_URL;
+  }
 }

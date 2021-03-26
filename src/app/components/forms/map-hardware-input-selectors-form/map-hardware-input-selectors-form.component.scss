@@ -1,21 +1,21 @@
-mat-form-field{
-    width:100%;
+mat-form-field {
+  width: 100%;
+}
+
+mat-expansion-panel {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  button {
+    float: right;
   }
-  
-mat-expansion-panel{
-    margin-top:5px;
-    margin-bottom:5px;
-    button{
-        float:right;
-    }
 }
 
 .mat-flat-button + .mat-flat-button {
-    margin-left: 8px;
-    float:right;
-  }
+  margin-left: 8px;
+  float: right;
+}
 
-.mat-flat-button.mat-accent{
-    background-color: #ff8d0b;
-    color: #ffffff;
+.mat-flat-button.mat-accent {
+  background-color: #ff8d0b;
+  color: #ffffff;
 }

@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { filter, map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
@@ -10,12 +10,18 @@ import { HardwarePanelOverviewDto } from 'src/app/models/models';
 @Component({
   selector: 'opena3xx-manage-hardware-panels',
   templateUrl: './manage-hardware-panels.component.html',
-  styleUrls: ['./manage-hardware-panels.component.scss']
+  styleUrls: ['./manage-hardware-panels.component.scss'],
 })
-
 export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
-
-  public displayedColumns: string[] = ['id', 'name', 'aircraftModel', 'manufacturer', 'cockpitArea', 'owner', 'details'];
+  public displayedColumns: string[] = [
+    'id',
+    'name',
+    'aircraftModel',
+    'manufacturer',
+    'cockpitArea',
+    'owner',
+    'details',
+  ];
   dataSource = new MatTableDataSource<HardwarePanelOverviewDto>();
   public data: any;
   public data_loaded: boolean = false;
@@ -24,29 +30,28 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
     private dataService: DataService,
     public router: Router,
     private _snackBar: MatSnackBar
-  ){
+  ) {}
 
-  }
-
-  onViewDetailsClick(id: Number)
-  {
+  onViewDetailsClick(id: Number) {
     this.router.navigateByUrl(`/view/hardware-panel-details?id=${id}`);
   }
 
   ngOnInit(): void {
-    this.dataService.getAllHardwarePanelOverviewDetails()
-    .pipe(
-      tap(data => console.log('Data received', data)),
-      filter(x => !!x),
-      map(data_received => {
-        this.data = data_received
-        this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data)
-        this.data_loaded = true;
-        this._snackBar.open("Data Loading Completed", "Ok", {
-          duration: 1000
-        });
-      })
-    ).subscribe();
+    this.dataService
+      .getAllHardwarePanelOverviewDetails()
+      .pipe(
+        tap((data) => console.log('Data received', data)),
+        filter((x) => !!x),
+        map((data_received) => {
+          this.data = data_received;
+          this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data);
+          this.data_loaded = true;
+          this._snackBar.open('Data Loading Completed', 'Ok', {
+            duration: 1000,
+          });
+        })
+      )
+      .subscribe();
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -55,4 +60,3 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 }
-
