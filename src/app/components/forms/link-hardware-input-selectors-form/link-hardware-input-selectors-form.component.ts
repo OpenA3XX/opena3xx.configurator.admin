@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HardwareInputDto } from 'src/app/models/models';
+import { HardwareInputDto, SimulatorEventItemDto } from 'src/app/models/models';
 
 @Component({
   selector: 'opena3xx-link-hardware-input-selectors-form',
@@ -181,11 +181,4 @@ export class LinkHardwareInputSelectorsFormComponent {
       });
     this.linkHardwareInputSelectorsForm.controls['simulatorEvents'].reset();
   }
-}
-
-export interface SimulatorEventItemDto {
-  id: number;
-  friendlyName: string;
-  eventName: string;
-  eventCode: string;
 }

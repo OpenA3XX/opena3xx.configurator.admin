@@ -123,3 +123,10 @@ export interface MapExtenderBitToHardwareInputSelectorDto {
   hardwareExtenderBusId: number;
   hardwareExtenderBusBitId: number;
 }
+
+export interface SimulatorEventItemDto {
+  id: number;
+  friendlyName: string;
+  eventName: string;
+  eventCode: string;
+}

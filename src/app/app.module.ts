@@ -43,6 +43,7 @@ import { RegisterHardwareBoardComponent } from './views/register-hardware-board/
 import { ManageHardwareBoardsComponent } from './views/manage-hardware-boards/manage-hardware-board.component';
 import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-hardware-input-selectors-form/map-hardware-input-selectors-form.component';
 import { CoreHelper } from './helpers/core-helper';
+import { AddHardwarePanelComponent } from './views/add-hardware-panel/add-hardware-panel.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { CoreHelper } from './helpers/core-helper';
     ManageHardwareBoardsComponent,
     MapHardwareInputSelectorsFormComponent,
     DeleteHardwareInputDialog,
+    AddHardwarePanelComponent,
     ExitAppDialog,
   ],
   imports: [

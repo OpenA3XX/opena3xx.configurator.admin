@@ -39,24 +39,24 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.dataService
       .getAllHardwarePanelOverviewDetails()
-      .pipe(
-        tap((data) => console.log('Data received', data)),
-        filter((x) => !!x),
-        map((data_received) => {
-          this.data = data_received;
-          this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data);
-          this.data_loaded = true;
-          this._snackBar.open('Data Loading Completed', 'Ok', {
-            duration: 1000,
-          });
-        })
-      )
-      .subscribe();
+      .toPromise()
+      .then((data: HardwarePanelOverviewDto) => {
+        this.data = data;
+        this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data);
+        this.data_loaded = true;
+        this._snackBar.open('Data Loading Completed', 'Ok', {
+          duration: 1000,
+        });
+      });
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  addHardwarePanel() {
+    this.router.navigateByUrl('/add/hardware-panel');
   }
 }
