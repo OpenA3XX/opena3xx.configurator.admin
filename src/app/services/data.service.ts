@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SimulatorEventItemDto } from '../components/forms/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
 import {
+  HardwareBoardDetailsDto,
   HardwareBoardDto,
   HardwareInputTypeDto,
   HardwareOutputTypeDto,
@@ -64,7 +66,9 @@ export class DataService {
   }
 
   getAllSimulatorEventsByIntegrationType(integrationTypeId: number) {
-    return this.http.get(`${this.BASE_URL}/simulator-event?integrationTypeId=${integrationTypeId}`);
+    return this.http.get<SimulatorEventItemDto[]>(
+      `${this.BASE_URL}/simulator-event?integrationTypeId=${integrationTypeId}`
+    );
   }
 
   getAllIntegrationTypes() {
@@ -144,7 +148,7 @@ export class DataService {
   }
 
   getAllHardwareBoards() {
-    return this.http.get(`${this.BASE_URL}/hardware-boards/all`);
+    return this.http.get<HardwareBoardDto[]>(`${this.BASE_URL}/hardware-boards/all`);
   }
 
   addHardwareBoards(harwareBoardDto: HardwareBoardDto) {
@@ -155,7 +159,7 @@ export class DataService {
   }
 
   getHardwareBoardDetails(id: number) {
-    return this.http.get(`${this.BASE_URL}/hardware-boards/${id}`);
+    return this.http.get<HardwareBoardDetailsDto>(`${this.BASE_URL}/hardware-boards/${id}`);
   }
 
   mapExtenderBitToHardwareInputSelector(
@@ -168,7 +172,7 @@ export class DataService {
   }
 
   getHardwareBoardAssociationForHardwareInputSelector(hardwareInputSelectorId: number) {
-    return this.http.get(
+    return this.http.get<MapExtenderBitToHardwareInputSelectorDto>(
       `${this.BASE_URL}/hardware-boards/hardware-input-selector/${hardwareInputSelectorId}`
     );
   }

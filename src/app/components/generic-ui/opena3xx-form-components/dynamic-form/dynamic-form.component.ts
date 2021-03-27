@@ -20,7 +20,7 @@ export class DynamicFormComponent implements OnInit {
 
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
 
-  form: FormGroup;
+  form!: FormGroup;
 
   get value() {
     return this.form.value;

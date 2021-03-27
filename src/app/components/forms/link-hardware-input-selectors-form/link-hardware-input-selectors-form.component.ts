@@ -100,6 +100,7 @@ export class LinkHardwareInputSelectorsFormComponent {
             .toPromise()
             .then((data: SimulatorEventItemDto[]) => {
               _.each(data, (entry) => {
+                this.simulatorEventsFieldConfig.options = [];
                 this.simulatorEventsFieldConfig.options.push({
                   key: entry.id.toString(),
                   value: `${entry.eventName} => ${entry.eventCode}`,
@@ -172,6 +173,7 @@ export class LinkHardwareInputSelectorsFormComponent {
       .toPromise()
       .then((data: SimulatorEventItemDto[]) => {
         _.each(data, (entry) => {
+          this.simulatorEventsFieldConfig.options = [];
           this.simulatorEventsFieldConfig.options.push({
             key: entry.id.toString(),
             value: `${entry.eventName} => ${entry.eventCode}`,

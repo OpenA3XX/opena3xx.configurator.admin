@@ -71,7 +71,7 @@ export class MapHardwareInputSelectorsFormComponent implements OnInit {
     ],
   };
 
-  public eventDetails: string;
+  public eventDetails!: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: HardwareInputDto,
@@ -190,32 +190,34 @@ export class MapHardwareInputSelectorsFormComponent implements OnInit {
   }
 
   loadIoExtenderBitsData(extenderId: number) {
-    this.ioExtenderBitFieldConfig.options = [];
-    return this.dataService
-      .getHardwareBoardDetails(1)
-      .toPromise()
-      .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto) => {
-        _.each(hardwareBoardDetailsDto.ioExtenderBuses, (ioExtender) => {
-          if (ioExtender.id == extenderId) {
-            _.each(ioExtender.ioExtenderBusBits, (ioExtenderBit) => {
-              var optionList: OptionList = {
-                key: ioExtenderBit.id.toString(),
-                value: `${ioExtenderBit.name} ${
-                  ioExtenderBit.hardwareInputSelectorFullName == null
-                    ? ' - Not Mapped'
-                    : ' - Currently Mapped to ' + ioExtenderBit.hardwareInputSelectorFullName
-                }`.replace('Bit', 'Bit '),
-              };
-              this.ioExtenderBitFieldConfig.options.push(optionList);
-            });
-            this.ioExtenderBitFieldConfig.options = _.orderBy(
-              this.ioExtenderBitFieldConfig.options,
-              ['value'],
-              ['asc']
-            );
-          }
+      return this.dataService
+        .getHardwareBoardDetails(1)
+        .toPromise()
+        .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto) => {
+          _.each(hardwareBoardDetailsDto.ioExtenderBuses, (ioExtender) => {
+            if (ioExtender.id == extenderId) {
+              if(this.ioExtenderBitFieldConfig.options != undefined){
+                 _.each(ioExtender.ioExtenderBusBits, (ioExtenderBit) => {
+                  var optionList: OptionList = {
+                    key: ioExtenderBit.id.toString(),
+                    value: `${ioExtenderBit.name} ${
+                      ioExtenderBit.hardwareInputSelectorFullName == null
+                        ? ' - Not Mapped'
+                        : ' - Currently Mapped to ' + ioExtenderBit.hardwareInputSelectorFullName
+                    }`.replace('Bit', 'Bit '),
+                  };
+                  this.ioExtenderBitFieldConfig.options.push(optionList);
+               });
+              }
+              this.ioExtenderBitFieldConfig.options = _.orderBy(
+                this.ioExtenderBitFieldConfig.options,
+                ['value'],
+                ['asc']
+              );
+            }
+          });
+          this.mapHardwareInputSelectorsForm.controls['hardwareBusExtenderBits'].reset();
         });
-        this.mapHardwareInputSelectorsForm.controls['hardwareBusExtenderBits'].reset();
-      });
+    }
   }
 }

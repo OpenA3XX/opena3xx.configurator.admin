@@ -5,7 +5,7 @@ export interface Validator {
 }
 export interface FieldConfig {
   label?: string;
-  name?: string;
+  name: string;
   inputType?: string;
   //options?: {[key: string]: string};
   options?: OptionList[];
