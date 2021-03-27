@@ -44,6 +44,14 @@ export interface HardwarePanelOverviewDto {
   detailsUrl?: string;
 }
 
+export interface BaseHardwarePanelDto {
+  id: number;
+  name: string;
+  aircraftModel: string;
+  manufacturer: string;
+  cockpitArea: string;
+  owner: string;
+}
 export interface HardwarePanelDto {
   id: number;
   name: string;
