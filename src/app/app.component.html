@@ -55,22 +55,42 @@
       style="margin: 18px 10px 10px 63px"
     />
     <mat-nav-list>
-      <mat-list-item (click)="clickDashboard()" class="parent" title="Home">
+      <mat-list-item
+        (click)="clickDashboard()"
+        class="parent"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+        matTooltip="Home"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
         <mat-icon mat-list-icon>home</mat-icon>
       </mat-list-item>
-      <mat-list-item (click)="clickManageHardwarePanels()" class="parent" title="Aircraft Models">
+      <mat-list-item
+        (click)="clickManageHardwarePanels()"
+        class="parent"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+        matTooltip="Aircraft Models"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Aircraft Models</span>
         <mat-icon mat-list-icon>airplanemode_active</mat-icon>
       </mat-list-item>
-      <mat-list-item (click)="clickManageHardwarePanels()" class="parent" title="Hardware Panels">
+      <mat-list-item
+        (click)="clickManageHardwarePanels()"
+        class="parent"
+        matTooltip="Hardware Panels"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Hardware Panels</span>
         <mat-icon mat-list-icon>dashboard</mat-icon>
       </mat-list-item>
       <mat-list-item
         (click)="clickManageHardwareInputTypes()"
         class="parent"
-        title="Hardware Input Types"
+        matTooltip="Hardware Input Types"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
       >
         <span class="full-width" *ngIf="isExpanded || isShowing">Hardware Input Types</span>
         <mat-icon mat-list-icon>login</mat-icon>
@@ -78,28 +98,60 @@
       <mat-list-item
         (click)="clickManageHardwareOutputTypes()"
         class="parent"
-        title="Hardware Output Types"
+        matTooltip="Hardware Output Types"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
       >
         <span class="full-width" *ngIf="isExpanded || isShowing">Hardware Output Types</span>
         <mat-icon mat-list-icon>logout</mat-icon>
       </mat-list-item>
-      <mat-list-item (click)="clickManageHardwareBoards()" class="parent" title="Hardware Boards">
+      <mat-list-item
+        (click)="clickManageHardwareBoards()"
+        class="parent"
+        matTooltip="Hardware Boards"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Hardware Boards</span>
         <mat-icon mat-list-icon>developer_board</mat-icon>
       </mat-list-item>
-      <mat-list-item (click)="clickManageSimulatorEvents()" class="parent" title="Simulator Events">
+      <mat-list-item
+        (click)="clickManageSimulatorEvents()"
+        class="parent"
+        matTooltip="Simulator Events"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Simulator Events</span>
         <mat-icon mat-list-icon>laptop</mat-icon>
       </mat-list-item>
-      <mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Connectivity">
+      <mat-list-item
+        (click)="clickManageHardwareOutputTypes()"
+        class="parent"
+        matTooltip="Connectivity"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Connectivity</span>
         <mat-icon mat-list-icon>cell_wifi</mat-icon>
       </mat-list-item>
-      <mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Monitoring">
+      <mat-list-item
+        (click)="clickManageHardwareOutputTypes()"
+        class="parent"
+        matTooltip="Monitoring"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Monitoring</span>
         <mat-icon mat-list-icon>bar_chart</mat-icon>
       </mat-list-item>
-      <mat-list-item (click)="clickManageHardwareOutputTypes()" class="parent" title="Console">
+      <mat-list-item
+        (click)="clickManageHardwareOutputTypes()"
+        class="parent"
+        matTooltip="Console"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Console</span>
         <mat-icon mat-list-icon>web_asset</mat-icon>
       </mat-list-item>
@@ -109,7 +161,6 @@
         matTooltipPosition="after"
         (click)="clickSettings()"
         class="parent"
-        title="Notifications"
       >
         <span class="full-width" *ngIf="isExpanded || isShowing">Notifications</span>
         <mat-icon
@@ -121,11 +172,24 @@
           >notification_important</mat-icon
         >
       </mat-list-item>
-      <mat-list-item (click)="clickSettings()" class="parent" title="Settings">
+      <mat-list-item
+        (click)="clickSettings()"
+        class="parent"
+        matTooltip="Settings"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Settings</span>
         <mat-icon mat-list-icon>settings</mat-icon>
       </mat-list-item>
-      <mat-list-item (click)="exit()" class="parent" title="Exit" *ngIf="isElectron">
+      <mat-list-item
+        (click)="exit()"
+        class="parent"
+        matTooltip="Exit"
+        *ngIf="isElectron"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="isExpanded"
+      >
         <span class="full-width" *ngIf="isExpanded || isShowing">Quit App</span>
         <mat-icon mat-list-icon>exit_to_app</mat-icon>
       </mat-list-item>
