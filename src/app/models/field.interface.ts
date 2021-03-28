@@ -17,6 +17,7 @@ export interface FieldConfig {
   stepValue?: string;
   minValue?: string;
   maxValue?: string;
+  disabled?: boolean;
 }
 
 export interface OptionList {

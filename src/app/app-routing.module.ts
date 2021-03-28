@@ -6,6 +6,7 @@ import { AddHardwarePanelComponent } from './views/add-hardware-panel/add-hardwa
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { EditHardwareInputTypeComponent } from './views/edit-hardware-input-type/edit-hardware-input-type.component';
 import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
+import { EditHardwarePanelComponent } from './views/edit-hardware-panel/edit-hardware-panel.component';
 import { ManageHardwareBoardsComponent } from './views/manage-hardware-boards/manage-hardware-board.component';
 import { ManageHardwareInputTypesComponent } from './views/manage-hardware-input-types/manage-hardware-input-types.component';
 import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-output-types/manage-hardware-output-types.component';
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'add/hardware-panel',
     component: AddHardwarePanelComponent,
+  },
+  {
+    path: 'edit/hardware-panel',
+    component: EditHardwarePanelComponent,
   },
   {
     path: 'view/hardware-panel-details',

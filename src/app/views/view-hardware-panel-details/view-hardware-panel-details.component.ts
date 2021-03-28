@@ -56,6 +56,10 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
     return;
   }
 
+  onEditHardwareDetails() {
+    this.router.navigateByUrl(`/edit/hardware-panel?id=${this.hardwarePanelDto.id}`);
+  }
+
   showInputSelectorDetails(data: HardwareInputDto): void {
     this.viewHardwareInputOutputSelectorsDialog.open(ViewHardwareInputSelectorsDialogComponent, {
       data: data,

@@ -1,214 +1,184 @@
 <mat-toolbar>
-    <mat-icon>dashboard</mat-icon>&nbsp;
-    <span>View Hardware Panel Details</span>
+  <mat-icon>dashboard</mat-icon>&nbsp;
+  <span>View Hardware Panel Details</span>
 </mat-toolbar>
 
 <mat-toolbar class="sub-menu-navigation">
-    
-    <button mat-flat-button color="primary">
-        <mat-icon mat-list-icon>add</mat-icon>
-        Add Hardware Input
-    </button>
-    <button mat-flat-button color="primary">
-        <mat-icon mat-list-icon>add</mat-icon>
-        Add Hardware Output
-    </button>
-    <button mat-flat-button color="primary">
-        <mat-icon mat-list-icon>edit</mat-icon>
-        Edit Hardware Panel Details
-    </button>
+  <button mat-flat-button color="primary">
+    <mat-icon mat-list-icon>add</mat-icon>
+    Add Hardware Input
+  </button>
+  <button mat-flat-button color="primary">
+    <mat-icon mat-list-icon>add</mat-icon>
+    Add Hardware Output
+  </button>
+  <button mat-flat-button color="primary" (click)="onEditHardwareDetails()">
+    <mat-icon mat-list-icon>edit</mat-icon>
+    Edit Hardware Panel Details
+  </button>
 </mat-toolbar>
 
 <mat-toolbar>
-    <mat-icon>info</mat-icon>&nbsp;
-    <span>General Information</span>
+  <mat-icon>info</mat-icon>&nbsp;
+  <span>General Information</span>
 </mat-toolbar>
-
-
 
 <mat-grid-list cols="8" rowHeight="6:3" *ngIf="hardwarePanelDto">
-    <mat-grid-tile>
-        <div class="data-wrapper">
-            <div class="title">
-                Hardware Panel Name
-            </div>
-            <div class="value small">
-             {{hardwarePanelDto.name}}
-            </div>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <div class="data-wrapper">
-            <div class="title">
-                Hardware Panel Identifier
-            </div>
-            <div class="value">
-                {{hardwarePanelDto.id}}
-            </div>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <div class="data-wrapper">
-            <div class="title">
-                Manufacturer
-            </div>
-            <div class="value">
-                {{hardwarePanelDto.aircraftModel}}
-            </div>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <div class="data-wrapper">
-            <div class="title">
-                Aircraft Model
-            </div>
-            <div class="value">
-                {{hardwarePanelDto.manufacturer}}
-            </div>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <div class="data-wrapper">
-            <div class="title">
-                Cockpit Area
-            </div>
-            <div class="value">
-                {{hardwarePanelDto.cockpitArea}}
-            </div>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <div class="data-wrapper">
-            <div class="title">
-                Panel Owner
-            </div>
-            <div class="value">
-                {{hardwarePanelDto.owner}}
-            </div>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <div class="data-wrapper">
-            <div class="title">
-                Total Inputs[Discrete]
-            </div>
-            <div class="value">
-                {{hardwarePanelDto.totalInputs}}[{{hardwarePanelDto.totalInputsDiscrete}}]
-            </div>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <div class="data-wrapper">
-            <div class="title">
-                Total Outputs[Discrete]
-            </div>
-            <div class="value">
-                {{hardwarePanelDto.totalOutputs}}[{{hardwarePanelDto.totalOutputsDiscrete}}]
-            </div>
-        </div>
-    </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="data-wrapper">
+      <div class="title">Hardware Panel Name</div>
+      <div class="value small">
+        {{ hardwarePanelDto.name }}
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="data-wrapper">
+      <div class="title">Hardware Panel Identifier</div>
+      <div class="value">
+        {{ hardwarePanelDto.id }}
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="data-wrapper">
+      <div class="title">Manufacturer</div>
+      <div class="value">
+        {{ hardwarePanelDto.aircraftModel }}
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="data-wrapper">
+      <div class="title">Aircraft Model</div>
+      <div class="value">
+        {{ hardwarePanelDto.manufacturer }}
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="data-wrapper">
+      <div class="title">Cockpit Area</div>
+      <div class="value">
+        {{ hardwarePanelDto.cockpitArea }}
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="data-wrapper">
+      <div class="title">Panel Owner</div>
+      <div class="value">
+        {{ hardwarePanelDto.owner }}
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="data-wrapper">
+      <div class="title">Total Inputs[Discrete]</div>
+      <div class="value">
+        {{ hardwarePanelDto.totalInputs }}[{{ hardwarePanelDto.totalInputsDiscrete }}]
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="data-wrapper">
+      <div class="title">Total Outputs[Discrete]</div>
+      <div class="value">
+        {{ hardwarePanelDto.totalOutputs }}[{{ hardwarePanelDto.totalOutputsDiscrete }}]
+      </div>
+    </div>
+  </mat-grid-tile>
 </mat-grid-list>
 
-
 <mat-toolbar class="hardware-inputs">
-    <mat-icon>login</mat-icon>&nbsp;
-    <span>Hardware Inputs</span>
+  <mat-icon>login</mat-icon>&nbsp;
+  <span>Hardware Inputs</span>
 </mat-toolbar>
 <table mat-table [dataSource]="inputsDataSource" *ngIf="inputsDataSource">
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element">{{element.name}} </td>
-    </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="hardwareInputType">
-        <th mat-header-cell *matHeaderCellDef> Discrete Inputs & Input Type </th>
-        <td mat-cell *matCellDef="let element">
-            {{element.hardwareInputType}} input type.
-        </td>
-    </ng-container>
+  <ng-container matColumnDef="hardwareInputType">
+    <th mat-header-cell *matHeaderCellDef>Discrete Inputs & Input Type</th>
+    <td mat-cell *matCellDef="let element">{{ element.hardwareInputType }} input type.</td>
+  </ng-container>
 
-    <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
-            <button (click)="showInputSelectorDetails(element)" 
-                mat-stroked-button color="primary">
-                <mat-icon mat-list-icon>remove_red_eye</mat-icon>
-                View {{element.hardwareInputSelectors.length}} Input(s)
-            </button>
-            <button (click)="mapInputSelector(element)" 
-                mat-stroked-button color="warn">
-                <mat-icon mat-list-icon>link</mat-icon>
-                Map {{element.hardwareInputSelectors.length}} Digital Input(s)
-            </button>
-            <button (click)="linkInputSelector(element)" 
-                mat-stroked-button color="accent">
-                <mat-icon mat-list-icon>laptop</mat-icon>
-                Sim Link {{element.hardwareInputSelectors.length}} Input(s)
-            </button>
-            <button matTooltip="Delete Hardware Input" class="small" (click)="deleteHardwareInput(element)" 
-            mat-stroked-button color="flat">
-            <mat-icon mat-list-icon>delete</mat-icon>
-        </button>
-        </td>
-    </ng-container>
-    
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <button (click)="showInputSelectorDetails(element)" mat-stroked-button color="primary">
+        <mat-icon mat-list-icon>remove_red_eye</mat-icon>
+        View {{ element.hardwareInputSelectors.length }} Input(s)
+      </button>
+      <button (click)="mapInputSelector(element)" mat-stroked-button color="warn">
+        <mat-icon mat-list-icon>link</mat-icon>
+        Map {{ element.hardwareInputSelectors.length }} Digital Input(s)
+      </button>
+      <button (click)="linkInputSelector(element)" mat-stroked-button color="accent">
+        <mat-icon mat-list-icon>laptop</mat-icon>
+        Sim Link {{ element.hardwareInputSelectors.length }} Input(s)
+      </button>
+      <button
+        matTooltip="Delete Hardware Input"
+        class="small"
+        (click)="deleteHardwareInput(element)"
+        mat-stroked-button
+        color="flat"
+      >
+        <mat-icon mat-list-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedInputColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedInputColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedInputColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedInputColumns"></tr>
 </table>
 
 <mat-toolbar class="hardware-outputs">
-    <mat-icon>logout</mat-icon>&nbsp;
-    <span>Hardware Outputs</span>
+  <mat-icon>logout</mat-icon>&nbsp;
+  <span>Hardware Outputs</span>
 </mat-toolbar>
 <table mat-table [dataSource]="outputsDataSource" *ngIf="outputsDataSource">
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element">{{element.name}} </td>
-    </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="hardwareOutputType">
-        <th mat-header-cell *matHeaderCellDef> Output Type </th>
-        <td mat-cell *matCellDef="let element"> {{element.hardwareOutputType}} </td>
-    </ng-container>
+  <ng-container matColumnDef="hardwareOutputType">
+    <th mat-header-cell *matHeaderCellDef>Output Type</th>
+    <td mat-cell *matCellDef="let element">{{ element.hardwareOutputType }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
-            <button (click)="showOutputSelectorDetails(element)" 
-                mat-stroked-button color="primary">
-                <mat-icon mat-list-icon>remove_red_eye</mat-icon>
-                View {{element.hardwareOutputSelectors.length}} Output(s)
-            </button>
-            <button (click)="mapOutputSelector(element)" 
-                mat-stroked-button color="warn">
-                <mat-icon mat-list-icon>link</mat-icon>
-                Map {{element.hardwareOutputSelectors.length}} Output(s)
-            </button>
-            <button (click)="mapOutputSelector(element)" 
-                mat-stroked-button color="accent">
-                <mat-icon mat-list-icon>laptop</mat-icon>
-                Sim Link {{element.hardwareOutputSelectors.length}} Output(s)
-            </button>
-            
-        </td>
-    </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <button (click)="showOutputSelectorDetails(element)" mat-stroked-button color="primary">
+        <mat-icon mat-list-icon>remove_red_eye</mat-icon>
+        View {{ element.hardwareOutputSelectors.length }} Output(s)
+      </button>
+      <button (click)="mapOutputSelector(element)" mat-stroked-button color="warn">
+        <mat-icon mat-list-icon>link</mat-icon>
+        Map {{ element.hardwareOutputSelectors.length }} Output(s)
+      </button>
+      <button (click)="mapOutputSelector(element)" mat-stroked-button color="accent">
+        <mat-icon mat-list-icon>laptop</mat-icon>
+        Sim Link {{ element.hardwareOutputSelectors.length }} Output(s)
+      </button>
+    </td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedOutputColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedOutputColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedOutputColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedOutputColumns"></tr>
 </table>
-
-
-
-
-

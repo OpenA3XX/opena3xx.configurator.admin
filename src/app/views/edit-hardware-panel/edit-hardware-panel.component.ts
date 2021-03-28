@@ -7,11 +7,11 @@ import { AddHardwarePanelDto } from 'src/app/models/models';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
-  selector: 'opena3xx-add-hardware-panel',
-  templateUrl: './add-hardware-panel.component.html',
-  styleUrls: ['./add-hardware-panel.component.scss'],
+  selector: 'opena3xx-edit-hardware-panel',
+  templateUrl: './edit-hardware-panel.component.html',
+  styleUrls: ['./edit-hardware-panel.component.scss'],
 })
-export class AddHardwarePanelComponent {
+export class EditHardwarePanelComponent {
   addHardwarePanelForm: FormGroup;
 
   public hardwarePanelNameFieldConfig: FieldConfig = {
@@ -33,6 +33,7 @@ export class AddHardwarePanelComponent {
     type: 'select',
     label: 'Aircraft Model',
     name: 'aircraftModel',
+    disabled: true,
     inputType: 'text',
     options: [
       {
