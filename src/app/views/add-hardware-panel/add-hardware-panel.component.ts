@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FieldConfig } from 'src/app/models/field.interface';
+import { AddHardwarePanelDto } from 'src/app/models/models';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'opena3xx-add-hardware-panel',
@@ -22,27 +24,6 @@ export class AddHardwarePanelComponent {
         name: 'required',
         validator: Validators.required,
         message: 'Hardware Panel Name is Required',
-      },
-    ],
-  };
-
-  public aircraftManufacturerFieldConfig: FieldConfig = {
-    type: 'select',
-    label: 'Aircraft Manufacturer',
-    name: 'aircraftManufacturer',
-    inputType: 'text',
-    options: [
-      {
-        key: 'airbus',
-        value: 'Airbus',
-      },
-    ],
-    hint: 'Select Manufacturer for the panel to be assigned to',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Aircraft Manufacturer is Required',
       },
     ],
   };
@@ -75,11 +56,15 @@ export class AddHardwarePanelComponent {
     inputType: 'text',
     options: [
       {
-        key: 'pedestal',
+        key: '0',
+        value: 'Glareshield',
+      },
+      {
+        key: '1',
         value: 'Pedestal',
       },
       {
-        key: 'overhead',
+        key: '2',
         value: 'Overhead',
       },
     ],
@@ -93,42 +78,41 @@ export class AddHardwarePanelComponent {
     ],
   };
 
-  public cockpitOwnerFieldConfig: FieldConfig = {
+  public hardwarePanelOwnerFieldConfig: FieldConfig = {
     type: 'select',
-    label: 'Cockpit Owner',
-    name: 'cockpitOwner',
+    label: 'Hardware Panel Owner',
+    name: 'hardwarePanelOwner',
     inputType: 'text',
     options: [
       {
-        key: 'pilot',
+        key: '0',
         value: 'Pilot',
       },
       {
-        key: 'co-pilot',
+        key: '1',
         value: 'Co-Pilot',
       },
       {
-        key: 'shared',
+        key: '2',
         value: 'Shared',
       },
     ],
-    hint: 'Select Cockpit Owner for the panel to be assigned to',
+    hint: 'Select Hardware Panel Owner for the panel to be assigned to',
     validations: [
       {
         name: 'required',
         validator: Validators.required,
-        message: 'Cockpit Owner is is Required',
+        message: 'Hardware Panel Owner is is Required',
       },
     ],
   };
 
-  constructor(private router: Router, formBuilder: FormBuilder) {
+  constructor(private router: Router, formBuilder: FormBuilder, private dataService: DataService) {
     this.addHardwarePanelForm = formBuilder.group({
       hardwarePanelName: [, { validators: [Validators.required], updateOn: 'change' }],
       aircraftModel: [, { validators: [Validators.required], updateOn: 'change' }],
-      aircraftManufacturer: [, { validators: [Validators.required], updateOn: 'change' }],
       cockpitArea: [, { validators: [Validators.required], updateOn: 'change' }],
-      cockpitOwner: [, { validators: [Validators.required], updateOn: 'change' }],
+      hardwarePanelOwner: [, { validators: [Validators.required], updateOn: 'change' }],
     });
   }
   back() {
@@ -137,8 +121,14 @@ export class AddHardwarePanelComponent {
 
   onSave() {}
 
-  onSubmit(data) {
+  onSubmit(hardwarePanelDto: any) {
     if (this.addHardwarePanelForm.valid) {
+      this.dataService
+        .addHardwarePanel(this.addHardwarePanelForm.value)
+        .toPromise()
+        .then((data) => {
+          console.log(data);
+        });
     } else {
       this.validateAllFormFields(this.addHardwarePanelForm);
     }

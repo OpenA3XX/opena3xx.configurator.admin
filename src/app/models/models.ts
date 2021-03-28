@@ -138,3 +138,10 @@ export interface SimulatorEventItemDto {
   eventName: string;
   eventCode: string;
 }
+
+export interface AddHardwarePanelDto {
+  name: string;
+  aircraftModel: number;
+  cockpitArea: number;
+  owner: number;
+}

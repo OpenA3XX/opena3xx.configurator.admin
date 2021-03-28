@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  AddHardwarePanelDto,
   HardwareBoardDto,
   HardwareInputTypeDto,
   HardwareOutputTypeDto,
@@ -171,6 +172,13 @@ export class DataService {
   getHardwareBoardAssociationForHardwareInputSelector(hardwareInputSelectorId: number) {
     return this.http.get(
       `${this.BASE_URL}/hardware-boards/hardware-input-selector/${hardwareInputSelectorId}`
+    );
+  }
+
+  addHardwarePanel(hardwarePanel: AddHardwarePanelDto) {
+    return this.http.post<AddHardwarePanelDto>(
+      `${this.BASE_URL}/hardware-panel/add`,
+      hardwarePanel
     );
   }
 }
