@@ -17,6 +17,8 @@ import { HardwareBoardDto } from 'src/app/models/models';
   styleUrls: ['./map-hardware-input-selectors-form.component.scss'],
 })
 export class MapHardwareInputSelectorsFormComponent implements OnInit {
+  public hardwareBoardId: number;
+
   @Input() hardwareInputSelectorId!: number;
 
   mapHardwareInputSelectorsForm: FormGroup;
@@ -172,6 +174,7 @@ export class MapHardwareInputSelectorsFormComponent implements OnInit {
   }
 
   loadIoExtenderData(hardwareBoardId: number) {
+    this.hardwareBoardId = hardwareBoardId;
     this.ioExtenderFieldConfig.options = [];
     return this.dataService
       .getHardwareBoardDetails(hardwareBoardId)
@@ -190,9 +193,10 @@ export class MapHardwareInputSelectorsFormComponent implements OnInit {
   }
 
   loadIoExtenderBitsData(extenderId: number) {
+    console.log('loadIoExtenderBitsData', extenderId);
     this.ioExtenderBitFieldConfig.options = [];
     return this.dataService
-      .getHardwareBoardDetails(1)
+      .getHardwareBoardDetails(this.hardwareBoardId)
       .toPromise()
       .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto) => {
         _.each(hardwareBoardDetailsDto.ioExtenderBuses, (ioExtender) => {
