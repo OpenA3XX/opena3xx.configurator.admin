@@ -45,6 +45,8 @@ import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-h
 import { CoreHelper } from './helpers/core-helper';
 import { AddHardwarePanelComponent } from './views/add-hardware-panel/add-hardware-panel.component';
 import { EditHardwarePanelComponent } from './views/edit-hardware-panel/edit-hardware-panel.component';
+import { SignalRComponent } from './components/signalr/signalr.component';
+import { SignalrService } from './services/SignalR.service';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,7 @@ import { EditHardwarePanelComponent } from './views/edit-hardware-panel/edit-har
     AddHardwarePanelComponent,
     EditHardwarePanelComponent,
     ExitAppDialog,
+    SignalRComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +102,7 @@ import { EditHardwarePanelComponent } from './views/edit-hardware-panel/edit-har
     DataService,
     CoreHelper,
     ConfigurationService,
+    SignalrService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent],
