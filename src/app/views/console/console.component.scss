@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+mat-expansion-panel {
+  margin-top: 10px;
+}
+
+.console-container {
+  background: rgba(56, 4, 40, 0.9);
+  color: white;
+  padding: 10px;
+  height: 400px;
+  overflow: scroll;
+  b {
+    font-weight: bold;
+  }
+  * {
+    font-family: 'Ubuntu Mono' !important;
+  }
+  margin-bottom: 15px;
+}
+
+#terminal__prompt--cursor {
+  display: block;
+  height: 17px;
+  width: 8px;
+  animation: blink 1200ms linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    background: #ffffff;
+  }
+  49% {
+    background: #ffffff;
+  }
+  60% {
+    background: transparent;
+  }
+  99% {
+    background: transparent;
+  }
+  100% {
+    background: #ffffff;
+  }
+}

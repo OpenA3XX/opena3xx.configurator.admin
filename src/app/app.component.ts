@@ -111,6 +111,9 @@ export class AppComponent {
   clickManageHardwareBoards() {
     this.router.navigateByUrl(`/manage/hardware-boards`);
   }
+  clickConsole() {
+    this.router.navigateByUrl(`/console`);
+  }
 }
 
 @Component({
