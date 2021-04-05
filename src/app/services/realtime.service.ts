@@ -29,6 +29,10 @@ export class RealTimeService {
     this.addListeners();
   };
 
+  public disconnect = () => {
+    this.hubConnection.stop();
+  };
+
   private getConnection(): HubConnection {
     return new HubConnectionBuilder().withUrl(this.connectionUrl).build();
   }
