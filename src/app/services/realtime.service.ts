@@ -12,6 +12,13 @@ export interface FlightEvent {
   extender_bus_id: number;
   extender_bus_name: string;
   input_selector_name: string;
+  timestamp: string;
+}
+
+export interface KeepAliveEvent {
+  hardware_board_id: number;
+  timestamp: string;
+  message: string;
 }
 
 @Injectable({
@@ -20,6 +27,7 @@ export interface FlightEvent {
 export class RealTimeService {
   private hubConnection: HubConnection;
   public flightEvents: FlightEvent[] = [];
+  public keepAliveEvents: KeepAliveEvent[] = [];
   private connectionUrl = 'http://localhost:5000/signalr';
 
   constructor(private http: HttpClient) {}
@@ -49,7 +57,11 @@ export class RealTimeService {
   private addListeners() {
     this.hubConnection.on('HardwareEvents', (payload: string) => {
       let data: FlightEvent = JSON.parse(payload);
-      this.flightEvents.push(data);
+      this.flightEvents.unshift(data);
+    });
+    this.hubConnection.on('KeepAlive', (payload: string) => {
+      let data: KeepAliveEvent = JSON.parse(payload);
+      this.keepAliveEvents.unshift(data);
     });
   }
 }
