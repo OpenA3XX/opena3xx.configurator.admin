@@ -55,7 +55,7 @@ export class RealTimeService {
   }
 
   private addListeners() {
-    this.hubConnection.on('HardwareEvents', (payload: string) => {
+    this.hubConnection.on('HardwareInputSelectors', (payload: string) => {
       let data: FlightEvent = JSON.parse(payload);
       this.flightEvents.unshift(data);
     });

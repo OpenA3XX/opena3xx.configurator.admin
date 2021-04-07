@@ -35,6 +35,8 @@ $opena3xx-configurator-webapp-theme: mat-light-theme(
 @include angular-material-theme($opena3xx-configurator-webapp-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 
 html,
 body {
