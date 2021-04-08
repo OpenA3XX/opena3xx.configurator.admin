@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import {
+  HubConnection,
+  HubConnectionBuilder,
+  HubConnectionState,
+  LogLevel,
+} from '@microsoft/signalr';
 import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MessagePackHubProtocol } from '@microsoft/signalr-protocol-msgpack';
@@ -27,12 +32,15 @@ export interface KeepAliveEvent {
 export class RealTimeService {
   private hubConnection: HubConnection;
   public flightEvents: FlightEvent[] = [];
+  public isConnected: boolean = false;
   public keepAliveEvents: KeepAliveEvent[] = [];
   private connectionUrl = 'http://localhost:5000/signalr';
-
+  private reconnectionInterval: any;
   constructor(private http: HttpClient) {}
 
   public connect = () => {
+    clearInterval(this.reconnectionInterval);
+    this.reconnectionInterval = this.pollReconnection();
     this.startConnection();
     this.addListeners();
   };
@@ -45,13 +53,19 @@ export class RealTimeService {
     return new HubConnectionBuilder().withUrl(this.connectionUrl).build();
   }
 
+  private pollReconnection = () => {
+    return setInterval(() => {
+      if (this.hubConnection.state == HubConnectionState.Disconnected) {
+        this.connect();
+      }
+    }, 1000);
+  };
   private startConnection() {
     this.hubConnection = this.getConnection();
-
     this.hubConnection
       .start()
-      .then(() => console.log('connection started'))
-      .catch((err) => console.log('error while establishing signalr connection: ' + err));
+      .then(() => (this.isConnected = true))
+      .catch((err) => (this.isConnected = false));
   }
 
   private addListeners() {
@@ -62,6 +76,14 @@ export class RealTimeService {
     this.hubConnection.on('KeepAlive', (payload: string) => {
       let data: KeepAliveEvent = JSON.parse(payload);
       this.keepAliveEvents.unshift(data);
+    });
+
+    this.hubConnection.onclose(() => {
+      this.isConnected = false;
+    });
+
+    this.hubConnection.onreconnected(() => {
+      this.isConnected = true;
     });
   }
 }
