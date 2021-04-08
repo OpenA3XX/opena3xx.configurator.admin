@@ -21,7 +21,10 @@
     <div class="console-container">
       <span id="terminal__prompt--user"
         >admin@opena3xx:
-        <span class="cursor">Connected & receiving realtime updates...</span>
+        <span class="cursor" *ngIf="realtimeService.isConnected"
+          >Connected & receiving realtime updates...</span
+        >
+        <span class="cursor" *ngIf="!realtimeService.isConnected">Disconnected from server...</span>
         <span class="cursor-blink"></span>
       </span>
 
@@ -52,7 +55,10 @@
     <div class="console-container">
       <span id="terminal__prompt--user"
         >admin@opena3xx:
-        <span class="cursor">Connected & receiving realtime updates...</span>
+        <span class="cursor" *ngIf="realtimeService.isConnected"
+          >Connected & receiving realtime updates...</span
+        >
+        <span class="cursor" *ngIf="!realtimeService.isConnected">Disconnected from server...</span>
         <span class="cursor-blink"></span>
       </span>
       <div *ngFor="let m of realtimeService.keepAliveEvents">
