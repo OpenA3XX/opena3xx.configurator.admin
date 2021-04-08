@@ -16,6 +16,7 @@ export interface FlightEvent {
   extender_bit_name: string;
   extender_bus_id: number;
   extender_bus_name: string;
+  input_selector_id: string;
   input_selector_name: string;
   timestamp: string;
 }
