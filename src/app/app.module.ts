@@ -47,6 +47,7 @@ import { AddHardwarePanelComponent } from './views/add-hardware-panel/add-hardwa
 import { EditHardwarePanelComponent } from './views/edit-hardware-panel/edit-hardware-panel.component';
 import { RealTimeService } from './services/realtime.service';
 import { ConsoleComponent } from './views/console/console.component';
+import { AutocompleteComponent } from './components/generic-ui/opena3xx-form-components/autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ConsoleComponent } from './views/console/console.component';
     HeadingComponent,
     SlideToggleComponent,
     SliderComponent,
+    AutocompleteComponent,
     DynamicFieldDirective,
     DynamicFormComponent,
     LinkHardwareInputSelectorsFormComponent,

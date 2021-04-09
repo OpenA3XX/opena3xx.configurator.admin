@@ -22,19 +22,19 @@ export class LinkHardwareInputSelectorsFormComponent {
   public simulatorEventTestInProgress: boolean = false;
 
   public simulatorEventsFieldConfig: FieldConfig = {
-    type: 'select',
+    type: 'autocomplete',
     label: 'Simulator Event',
     name: 'simulatorEvents',
     inputType: 'text',
     options: [],
     hint: 'Select event to trigger to the Simulator Software',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Simulator Event is Required',
-      },
-    ],
+    // validations: [
+    //   {
+    //     name: 'required',
+    //     validator: Validators.required,
+    //     message: 'Simulator Event is Required',
+    //   },
+    // ],
   };
 
   public integrationTypeFieldConfig: FieldConfig = {
@@ -106,7 +106,8 @@ export class LinkHardwareInputSelectorsFormComponent {
                 });
               });
               this.linkHardwareInputSelectorsForm.controls['simulatorEvents'].setValue(
-                hardwareInputSelectorDetails.simulatorEventDto.id.toString()
+                //hardwareInputSelectorDetails.simulatorEventDto.id.toString()
+                hardwareInputSelectorDetails.simulatorEventDto.eventCode
               );
             });
         }
@@ -129,40 +130,41 @@ export class LinkHardwareInputSelectorsFormComponent {
   }
 
   onSubmit(formData: any) {
-    if (this.linkHardwareInputSelectorsForm.valid) {
-      if (this.simulatorEventTestInProgress) {
-        this.dataService
-          .sendSimulatorTestEvent(this.linkHardwareInputSelectorsForm.value.simulatorEvents)
-          .toPromise()
-          .then(() => {
-            this._snackBar.open('Simulator Test Event Sent Successfully', 'Ok', {
-              duration: 1000,
-            });
+    //if (this.linkHardwareInputSelectorsForm.valid) {
+    if (this.simulatorEventTestInProgress) {
+      this.dataService
+        .sendSimulatorTestEvent(this.linkHardwareInputSelectorsForm.value.simulatorEvents)
+        .toPromise()
+        .then(() => {
+          this._snackBar.open('Simulator Test Event Sent Successfully', 'Ok', {
+            duration: 1000,
           });
-      } else {
-        this.dataService
-          .linkSimulatorEventToHardwareInputSelector(
-            this.hardwareInputSelectorId,
-            this.linkHardwareInputSelectorsForm.value.simulatorEvents
-          )
-          .toPromise()
-          .then(() => {
-            this._snackBar.open('Linking Saved Successfully', 'Ok', {
-              duration: 3000,
-            });
-          });
-      }
-      console.log(
-        'hardwareInputDto',
-        this.hardwareInputDto,
-        'HardwareInputSelectorId',
-        this.hardwareInputSelectorId,
-        'FormData',
-        this.linkHardwareInputSelectorsForm.value
-      );
+        });
     } else {
-      this.validateAllFormFields(this.linkHardwareInputSelectorsForm);
+      console.log('huss', this.linkHardwareInputSelectorsForm.controls['simulatorEvents']);
+      // this.dataService
+      //   .linkSimulatorEventToHardwareInputSelector(
+      //     this.hardwareInputSelectorId,
+      //     this.linkHardwareInputSelectorsForm.value.simulatorEvents
+      //   )
+      //   .toPromise()
+      //   .then(() => {
+      //     this._snackBar.open('Linking Saved Successfully', 'Ok', {
+      //       duration: 3000,
+      //     });
+      //   });
     }
+    console.log(
+      'hardwareInputDto',
+      this.hardwareInputDto,
+      'HardwareInputSelectorId',
+      this.hardwareInputSelectorId,
+      'FormData',
+      this.linkHardwareInputSelectorsForm.value
+    );
+    //} else {
+    // this.validateAllFormFields(this.linkHardwareInputSelectorsForm);
+    //}
   }
 
   onIntegrationTypeChange(selectChangeEvent: any) {

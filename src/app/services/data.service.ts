@@ -96,12 +96,11 @@ export class DataService {
     return this.http.post<any>(`${this.BASE_URL}/configuration`, data);
   }
 
-  linkSimulatorEventToHardwareInputSelector(
-    hardwareInputSelectorId: number,
-    simulatorEventId: number
-  ) {
+  linkSimulatorEventToHardwareInputSelector(hardwareInputSelectorId: number, eventCode: string) {
+    //Change to this endpoint to use autocomplete in admin ui
+    // `${this.BASE_URL}/simulator-event/link/hardware-input-selector/${hardwareInputSelectorId}/${simulatorEventId}`,
     return this.http.post<any>(
-      `${this.BASE_URL}/simulator-event/link/hardware-input-selector/${hardwareInputSelectorId}/${simulatorEventId}`,
+      `${this.BASE_URL}/simulator-event/link/hardware-input-selector/by-event-code/${hardwareInputSelectorId}/${eventCode}`,
       {}
     );
   }
