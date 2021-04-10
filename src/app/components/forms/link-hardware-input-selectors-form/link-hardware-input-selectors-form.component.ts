@@ -55,6 +55,8 @@ export class LinkHardwareInputSelectorsFormComponent {
 
   public eventDetails: string;
 
+  public autocompleteValue: string;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: HardwareInputDto,
     formBuilder: FormBuilder,
@@ -71,6 +73,9 @@ export class LinkHardwareInputSelectorsFormComponent {
     this.fetchData();
   }
 
+  readAutoCompleteValue(value) {
+    this.autocompleteValue = value;
+  }
   fetchData() {
     this.dataService
       .getAllIntegrationTypes()
@@ -141,18 +146,18 @@ export class LinkHardwareInputSelectorsFormComponent {
           });
         });
     } else {
-      console.log('huss', this.linkHardwareInputSelectorsForm.controls['simulatorEvents']);
-      // this.dataService
-      //   .linkSimulatorEventToHardwareInputSelector(
-      //     this.hardwareInputSelectorId,
-      //     this.linkHardwareInputSelectorsForm.value.simulatorEvents
-      //   )
-      //   .toPromise()
-      //   .then(() => {
-      //     this._snackBar.open('Linking Saved Successfully', 'Ok', {
-      //       duration: 3000,
-      //     });
-      //   });
+      console.log('huss');
+      this.dataService
+        .linkSimulatorEventToHardwareInputSelector(
+          this.hardwareInputSelectorId,
+          this.autocompleteValue
+        )
+        .toPromise()
+        .then(() => {
+          this._snackBar.open('Linking Saved Successfully', 'Ok', {
+            duration: 3000,
+          });
+        });
     }
     console.log(
       'hardwareInputDto',

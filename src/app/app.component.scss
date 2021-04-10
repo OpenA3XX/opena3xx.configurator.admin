@@ -54,9 +54,9 @@ img:hover {
   background-color: #ff2d2d;
   position: absolute;
   top: 0;
-  left: 40%;
-  width: 20%;
+  left: calc(50% - 245px);
   padding: 10px;
+  width: 510px;
   border-radius: 0px 0px 30px 30px;
   p {
     color: #fff;

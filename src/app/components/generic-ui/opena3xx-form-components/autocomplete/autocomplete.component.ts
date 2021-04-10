@@ -48,6 +48,8 @@ export class AutocompleteComponent implements OnInit {
 
   @Input() group!: FormGroup;
 
+  @Output() AutoCompleteValue: EventEmitter<string> = new EventEmitter<string>();
+
   myControl = new FormControl();
 
   filteredOptions: Observable<OptionList[]>;
@@ -57,10 +59,13 @@ export class AutocompleteComponent implements OnInit {
       startWith(''),
       map((value) => this._filter(value))
     );
+
+    this.group.addControl(this.field.name, this.myControl);
   }
 
   private _filter(value: string): OptionList[] {
     console.log('_filter', value);
+    this.AutoCompleteValue.emit(value);
     const filterValue = value.toLowerCase();
     return this.field.options.filter((option) => option.value.toLowerCase().includes(filterValue));
   }
