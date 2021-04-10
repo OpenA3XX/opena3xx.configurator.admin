@@ -125,6 +125,25 @@ body {
   color: #1a8f47;
   border-color: #1a8f47;
 }
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
+  background-color: #1a8f47;
+}
+.mat-flat-button.mat-accent:hover,
+.mat-raised-button.mat-accent:hover,
+.mat-fab.mat-accent:hover,
+.mat-mini-fab.mat-accent:hover {
+  background-color: #136332;
+}
+
+.mat-flat-button.mat-warn:hover,
+.mat-raised-button.mat-warn:hover,
+.mat-fab.mat-warn:hover,
+.mat-mini-fab.mat-warn:hover {
+  background-color: #c43228;
+}
 .mat-stroked-button.mat-accent:hover {
   background-color: #1a8f47;
   color: #ffffff;

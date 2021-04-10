@@ -37,7 +37,10 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
       console.log('Received Query Params', params);
       this.idParam = params.id;
     });
+    this.fetchData();
+  }
 
+  fetchData() {
     this.dataService
       .getAllHardwarePanelDetails(this.idParam)
       .pipe(
@@ -68,16 +71,28 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
   }
 
   mapInputSelector(data: HardwareInputDto): void {
-    this.viewHardwareInputOutputSelectorsDialog.open(MapHardwareInputSelectorsDialogComponent, {
-      data: data,
-      width: '900px',
+    let dialogRef = this.viewHardwareInputOutputSelectorsDialog.open(
+      MapHardwareInputSelectorsDialogComponent,
+      {
+        data: data,
+        width: '900px',
+      }
+    );
+    dialogRef.afterClosed().subscribe((result) => {
+      this.fetchData();
     });
   }
 
   linkInputSelector(data: HardwareInputDto) {
-    this.viewHardwareInputOutputSelectorsDialog.open(LinkHardwareInputSelectorsDialogComponent, {
-      data: data,
-      width: '900px',
+    let dialogRef = this.viewHardwareInputOutputSelectorsDialog.open(
+      LinkHardwareInputSelectorsDialogComponent,
+      {
+        data: data,
+        width: '900px',
+      }
+    );
+    dialogRef.afterClosed().subscribe((result) => {
+      this.fetchData();
     });
   }
 

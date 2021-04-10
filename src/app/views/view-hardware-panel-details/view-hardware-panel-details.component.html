@@ -117,14 +117,45 @@
         <mat-icon mat-list-icon>remove_red_eye</mat-icon>
         View {{ element.hardwareInputSelectors.length }} Input(s)
       </button>
-      <button (click)="mapInputSelector(element)" mat-stroked-button color="warn">
+
+      <button
+        (click)="mapInputSelector(element)"
+        *ngIf="element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware == false"
+        mat-stroked-button
+        color="warn"
+      >
         <mat-icon mat-list-icon>link</mat-icon>
         Map {{ element.hardwareInputSelectors.length }} Digital Input(s)
       </button>
-      <button (click)="linkInputSelector(element)" mat-stroked-button color="accent">
+      <button
+        (click)="mapInputSelector(element)"
+        *ngIf="element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware == true"
+        mat-flat-button
+        color="warn"
+      >
+        <mat-icon mat-list-icon>link</mat-icon>
+        Map {{ element.hardwareInputSelectors.length }} Digital Input(s)
+      </button>
+
+      <button
+        (click)="linkInputSelector(element)"
+        *ngIf="element.hardwareInputSelectors[0].simulatorEventDto != null"
+        mat-flat-button
+        color="accent"
+      >
         <mat-icon mat-list-icon>laptop</mat-icon>
         Sim Link {{ element.hardwareInputSelectors.length }} Input(s)
       </button>
+      <button
+        (click)="linkInputSelector(element)"
+        *ngIf="element.hardwareInputSelectors[0].simulatorEventDto == null"
+        mat-stroked-button
+        color="accent"
+      >
+        <mat-icon mat-list-icon>laptop</mat-icon>
+        Sim Link {{ element.hardwareInputSelectors.length }} Input(s)
+      </button>
+
       <button
         matTooltip="Delete Hardware Input"
         class="small"
