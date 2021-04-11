@@ -11,7 +11,10 @@ table {
   width: 100%;
   button {
     margin-left: 10px;
-    width: 204px;
+    width: 170px;
+  }
+  button.view-button {
+    width: 64px;
   }
   button.small {
     width: 50px;

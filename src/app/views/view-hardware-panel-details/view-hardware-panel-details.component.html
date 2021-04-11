@@ -113,9 +113,15 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef>Action</th>
     <td mat-cell *matCellDef="let element">
-      <button (click)="showInputSelectorDetails(element)" mat-stroked-button color="primary">
+      <button
+        (click)="showInputSelectorDetails(element)"
+        mat-stroked-button
+        color="primary"
+        class="view-button"
+        matTooltip=" View {{ element.hardwareInputSelectors.length }} Input(s)"
+        matTooltipPosition="before"
+      >
         <mat-icon mat-list-icon>remove_red_eye</mat-icon>
-        View {{ element.hardwareInputSelectors.length }} Input(s)
       </button>
 
       <button
@@ -125,7 +131,7 @@
         color="warn"
       >
         <mat-icon mat-list-icon>link</mat-icon>
-        Map {{ element.hardwareInputSelectors.length }} Digital Input(s)
+        Set Mapping
       </button>
       <button
         (click)="mapInputSelector(element)"
@@ -134,7 +140,7 @@
         color="warn"
       >
         <mat-icon mat-list-icon>link</mat-icon>
-        Map {{ element.hardwareInputSelectors.length }} Digital Input(s)
+        Edit Mapping
       </button>
 
       <button
@@ -144,7 +150,7 @@
         color="accent"
       >
         <mat-icon mat-list-icon>laptop</mat-icon>
-        Sim Link {{ element.hardwareInputSelectors.length }} Input(s)
+        Edit Sim Linking
       </button>
       <button
         (click)="linkInputSelector(element)"
@@ -153,7 +159,7 @@
         color="accent"
       >
         <mat-icon mat-list-icon>laptop</mat-icon>
-        Sim Link {{ element.hardwareInputSelectors.length }} Input(s)
+        Set Sim Linking
       </button>
 
       <button
