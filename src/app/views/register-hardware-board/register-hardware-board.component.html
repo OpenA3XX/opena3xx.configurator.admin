@@ -12,6 +12,36 @@
   </mat-expansion-panel-header>
   <div class="container">
     <form [formGroup]="registerHardwareBoardForm" (submit)="onSubmit($event)">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="dhcb"></div>
+          <mat-card-title>DHC Board</mat-card-title>
+          <mat-card-subtitle>OpenA3XX DHC Board - 8 IO Extender Buses</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="assets/opena3xx-hdc-board.png" alt="Photo of a Shiba Inu" />
+        <mat-card-content>
+          <p>OpenA3XX Digital Hardware Controller Board</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button mat-flat-button color="primary">Select</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="mcdu"></div>
+          <mat-card-title>MCDU Board</mat-card-title>
+          <mat-card-subtitle>OpenA3XX MCDU Board - 5 IO Extender Buses</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="assets/opena3xx-mcdu-board.png" alt="Photo of a Shiba Inu" />
+        <mat-card-content>
+          <p>OpenA3XX MCDU Hardware Board</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button mat-flat-button color="primary">Select</button>
+        </mat-card-actions>
+      </mat-card>
+
       <opena3xx-input [field]="boardNameFieldConfig" [group]="registerHardwareBoardForm">
       </opena3xx-input>
 
