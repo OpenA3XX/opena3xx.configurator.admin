@@ -200,18 +200,26 @@
 
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef>Action</th>
+
     <td mat-cell *matCellDef="let element">
-      <button (click)="showOutputSelectorDetails(element)" mat-stroked-button color="primary">
+      <button
+        (click)="showOutputSelectorDetails(element)"
+        mat-stroked-button
+        color="primary"
+        class="view-button"
+        matTooltip=" View {{ element.hardwareOutputSelectors.length }} Output(s)"
+        matTooltipPosition="before"
+      >
         <mat-icon mat-list-icon>remove_red_eye</mat-icon>
-        View {{ element.hardwareOutputSelectors.length }} Output(s)
       </button>
+
       <button (click)="mapOutputSelector(element)" mat-stroked-button color="warn">
         <mat-icon mat-list-icon>link</mat-icon>
-        Map {{ element.hardwareOutputSelectors.length }} Output(s)
+        Set Mapping
       </button>
       <button (click)="mapOutputSelector(element)" mat-stroked-button color="accent">
         <mat-icon mat-list-icon>laptop</mat-icon>
-        Sim Link {{ element.hardwareOutputSelectors.length }} Output(s)
+        Set Sim Linking
       </button>
     </td>
   </ng-container>
