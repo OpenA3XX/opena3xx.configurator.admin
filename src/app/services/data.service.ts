@@ -8,6 +8,7 @@ import {
   HardwareOutputTypeDto,
   HardwarePanelOverviewDto,
   MapExtenderBitToHardwareInputSelectorDto,
+  MapExtenderBitToHardwareOutputSelectorDto,
 } from '../models/models';
 import { ConfigurationService } from './configuration.service';
 
@@ -178,6 +179,21 @@ export class DataService {
     return this.http.post<AddHardwarePanelDto>(
       `${this.BASE_URL}/hardware-panel/add`,
       hardwarePanel
+    );
+  }
+
+  getHardwareBoardAssociationForHardwareOutputSelector(hardwareOutputSelectorId: number) {
+    return this.http.get(
+      `${this.BASE_URL}/hardware-boards/hardware-output-selector/${hardwareOutputSelectorId}`
+    );
+  }
+
+  mapExtenderBitToHardwareOutputSelector(
+    linkExtenderBitToHardwareOutputSelectorDto: MapExtenderBitToHardwareOutputSelectorDto
+  ) {
+    return this.http.post<MapExtenderBitToHardwareOutputSelectorDto>(
+      `${this.BASE_URL}/hardware-boards/link/hardware-output-selector`,
+      linkExtenderBitToHardwareOutputSelectorDto
     );
   }
 }

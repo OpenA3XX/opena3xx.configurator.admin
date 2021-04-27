@@ -48,6 +48,7 @@ import { EditHardwarePanelComponent } from './views/edit-hardware-panel/edit-har
 import { RealTimeService } from './services/realtime.service';
 import { ConsoleComponent } from './views/console/console.component';
 import { AutocompleteComponent } from './components/generic-ui/opena3xx-form-components/autocomplete/autocomplete.component';
+import { MapHardwareOutputSelectorsFormComponent } from './components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { AutocompleteComponent } from './components/generic-ui/opena3xx-form-com
     EditHardwarePanelComponent,
     ExitAppDialog,
     ConsoleComponent,
+    MapHardwareOutputSelectorsFormComponent,
   ],
   imports: [
     BrowserModule,

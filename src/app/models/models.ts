@@ -73,7 +73,6 @@ export interface HardwareInputDto {
   hardwareInputType: string;
   inputSelectors: HardwareInputSelectorDto[];
 }
-
 export interface HardwareInputSelectorDto {
   id: number;
   name: string;
@@ -127,6 +126,13 @@ export enum SimulatorEventSdkType {
 
 export interface MapExtenderBitToHardwareInputSelectorDto {
   hardwareInputSelectorId: number;
+  hardwareBoardId: number;
+  hardwareExtenderBusId: number;
+  hardwareExtenderBusBitId: number;
+}
+
+export interface MapExtenderBitToHardwareOutputSelectorDto {
+  hardwareOutputSelectorId: number;
   hardwareBoardId: number;
   hardwareExtenderBusId: number;
   hardwareExtenderBusBitId: number;
