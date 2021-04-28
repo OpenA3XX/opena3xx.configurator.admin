@@ -1,0 +1,743 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>opena3xx-configurator-webapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">opena3xx-configurator-webapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>ConsoleComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/views/console/console.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>opena3xx-console</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./console.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./console.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#realtimeService">realtimeService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#router">router</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#goBack">goBack</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(realtimeService: <a href="../injectables/RealTimeService.html">RealTimeService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/views/console/console.component.ts:10</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>realtimeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RealTimeService.html" target="_self" >RealTimeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <b>
+                            goBack
+                        </b>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">src/app/views/console/console.component.ts:19</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="12"
+                            class="link-to-prism">src/app/views/console/console.component.ts:12</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="15"
+                            class="link-to-prism">src/app/views/console/console.component.ts:15</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="realtimeService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            realtimeService</b>
+                            <a href="#realtimeService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/RealTimeService.html" target="_self" >RealTimeService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/views/console/console.component.ts:11</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="router"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            router</b>
+                            <a href="#router"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/views/console/console.component.ts:11</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { RealTimeService } from &#x27;src/app/services/realtime.service&#x27;;
+
+@Component({
+  selector: &#x27;opena3xx-console&#x27;,
+  templateUrl: &#x27;./console.component.html&#x27;,
+  styleUrls: [&#x27;./console.component.scss&#x27;],
+})
+export class ConsoleComponent implements OnInit, OnDestroy {
+  constructor(public realtimeService: RealTimeService, public router: Router) {}
+  ngOnDestroy(): void {
+    this.realtimeService.disconnect();
+  }
+  ngOnInit(): void {
+    this.realtimeService.connect();
+  }
+
+  goBack() {
+    this.router.navigateByUrl(&#x27;/&#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-toolbar&gt;
+  &lt;mat-icon&gt;web_asset&lt;/mat-icon&gt;&amp;nbsp;
+  &lt;span&gt;Real Time Console&lt;/span&gt;
+&lt;/mat-toolbar&gt;
+&lt;mat-toolbar&gt;
+  &lt;button mat-flat-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;goBack()&quot;&gt;Back&lt;/button&gt;
+&lt;/mat-toolbar&gt;
+&lt;mat-expansion-panel expanded&gt;
+  &lt;mat-expansion-panel-header&gt;
+    &lt;mat-panel-title&gt; Flight Events &lt;/mat-panel-title&gt;
+  &lt;/mat-expansion-panel-header&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;section id&#x3D;&quot;terminal__bar&quot;&gt;
+      &lt;div id&#x3D;&quot;bar__buttons&quot;&gt;
+        &lt;button class&#x3D;&quot;bar__button&quot; id&#x3D;&quot;bar__button--exit&quot;&gt;&amp;#10005;&lt;/button&gt;
+        &lt;button class&#x3D;&quot;bar__button&quot;&gt;&amp;#9472;&lt;/button&gt;
+        &lt;button class&#x3D;&quot;bar__button&quot;&gt;&amp;#9723;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;p id&#x3D;&quot;bar__user&quot;&gt;OpenA3XX Terminal: Real Time Console&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;div class&#x3D;&quot;console-container&quot;&gt;
+      &lt;span id&#x3D;&quot;terminal__prompt--user&quot;
+        &gt;admin@opena3xx:
+        &lt;span class&#x3D;&quot;cursor&quot; *ngIf&#x3D;&quot;realtimeService.isConnected&quot;
+          &gt;Connected &amp; receiving realtime updates...&lt;/span
+        &gt;
+        &lt;span class&#x3D;&quot;cursor&quot; *ngIf&#x3D;&quot;!realtimeService.isConnected&quot;&gt;Disconnected from server...&lt;/span&gt;
+        &lt;span class&#x3D;&quot;cursor-blink&quot;&gt;&lt;/span&gt;
+      &lt;/span&gt;
+
+      &lt;div *ngFor&#x3D;&quot;let m of realtimeService.flightEvents&quot;&gt;
+        &lt;span id&#x3D;&quot;terminal__prompt--user&quot;&gt;admin@opena3xx:&lt;/span&gt;
+        Hardware Event: → Timestamp:
+        &lt;b&gt;{{ m.timestamp }}&lt;/b&gt; | Hardware Board Id: &lt;b&gt;{{ m.hardware_board_id }}&lt;/b&gt; | Hardware
+        Bus Name: &lt;b&gt;{{ m.extender_bus_name }}&lt;/b&gt; | Extender Bit Id (Name):
+        &lt;b&gt;{{ m.extender_bit_id }} ({{ m.extender_bit_name }})&lt;/b&gt; | Input Selector Name:
+        &lt;b&gt;{{ m.input_selector_name }}&lt;/b&gt; | Input Selector Id:
+        &lt;b&gt;{{ m.input_selector_id }}&lt;/b&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/mat-expansion-panel&gt;
+&lt;mat-expansion-panel expanded&gt;
+  &lt;mat-expansion-panel-header&gt;
+    &lt;mat-panel-title&gt; Keep Alive Events &lt;/mat-panel-title&gt;
+  &lt;/mat-expansion-panel-header&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;section id&#x3D;&quot;terminal__bar&quot;&gt;
+      &lt;div id&#x3D;&quot;bar__buttons&quot;&gt;
+        &lt;button class&#x3D;&quot;bar__button&quot; id&#x3D;&quot;bar__button--exit&quot;&gt;&amp;#10005;&lt;/button&gt;
+        &lt;button class&#x3D;&quot;bar__button&quot;&gt;&amp;#9472;&lt;/button&gt;
+        &lt;button class&#x3D;&quot;bar__button&quot;&gt;&amp;#9723;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;p id&#x3D;&quot;bar__user&quot;&gt;OpenA3XX Terminal: Real Time Console&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;div class&#x3D;&quot;console-container&quot;&gt;
+      &lt;span id&#x3D;&quot;terminal__prompt--user&quot;
+        &gt;admin@opena3xx:
+        &lt;span class&#x3D;&quot;cursor&quot; *ngIf&#x3D;&quot;realtimeService.isConnected&quot;
+          &gt;Connected &amp; receiving realtime updates...&lt;/span
+        &gt;
+        &lt;span class&#x3D;&quot;cursor&quot; *ngIf&#x3D;&quot;!realtimeService.isConnected&quot;&gt;Disconnected from server...&lt;/span&gt;
+        &lt;span class&#x3D;&quot;cursor-blink&quot;&gt;&lt;/span&gt;
+      &lt;/span&gt;
+      &lt;div *ngFor&#x3D;&quot;let m of realtimeService.keepAliveEvents&quot;&gt;
+        &lt;span id&#x3D;&quot;terminal__prompt--user&quot;&gt;admin@opena3xx:&lt;/span&gt;
+        Keep Alive Event: → Timestamp:
+        &lt;b&gt;{{ m.timestamp }}&lt;/b&gt; | Hardware Board Id: &lt;b&gt;{{ m.hardware_board_id }}&lt;/b&gt; | Message:
+        &lt;b&gt;{{ m.message }}&lt;/b&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/mat-expansion-panel&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./console.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">mat-expansion-panel {
+  margin-top: 10px;
+}
+
+.console-container {
+  //   background: rgba(56, 4, 40, 0.9);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 10px;
+  height: 300px;
+  overflow: scroll;
+  font-family: &#x27;Ubuntu Mono&#x27; !important;
+  b {
+    font-weight: bold;
+    color: yellow;
+  }
+  * {
+    font-family: &#x27;Ubuntu Mono&#x27; !important;
+  }
+  margin-bottom: 15px;
+}
+#terminal__prompt--user {
+  color: #7eda28;
+}
+
+.cursor {
+  font-weight: bold;
+  color: turquoise;
+}
+
+.cursor-blink {
+  animation: blink 2500ms linear infinite;
+  display: inline-block;
+  height: 16px;
+  width: 8px;
+  margin-left: 4px;
+  background-color: white;
+  vertical-align: -1px;
+}
+
+@keyframes blink {
+  0% {
+    background-color: #ffffff;
+  }
+  49% {
+    background-color: #ffffff;
+  }
+  60% {
+    background-color: transparent;
+  }
+  99% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #ffffff;
+  }
+}
+
+#terminal__bar {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  align-items: center;
+  padding: 0 8px;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background: linear-gradient(#504b45 0%, #3c3b37 100%);
+}
+
+#bar__buttons {
+  display: flex;
+  align-items: center;
+}
+
+.bar__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin-right: 5px;
+  font-size: 8px;
+  height: 12px;
+  width: 12px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 100%;
+  background: linear-gradient(#7d7871 0%, #595953 100%);
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 1px 0px #41403a, 0px 1px 1px 0px #474642;
+}
+.bar__button:hover {
+  cursor: pointer;
+}
+.bar__button:focus {
+  outline: none;
+}
+// #bar__button--exit {
+//   background: linear-gradient(#f37458 0%, #de4c12 100%);
+//   background-clip: padding-box;
+// }
+
+#bar__user {
+  color: #d5d0ce;
+  margin-left: 6px;
+  font-size: 14px;
+  line-height: 21px;
+  margin-top: 9px;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-toolbar>  <mat-icon>web_asset</mat-icon>&nbsp;  <span>Real Time Console</span></mat-toolbar><mat-toolbar>  <button mat-flat-button color="primary" (click)="goBack()">Back</button></mat-toolbar><mat-expansion-panel expanded>  <mat-expansion-panel-header>    <mat-panel-title> Flight Events </mat-panel-title>  </mat-expansion-panel-header>  <div class="container">    <section id="terminal__bar">      <div id="bar__buttons">        <button class="bar__button" id="bar__button--exit">&#10005;</button>        <button class="bar__button">&#9472;</button>        <button class="bar__button">&#9723;</button>      </div>      <p id="bar__user">OpenA3XX Terminal: Real Time Console</p>    </section>    <div class="console-container">      <span id="terminal__prompt--user"        >admin@opena3xx:        <span class="cursor" *ngIf="realtimeService.isConnected"          >Connected & receiving realtime updates...</span        >        <span class="cursor" *ngIf="!realtimeService.isConnected">Disconnected from server...</span>        <span class="cursor-blink"></span>      </span>      <div *ngFor="let m of realtimeService.flightEvents">        <span id="terminal__prompt--user">admin@opena3xx:</span>        Hardware Event: → Timestamp:        <b>{{ m.timestamp }}</b> | Hardware Board Id: <b>{{ m.hardware_board_id }}</b> | Hardware        Bus Name: <b>{{ m.extender_bus_name }}</b> | Extender Bit Id (Name):        <b>{{ m.extender_bit_id }} ({{ m.extender_bit_name }})</b> | Input Selector Name:        <b>{{ m.input_selector_name }}</b> | Input Selector Id:        <b>{{ m.input_selector_id }}</b>      </div>    </div>  </div></mat-expansion-panel><mat-expansion-panel expanded>  <mat-expansion-panel-header>    <mat-panel-title> Keep Alive Events </mat-panel-title>  </mat-expansion-panel-header>  <div class="container">    <section id="terminal__bar">      <div id="bar__buttons">        <button class="bar__button" id="bar__button--exit">&#10005;</button>        <button class="bar__button">&#9472;</button>        <button class="bar__button">&#9723;</button>      </div>      <p id="bar__user">OpenA3XX Terminal: Real Time Console</p>    </section>    <div class="console-container">      <span id="terminal__prompt--user"        >admin@opena3xx:        <span class="cursor" *ngIf="realtimeService.isConnected"          >Connected & receiving realtime updates...</span        >        <span class="cursor" *ngIf="!realtimeService.isConnected">Disconnected from server...</span>        <span class="cursor-blink"></span>      </span>      <div *ngFor="let m of realtimeService.keepAliveEvents">        <span id="terminal__prompt--user">admin@opena3xx:</span>        Keep Alive Event: → Timestamp:        <b>{{ m.timestamp }}</b> | Hardware Board Id: <b>{{ m.hardware_board_id }}</b> | Message:        <b>{{ m.message }}</b>      </div>    </div>  </div></mat-expansion-panel></div>'
+    var COMPONENTS = [{'name': 'AddHardwareInputTypeComponent', 'selector': 'opena3xx-add-hardware-input-type'},{'name': 'AddHardwareOutputTypeComponent', 'selector': 'opena3xx-add-hardware-output-type'},{'name': 'AddHardwarePanelComponent', 'selector': 'opena3xx-add-hardware-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AutocompleteComponent', 'selector': 'opena3xx-forms-autocomplete'},{'name': 'ButtonComponent', 'selector': 'opena3xx-button'},{'name': 'CheckboxComponent', 'selector': 'opena3xx-checkbox'},{'name': 'ConsoleComponent', 'selector': 'opena3xx-console'},{'name': 'DashboardComponent', 'selector': 'opena3xx-dashboard'},{'name': 'DateComponent', 'selector': 'opena3xx-date'},{'name': 'DeleteHardwareInputDialog', 'selector': 'opena3xx-delete-hardware-input-dialog-confirm'},{'name': 'DynamicFormComponent', 'selector': 'dynamic-form'},{'name': 'EditHardwareInputTypeComponent', 'selector': 'opena3xx-edit-hardware-input-type'},{'name': 'EditHardwareOutputTypeComponent', 'selector': 'opena3xx-edit-hardware-output-type'},{'name': 'EditHardwarePanelComponent', 'selector': 'opena3xx-edit-hardware-panel'},{'name': 'ExitAppDialog', 'selector': 'opena3xx-exit-app-dialog'},{'name': 'HeadingComponent', 'selector': 'opena3xx-heading'},{'name': 'InputComponent', 'selector': 'opena3xx-input'},{'name': 'LinkHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-link-hardware-input-selectors-dialog'},{'name': 'LinkHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-link-hardware-input-selectors-form'},{'name': 'ManageHardwareBoardsComponent', 'selector': 'opena3xx-manage-hardware-boards'},{'name': 'ManageHardwareInputTypesComponent', 'selector': 'opena3xx-manage-hardware-input-types'},{'name': 'ManageHardwareOutputTypesComponent', 'selector': 'opena3xx-manage-hardware-output-types'},{'name': 'ManageHardwarePanelsComponent', 'selector': 'opena3xx-manage-hardware-panels'},{'name': 'ManageSimulatorEventsComponent', 'selector': 'opena3xx-manage-simulator-events'},{'name': 'MapHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-input-selectors-dialog'},{'name': 'MapHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-input-selectors-form'},{'name': 'MapHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-output-selectors-dialog'},{'name': 'MapHardwareOutputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-output-selectors-form'},{'name': 'RadiobuttonComponent', 'selector': 'opena3xx-radiobutton'},{'name': 'RegisterHardwareBoardComponent', 'selector': 'opena3xx-register-hardware-board'},{'name': 'SelectComponent', 'selector': 'opena3xx-forms-select'},{'name': 'SettingsComponent', 'selector': 'opena3xx-settings'},{'name': 'SliderComponent', 'selector': 'opena3xx-slider'},{'name': 'SlideToggleComponent', 'selector': 'opena3xx-slide-toggle'},{'name': 'ViewHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-input-selectors-dialog'},{'name': 'ViewHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-output-selectors-dialog'},{'name': 'ViewHardwarePanelDetailsComponent', 'selector': 'opena3xx-view-hardware-panel-details'}];
+    var DIRECTIVES = [{'name': 'DynamicFieldDirective', 'selector': '[dynamicField]'}];
+    var ACTUAL_COMPONENT = {'name': 'ConsoleComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ConsoleComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

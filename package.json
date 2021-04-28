@@ -11,7 +11,8 @@
     "e2e": "ng e2e",
     "start:electron": "ng build --base-href ./ && electron .",
     "publish:electron": "electron-packager . OpenA3XX Configurator --all",
-    "serve:electron": "electron ."
+    "serve:electron": "electron .",
+    "compodoc": "npx compodoc -p tsconfig.doc.json --theme=material"
   },
   "private": true,
   "dependencies": {

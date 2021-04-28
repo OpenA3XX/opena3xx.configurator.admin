@@ -1,0 +1,1061 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>opena3xx-configurator-webapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">opena3xx-configurator-webapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>EditHardwarePanelComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts</code>
+</p>
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>opena3xx-edit-hardware-panel</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./edit-hardware-panel.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./edit-hardware-panel.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addHardwarePanelForm">addHardwarePanelForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#aircraftModelFieldConfig">aircraftModelFieldConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#cockpitAreaFieldConfig">cockpitAreaFieldConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hardwarePanelNameFieldConfig">hardwarePanelNameFieldConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hardwarePanelOwnerFieldConfig">hardwarePanelOwnerFieldConfig</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#back">back</a>
+                            </li>
+                            <li>
+                                <a href="#onSave">onSave</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit">onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#validateAllFormFields">validateAllFormFields</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, snackBar: MatSnackBar, dataService: <a href="../injectables/DataService.html">DataService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:110</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dataService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DataService.html" target="_self" >DataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="back"></a>
+                    <span class="name">
+                        <b>
+                            back
+                        </b>
+                        <a href="#back"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>back()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:125</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSave"></a>
+                    <span class="name">
+                        <b>
+                            onSave
+                        </b>
+                        <a href="#onSave"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSave()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="129"
+                            class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:129</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <b>
+                            onSubmit
+                        </b>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit(hardwarePanelDto: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="131"
+                            class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:131</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>hardwarePanelDto</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateAllFormFields"></a>
+                    <span class="name">
+                        <b>
+                            validateAllFormFields
+                        </b>
+                        <a href="#validateAllFormFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateAllFormFields(formGroup: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="151"
+                            class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:151</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formGroup</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addHardwarePanelForm"></a>
+                        <span class="name">
+                            <b>
+                            addHardwarePanelForm</b>
+                            <a href="#addHardwarePanelForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="aircraftModelFieldConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            aircraftModelFieldConfig</b>
+                            <a href="#aircraftModelFieldConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FieldConfig.html" target="_self" >FieldConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    type: &#x27;select&#x27;,
+    label: &#x27;Aircraft Model&#x27;,
+    name: &#x27;aircraftModel&#x27;,
+    disabled: true,
+    inputType: &#x27;text&#x27;,
+    options: [
+      {
+        key: &#x27;1&#x27;,
+        value: &#x27;A320-NEO&#x27;,
+      },
+    ],
+    hint: &#x27;Select Aircraft Model for the panel to be assigned to&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Aircraft Model is  Required&#x27;,
+      },
+    ],
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="cockpitAreaFieldConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            cockpitAreaFieldConfig</b>
+                            <a href="#cockpitAreaFieldConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FieldConfig.html" target="_self" >FieldConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    type: &#x27;select&#x27;,
+    label: &#x27;Cockpit Area&#x27;,
+    name: &#x27;cockpitArea&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [
+      {
+        key: &#x27;0&#x27;,
+        value: &#x27;Glareshield&#x27;,
+      },
+      {
+        key: &#x27;1&#x27;,
+        value: &#x27;Pedestal&#x27;,
+      },
+      {
+        key: &#x27;2&#x27;,
+        value: &#x27;Overhead&#x27;,
+      },
+    ],
+    hint: &#x27;Select Cockpit Area for the panel to be assigned to&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Cockpit Area is  Required&#x27;,
+      },
+    ],
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:54</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hardwarePanelNameFieldConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hardwarePanelNameFieldConfig</b>
+                            <a href="#hardwarePanelNameFieldConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FieldConfig.html" target="_self" >FieldConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    type: &#x27;input&#x27;,
+    label: &#x27;Hardware Panel Name&#x27;,
+    name: &#x27;hardwarePanelName&#x27;,
+    inputType: &#x27;text&#x27;,
+    hint: &#x27;Enter the Hardware Panel Name&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Panel Name is Required&#x27;,
+      },
+    ],
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hardwarePanelOwnerFieldConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hardwarePanelOwnerFieldConfig</b>
+                            <a href="#hardwarePanelOwnerFieldConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FieldConfig.html" target="_self" >FieldConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    type: &#x27;select&#x27;,
+    label: &#x27;Hardware Panel Owner&#x27;,
+    name: &#x27;hardwarePanelOwner&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [
+      {
+        key: &#x27;0&#x27;,
+        value: &#x27;Pilot&#x27;,
+      },
+      {
+        key: &#x27;1&#x27;,
+        value: &#x27;Co-Pilot&#x27;,
+      },
+      {
+        key: &#x27;2&#x27;,
+        value: &#x27;Shared&#x27;,
+      },
+    ],
+    hint: &#x27;Select Hardware Panel Owner for the panel to be assigned to&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Panel Owner is is Required&#x27;,
+      },
+    ],
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/views/edit-hardware-panel/edit-hardware-panel.component.ts:83</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormGroup, NgForm, Validators } from &#x27;@angular/forms&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { FieldConfig } from &#x27;src/app/models/field.interface&#x27;;
+import { AddHardwarePanelDto } from &#x27;src/app/models/models&#x27;;
+import { DataService } from &#x27;src/app/services/data.service&#x27;;
+
+@Component({
+  selector: &#x27;opena3xx-edit-hardware-panel&#x27;,
+  templateUrl: &#x27;./edit-hardware-panel.component.html&#x27;,
+  styleUrls: [&#x27;./edit-hardware-panel.component.scss&#x27;],
+})
+export class EditHardwarePanelComponent {
+  addHardwarePanelForm: FormGroup;
+
+  public hardwarePanelNameFieldConfig: FieldConfig &#x3D; {
+    type: &#x27;input&#x27;,
+    label: &#x27;Hardware Panel Name&#x27;,
+    name: &#x27;hardwarePanelName&#x27;,
+    inputType: &#x27;text&#x27;,
+    hint: &#x27;Enter the Hardware Panel Name&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Panel Name is Required&#x27;,
+      },
+    ],
+  };
+
+  public aircraftModelFieldConfig: FieldConfig &#x3D; {
+    type: &#x27;select&#x27;,
+    label: &#x27;Aircraft Model&#x27;,
+    name: &#x27;aircraftModel&#x27;,
+    disabled: true,
+    inputType: &#x27;text&#x27;,
+    options: [
+      {
+        key: &#x27;1&#x27;,
+        value: &#x27;A320-NEO&#x27;,
+      },
+    ],
+    hint: &#x27;Select Aircraft Model for the panel to be assigned to&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Aircraft Model is  Required&#x27;,
+      },
+    ],
+  };
+
+  public cockpitAreaFieldConfig: FieldConfig &#x3D; {
+    type: &#x27;select&#x27;,
+    label: &#x27;Cockpit Area&#x27;,
+    name: &#x27;cockpitArea&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [
+      {
+        key: &#x27;0&#x27;,
+        value: &#x27;Glareshield&#x27;,
+      },
+      {
+        key: &#x27;1&#x27;,
+        value: &#x27;Pedestal&#x27;,
+      },
+      {
+        key: &#x27;2&#x27;,
+        value: &#x27;Overhead&#x27;,
+      },
+    ],
+    hint: &#x27;Select Cockpit Area for the panel to be assigned to&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Cockpit Area is  Required&#x27;,
+      },
+    ],
+  };
+
+  public hardwarePanelOwnerFieldConfig: FieldConfig &#x3D; {
+    type: &#x27;select&#x27;,
+    label: &#x27;Hardware Panel Owner&#x27;,
+    name: &#x27;hardwarePanelOwner&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [
+      {
+        key: &#x27;0&#x27;,
+        value: &#x27;Pilot&#x27;,
+      },
+      {
+        key: &#x27;1&#x27;,
+        value: &#x27;Co-Pilot&#x27;,
+      },
+      {
+        key: &#x27;2&#x27;,
+        value: &#x27;Shared&#x27;,
+      },
+    ],
+    hint: &#x27;Select Hardware Panel Owner for the panel to be assigned to&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Panel Owner is is Required&#x27;,
+      },
+    ],
+  };
+
+  constructor(
+    private router: Router,
+    formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
+    private dataService: DataService
+  ) {
+    this.addHardwarePanelForm &#x3D; formBuilder.group({
+      hardwarePanelName: [, { validators: [Validators.required], updateOn: &#x27;change&#x27; }],
+      aircraftModel: [, { validators: [Validators.required], updateOn: &#x27;change&#x27; }],
+      cockpitArea: [, { validators: [Validators.required], updateOn: &#x27;change&#x27; }],
+      hardwarePanelOwner: [, { validators: [Validators.required], updateOn: &#x27;change&#x27; }],
+    });
+  }
+  back() {
+    this.router.navigateByUrl(&#x27;/manage/hardware-panels&#x27;);
+  }
+
+  onSave() {}
+
+  onSubmit(hardwarePanelDto: any) {
+    if (this.addHardwarePanelForm.valid) {
+      this.dataService
+        .addHardwarePanel(this.addHardwarePanelForm.value)
+        .toPromise()
+        .then(() &#x3D;&gt; {
+          this.snackBar.open(&#x27;Hardware Panel Added Successfully&#x27;, &#x27;Ok&#x27;, {
+            duration: 3000,
+          });
+        })
+        .catch(() &#x3D;&gt; {
+          this.snackBar.open(&#x27;Error has occured when adding Hardware Panel&#x27;, &#x27;Ok&#x27;, {
+            duration: 3000,
+          });
+        });
+    } else {
+      this.validateAllFormFields(this.addHardwarePanelForm);
+    }
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) &#x3D;&gt; {
+      const control &#x3D; formGroup.get(field);
+      control!.markAsTouched({ onlySelf: true });
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-toolbar&gt;
+  &lt;mat-icon&gt;dashboard&lt;/mat-icon&gt;&amp;nbsp;
+  &lt;span&gt;Edit Hardware Panel&lt;/span&gt;
+&lt;/mat-toolbar&gt;
+&lt;mat-toolbar class&#x3D;&quot;sub-menu-navigation&quot;&gt;
+  &lt;button mat-flat-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;back()&quot;&gt;Back&lt;/button&gt;
+&lt;/mat-toolbar&gt;
+
+&lt;mat-expansion-panel expanded&gt;
+  &lt;mat-expansion-panel-header&gt;
+    &lt;mat-panel-title&gt; Add Hardware Panel &lt;/mat-panel-title&gt;
+  &lt;/mat-expansion-panel-header&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;container&quot;&gt;
+      &lt;form [formGroup]&#x3D;&quot;addHardwarePanelForm&quot; (submit)&#x3D;&quot;onSubmit($event)&quot;&gt;
+        &lt;opena3xx-input [field]&#x3D;&quot;hardwarePanelNameFieldConfig&quot; [group]&#x3D;&quot;addHardwarePanelForm&quot;&gt;
+        &lt;/opena3xx-input&gt;
+
+        &lt;opena3xx-forms-select [field]&#x3D;&quot;aircraftModelFieldConfig&quot; [group]&#x3D;&quot;addHardwarePanelForm&quot;&gt;
+        &lt;/opena3xx-forms-select&gt;
+
+        &lt;opena3xx-forms-select [field]&#x3D;&quot;cockpitAreaFieldConfig&quot; [group]&#x3D;&quot;addHardwarePanelForm&quot;&gt;
+        &lt;/opena3xx-forms-select&gt;
+
+        &lt;opena3xx-forms-select
+          [field]&#x3D;&quot;hardwarePanelOwnerFieldConfig&quot;
+          [group]&#x3D;&quot;addHardwarePanelForm&quot;
+        &gt;
+        &lt;/opena3xx-forms-select&gt;
+
+        &lt;div class&#x3D;&quot;full-width margin-top&quot;&gt;
+          &lt;button type&#x3D;&quot;submit&quot; mat-flat-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;onSave()&quot;&gt;
+            &lt;mat-icon&gt;check&lt;/mat-icon&gt;
+            Save
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/mat-expansion-panel&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./edit-hardware-panel.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">mat-expansion-panel {
+  margin-top: 10px;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-toolbar>  <mat-icon>dashboard</mat-icon>&nbsp;  <span>Edit Hardware Panel</span></mat-toolbar><mat-toolbar class="sub-menu-navigation">  <button mat-flat-button color="primary" (click)="back()">Back</button></mat-toolbar><mat-expansion-panel expanded>  <mat-expansion-panel-header>    <mat-panel-title> Add Hardware Panel </mat-panel-title>  </mat-expansion-panel-header>  <div class="container">    <div class="container">      <form [formGroup]="addHardwarePanelForm" (submit)="onSubmit($event)">        <opena3xx-input [field]="hardwarePanelNameFieldConfig" [group]="addHardwarePanelForm">        </opena3xx-input>        <opena3xx-forms-select [field]="aircraftModelFieldConfig" [group]="addHardwarePanelForm">        </opena3xx-forms-select>        <opena3xx-forms-select [field]="cockpitAreaFieldConfig" [group]="addHardwarePanelForm">        </opena3xx-forms-select>        <opena3xx-forms-select          [field]="hardwarePanelOwnerFieldConfig"          [group]="addHardwarePanelForm"        >        </opena3xx-forms-select>        <div class="full-width margin-top">          <button type="submit" mat-flat-button color="primary" (click)="onSave()">            <mat-icon>check</mat-icon>            Save          </button>        </div>      </form>    </div>  </div></mat-expansion-panel></div>'
+    var COMPONENTS = [{'name': 'AddHardwareInputTypeComponent', 'selector': 'opena3xx-add-hardware-input-type'},{'name': 'AddHardwareOutputTypeComponent', 'selector': 'opena3xx-add-hardware-output-type'},{'name': 'AddHardwarePanelComponent', 'selector': 'opena3xx-add-hardware-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AutocompleteComponent', 'selector': 'opena3xx-forms-autocomplete'},{'name': 'ButtonComponent', 'selector': 'opena3xx-button'},{'name': 'CheckboxComponent', 'selector': 'opena3xx-checkbox'},{'name': 'ConsoleComponent', 'selector': 'opena3xx-console'},{'name': 'DashboardComponent', 'selector': 'opena3xx-dashboard'},{'name': 'DateComponent', 'selector': 'opena3xx-date'},{'name': 'DeleteHardwareInputDialog', 'selector': 'opena3xx-delete-hardware-input-dialog-confirm'},{'name': 'DynamicFormComponent', 'selector': 'dynamic-form'},{'name': 'EditHardwareInputTypeComponent', 'selector': 'opena3xx-edit-hardware-input-type'},{'name': 'EditHardwareOutputTypeComponent', 'selector': 'opena3xx-edit-hardware-output-type'},{'name': 'EditHardwarePanelComponent', 'selector': 'opena3xx-edit-hardware-panel'},{'name': 'ExitAppDialog', 'selector': 'opena3xx-exit-app-dialog'},{'name': 'HeadingComponent', 'selector': 'opena3xx-heading'},{'name': 'InputComponent', 'selector': 'opena3xx-input'},{'name': 'LinkHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-link-hardware-input-selectors-dialog'},{'name': 'LinkHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-link-hardware-input-selectors-form'},{'name': 'ManageHardwareBoardsComponent', 'selector': 'opena3xx-manage-hardware-boards'},{'name': 'ManageHardwareInputTypesComponent', 'selector': 'opena3xx-manage-hardware-input-types'},{'name': 'ManageHardwareOutputTypesComponent', 'selector': 'opena3xx-manage-hardware-output-types'},{'name': 'ManageHardwarePanelsComponent', 'selector': 'opena3xx-manage-hardware-panels'},{'name': 'ManageSimulatorEventsComponent', 'selector': 'opena3xx-manage-simulator-events'},{'name': 'MapHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-input-selectors-dialog'},{'name': 'MapHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-input-selectors-form'},{'name': 'MapHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-output-selectors-dialog'},{'name': 'MapHardwareOutputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-output-selectors-form'},{'name': 'RadiobuttonComponent', 'selector': 'opena3xx-radiobutton'},{'name': 'RegisterHardwareBoardComponent', 'selector': 'opena3xx-register-hardware-board'},{'name': 'SelectComponent', 'selector': 'opena3xx-forms-select'},{'name': 'SettingsComponent', 'selector': 'opena3xx-settings'},{'name': 'SliderComponent', 'selector': 'opena3xx-slider'},{'name': 'SlideToggleComponent', 'selector': 'opena3xx-slide-toggle'},{'name': 'ViewHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-input-selectors-dialog'},{'name': 'ViewHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-output-selectors-dialog'},{'name': 'ViewHardwarePanelDetailsComponent', 'selector': 'opena3xx-view-hardware-panel-details'}];
+    var DIRECTIVES = [{'name': 'DynamicFieldDirective', 'selector': '[dynamicField]'}];
+    var ACTUAL_COMPONENT = {'name': 'EditHardwarePanelComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'EditHardwarePanelComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
