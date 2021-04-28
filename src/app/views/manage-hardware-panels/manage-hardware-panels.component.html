@@ -16,7 +16,13 @@
 <div class="filter-form">
   <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. MCDU" #input />
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. MCDU"
+      #input
+      autocomplete="off"
+    />
   </mat-form-field>
 </div>
 
