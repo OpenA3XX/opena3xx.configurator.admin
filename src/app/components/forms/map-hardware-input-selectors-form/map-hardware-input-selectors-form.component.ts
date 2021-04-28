@@ -202,13 +202,35 @@ export class MapHardwareInputSelectorsFormComponent implements OnInit {
         _.each(hardwareBoardDetailsDto.ioExtenderBuses, (ioExtender) => {
           if (ioExtender.id == extenderId) {
             _.each(ioExtender.ioExtenderBusBits, (ioExtenderBit) => {
+              let optionListValue: string = `${ioExtenderBit.name} `;
+
+              if (
+                ioExtenderBit.hardwareInputSelectorFullName == null &&
+                ioExtenderBit.hardwareOutputSelectorFullName == null
+              ) {
+                optionListValue += ' - Not Mapped';
+              } else if (
+                ioExtenderBit.hardwareInputSelectorFullName != null &&
+                ioExtenderBit.hardwareOutputSelectorFullName == null
+              ) {
+                optionListValue +=
+                  ' - Currently Mapped to ' +
+                  ioExtenderBit.hardwareInputSelectorFullName +
+                  ' (Input from Board)';
+              } else if (
+                ioExtenderBit.hardwareInputSelectorFullName == null &&
+                ioExtenderBit.hardwareOutputSelectorFullName != null
+              ) {
+                optionListValue +=
+                  ' - Currently Mapped to ' +
+                  ioExtenderBit.hardwareOutputSelectorFullName +
+                  ' (Output to Board)';
+              }
+              optionListValue = optionListValue.replace('Bit', 'Bit ');
+
               var optionList: OptionList = {
                 key: ioExtenderBit.id.toString(),
-                value: `${ioExtenderBit.name} ${
-                  ioExtenderBit.hardwareInputSelectorFullName == null
-                    ? ' - Not Mapped'
-                    : ' - Currently Mapped to ' + ioExtenderBit.hardwareInputSelectorFullName
-                }`.replace('Bit', 'Bit '),
+                value: optionListValue,
               };
               this.ioExtenderBitFieldConfig.options.push(optionList);
             });

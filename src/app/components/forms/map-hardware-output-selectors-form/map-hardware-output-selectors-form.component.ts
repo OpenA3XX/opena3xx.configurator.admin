@@ -216,13 +216,17 @@ export class MapHardwareOutputSelectorsFormComponent implements OnInit {
                 ioExtenderBit.hardwareOutputSelectorFullName == null
               ) {
                 optionListValue +=
-                  ' - Currently Mapped to ' + ioExtenderBit.hardwareInputSelectorFullName;
+                  ' - Currently Mapped to ' +
+                  ioExtenderBit.hardwareInputSelectorFullName +
+                  ' (Input from Board)';
               } else if (
                 ioExtenderBit.hardwareInputSelectorFullName == null &&
                 ioExtenderBit.hardwareOutputSelectorFullName != null
               ) {
                 optionListValue +=
-                  ' - Currently Mapped to ' + ioExtenderBit.hardwareOutputSelectorFullName;
+                  ' - Currently Mapped to ' +
+                  ioExtenderBit.hardwareOutputSelectorFullName +
+                  ' (Output to Board)';
               }
               optionListValue = optionListValue.replace('Bit', 'Bit ');
 
