@@ -28,6 +28,7 @@
     "@angular/router": "~11.2.8",
     "@microsoft/signalr": "^5.0.5",
     "@microsoft/signalr-protocol-msgpack": "^5.0.5",
+    "@ngstack/code-editor": "^3.0.0",
     "@types/lodash": "^4.14.168",
     "ngx-cookie-service": "^11.0.2",
     "rxjs": "~6.6.7",

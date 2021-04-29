@@ -5,6 +5,15 @@
 <mat-toolbar>
   <button mat-flat-button color="primary" (click)="goBack()">Back</button>
 </mat-toolbar>
+
+<ngs-code-editor
+  [theme]="theme"
+  [codeModel]="codeModel"
+  [options]="options"
+  (valueChanged)="onCodeChanged($event)"
+>
+</ngs-code-editor>
+
 <mat-expansion-panel expanded>
   <mat-expansion-panel-header>
     <mat-panel-title> Flight Events </mat-panel-title>
