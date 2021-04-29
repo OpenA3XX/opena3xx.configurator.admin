@@ -1,0 +1,25 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.39
+    - 15.0.0
+  - dependency-name: eslint
+    versions:
+    - 7.25.0
+  - dependency-name: "@angular/cli"
+    versions:
+    - 11.2.9
+  - dependency-name: "@angular-devkit/build-angular"
+    versions:
+    - 0.1102.9
+  - dependency-name: electron
+    versions:
+    - 12.0.4
