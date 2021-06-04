@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CodeModel } from '@ngstack/code-editor';
 import { RealTimeService } from 'src/app/services/realtime.service';
 
 @Component({
@@ -18,5 +19,25 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
   goBack() {
     this.router.navigateByUrl('/');
+  }
+
+  theme = 'vs-dark';
+
+  codeModel: CodeModel = {
+    language: 'javascript',
+    uri: 'main.js',
+    value: '',
+  };
+
+  options = {
+    contextmenu: true,
+    lineNumbers: true,
+    minimap: {
+      enabled: true,
+    },
+  };
+
+  onCodeChanged(value) {
+    console.log('CODE', value);
   }
 }

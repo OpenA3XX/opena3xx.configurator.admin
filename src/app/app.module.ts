@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent, ExitAppDialog } from './app.component';
+import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -49,6 +49,8 @@ import { RealTimeService } from './services/realtime.service';
 import { ConsoleComponent } from './views/console/console.component';
 import { AutocompleteComponent } from './components/generic-ui/opena3xx-form-components/autocomplete/autocomplete.component';
 import { MapHardwareOutputSelectorsFormComponent } from './components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component';
+import { ExitAppDialog } from './views/exit-app-dialog.component';
+import { CodeEditorModule } from '@ngstack/code-editor';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,7 @@ import { MapHardwareOutputSelectorsFormComponent } from './components/forms/map-
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    CodeEditorModule.forRoot(),
   ],
   providers: [
     DataService,
