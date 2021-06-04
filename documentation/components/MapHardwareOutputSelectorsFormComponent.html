@@ -1,0 +1,1545 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>opena3xx-configurator-webapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">opena3xx-configurator-webapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>MapHardwareOutputSelectorsFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>opena3xx-map-hardware-output-selectors-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./map-hardware-output-selectors-form.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./map-hardware-output-selectors-form.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#data">data</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#eventDetails">eventDetails</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hardwareBoardId">hardwareBoardId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hardwareBoardsFieldConfig">hardwareBoardsFieldConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hardwareOutputDto">hardwareOutputDto</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ioExtenderBitFieldConfig">ioExtenderBitFieldConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ioExtenderFieldConfig">ioExtenderFieldConfig</a>
+                            </li>
+                            <li>
+                                <a href="#mapHardwareOutputSelectorsForm">mapHardwareOutputSelectorsForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#fetchHardwareBoards">fetchHardwareBoards</a>
+                            </li>
+                            <li>
+                                <a href="#loadIoExtenderBitsData">loadIoExtenderBitsData</a>
+                            </li>
+                            <li>
+                                <a href="#loadIoExtenderData">loadIoExtenderData</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onHardwareBoardSelectChange">onHardwareBoardSelectChange</a>
+                            </li>
+                            <li>
+                                <a href="#onIoExtenderSelectChange">onIoExtenderSelectChange</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit">onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#validateAllFormFields">validateAllFormFields</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#hardwareOutputSelectorId">hardwareOutputSelectorId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(data: <a href="../interfaces/HardwareOutputDto.html">HardwareOutputDto</a>, formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, dataService: <a href="../injectables/DataService.html">DataService</a>, _snackBar: MatSnackBar)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:78</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>data</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/HardwareOutputDto.html" target="_self" >HardwareOutputDto</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dataService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DataService.html" target="_self" >DataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hardwareOutputSelectorId"></a>
+                        <b>hardwareOutputSelectorId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:24</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchHardwareBoards"></a>
+                    <span class="name">
+                        <b>
+                            fetchHardwareBoards
+                        </b>
+                        <a href="#fetchHardwareBoards"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fetchHardwareBoards()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="124"
+                            class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:124</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadIoExtenderBitsData"></a>
+                    <span class="name">
+                        <b>
+                            loadIoExtenderBitsData
+                        </b>
+                        <a href="#loadIoExtenderBitsData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadIoExtenderBitsData(extenderId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="197"
+                            class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:197</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>extenderId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadIoExtenderData"></a>
+                    <span class="name">
+                        <b>
+                            loadIoExtenderData
+                        </b>
+                        <a href="#loadIoExtenderData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadIoExtenderData(hardwareBoardId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="178"
+                            class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:178</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>hardwareBoardId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:94</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onHardwareBoardSelectChange"></a>
+                    <span class="name">
+                        <b>
+                            onHardwareBoardSelectChange
+                        </b>
+                        <a href="#onHardwareBoardSelectChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onHardwareBoardSelectChange(selectChangeEvent: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="170"
+                            class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:170</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>selectChangeEvent</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onIoExtenderSelectChange"></a>
+                    <span class="name">
+                        <b>
+                            onIoExtenderSelectChange
+                        </b>
+                        <a href="#onIoExtenderSelectChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onIoExtenderSelectChange(selectChangeEvent: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="174"
+                            class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:174</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>selectChangeEvent</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <b>
+                            onSubmit
+                        </b>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit(formData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="147"
+                            class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:147</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formData</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateAllFormFields"></a>
+                    <span class="name">
+                        <b>
+                            validateAllFormFields
+                        </b>
+                        <a href="#validateAllFormFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateAllFormFields(formGroup: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="140"
+                            class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:140</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formGroup</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            data</b>
+                            <a href="#data"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/HardwareOutputDto.html" target="_self" >HardwareOutputDto</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Inject(MAT_DIALOG_DATA)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:81</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="eventDetails"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            eventDetails</b>
+                            <a href="#eventDetails"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:78</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hardwareBoardId"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hardwareBoardId</b>
+                            <a href="#hardwareBoardId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hardwareBoardsFieldConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hardwareBoardsFieldConfig</b>
+                            <a href="#hardwareBoardsFieldConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FieldConfig.html" target="_self" >FieldConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    type: &#x27;select&#x27;,
+    label: &#x27;Hardware Board Selection&#x27;,
+    name: &#x27;hardwareBoards&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [],
+    hint: &#x27;Select Hardware Board that is responsible for such Hardware Output&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Board is Required&#x27;,
+      },
+    ],
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hardwareOutputDto"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            hardwareOutputDto</b>
+                            <a href="#hardwareOutputDto"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/HardwareOutputDto.html" target="_self" >HardwareOutputDto</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ioExtenderBitFieldConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ioExtenderBitFieldConfig</b>
+                            <a href="#ioExtenderBitFieldConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FieldConfig.html" target="_self" >FieldConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    type: &#x27;select&#x27;,
+    label: &#x27;Hardware Board IO Extender Bit Selection&#x27;,
+    name: &#x27;hardwareBusExtenderBits&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [],
+    hint: &#x27;Select Hardware Board IO Extender Bit that is responsible for such Hardware Output&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Board IO Extender Bit is Required&#x27;,
+      },
+    ],
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:62</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ioExtenderFieldConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            ioExtenderFieldConfig</b>
+                            <a href="#ioExtenderFieldConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FieldConfig.html" target="_self" >FieldConfig</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    type: &#x27;select&#x27;,
+    label: &#x27;Hardware Board IO Extender Bus Selection&#x27;,
+    name: &#x27;hardwareBusExtenders&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [],
+    hint: &#x27;Select Hardware Board IO Extender Bus that is responsible for such Hardware Output&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Board IO Extender is Required&#x27;,
+      },
+    ],
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:46</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mapHardwareOutputSelectorsForm"></a>
+                        <span class="name">
+                            <b>
+                            mapHardwareOutputSelectorsForm</b>
+                            <a href="#mapHardwareOutputSelectorsForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, Input, OnInit } from &#x27;@angular/core&#x27;;
+import { MAT_DIALOG_DATA } from &#x27;@angular/material/dialog&#x27;;
+import {
+  HardwareBoardDetailsDto,
+  HardwareInputDto,
+  HardwareOutputDto,
+  MapExtenderBitToHardwareInputSelectorDto,
+  MapExtenderBitToHardwareOutputSelectorDto,
+} from &#x27;src/app/models/models&#x27;;
+import { FieldConfig, OptionList } from &#x27;src/app/models/field.interface&#x27;;
+import * as _ from &#x27;lodash&#x27;;
+import { FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { DataService } from &#x27;src/app/services/data.service&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { HardwareBoardDto } from &#x27;src/app/models/models&#x27;;
+@Component({
+  selector: &#x27;opena3xx-map-hardware-output-selectors-form&#x27;,
+  templateUrl: &#x27;./map-hardware-output-selectors-form.component.html&#x27;,
+  styleUrls: [&#x27;./map-hardware-output-selectors-form.component.scss&#x27;],
+})
+export class MapHardwareOutputSelectorsFormComponent implements OnInit {
+  public hardwareBoardId: number;
+
+  @Input() hardwareOutputSelectorId!: number;
+
+  mapHardwareOutputSelectorsForm: FormGroup;
+
+  public hardwareOutputDto: HardwareOutputDto;
+
+  public hardwareBoardsFieldConfig: FieldConfig &#x3D; {
+    type: &#x27;select&#x27;,
+    label: &#x27;Hardware Board Selection&#x27;,
+    name: &#x27;hardwareBoards&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [],
+    hint: &#x27;Select Hardware Board that is responsible for such Hardware Output&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Board is Required&#x27;,
+      },
+    ],
+  };
+
+  public ioExtenderFieldConfig: FieldConfig &#x3D; {
+    type: &#x27;select&#x27;,
+    label: &#x27;Hardware Board IO Extender Bus Selection&#x27;,
+    name: &#x27;hardwareBusExtenders&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [],
+    hint: &#x27;Select Hardware Board IO Extender Bus that is responsible for such Hardware Output&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Board IO Extender is Required&#x27;,
+      },
+    ],
+  };
+
+  public ioExtenderBitFieldConfig: FieldConfig &#x3D; {
+    type: &#x27;select&#x27;,
+    label: &#x27;Hardware Board IO Extender Bit Selection&#x27;,
+    name: &#x27;hardwareBusExtenderBits&#x27;,
+    inputType: &#x27;text&#x27;,
+    options: [],
+    hint: &#x27;Select Hardware Board IO Extender Bit that is responsible for such Hardware Output&#x27;,
+    validations: [
+      {
+        name: &#x27;required&#x27;,
+        validator: Validators.required,
+        message: &#x27;Hardware Board IO Extender Bit is Required&#x27;,
+      },
+    ],
+  };
+
+  public eventDetails: string;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: HardwareOutputDto,
+    formBuilder: FormBuilder,
+    private dataService: DataService,
+    private _snackBar: MatSnackBar
+  ) {
+    this.hardwareOutputDto &#x3D; data;
+
+    this.mapHardwareOutputSelectorsForm &#x3D; formBuilder.group({
+      hardwareBoards: [, { validators: [Validators.required], updateOn: &#x27;change&#x27; }],
+      hardwareBusExtenders: [, { validators: [Validators.required], updateOn: &#x27;change&#x27; }],
+      hardwareBusExtenderBits: [, { validators: [Validators.required], updateOn: &#x27;change&#x27; }],
+    });
+  }
+  ngOnInit(): void {
+    this.dataService
+      .getHardwareBoardAssociationForHardwareOutputSelector(this.hardwareOutputSelectorId)
+      .toPromise()
+      .then((data: MapExtenderBitToHardwareOutputSelectorDto) &#x3D;&gt; {
+        this.fetchHardwareBoards().finally(() &#x3D;&gt; {
+          if (
+            data.hardwareBoardId !&#x3D; 0 &amp;&amp;
+            data.hardwareExtenderBusBitId !&#x3D; 0 &amp;&amp;
+            data.hardwareExtenderBusId !&#x3D; 0
+          ) {
+            this.loadIoExtenderData(data.hardwareBoardId).finally(() &#x3D;&gt; {
+              this.loadIoExtenderBitsData(data.hardwareExtenderBusId).finally(() &#x3D;&gt; {
+                console.log(this.mapHardwareOutputSelectorsForm.controls[&#x27;hardwareBoards&#x27;]);
+                this.mapHardwareOutputSelectorsForm.controls[&#x27;hardwareBoards&#x27;].setValue(
+                  data.hardwareBoardId.toString()
+                );
+                this.mapHardwareOutputSelectorsForm.controls[&#x27;hardwareBusExtenders&#x27;].setValue(
+                  data.hardwareExtenderBusId.toString()
+                );
+                this.mapHardwareOutputSelectorsForm.controls[&#x27;hardwareBusExtenderBits&#x27;].setValue(
+                  data.hardwareExtenderBusBitId.toString()
+                );
+              });
+            });
+          }
+        });
+      });
+  }
+
+  fetchHardwareBoards() {
+    return this.dataService
+      .getAllHardwareBoards()
+      .toPromise()
+      .then((hardwareBoardList: HardwareBoardDto[]) &#x3D;&gt; {
+        this.hardwareBoardsFieldConfig.options &#x3D; [];
+        _.forEach(hardwareBoardList, (item) &#x3D;&gt; {
+          var optionList: OptionList &#x3D; {
+            key: item.id.toString(),
+            value: item.name,
+          };
+          this.hardwareBoardsFieldConfig.options.push(optionList);
+        });
+      });
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) &#x3D;&gt; {
+      const control &#x3D; formGroup.get(field);
+      control!.markAsTouched({ onlySelf: true });
+    });
+  }
+
+  onSubmit(formData: any) {
+    if (this.mapHardwareOutputSelectorsForm.valid) {
+      var linkExtenderBitToHardwareOutputSelector: MapExtenderBitToHardwareOutputSelectorDto &#x3D; {
+        hardwareBoardId: this.mapHardwareOutputSelectorsForm.value.hardwareBoards,
+        hardwareExtenderBusBitId: this.mapHardwareOutputSelectorsForm.value.hardwareBusExtenderBits,
+        hardwareExtenderBusId: this.mapHardwareOutputSelectorsForm.value.hardwareBusExtenders,
+        hardwareOutputSelectorId: this.hardwareOutputSelectorId,
+      };
+
+      this.dataService
+        .mapExtenderBitToHardwareOutputSelector(linkExtenderBitToHardwareOutputSelector)
+        .toPromise()
+        .then(() &#x3D;&gt; {
+          this._snackBar.open(&#x27;Linking Saved Successfully&#x27;, &#x27;Ok&#x27;, {
+            duration: 3000,
+          });
+        });
+      console.log(this.hardwareOutputSelectorId, this.mapHardwareOutputSelectorsForm.value);
+    } else {
+      this.validateAllFormFields(this.mapHardwareOutputSelectorsForm);
+    }
+  }
+
+  onHardwareBoardSelectChange(selectChangeEvent: any) {
+    this.loadIoExtenderData(selectChangeEvent.value);
+  }
+
+  onIoExtenderSelectChange(selectChangeEvent: any) {
+    this.loadIoExtenderBitsData(selectChangeEvent.value);
+  }
+
+  loadIoExtenderData(hardwareBoardId: number) {
+    this.hardwareBoardId &#x3D; hardwareBoardId;
+    this.ioExtenderFieldConfig.options &#x3D; [];
+    return this.dataService
+      .getHardwareBoardDetails(hardwareBoardId)
+      .toPromise()
+      .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto) &#x3D;&gt; {
+        console.log(hardwareBoardDetailsDto);
+        _.each(hardwareBoardDetailsDto.ioExtenderBuses, (ioExtender) &#x3D;&gt; {
+          var optionList: OptionList &#x3D; {
+            key: ioExtender.id.toString(),
+            value: ioExtender.name.replace(&#x27;Bus&#x27;, &#x27;Bus &#x27;),
+          };
+          this.ioExtenderFieldConfig.options.push(optionList);
+        });
+        this.mapHardwareOutputSelectorsForm.controls[&#x27;hardwareBusExtenders&#x27;].reset();
+      });
+  }
+
+  loadIoExtenderBitsData(extenderId: number) {
+    console.log(&#x27;loadIoExtenderBitsData&#x27;, extenderId);
+    this.ioExtenderBitFieldConfig.options &#x3D; [];
+    return this.dataService
+      .getHardwareBoardDetails(this.hardwareBoardId)
+      .toPromise()
+      .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto) &#x3D;&gt; {
+        _.each(hardwareBoardDetailsDto.ioExtenderBuses, (ioExtender) &#x3D;&gt; {
+          if (ioExtender.id &#x3D;&#x3D; extenderId) {
+            _.each(ioExtender.ioExtenderBusBits, (ioExtenderBit) &#x3D;&gt; {
+              let optionListValue: string &#x3D; &#x60;${ioExtenderBit.name} &#x60;;
+
+              if (
+                ioExtenderBit.hardwareInputSelectorFullName &#x3D;&#x3D; null &amp;&amp;
+                ioExtenderBit.hardwareOutputSelectorFullName &#x3D;&#x3D; null
+              ) {
+                optionListValue +&#x3D; &#x27; - Not Mapped&#x27;;
+              } else if (
+                ioExtenderBit.hardwareInputSelectorFullName !&#x3D; null &amp;&amp;
+                ioExtenderBit.hardwareOutputSelectorFullName &#x3D;&#x3D; null
+              ) {
+                optionListValue +&#x3D;
+                  &#x27; - Currently Mapped to &#x27; + ioExtenderBit.hardwareInputSelectorFullName;
+              } else if (
+                ioExtenderBit.hardwareInputSelectorFullName &#x3D;&#x3D; null &amp;&amp;
+                ioExtenderBit.hardwareOutputSelectorFullName !&#x3D; null
+              ) {
+                optionListValue +&#x3D;
+                  &#x27; - Currently Mapped to &#x27; + ioExtenderBit.hardwareOutputSelectorFullName;
+              }
+              optionListValue &#x3D; optionListValue.replace(&#x27;Bit&#x27;, &#x27;Bit &#x27;);
+
+              var optionList: OptionList &#x3D; {
+                key: ioExtenderBit.id.toString(),
+                value: optionListValue,
+              };
+              this.ioExtenderBitFieldConfig.options.push(optionList);
+            });
+            this.ioExtenderBitFieldConfig.options &#x3D; _.orderBy(
+              this.ioExtenderBitFieldConfig.options,
+              [&#x27;value&#x27;],
+              [&#x27;asc&#x27;]
+            );
+          }
+        });
+        this.mapHardwareOutputSelectorsForm.controls[&#x27;hardwareBusExtenderBits&#x27;].reset();
+      });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;form [formGroup]&#x3D;&quot;mapHardwareOutputSelectorsForm&quot; (submit)&#x3D;&quot;onSubmit($event)&quot;&gt;
+  &lt;opena3xx-forms-select
+    [field]&#x3D;&quot;hardwareBoardsFieldConfig&quot;
+    [group]&#x3D;&quot;mapHardwareOutputSelectorsForm&quot;
+    (onSelectChange)&#x3D;&quot;onHardwareBoardSelectChange($event)&quot;
+  &gt;
+  &lt;/opena3xx-forms-select&gt;
+
+  &lt;opena3xx-forms-select
+    [field]&#x3D;&quot;ioExtenderFieldConfig&quot;
+    [group]&#x3D;&quot;mapHardwareOutputSelectorsForm&quot;
+    (onSelectChange)&#x3D;&quot;onIoExtenderSelectChange($event)&quot;
+  &gt;
+  &lt;/opena3xx-forms-select&gt;
+
+  &lt;opena3xx-forms-select
+    [field]&#x3D;&quot;ioExtenderBitFieldConfig&quot;
+    [group]&#x3D;&quot;mapHardwareOutputSelectorsForm&quot;
+  &gt;
+  &lt;/opena3xx-forms-select&gt;
+
+  &lt;div class&#x3D;&quot;full-width margin-top&quot;&gt;
+    &lt;button type&#x3D;&quot;submit&quot; mat-flat-button color&#x3D;&quot;primary&quot;&gt;
+      &lt;mat-icon&gt;check&lt;/mat-icon&gt;
+      Save
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./map-hardware-output-selectors-form.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">mat-form-field {
+  width: 100%;
+}
+
+mat-expansion-panel {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  button {
+    float: right;
+  }
+}
+
+.mat-flat-button + .mat-flat-button {
+  margin-left: 8px;
+  float: right;
+}
+
+.mat-flat-button.mat-accent {
+  background-color: #ff8d0b;
+  color: #ffffff;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><form [formGroup]="mapHardwareOutputSelectorsForm" (submit)="onSubmit($event)">  <opena3xx-forms-select    [field]="hardwareBoardsFieldConfig"    [group]="mapHardwareOutputSelectorsForm"    (onSelectChange)="onHardwareBoardSelectChange($event)"  >  </opena3xx-forms-select>  <opena3xx-forms-select    [field]="ioExtenderFieldConfig"    [group]="mapHardwareOutputSelectorsForm"    (onSelectChange)="onIoExtenderSelectChange($event)"  >  </opena3xx-forms-select>  <opena3xx-forms-select    [field]="ioExtenderBitFieldConfig"    [group]="mapHardwareOutputSelectorsForm"  >  </opena3xx-forms-select>  <div class="full-width margin-top">    <button type="submit" mat-flat-button color="primary">      <mat-icon>check</mat-icon>      Save    </button>  </div></form></div>'
+    var COMPONENTS = [{'name': 'AddHardwareInputTypeComponent', 'selector': 'opena3xx-add-hardware-input-type'},{'name': 'AddHardwareOutputTypeComponent', 'selector': 'opena3xx-add-hardware-output-type'},{'name': 'AddHardwarePanelComponent', 'selector': 'opena3xx-add-hardware-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AutocompleteComponent', 'selector': 'opena3xx-forms-autocomplete'},{'name': 'ButtonComponent', 'selector': 'opena3xx-button'},{'name': 'CheckboxComponent', 'selector': 'opena3xx-checkbox'},{'name': 'ConsoleComponent', 'selector': 'opena3xx-console'},{'name': 'DashboardComponent', 'selector': 'opena3xx-dashboard'},{'name': 'DateComponent', 'selector': 'opena3xx-date'},{'name': 'DeleteHardwareInputDialog', 'selector': 'opena3xx-delete-hardware-input-dialog-confirm'},{'name': 'DynamicFormComponent', 'selector': 'dynamic-form'},{'name': 'EditHardwareInputTypeComponent', 'selector': 'opena3xx-edit-hardware-input-type'},{'name': 'EditHardwareOutputTypeComponent', 'selector': 'opena3xx-edit-hardware-output-type'},{'name': 'EditHardwarePanelComponent', 'selector': 'opena3xx-edit-hardware-panel'},{'name': 'ExitAppDialog', 'selector': 'opena3xx-exit-app-dialog'},{'name': 'HeadingComponent', 'selector': 'opena3xx-heading'},{'name': 'InputComponent', 'selector': 'opena3xx-input'},{'name': 'LinkHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-link-hardware-input-selectors-dialog'},{'name': 'LinkHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-link-hardware-input-selectors-form'},{'name': 'ManageHardwareBoardsComponent', 'selector': 'opena3xx-manage-hardware-boards'},{'name': 'ManageHardwareInputTypesComponent', 'selector': 'opena3xx-manage-hardware-input-types'},{'name': 'ManageHardwareOutputTypesComponent', 'selector': 'opena3xx-manage-hardware-output-types'},{'name': 'ManageHardwarePanelsComponent', 'selector': 'opena3xx-manage-hardware-panels'},{'name': 'ManageSimulatorEventsComponent', 'selector': 'opena3xx-manage-simulator-events'},{'name': 'MapHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-input-selectors-dialog'},{'name': 'MapHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-input-selectors-form'},{'name': 'MapHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-output-selectors-dialog'},{'name': 'MapHardwareOutputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-output-selectors-form'},{'name': 'RadiobuttonComponent', 'selector': 'opena3xx-radiobutton'},{'name': 'RegisterHardwareBoardComponent', 'selector': 'opena3xx-register-hardware-board'},{'name': 'SelectComponent', 'selector': 'opena3xx-forms-select'},{'name': 'SettingsComponent', 'selector': 'opena3xx-settings'},{'name': 'SliderComponent', 'selector': 'opena3xx-slider'},{'name': 'SlideToggleComponent', 'selector': 'opena3xx-slide-toggle'},{'name': 'ViewHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-input-selectors-dialog'},{'name': 'ViewHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-output-selectors-dialog'},{'name': 'ViewHardwarePanelDetailsComponent', 'selector': 'opena3xx-view-hardware-panel-details'}];
+    var DIRECTIVES = [{'name': 'DynamicFieldDirective', 'selector': '[dynamicField]'}];
+    var ACTUAL_COMPONENT = {'name': 'MapHardwareOutputSelectorsFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MapHardwareOutputSelectorsFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

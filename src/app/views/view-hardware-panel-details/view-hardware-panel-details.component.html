@@ -90,140 +90,161 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<mat-toolbar class="hardware-inputs">
-  <mat-icon>login</mat-icon>&nbsp;
-  <span>Hardware Inputs</span>
-</mat-toolbar>
-<table mat-table [dataSource]="inputsDataSource" *ngIf="inputsDataSource">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Id</th>
-    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-  </ng-container>
+<div *ngIf="!showHardwareInputs">
+  <mat-toolbar class="hardware-inputs">
+    <mat-icon>login</mat-icon>&nbsp;
+    <span>No Hardware Inputs Defined</span>
+  </mat-toolbar>
+</div>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+<div *ngIf="showHardwareInputs">
+  <mat-toolbar class="hardware-inputs">
+    <mat-icon>login</mat-icon>&nbsp;
+    <span>Hardware Inputs</span>
+  </mat-toolbar>
+  <table mat-table [dataSource]="inputsDataSource" *ngIf="inputsDataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="hardwareInputType">
-    <th mat-header-cell *matHeaderCellDef>Discrete Inputs & Input Type</th>
-    <td mat-cell *matCellDef="let element">{{ element.hardwareInputType }} input type.</td>
-  </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef>Action</th>
-    <td mat-cell *matCellDef="let element">
-      <button
-        (click)="showInputSelectorDetails(element)"
-        mat-stroked-button
-        color="primary"
-        class="view-button"
-        matTooltip=" View {{ element.hardwareInputSelectors.length }} Input(s)"
-        matTooltipPosition="before"
-      >
-        <mat-icon mat-list-icon>remove_red_eye</mat-icon>
-      </button>
+    <ng-container matColumnDef="hardwareInputType">
+      <th mat-header-cell *matHeaderCellDef>Discrete Inputs & Input Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.hardwareInputType }} input type.</td>
+    </ng-container>
 
-      <button
-        (click)="mapInputSelector(element)"
-        *ngIf="element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware == false"
-        mat-stroked-button
-        color="warn"
-      >
-        <mat-icon mat-list-icon>link</mat-icon>
-        Set Mapping
-      </button>
-      <button
-        (click)="mapInputSelector(element)"
-        *ngIf="element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware == true"
-        mat-flat-button
-        color="warn"
-      >
-        <mat-icon mat-list-icon>link</mat-icon>
-        Edit Mapping
-      </button>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          (click)="showInputSelectorDetails(element)"
+          mat-stroked-button
+          color="primary"
+          class="view-button"
+          matTooltip=" View {{ element.hardwareInputSelectors.length }} Input(s)"
+          matTooltipPosition="before"
+        >
+          <mat-icon mat-list-icon>remove_red_eye</mat-icon>
+        </button>
 
-      <button
-        (click)="linkInputSelector(element)"
-        *ngIf="element.hardwareInputSelectors[0].simulatorEventDto != null"
-        mat-flat-button
-        color="accent"
-      >
-        <mat-icon mat-list-icon>laptop</mat-icon>
-        Edit Sim Linking
-      </button>
-      <button
-        (click)="linkInputSelector(element)"
-        *ngIf="element.hardwareInputSelectors[0].simulatorEventDto == null"
-        mat-stroked-button
-        color="accent"
-      >
-        <mat-icon mat-list-icon>laptop</mat-icon>
-        Set Sim Linking
-      </button>
+        <button
+          (click)="mapInputSelector(element)"
+          *ngIf="
+            element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware == false
+          "
+          mat-stroked-button
+          color="warn"
+        >
+          <mat-icon mat-list-icon>link</mat-icon>
+          Set Mapping
+        </button>
+        <button
+          (click)="mapInputSelector(element)"
+          *ngIf="
+            element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware == true
+          "
+          mat-flat-button
+          color="warn"
+        >
+          <mat-icon mat-list-icon>link</mat-icon>
+          Edit Mapping
+        </button>
 
-      <button
-        matTooltip="Delete Hardware Input"
-        class="small"
-        (click)="deleteHardwareInput(element)"
-        mat-stroked-button
-        color="flat"
-      >
-        <mat-icon mat-list-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+        <button
+          (click)="linkInputSelector(element)"
+          *ngIf="element.hardwareInputSelectors[0].simulatorEventDto != null"
+          mat-flat-button
+          color="accent"
+        >
+          <mat-icon mat-list-icon>laptop</mat-icon>
+          Edit Sim Linking
+        </button>
+        <button
+          (click)="linkInputSelector(element)"
+          *ngIf="element.hardwareInputSelectors[0].simulatorEventDto == null"
+          mat-stroked-button
+          color="accent"
+        >
+          <mat-icon mat-list-icon>laptop</mat-icon>
+          Set Sim Linking
+        </button>
 
-  <tr mat-header-row *matHeaderRowDef="displayedInputColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedInputColumns"></tr>
-</table>
+        <button
+          matTooltip="Delete Hardware Input"
+          class="small"
+          (click)="deleteHardwareInput(element)"
+          mat-stroked-button
+          color="flat"
+        >
+          <mat-icon mat-list-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-<mat-toolbar class="hardware-outputs">
-  <mat-icon>logout</mat-icon>&nbsp;
-  <span>Hardware Outputs</span>
-</mat-toolbar>
-<table mat-table [dataSource]="outputsDataSource" *ngIf="outputsDataSource">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Id</th>
-    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedInputColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedInputColumns"></tr>
+  </table>
+</div>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+<div *ngIf="!showHardwareOutputs">
+  <mat-toolbar class="hardware-outputs">
+    <mat-icon>logout</mat-icon>&nbsp;
+    <span>No Hardware Outputs Defined</span>
+  </mat-toolbar>
+</div>
+<div *ngIf="showHardwareOutputs">
+  <mat-toolbar class="hardware-outputs">
+    <mat-icon>logout</mat-icon>&nbsp;
+    <span>Hardware Outputs</span>
+  </mat-toolbar>
+  <table mat-table [dataSource]="outputsDataSource" *ngIf="outputsDataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="hardwareOutputType">
-    <th mat-header-cell *matHeaderCellDef>Output Type</th>
-    <td mat-cell *matCellDef="let element">{{ element.hardwareOutputType }}</td>
-  </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <ng-container matColumnDef="hardwareOutputType">
+      <th mat-header-cell *matHeaderCellDef>Output Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.hardwareOutputType }}</td>
+    </ng-container>
 
-    <td mat-cell *matCellDef="let element">
-      <button
-        (click)="showOutputSelectorDetails(element)"
-        mat-stroked-button
-        color="primary"
-        class="view-button"
-        matTooltip=" View {{ element.hardwareOutputSelectors.length }} Output(s)"
-        matTooltipPosition="before"
-      >
-        <mat-icon mat-list-icon>remove_red_eye</mat-icon>
-      </button>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
 
-      <button (click)="mapOutputSelector(element)" mat-stroked-button color="warn">
-        <mat-icon mat-list-icon>link</mat-icon>
-        Set Mapping
-      </button>
-      <button (click)="mapOutputSelector(element)" mat-stroked-button color="accent">
-        <mat-icon mat-list-icon>laptop</mat-icon>
-        Set Sim Linking
-      </button>
-    </td>
-  </ng-container>
+      <td mat-cell *matCellDef="let element">
+        <button
+          (click)="showOutputSelectorDetails(element)"
+          mat-stroked-button
+          color="primary"
+          class="view-button"
+          matTooltip=" View {{ element.hardwareOutputSelectors.length }} Output(s)"
+          matTooltipPosition="before"
+        >
+          <mat-icon mat-list-icon>remove_red_eye</mat-icon>
+        </button>
 
-  <tr mat-header-row *matHeaderRowDef="displayedOutputColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedOutputColumns"></tr>
-</table>
+        <button (click)="mapOutputSelector(element)" mat-stroked-button color="warn">
+          <mat-icon mat-list-icon>link</mat-icon>
+          Set Mapping
+        </button>
+        <button (click)="mapOutputSelector(element)" mat-stroked-button color="accent">
+          <mat-icon mat-list-icon>laptop</mat-icon>
+          Set Sim Linking
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedOutputColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedOutputColumns"></tr>
+  </table>
+</div>

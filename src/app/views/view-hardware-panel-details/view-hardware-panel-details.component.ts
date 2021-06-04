@@ -25,6 +25,9 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
   inputsDataSource = new MatTableDataSource<HardwareInputDto>();
   outputsDataSource = new MatTableDataSource<HardwareOutputDto>();
 
+  showHardwareInputs: boolean = false;
+  showHardwareOutputs: boolean = false;
+
   constructor(
     private dataService: DataService,
     private router: Router,
@@ -53,6 +56,13 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
           this.outputsDataSource = new MatTableDataSource<HardwareOutputDto>(
             this.hardwarePanelDto.hardwareOutputs
           );
+
+          if (this.hardwarePanelDto.hardwareInputs.length > 0) {
+            this.showHardwareInputs = true;
+          }
+          if (this.hardwarePanelDto.hardwareOutputs.length > 0) {
+            this.showHardwareOutputs = true;
+          }
         })
       )
       .subscribe();

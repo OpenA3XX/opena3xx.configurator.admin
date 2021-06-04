@@ -1,0 +1,237 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>opena3xx-configurator-webapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">opena3xx-configurator-webapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content module">
+                   <div class="content-data">
+
+
+
+<ol class="breadcrumb">
+    <li>Modules</li>
+    <li>AppRoutingModule</li>
+</ol>
+
+
+<ul class="nav nav-tabs" role="tablist">
+    <li  class="active" >
+        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    </li>
+    <li >
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/app-routing.module.ts</code>
+        </p>
+
+
+
+
+        <div class="container-fluid module">
+            <div class="row">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { AddHardwareInputTypeComponent } from &#x27;./views/add-hardware-input-type/add-hardware-input-type.component&#x27;;
+import { AddHardwareOutputTypeComponent } from &#x27;./views/add-hardware-output-type/add-hardware-output-type.component&#x27;;
+import { AddHardwarePanelComponent } from &#x27;./views/add-hardware-panel/add-hardware-panel.component&#x27;;
+import { ConsoleComponent } from &#x27;./views/console/console.component&#x27;;
+import { DashboardComponent } from &#x27;./views/dashboard/dashboard.component&#x27;;
+import { EditHardwareInputTypeComponent } from &#x27;./views/edit-hardware-input-type/edit-hardware-input-type.component&#x27;;
+import { EditHardwareOutputTypeComponent } from &#x27;./views/edit-hardware-output-type/edit-hardware-output-type.component&#x27;;
+import { EditHardwarePanelComponent } from &#x27;./views/edit-hardware-panel/edit-hardware-panel.component&#x27;;
+import { ManageHardwareBoardsComponent } from &#x27;./views/manage-hardware-boards/manage-hardware-board.component&#x27;;
+import { ManageHardwareInputTypesComponent } from &#x27;./views/manage-hardware-input-types/manage-hardware-input-types.component&#x27;;
+import { ManageHardwareOutputTypesComponent } from &#x27;./views/manage-hardware-output-types/manage-hardware-output-types.component&#x27;;
+import { ManageHardwarePanelsComponent } from &#x27;./views/manage-hardware-panels/manage-hardware-panels.component&#x27;;
+import { ManageSimulatorEventsComponent } from &#x27;./views/manage-simulator-events/manage-simulator-events.component&#x27;;
+import { RegisterHardwareBoardComponent } from &#x27;./views/register-hardware-board/register-hardware-board.component&#x27;;
+import { SettingsComponent } from &#x27;./views/settings/settings.component&#x27;;
+import { ViewHardwarePanelDetailsComponent } from &#x27;./views/view-hardware-panel-details/view-hardware-panel-details.component&#x27;;
+
+const routes: Routes &#x3D; [
+  {
+    path: &#x27;&#x27;,
+    redirectTo: &#x27;dashboard&#x27;,
+    pathMatch: &#x27;full&#x27;,
+  },
+  {
+    path: &#x27;dashboard&#x27;,
+    component: DashboardComponent,
+  },
+  {
+    path: &#x27;manage/hardware-panels&#x27;,
+    component: ManageHardwarePanelsComponent,
+  },
+  {
+    path: &#x27;add/hardware-panel&#x27;,
+    component: AddHardwarePanelComponent,
+  },
+  {
+    path: &#x27;edit/hardware-panel&#x27;,
+    component: EditHardwarePanelComponent,
+  },
+  {
+    path: &#x27;view/hardware-panel-details&#x27;,
+    component: ViewHardwarePanelDetailsComponent,
+  },
+  {
+    path: &#x27;manage/hardware-input-types&#x27;,
+    component: ManageHardwareInputTypesComponent,
+  },
+  {
+    path: &#x27;edit/hardware-input-type&#x27;,
+    component: EditHardwareInputTypeComponent,
+  },
+  {
+    path: &#x27;add/hardware-input-type&#x27;,
+    component: AddHardwareInputTypeComponent,
+  },
+  {
+    path: &#x27;manage/hardware-output-types&#x27;,
+    component: ManageHardwareOutputTypesComponent,
+  },
+  {
+    path: &#x27;edit/hardware-output-type&#x27;,
+    component: EditHardwareOutputTypeComponent,
+  },
+  {
+    path: &#x27;add/hardware-output-type&#x27;,
+    component: AddHardwareOutputTypeComponent,
+  },
+  {
+    path: &#x27;settings&#x27;,
+    component: SettingsComponent,
+  },
+  {
+    path: &#x27;manage/simulator-events&#x27;,
+    component: ManageSimulatorEventsComponent,
+  },
+  {
+    path: &#x27;manage/hardware-boards&#x27;,
+    component: ManageHardwareBoardsComponent,
+  },
+  {
+    path: &#x27;register/hardware-board&#x27;,
+    component: RegisterHardwareBoardComponent,
+  },
+  {
+    path: &#x27;console&#x27;,
+    component: ConsoleComponent,
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'AppRoutingModule.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

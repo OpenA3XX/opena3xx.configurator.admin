@@ -1,18 +1,25 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { filter, map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HardwarePanelOverviewDto } from 'src/app/models/models';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'opena3xx-manage-hardware-panels',
   templateUrl: './manage-hardware-panels.component.html',
   styleUrls: ['./manage-hardware-panels.component.scss'],
 })
-export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
+export class ManageHardwarePanelsComponent implements AfterViewInit, OnChanges {
   public displayedColumns: string[] = [
     'id',
     'name',
@@ -24,7 +31,10 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
   ];
   dataSource = new MatTableDataSource<HardwarePanelOverviewDto>();
   public data: any;
-  public data_loaded: boolean = false;
+  public dataLoaded: boolean = false;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private dataService: DataService,
@@ -32,28 +42,36 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnInit {
     private _snackBar: MatSnackBar
   ) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   onViewDetailsClick(id: Number) {
     this.router.navigateByUrl(`/view/hardware-panel-details?id=${id}`);
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
     this.dataService
       .getAllHardwarePanelOverviewDetails()
       .toPromise()
       .then((data: HardwarePanelOverviewDto) => {
         this.data = data;
         this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data);
-        this.data_loaded = true;
+        this.dataLoaded = true;
         this._snackBar.open('Data Loading Completed', 'Ok', {
           duration: 1000,
         });
       });
-  }
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
   addHardwarePanel() {
