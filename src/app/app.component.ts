@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from './services/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CoreHelper } from './helpers/core-helper';
+import { ExitAppDialog } from './views/exit-app-dialog.component';
 
 /**
  * @title Autosize sidenav
@@ -113,22 +114,5 @@ export class AppComponent {
   }
   clickConsole() {
     this.router.navigateByUrl(`/console`);
-  }
-}
-
-@Component({
-  selector: 'opena3xx-exit-app-dialog',
-  template: `
-    <h1 mat-dialog-title>Confirmation</h1>
-    <div mat-dialog-content>Are you sure you want to exit OpenA3XX Configurator App?</div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="exit()">Yes</button>
-      <button mat-button mat-flat-button color="primary" mat-dialog-close>No</button>
-    </div>
-  `,
-})
-export class ExitAppDialog {
-  exit() {
-    window.close();
   }
 }
