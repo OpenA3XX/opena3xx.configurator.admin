@@ -31,7 +31,7 @@
     "@ngstack/code-editor": "^3.0.0",
     "@types/lodash": "^4.14.168",
     "ngx-cookie-service": "^11.0.2",
-    "rxjs": "~6.6.7",
+    "rxjs": "~7.5.1",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },
