@@ -37,7 +37,7 @@ import { Component } from '@angular/core';
       <mat-grid-tile>15</mat-grid-tile>
       <mat-grid-tile>16</mat-grid-tile>
     </mat-grid-list>
-    <iframe src="http://192.168.50.22:15672/#/channels" width="100%" height="500px"></iframe>
+    <iframe src="http://localhost:15672/#/channels" width="100%" height="500px"></iframe>
   `,
   styleUrls: ['./dashboard.component.scss'],
 })

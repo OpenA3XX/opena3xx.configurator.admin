@@ -12,7 +12,7 @@ import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ManageHardwareInputTypesComponent } from './views/manage-hardware-input-types/manage-hardware-input-types.component';
 import { ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
-import { DeleteHardwareInputDialog } from './components/delete-hardware-input-dialog/delete-hardware-input-dialog.component';
+import { DeleteHardwareInputDialogComponent } from './components/delete-hardware-input-dialog/delete-hardware-input-dialog.component';
 import { EditHardwareInputTypeComponent } from './views/edit-hardware-input-type/edit-hardware-input-type.component';
 import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-output-types/manage-hardware-output-types.component';
 import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
@@ -76,7 +76,6 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     DateComponent,
     RadiobuttonComponent,
     CheckboxComponent,
-    HeadingComponent,
     SlideToggleComponent,
     SliderComponent,
     AutocompleteComponent,
@@ -87,7 +86,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     RegisterHardwareBoardComponent,
     ManageHardwareBoardsComponent,
     MapHardwareInputSelectorsFormComponent,
-    DeleteHardwareInputDialog,
+    DeleteHardwareInputDialogComponent,
     AddHardwarePanelComponent,
     EditHardwarePanelComponent,
     ExitAppDialog,
@@ -104,6 +103,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     ReactiveFormsModule,
     FormsModule,
     CodeEditorModule.forRoot(),
+    HeadingComponent,
   ],
   providers: [
     DataService,
@@ -113,7 +113,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AppComponent],
+  // entryComponents: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

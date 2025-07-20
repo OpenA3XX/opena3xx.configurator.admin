@@ -66,8 +66,8 @@ export class LinkHardwareInputSelectorsFormComponent {
     this.hardwareInputDto = data;
 
     this.linkHardwareInputSelectorsForm = formBuilder.group({
-      integrationTypes: [, { validators: [Validators.required], updateOn: 'change' }],
-      simulatorEvents: [, { validators: [Validators.required], updateOn: 'change' }],
+      integrationTypes: [{ validators: [Validators.required], updateOn: 'change' }],
+      simulatorEvents: [{ validators: [Validators.required], updateOn: 'change' }],
     });
 
     this.fetchData();

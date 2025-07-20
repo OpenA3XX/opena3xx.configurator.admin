@@ -28,7 +28,7 @@ export class AppComponent {
   private apiHealthPollingTime: number = 5000;
 
   fullscreen() {
-    var element = document.documentElement;
+    const element = document.documentElement;
     if (!this.isFullscreen) {
       this.isFullscreen = true;
       element.requestFullscreen();

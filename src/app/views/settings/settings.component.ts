@@ -17,7 +17,7 @@ export class SettingsComponent{
 
   @ViewChild(DynamicFormComponent) form!: DynamicFormComponent;
 
-  dataLoaded: Boolean = false;
+  dataLoaded: boolean = false;
   settingsConfig: FieldConfig[] = []
 
   constructor

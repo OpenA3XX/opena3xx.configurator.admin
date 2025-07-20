@@ -1,6 +1,6 @@
+
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSlider } from '@angular/material/slider';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FieldConfig } from 'src/app/models/field.interface';
@@ -12,53 +12,52 @@ import { DataService } from 'src/app/services/data.service';
   selector: 'opena3xx-register-hardware-board',
 })
 export class RegisterHardwareBoardComponent implements OnInit {
-  registerHardwareBoardForm: FormGroup;
+  public registerHardwareBoardForm: FormGroup;
 
   public totalDiscreteInputOutput: number;
 
   public boardNameFieldConfig: FieldConfig = {
-    type: 'input',
+    hint: 'Enter the name of the new Hardware Board',
+    inputType: 'text',
     label: 'Name',
     name: 'name',
-    inputType: 'text',
-    hint: 'Enter the name of the new Hardware Board',
+    type: 'input',
     validations: [
       {
+        message: 'Hardware Board Name is Required',
         name: 'required',
         validator: Validators.required,
-        message: 'Hardware Board Name is Required',
       },
     ],
   };
 
   public totalExtendersFieldConfig: FieldConfig = {
-    type: 'slider',
-    label: 'Total I²C Extenders on board',
-    name: 'hardwareBusExtendersCount',
     hint: 'Select Total Extenders (MCP23017)',
-    minValue: '1',
+    label: 'Total I²C Extenders on board',
     maxValue: '8',
-    value: 1,
+    minValue: '1',
+    name: 'hardwareBusExtendersCount',
     stepValue: '1',
+    type: 'slider',
+    value: 1,
   };
 
   constructor(
     formBuilder: FormBuilder,
     private router: Router,
     private dataService: DataService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
   ) {
     this.registerHardwareBoardForm = formBuilder.group({
       name: [, { validators: [Validators.required], updateOn: 'change' }],
       hardwareBusExtendersCount: [, { validators: [Validators.required], updateOn: 'change' }],
     });
-    //this.registerHardwareBoardForm.controls["totalExtenders"].setValue(1);
     this.totalDiscreteInputOutput = 16; //Default
   }
 
   ngOnInit() {}
 
-  onSubmit(formData: any) {
+  onSubmit = (formData: any) => {
     if (this.registerHardwareBoardForm.valid) {
       this.dataService
         .addHardwareBoards(this.registerHardwareBoardForm.value)
@@ -71,7 +70,7 @@ export class RegisterHardwareBoardComponent implements OnInit {
     } else {
       this.validateAllFormFields(this.registerHardwareBoardForm);
     }
-  }
+  };
 
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((field) => {
@@ -79,11 +78,13 @@ export class RegisterHardwareBoardComponent implements OnInit {
       control!.markAsTouched({ onlySelf: true });
     });
   }
+
   goBack() {
     this.router.navigateByUrl('/manage/hardware-boards');
   }
 
-  onSliderValueChange(slider: MatSlider) {
-    this.totalDiscreteInputOutput = slider.value * 16;
+  onSliderValueChange(event: any) {
+    const value = parseInt((event.target as HTMLInputElement).value, 10);
+    this.totalDiscreteInputOutput = value * 16;
   }
 }

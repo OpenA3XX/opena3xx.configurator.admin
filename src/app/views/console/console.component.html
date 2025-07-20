@@ -29,7 +29,7 @@
     </section>
     <div class="console-container">
       <span id="terminal__prompt--user"
-        >admin@opena3xx:
+        >admin&#64;opena3xx:
         <span class="cursor" *ngIf="realtimeService.isConnected"
           >Connected & receiving realtime updates...</span
         >
@@ -38,7 +38,7 @@
       </span>
 
       <div *ngFor="let m of realtimeService.flightEvents">
-        <span id="terminal__prompt--user">admin@opena3xx:</span>
+        <span id="terminal__prompt--user">admin&#64;opena3xx:</span>
         Hardware Event: → Timestamp:
         <b>{{ m.timestamp }}</b> | Hardware Board Id: <b>{{ m.hardware_board_id }}</b> | Hardware
         Bus Name: <b>{{ m.extender_bus_name }}</b> | Extender Bit Id (Name):
@@ -64,7 +64,7 @@
     </section>
     <div class="console-container">
       <span id="terminal__prompt--user"
-        >admin@opena3xx:
+        >admin&#64;opena3xx:
         <span class="cursor" *ngIf="realtimeService.isConnected"
           >Connected & receiving realtime updates...</span
         >
@@ -72,7 +72,7 @@
         <span class="cursor-blink"></span>
       </span>
       <div *ngFor="let m of realtimeService.keepAliveEvents">
-        <span id="terminal__prompt--user">admin@opena3xx:</span>
+        <span id="terminal__prompt--user">admin&#64;opena3xx:</span>
         Keep Alive Event: → Timestamp:
         <b>{{ m.timestamp }}</b> | Hardware Board Id: <b>{{ m.hardware_board_id }}</b> | Message:
         <b>{{ m.message }}</b>

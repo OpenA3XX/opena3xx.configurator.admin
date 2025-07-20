@@ -235,7 +235,7 @@ export class InputComponent {
   @Input() field!: FieldConfig;
 
   @Input() group!: FormGroup;
-  
+
   constructor() {}
 }
 </code></pre>
@@ -261,14 +261,14 @@ export class InputComponent {
         </div>
     </div>
 
-    
+
 </div>
 
 <script src="../js/libs/vis.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-form-field appearance="standard" class="full-width" [formGroup]="group">  <mat-label>{{field.label}}</mat-label>  <input autocomplete="off" matInput [formControlName]="field.name" [placeholder]="field.label" [type]="field.inputType">  <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{validation.message}}</mat-error>  </ng-container>  <mat-hint>{{field.hint}}</mat-hint></mat-form-field></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-form-field appearance="outline" class="full-width" [formGroup]="group">  <mat-label>{{field.label}}</mat-label>  <input autocomplete="off" matInput [formControlName]="field.name" [placeholder]="field.label" [type]="field.inputType">  <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{validation.message}}</mat-error>  </ng-container>  <mat-hint>{{field.hint}}</mat-hint></mat-form-field></div>'
     var COMPONENTS = [{'name': 'AddHardwareInputTypeComponent', 'selector': 'opena3xx-add-hardware-input-type'},{'name': 'AddHardwareOutputTypeComponent', 'selector': 'opena3xx-add-hardware-output-type'},{'name': 'AddHardwarePanelComponent', 'selector': 'opena3xx-add-hardware-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AutocompleteComponent', 'selector': 'opena3xx-forms-autocomplete'},{'name': 'ButtonComponent', 'selector': 'opena3xx-button'},{'name': 'CheckboxComponent', 'selector': 'opena3xx-checkbox'},{'name': 'ConsoleComponent', 'selector': 'opena3xx-console'},{'name': 'DashboardComponent', 'selector': 'opena3xx-dashboard'},{'name': 'DateComponent', 'selector': 'opena3xx-date'},{'name': 'DeleteHardwareInputDialog', 'selector': 'opena3xx-delete-hardware-input-dialog-confirm'},{'name': 'DynamicFormComponent', 'selector': 'dynamic-form'},{'name': 'EditHardwareInputTypeComponent', 'selector': 'opena3xx-edit-hardware-input-type'},{'name': 'EditHardwareOutputTypeComponent', 'selector': 'opena3xx-edit-hardware-output-type'},{'name': 'EditHardwarePanelComponent', 'selector': 'opena3xx-edit-hardware-panel'},{'name': 'ExitAppDialog', 'selector': 'opena3xx-exit-app-dialog'},{'name': 'HeadingComponent', 'selector': 'opena3xx-heading'},{'name': 'InputComponent', 'selector': 'opena3xx-input'},{'name': 'LinkHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-link-hardware-input-selectors-dialog'},{'name': 'LinkHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-link-hardware-input-selectors-form'},{'name': 'ManageHardwareBoardsComponent', 'selector': 'opena3xx-manage-hardware-boards'},{'name': 'ManageHardwareInputTypesComponent', 'selector': 'opena3xx-manage-hardware-input-types'},{'name': 'ManageHardwareOutputTypesComponent', 'selector': 'opena3xx-manage-hardware-output-types'},{'name': 'ManageHardwarePanelsComponent', 'selector': 'opena3xx-manage-hardware-panels'},{'name': 'ManageSimulatorEventsComponent', 'selector': 'opena3xx-manage-simulator-events'},{'name': 'MapHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-input-selectors-dialog'},{'name': 'MapHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-input-selectors-form'},{'name': 'MapHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-output-selectors-dialog'},{'name': 'MapHardwareOutputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-output-selectors-form'},{'name': 'RadiobuttonComponent', 'selector': 'opena3xx-radiobutton'},{'name': 'RegisterHardwareBoardComponent', 'selector': 'opena3xx-register-hardware-board'},{'name': 'SelectComponent', 'selector': 'opena3xx-forms-select'},{'name': 'SettingsComponent', 'selector': 'opena3xx-settings'},{'name': 'SliderComponent', 'selector': 'opena3xx-slider'},{'name': 'SlideToggleComponent', 'selector': 'opena3xx-slide-toggle'},{'name': 'ViewHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-input-selectors-dialog'},{'name': 'ViewHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-output-selectors-dialog'},{'name': 'ViewHardwarePanelDetailsComponent', 'selector': 'opena3xx-view-hardware-panel-details'}];
     var DIRECTIVES = [{'name': 'DynamicFieldDirective', 'selector': '[dynamicField]'}];
     var ACTUAL_COMPONENT = {'name': 'InputComponent'};
@@ -284,7 +284,7 @@ export class InputComponent {
 
 
 
-                   
+
 
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
@@ -11,14 +11,14 @@ import { HardwareInputTypeDto } from '../../models/models';
   templateUrl: './manage-hardware-input-types.component.html',
   styleUrls: ['./manage-hardware-input-types.component.scss'],
 })
-export class ManageHardwareInputTypesComponent implements OnInit {
+export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit {
   public displayedColumns: string[] = ['id', 'name', 'details'];
   dataSource = new MatTableDataSource<HardwareInputTypeDto>();
   public data: any;
 
   constructor(private dataService: DataService, public router: Router) {}
 
-  onEditClick(id: Number) {
+  onEditClick(id: number) {
     this.router.navigateByUrl(`/edit/hardware-input-type?id=${id}`);
   }
 

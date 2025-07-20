@@ -13,7 +13,7 @@
     <div class="container">
       <form #f="ngForm" (ngSubmit)="addHardwareInputType(f)" novalidate autocomplete="off">
         <p>
-          <mat-form-field appearance="standard">
+          <mat-form-field appearance="outline">
             <mat-label>Hardware Input Type Name</mat-label>
             <input
               matInput
@@ -24,7 +24,7 @@
             />
             <mat-icon matSuffix>text_format</mat-icon>
             <mat-hint
-              >Enter the name of the hardware input type that describe the pyhiscal input
+            >Enter the name of the hardware input type that describe the pyhiscal input
               type</mat-hint
             >
           </mat-form-field>

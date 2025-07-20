@@ -38,9 +38,9 @@ import { HardwareInputDto } from 'src/app/models/models';
     `,
   ],
 })
-export class DeleteHardwareInputDialog implements OnInit {
+export class DeleteHardwareInputDialogComponent implements OnInit {
   disabled: boolean = true;
-  hardwareInputName: String = '';
+  hardwareInputName: string = '';
 
   @Input() hardwareInput: HardwareInputDto;
 

@@ -14,7 +14,7 @@ import { HardwareInputDto } from 'src/app/models/models';
 export class MapHardwareInputSelectorsDialogComponent {
   public hardwareInputSelector: any;
   public hardwareBoardSelectorFields: FieldConfig[] = [];
-  dataLoaded: Boolean = false;
+  dataLoaded: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { data: HardwareInputDto },
@@ -26,7 +26,7 @@ export class MapHardwareInputSelectorsDialogComponent {
   }
 
   submit(formData: any) {
-    var index = _.find(this.hardwareInputSelector.hardwareInputSelectors, (o) => {
+    const index = _.find(this.hardwareInputSelector.hardwareInputSelectors, (o) => {
       return o.id == formData.identifier;
     });
     this._snackBar.open(

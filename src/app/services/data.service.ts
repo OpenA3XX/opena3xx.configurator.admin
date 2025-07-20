@@ -34,7 +34,7 @@ export class DataService {
     return this.http.get<HardwarePanelOverviewDto>(`${this.BASE_URL}/hardware-panel/overview/all`);
   }
 
-  getAllHardwarePanelDetails(id: Number) {
+  getAllHardwarePanelDetails(id: number) {
     return this.http.get(`${this.BASE_URL}/hardware-panel/details/${id}`);
   }
 
@@ -42,7 +42,7 @@ export class DataService {
     return this.http.get(`${this.BASE_URL}/hardware-input-types`);
   }
 
-  getHardwareInputTypeById(id: Number) {
+  getHardwareInputTypeById(id: number) {
     return this.http.get(`${this.BASE_URL}/hardware-input-types/${id}`);
   }
 
@@ -54,7 +54,7 @@ export class DataService {
     return this.http.get(`${this.BASE_URL}/hardware-output-types`);
   }
 
-  getHardwareOutputTypeById(id: Number) {
+  getHardwareOutputTypeById(id: number) {
     return this.http.get(`${this.BASE_URL}/hardware-output-types/${id}`);
   }
 

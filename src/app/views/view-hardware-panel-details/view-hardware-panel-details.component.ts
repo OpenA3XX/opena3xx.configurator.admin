@@ -10,7 +10,7 @@ import { ViewHardwareInputSelectorsDialogComponent } from 'src/app/components/vi
 import { ViewHardwareOutputSelectorsDialogComponent } from 'src/app/components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
 import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/models/models';
 import { DataService } from 'src/app/services/data.service';
-import { DeleteHardwareInputDialog } from '../../components/delete-hardware-input-dialog/delete-hardware-input-dialog.component';
+import { DeleteHardwareInputDialogComponent } from '../../components/delete-hardware-input-dialog/delete-hardware-input-dialog.component';
 
 @Component({
   selector: 'opena3xx-view-hardware-panel-details',
@@ -38,7 +38,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.router.routerState.root.queryParams.subscribe((params) => {
       console.log('Received Query Params', params);
-      this.idParam = params.id;
+      this.idParam = params['id'];
     });
     this.fetchData();
   }
@@ -81,7 +81,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
   }
 
   mapInputSelector(data: HardwareInputDto): void {
-    let dialogRef = this.viewHardwareInputOutputSelectorsDialog.open(
+    const dialogRef = this.viewHardwareInputOutputSelectorsDialog.open(
       MapHardwareInputSelectorsDialogComponent,
       {
         data: data,
@@ -94,7 +94,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
   }
 
   linkInputSelector(data: HardwareInputDto) {
-    let dialogRef = this.viewHardwareInputOutputSelectorsDialog.open(
+    const dialogRef = this.viewHardwareInputOutputSelectorsDialog.open(
       LinkHardwareInputSelectorsDialogComponent,
       {
         data: data,
@@ -121,7 +121,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
   }
 
   deleteHardwareInput(hardwareInput: HardwareInputDto) {
-    const dialogRef = this.dialog.open(DeleteHardwareInputDialog);
+    const dialogRef = this.dialog.open(DeleteHardwareInputDialogComponent);
     dialogRef.componentInstance.hardwareInput = hardwareInput;
   }
 }

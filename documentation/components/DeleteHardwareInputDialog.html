@@ -36,7 +36,7 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>DeleteHardwareInputDialog</li>
+  <li>DeleteHardwareInputDialogComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -235,7 +235,7 @@
 
 
     <section>
-    
+
     <h3 id="methods">
         Methods
     </h3>
@@ -338,7 +338,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -346,7 +346,7 @@
     </table>
 </section>
     <section>
-    
+
         <h3 id="inputs">
             Properties
         </h3>
@@ -460,7 +460,7 @@ import { HardwareInputDto } from &#x27;src/app/models/models&#x27;;
     &#x60;,
   ],
 })
-export class DeleteHardwareInputDialog implements OnInit {
+export class DeleteHardwareInputDialogComponent implements OnInit {
   disabled: boolean &#x3D; true;
   hardwareInputName: String &#x3D; &#x27;&#x27;;
 
@@ -490,7 +490,7 @@ export class DeleteHardwareInputDialog implements OnInit {
         margin-bottom: 10px;
         text-align: center;
       }
-    
+
 </code></pre>
     </div>
 
@@ -512,7 +512,7 @@ export class DeleteHardwareInputDialog implements OnInit {
         </div>
     </div>
 
-    
+
 </div>
 
 <script src="../js/libs/vis.min.js"></script>
@@ -520,9 +520,9 @@ export class DeleteHardwareInputDialog implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><h1 mat-dialog-title>Confirmation</h1><div mat-dialog-content>  Are you sure you want to delete {{ hardwareInputName }} Hardware Input?</div><div mat-dialog-content>  Enter the word <b>{{ hardwareInputName }}</b> to confirm. This will <u>permanently</u> delete  the entity.</div><form autocomplete="off">  <mat-form-field class="example-full-width">    <input (input)="onInputChange($event.target)" matInput value="" />  </mat-form-field></form><div mat-dialog-actions>  <button mat-button [disabled]="disabled">Yes</button>  <button mat-button mat-flat-button color="primary" mat-dialog-close>No</button></div></div>'
-    var COMPONENTS = [{'name': 'AddHardwareInputTypeComponent', 'selector': 'opena3xx-add-hardware-input-type'},{'name': 'AddHardwareOutputTypeComponent', 'selector': 'opena3xx-add-hardware-output-type'},{'name': 'AddHardwarePanelComponent', 'selector': 'opena3xx-add-hardware-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AutocompleteComponent', 'selector': 'opena3xx-forms-autocomplete'},{'name': 'ButtonComponent', 'selector': 'opena3xx-button'},{'name': 'CheckboxComponent', 'selector': 'opena3xx-checkbox'},{'name': 'ConsoleComponent', 'selector': 'opena3xx-console'},{'name': 'DashboardComponent', 'selector': 'opena3xx-dashboard'},{'name': 'DateComponent', 'selector': 'opena3xx-date'},{'name': 'DeleteHardwareInputDialog', 'selector': 'opena3xx-delete-hardware-input-dialog-confirm'},{'name': 'DynamicFormComponent', 'selector': 'dynamic-form'},{'name': 'EditHardwareInputTypeComponent', 'selector': 'opena3xx-edit-hardware-input-type'},{'name': 'EditHardwareOutputTypeComponent', 'selector': 'opena3xx-edit-hardware-output-type'},{'name': 'EditHardwarePanelComponent', 'selector': 'opena3xx-edit-hardware-panel'},{'name': 'ExitAppDialog', 'selector': 'opena3xx-exit-app-dialog'},{'name': 'HeadingComponent', 'selector': 'opena3xx-heading'},{'name': 'InputComponent', 'selector': 'opena3xx-input'},{'name': 'LinkHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-link-hardware-input-selectors-dialog'},{'name': 'LinkHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-link-hardware-input-selectors-form'},{'name': 'ManageHardwareBoardsComponent', 'selector': 'opena3xx-manage-hardware-boards'},{'name': 'ManageHardwareInputTypesComponent', 'selector': 'opena3xx-manage-hardware-input-types'},{'name': 'ManageHardwareOutputTypesComponent', 'selector': 'opena3xx-manage-hardware-output-types'},{'name': 'ManageHardwarePanelsComponent', 'selector': 'opena3xx-manage-hardware-panels'},{'name': 'ManageSimulatorEventsComponent', 'selector': 'opena3xx-manage-simulator-events'},{'name': 'MapHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-input-selectors-dialog'},{'name': 'MapHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-input-selectors-form'},{'name': 'MapHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-output-selectors-dialog'},{'name': 'MapHardwareOutputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-output-selectors-form'},{'name': 'RadiobuttonComponent', 'selector': 'opena3xx-radiobutton'},{'name': 'RegisterHardwareBoardComponent', 'selector': 'opena3xx-register-hardware-board'},{'name': 'SelectComponent', 'selector': 'opena3xx-forms-select'},{'name': 'SettingsComponent', 'selector': 'opena3xx-settings'},{'name': 'SliderComponent', 'selector': 'opena3xx-slider'},{'name': 'SlideToggleComponent', 'selector': 'opena3xx-slide-toggle'},{'name': 'ViewHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-input-selectors-dialog'},{'name': 'ViewHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-output-selectors-dialog'},{'name': 'ViewHardwarePanelDetailsComponent', 'selector': 'opena3xx-view-hardware-panel-details'}];
+    var COMPONENTS = [{'name': 'AddHardwareInputTypeComponent', 'selector': 'opena3xx-add-hardware-input-type'},{'name': 'AddHardwareOutputTypeComponent', 'selector': 'opena3xx-add-hardware-output-type'},{'name': 'AddHardwarePanelComponent', 'selector': 'opena3xx-add-hardware-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AutocompleteComponent', 'selector': 'opena3xx-forms-autocomplete'},{'name': 'ButtonComponent', 'selector': 'opena3xx-button'},{'name': 'CheckboxComponent', 'selector': 'opena3xx-checkbox'},{'name': 'ConsoleComponent', 'selector': 'opena3xx-console'},{'name': 'DashboardComponent', 'selector': 'opena3xx-dashboard'},{'name': 'DateComponent', 'selector': 'opena3xx-date'},{'name': 'DeleteHardwareInputDialogComponent', 'selector': 'opena3xx-delete-hardware-input-dialog-confirm'},{'name': 'DynamicFormComponent', 'selector': 'dynamic-form'},{'name': 'EditHardwareInputTypeComponent', 'selector': 'opena3xx-edit-hardware-input-type'},{'name': 'EditHardwareOutputTypeComponent', 'selector': 'opena3xx-edit-hardware-output-type'},{'name': 'EditHardwarePanelComponent', 'selector': 'opena3xx-edit-hardware-panel'},{'name': 'ExitAppDialog', 'selector': 'opena3xx-exit-app-dialog'},{'name': 'HeadingComponent', 'selector': 'opena3xx-heading'},{'name': 'InputComponent', 'selector': 'opena3xx-input'},{'name': 'LinkHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-link-hardware-input-selectors-dialog'},{'name': 'LinkHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-link-hardware-input-selectors-form'},{'name': 'ManageHardwareBoardsComponent', 'selector': 'opena3xx-manage-hardware-boards'},{'name': 'ManageHardwareInputTypesComponent', 'selector': 'opena3xx-manage-hardware-input-types'},{'name': 'ManageHardwareOutputTypesComponent', 'selector': 'opena3xx-manage-hardware-output-types'},{'name': 'ManageHardwarePanelsComponent', 'selector': 'opena3xx-manage-hardware-panels'},{'name': 'ManageSimulatorEventsComponent', 'selector': 'opena3xx-manage-simulator-events'},{'name': 'MapHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-input-selectors-dialog'},{'name': 'MapHardwareInputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-input-selectors-form'},{'name': 'MapHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-map-hardware-output-selectors-dialog'},{'name': 'MapHardwareOutputSelectorsFormComponent', 'selector': 'opena3xx-map-hardware-output-selectors-form'},{'name': 'RadiobuttonComponent', 'selector': 'opena3xx-radiobutton'},{'name': 'RegisterHardwareBoardComponent', 'selector': 'opena3xx-register-hardware-board'},{'name': 'SelectComponent', 'selector': 'opena3xx-forms-select'},{'name': 'SettingsComponent', 'selector': 'opena3xx-settings'},{'name': 'SliderComponent', 'selector': 'opena3xx-slider'},{'name': 'SlideToggleComponent', 'selector': 'opena3xx-slide-toggle'},{'name': 'ViewHardwareInputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-input-selectors-dialog'},{'name': 'ViewHardwareOutputSelectorsDialogComponent', 'selector': 'opena3xx-view-hardware-output-selectors-dialog'},{'name': 'ViewHardwarePanelDetailsComponent', 'selector': 'opena3xx-view-hardware-panel-details'}];
     var DIRECTIVES = [{'name': 'DynamicFieldDirective', 'selector': '[dynamicField]'}];
-    var ACTUAL_COMPONENT = {'name': 'DeleteHardwareInputDialog'};
+    var ACTUAL_COMPONENT = {'name': 'DeleteHardwareInputDialogComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -535,7 +535,7 @@ export class DeleteHardwareInputDialog implements OnInit {
 
 
 
-                   
+
 
 
 
@@ -557,7 +557,7 @@ export class DeleteHardwareInputDialog implements OnInit {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'DeleteHardwareInputDialog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'DeleteHardwareInputDialogComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

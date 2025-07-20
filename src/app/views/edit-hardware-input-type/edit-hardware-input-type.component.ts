@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./edit-hardware-input-type.component.scss'],
 })
 export class EditHardwareInputTypeComponent implements OnInit {
-  idParam!: Number;
+  idParam!: number;
   public data!: any;
 
   constructor(
@@ -23,7 +23,7 @@ export class EditHardwareInputTypeComponent implements OnInit {
   ngOnInit(): void {
     this.router.routerState.root.queryParams.subscribe((params) => {
       console.log('Received Query Params', params);
-      this.idParam = params.id;
+      this.idParam = params['id'];
     });
 
     this.dataService

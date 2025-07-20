@@ -1,0 +1,8 @@
+node_modules/
+dist/
+e2e/
+*.js
+*.d.ts
+main.js
+coverage/
+karma.conf.js

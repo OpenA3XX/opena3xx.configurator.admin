@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +12,7 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './manage-simulator-events.component.html',
   styleUrls: ['./manage-simulator-events.component.scss'],
 })
-export class ManageSimulatorEventsComponent implements OnInit {
+export class ManageSimulatorEventsComponent implements OnInit, AfterViewInit {
   public displayedColumns: string[] = [
     'id',
     'friendlyName',
@@ -33,7 +33,7 @@ export class ManageSimulatorEventsComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {}
 
-  onEditClick(id: Number) {
+  onEditClick(id: number) {
     this.router.navigateByUrl(`/edit/simulator-event?id=${id}`);
   }
 

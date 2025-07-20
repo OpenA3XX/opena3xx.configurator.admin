@@ -12,7 +12,7 @@
   <div class="container">
     <form #f="ngForm" (ngSubmit)="updateHardwareOutputType(f)" novalidate *ngIf="data">
       <p>
-        <mat-form-field appearance="standard">
+        <mat-form-field appearance="outline">
           <mat-label>Hardware Output Type Identifier</mat-label>
           <input matInput placeholder="Placeholder" disabled [ngModel]="data.id" name="id" />
           <mat-icon matSuffix>format_list_numbered</mat-icon>
@@ -23,7 +23,7 @@
         </mat-form-field>
       </p>
       <p>
-        <mat-form-field appearance="standard">
+        <mat-form-field appearance="outline">
           <mat-label>Hardware Output Type Name</mat-label>
           <input matInput placeholder="Placeholder" [(ngModel)]="data.name" name="name" />
           <mat-icon matSuffix>text_format</mat-icon>

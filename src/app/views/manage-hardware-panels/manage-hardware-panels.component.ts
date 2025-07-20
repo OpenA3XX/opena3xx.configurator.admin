@@ -56,7 +56,7 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  onViewDetailsClick(id: Number) {
+  onViewDetailsClick(id: number) {
     this.router.navigateByUrl(`/view/hardware-panel-details?id=${id}`);
   }
 

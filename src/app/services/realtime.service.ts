@@ -71,11 +71,11 @@ export class RealTimeService {
 
   private addListeners() {
     this.hubConnection.on('HardwareInputSelectors', (payload: string) => {
-      let data: FlightEvent = JSON.parse(payload);
+      const data: FlightEvent = JSON.parse(payload);
       this.flightEvents.unshift(data);
     });
     this.hubConnection.on('KeepAlive', (payload: string) => {
-      let data: KeepAliveEvent = JSON.parse(payload);
+      const data: KeepAliveEvent = JSON.parse(payload);
       this.keepAliveEvents.unshift(data);
     });
 

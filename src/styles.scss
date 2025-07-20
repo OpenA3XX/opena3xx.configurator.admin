@@ -1,224 +1,70 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
-// Plus imports for other components in your app.
+// Update Material imports for v17
+@use '@angular/material' as mat;
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat-core();
+// Include the common styles for Angular Material
+@include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$opena3xx-configurator-webapp-primary: mat-palette($mat-indigo);
-$opena3xx-configurator-webapp-accent: mat-palette($mat-pink, A200, A100, A400);
+// Define your theme
 
-// The warn palette is optional (defaults to red).
-$opena3xx-configurator-webapp-warn: mat-palette($mat-red);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$opena3xx-configurator-webapp-theme: mat-light-theme(
-  (
-    color: (
-      primary: $opena3xx-configurator-webapp-primary,
-      accent: $opena3xx-configurator-webapp-accent,
-      warn: $opena3xx-configurator-webapp-warn,
-    ),
+// Define custom palette for your brand color
+$opena3xx-palette: (
+  50: #e3f2fd,
+  100: #bbdefb,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
+  500: #0061ed, // Your brand color
+  600: #1e88e5,
+  700: #1976d2,
+  800: #1565c0,
+  900: #0d47a1,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
   )
 );
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($opena3xx-configurator-webapp-theme);
+$primary: mat.define-palette($opena3xx-palette, 500);
+$accent: mat.define-palette($opena3xx-palette, A200, A100, A400);
+$warn: mat.define-palette(mat.$red-palette);
 
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 
-html,
-body {
-  height: 100%;
-}
-body {
+
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  ),
+  typography: mat.define-typography-config(),
+  plain-family: Roboto,
+  brand-family: Open Sans,
+  bold-weight: 900,
+  medium-weight: 500,
+  regular-weight: 300,
+));
+
+body{
   margin: 0;
-  font-family: 'Inter', Roboto, 'Helvetica Neue', sans-serif;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
 }
-
-* {
-  font-family: 'Inter', Roboto, 'Helvetica Neue', sans-serif;
-}
-
-.windows-draggable {
-  -webkit-app-region: drag;
-}
-
-.mat-toolbar.mat-primary,
-.mat-flat-button.mat-primary,
-.mat-calendar-body-selected,
-.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
-.mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
-.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
-.mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background: #0061ed;
-}
-
-.mat-badge-accent .mat-badge-content {
-  background-color: #f44336;
-}
-
-.mat-radio-button.mat-accent .mat-radio-inner-circle,
-.mat-radio-button.mat-accent
-  .mat-radio-ripple
-  .mat-ripple-element:not(.mat-radio-persistent-ripple),
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
-.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-  background: #0061ed;
-}
-
-.mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb,
-.mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label,
-.mat-accent .mat-slider-track-fill,
-.mat-accent .mat-slider-thumb,
-.mat-accent .mat-slider-thumb-label {
-  background-color: #0061ed;
-}
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-  border-color: #0061ed;
-}
-.mat-progress-bar-fill::after {
-  background-color: #0061ed;
-}
-.mat-stroked-button.mat-primary {
-  color: #0061ed;
-  border-color: #0061ed;
-}
-.mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: #0061ed;
-}
-.mat-form-field.mat-focused .mat-form-field-label {
-  color: #0061ed;
-}
-
-.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-  color: #0061ed;
-}
-
-.mat-simple-snackbar-action {
-  color: #ffffff;
-}
-.mat-stroked-button.mat-primary:hover {
-  background-color: #0061ed;
-  color: #ffffff;
-}
-.mat-stroked-button.mat-warn {
-  color: #f44336;
-  border-color: #f44336;
-}
-.mat-stroked-button.mat-warn:hover {
-  background-color: #f44336;
-  color: #ffffff;
-}
-.mat-stroked-button.mat-accent {
-  color: #1a8f47;
-  border-color: #1a8f47;
-}
-.mat-flat-button.mat-accent,
-.mat-raised-button.mat-accent,
-.mat-fab.mat-accent,
-.mat-mini-fab.mat-accent {
-  background-color: #1a8f47;
-}
-.mat-flat-button.mat-accent:hover,
-.mat-raised-button.mat-accent:hover,
-.mat-fab.mat-accent:hover,
-.mat-mini-fab.mat-accent:hover {
-  background-color: #136332;
-}
-
-.mat-flat-button.mat-warn:hover,
-.mat-raised-button.mat-warn:hover,
-.mat-fab.mat-warn:hover,
-.mat-mini-fab.mat-warn:hover {
-  background-color: #c43228;
-}
-.mat-stroked-button.mat-accent:hover {
-  background-color: #1a8f47;
-  color: #ffffff;
-}
-.mat-drawer-container {
-  background-color: #fdfdfd !important;
-}
-
-tr.mat-row:hover {
-  background-color: #f0f0f0;
-}
-
-.mat-expansion-panel-header.mat-expanded {
-  padding-bottom: 5px;
-  background-color: #ffffff;
-  height: 50px;
-}
-
-button.mat-focus-indicator {
-  background: transparent;
-}
-// .mat-focus-indicator{
-//   background-color: #ffffff;
-// }
-
-.mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-dsiabled='true']) {
-  background-color: #ffffff;
-}
-
-.full-width {
-  width: 100%;
-}
-.margin-top {
-  margin-top: 15px;
-}
-.margin-left {
-  margin-left: 10px;
-}
-.margin-right {
-  margin-right: 10px;
-}
-.radio-label-padding {
-  padding-right: 10px;
-  color: grey;
-}
-.form {
-  margin-left: 10px;
-  border: 2px solid lightgray;
-  width: 600px;
-  padding-left: 5px;
-  margin-top: 10px;
-}
-
-dynamic-form app-heading h5:first-child {
-  margin-top: 40px;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 0px;
-}
-
-// /* Track */
-// ::-webkit-scrollbar-track {
-//   box-shadow: inset 0 0 5px grey;
-//   border-radius: 10px;
-// }
-
-// /* Handle */
-// ::-webkit-scrollbar-thumb {
-//   background: #a0a0a0;
-//   border-radius: 10px;
-// }
-
-// /* Handle on hover */
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #0061ed;
-// }
+@include mat.all-component-themes($theme);

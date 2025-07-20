@@ -1,12 +1,13 @@
 mat-toolbar {
   margin-bottom: 20px;
 }
-.container {
-  .mat-form-field {
-    width: 100%;
-  }
-  button {
-    margin-top: 40px;
-    float: right;
-  }
+
+.container .mat-mdc-form-field {
+  width: 100%;
+  display: block;
+}
+
+button {
+  margin-top: 40px;
+  float: right
 }

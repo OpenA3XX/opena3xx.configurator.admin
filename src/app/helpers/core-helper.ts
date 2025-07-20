@@ -16,7 +16,7 @@ export class CoreHelper {
   }
 
   isRunningAsApp(): boolean {
-    let userAgent = navigator.userAgent.toLowerCase();
+    const userAgent = navigator.userAgent.toLowerCase();
     if (userAgent.indexOf(' electron/') > -1) {
       return true;
     }

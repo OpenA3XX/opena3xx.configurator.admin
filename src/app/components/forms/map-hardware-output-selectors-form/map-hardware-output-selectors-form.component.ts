@@ -128,7 +128,7 @@ export class MapHardwareOutputSelectorsFormComponent implements OnInit {
       .then((hardwareBoardList: HardwareBoardDto[]) => {
         this.hardwareBoardsFieldConfig.options = [];
         _.forEach(hardwareBoardList, (item) => {
-          var optionList: OptionList = {
+          const optionList: OptionList = {
             key: item.id.toString(),
             value: item.name,
           };
@@ -146,7 +146,7 @@ export class MapHardwareOutputSelectorsFormComponent implements OnInit {
 
   onSubmit(formData: any) {
     if (this.mapHardwareOutputSelectorsForm.valid) {
-      var linkExtenderBitToHardwareOutputSelector: MapExtenderBitToHardwareOutputSelectorDto = {
+      const linkExtenderBitToHardwareOutputSelector: MapExtenderBitToHardwareOutputSelectorDto = {
         hardwareBoardId: this.mapHardwareOutputSelectorsForm.value.hardwareBoards,
         hardwareExtenderBusBitId: this.mapHardwareOutputSelectorsForm.value.hardwareBusExtenderBits,
         hardwareExtenderBusId: this.mapHardwareOutputSelectorsForm.value.hardwareBusExtenders,
@@ -184,7 +184,7 @@ export class MapHardwareOutputSelectorsFormComponent implements OnInit {
       .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto) => {
         console.log(hardwareBoardDetailsDto);
         _.each(hardwareBoardDetailsDto.ioExtenderBuses, (ioExtender) => {
-          var optionList: OptionList = {
+          const optionList: OptionList = {
             key: ioExtender.id.toString(),
             value: ioExtender.name.replace('Bus', 'Bus '),
           };
@@ -230,7 +230,7 @@ export class MapHardwareOutputSelectorsFormComponent implements OnInit {
               }
               optionListValue = optionListValue.replace('Bit', 'Bit ');
 
-              var optionList: OptionList = {
+              const optionList: OptionList = {
                 key: ioExtenderBit.id.toString(),
                 value: optionListValue,
               };
