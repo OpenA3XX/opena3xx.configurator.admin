@@ -12,8 +12,11 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 2400,
     height: 1200,
-    minWidth: 2400,
-    minHeight: 1200,
+    minWidth: 800,
+    minHeight: 600,
+    resizable: true,
+    movable: true,
+    movableByWindowBackground: true,
     frame: false,
     icon: path.join(__dirname + '/dist/assets/app-icons/icons/png/512x512.png'),
     webPreferences: {

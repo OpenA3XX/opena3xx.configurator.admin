@@ -1,98 +1,122 @@
-.opena3xx-container {
-  // display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 64px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.opena3xx-sidenav-content {
-  // display: flex;
-  // height: 100%;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-  // overflow:auto;
-}
-.opena3xx-sidenav {
-  user-select: none;
-}
-.full-width {
-  width: 100%;
-}
-mat-list-item.selected {
-  background-color: #f5f5f5;
-}
-.menu-button {
-  transition: 300ms ease-in-out;
-  transform: rotate(0deg);
-}
-.menu-button.rotated {
-  transform: rotate(180deg);
-}
-.submenu {
-  overflow-y: hidden;
-  transition: transform 300ms ease;
-  transform: scaleY(0);
-  transform-origin: top;
-  padding-left: 30px;
-}
-.submenu.expanded {
-  transform: scaleY(1);
+// Electron window dragging styles
+.electron-app {
+  .windows-draggable {
+    -webkit-app-region: drag;
+    cursor: grab;
+    user-select: none;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  // Make buttons and interactive elements non-draggable
+  .opena3xx-toolbar {
+    button, mat-icon, .spacer {
+      -webkit-app-region: no-drag;
+    }
+
+    // Ensure the toolbar itself allows dragging except for interactive elements
+    .windows-draggable {
+      -webkit-app-region: drag;
+      pointer-events: auto;
+    }
+  }
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
+// General toolbar styles
+.opena3xx-toolbar {
+  position: relative;
+  z-index: 1000;
 
-img:hover {
-  cursor: pointer;
-}
+  .spacer {
+    flex: 1 1 auto;
+  }
 
-.api-status {
-  background-color: #ff2d2d;
-  position: absolute;
-  top: 0;
-  left: calc(50% - 245px);
-  padding: 10px;
-  width: 510px;
-  border-radius: 0px 0px 30px 30px;
-  p {
-    color: #fff;
-    padding: 0;
+  .opena3xx-app-name {
+    font-size: 18px;
+    font-weight: 500;
     margin: 0;
-    text-align: center;
+    user-select: none;
   }
-  mat-icon {
-    position: absolute;
-    top: 16%;
-    left: 10%;
-  }
-  animation: fadeIn ease 1s;
-  -webkit-animation: fadeIn ease 1s;
-  -moz-animation: fadeIn ease 1s;
-  -o-animation: fadeIn ease 1s;
-  -ms-animation: fadeIn ease 1s;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
+// API status styles
+.api-status {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+
+  p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
-  100% {
-    opacity: 1;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// Sidenav styles
+.opena3xx-container {
+  height: calc(100vh - 64px); // Subtract toolbar height
+}
+
+.opena3xx-sidenav {
+  width: 250px;
+  transition: width 0.3s ease;
+
+  &.collapsed {
+    width: 20px;
+  }
+
+  mat-nav-list {
+    padding: 0;
+  }
+
+  mat-list-item {
+    height: 48px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    mat-icon {
+      margin-right: 16px;
+    }
+
+    .full-width {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 
 .opena3xx-sidenav-right {
-  mat-icon.ok {
-    color: #1a8f47;
+  width: 200px;
+
+  mat-list-item {
+    height: 48px;
+
+    .ok {
+      color: #4caf50;
+    }
+
+    .error {
+      color: #f44336;
+    }
   }
-  mat-icon.error {
-    color: #f44336;
-  }
-  span {
-    text-align: right;
-  }
+}
+
+.opena3xx-sidenav-content {
+  padding: 20px;
+  overflow-y: auto;
 }

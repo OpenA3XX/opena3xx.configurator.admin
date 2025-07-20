@@ -1,223 +1,226 @@
-<div *ngIf="!apiAvailabilityStatus" class="api-status">
-  <p>
-    <mat-icon>error</mat-icon>
-    Cannot communicate with OpenA3XX Peripheral API.
-  </p>
-</div>
-<mat-toolbar class="opena3xx-toolbar" color="primary">
-  <button (click)="toggle()" mat-icon-button>
-    <mat-icon *ngIf="isExpanded">menu_open</mat-icon>
-    <mat-icon *ngIf="!isExpanded">menu</mat-icon>
-  </button>
-  <div
-    class="windows-draggable"
-    style="position: absolute; left: 50px; width: 80%; height: 50px"
-  ></div>
+<div [class.electron-app]="isElectron">
 
-  <h1 class="opena3xx-app-name">OpenA3XX Configurator</h1>
-  <span class="spacer"></span>
-  <button
-    (click)="toggle()"
-    mat-icon-button
-    matBadge="1"
-    matBadgeColor="accent"
-    matBadgeSize="small"
-    matTooltip="Notifications"
-  >
-    <mat-icon>notification_important</mat-icon>
-  </button>
-  <button
-    (click)="fullscreen()"
-    mat-icon-button
-    matBadgeColor="accent"
-    matTooltip="Toggle Fullscreen"
-  >
-    <mat-icon *ngIf="!isFullscreen">settings_overscan</mat-icon>
-    <mat-icon *ngIf="isFullscreen">close_fullscreen</mat-icon>
-  </button>
-  <button (click)="toggleRight()" mat-icon-button>
-    <mat-icon *ngIf="isRightMenuExpanded">menu</mat-icon>
-    <mat-icon *ngIf="!isRightMenuExpanded">menu_open</mat-icon>
-  </button>
-  <button (click)="exit()" *ngIf="isElectron" mat-icon-button>
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-toolbar>
-
-<mat-sidenav-container autosize class="opena3xx-container">
-  <!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
-  <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
-    <img
-      (click)="clickDashboard()"
-      *ngIf="isExpanded || isShowing"
-      alt=""
-      src="assets/logo.png"
-      style="margin: 18px 10px 10px 63px"
-     width="100px"/>
-    <mat-nav-list>
-      <mat-list-item
-        (click)="clickDashboard()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Home"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>home</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Home</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickManageHardwarePanels()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Aircraft Models"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>airplanemode_active</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Aircraft Models</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickManageHardwarePanels()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Hardware Panels"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>dashboard</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Panels</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickManageHardwareInputTypes()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Hardware Input Types"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>login</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Input Types</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickManageHardwareOutputTypes()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Hardware Output Types"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>logout</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Output Types</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickManageHardwareBoards()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Hardware Boards"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>developer_board</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Boards</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickManageSimulatorEvents()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Simulator Events"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>laptop</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Simulator Events</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickManageHardwareOutputTypes()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Connectivity"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>cell_wifi</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Connectivity</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickManageHardwareOutputTypes()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Monitoring"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>bar_chart</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Monitoring</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickConsole()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Console"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>web_asset</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Real Time Console</span>
-      </mat-list-item>
-
-      <mat-list-item
-        (click)="clickSettings()"
-        class="parent"
-        matTooltip="1 Pending Notification"
-        matTooltipPosition="after"
-      >
-        <mat-icon
-          matListItemIcon
-          matBadge="1"
-          matBadgeColor="accent"
-          matBadgePosition="before"
-          matBadgeSize="small"
-        >notification_important</mat-icon
-        >
-        <span *ngIf="isExpanded || isShowing" class="full-width">Notifications</span>
-
-      </mat-list-item>
-      <mat-list-item
-        (click)="clickSettings()"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Settings"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>settings</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Settings</span>
-      </mat-list-item>
-      <mat-list-item
-        (click)="exit()"
-        *ngIf="isElectron"
-        [matTooltipDisabled]="isExpanded"
-        class="parent"
-        matTooltip="Exit"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon>exit_to_app</mat-icon>
-        <span *ngIf="isExpanded || isShowing" class="full-width">Quit App</span>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <div class="opena3xx-sidenav-content">
-    <router-outlet></router-outlet>
+  <div *ngIf="!apiAvailabilityStatus" class="api-status">
+    <p>
+      <mat-icon>error</mat-icon>
+      Cannot communicate with OpenA3XX Peripheral API.
+    </p>
   </div>
+  <mat-toolbar class="opena3xx-toolbar" color="primary">
+    <button (click)="toggle()" mat-icon-button>
+      <mat-icon *ngIf="isExpanded">menu_open</mat-icon>
+      <mat-icon *ngIf="!isExpanded">menu</mat-icon>
+    </button>
+    <div
+      class="windows-draggable"
+      style="position: absolute; left: 50px; width: 80%; height: 50px"
+    ></div>
 
-  <mat-sidenav class="opena3xx-sidenav-right" mode="side" opened="true" position="end">
-    <mat-nav-list>
-      <mat-list-item *ngIf="isRightMenuExpanded || isRightMenuShowing" class="parent" title="Home">
-        <span class="full-width" style="font-weight: bold">System Status</span>
-      </mat-list-item>
-      <mat-list-item class="parent" title="Flight Simulator 2020">
-        <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">MSFS 2020</span>
-        <mat-icon class="error">flight</mat-icon>
-      </mat-list-item>
-      <mat-list-item class="parent" title="RabbitMQ">
-        <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">RabbitMQ</span>
-        <mat-icon class="ok">mail</mat-icon>
-      </mat-list-item>
-      <mat-list-item class="parent" title="SEQ">
-        <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">SEQ</span>
-        <mat-icon class="ok">format_align_left</mat-icon>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
-</mat-sidenav-container>
+    <h1 class="opena3xx-app-name">OpenA3XX Configurator</h1>
+    <span class="spacer"></span>
+    <button
+      (click)="toggle()"
+      mat-icon-button
+      matBadge="1"
+      matBadgeColor="accent"
+      matBadgeSize="small"
+      matTooltip="Notifications"
+    >
+      <mat-icon>notification_important</mat-icon>
+    </button>
+    <button
+      (click)="fullscreen()"
+      mat-icon-button
+      matBadgeColor="accent"
+      matTooltip="Toggle Fullscreen"
+    >
+      <mat-icon *ngIf="!isFullscreen">settings_overscan</mat-icon>
+      <mat-icon *ngIf="isFullscreen">close_fullscreen</mat-icon>
+    </button>
+    <button (click)="toggleRight()" mat-icon-button>
+      <mat-icon *ngIf="isRightMenuExpanded">menu</mat-icon>
+      <mat-icon *ngIf="!isRightMenuExpanded">menu_open</mat-icon>
+    </button>
+    <button (click)="exit()" *ngIf="isElectron" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container autosize class="opena3xx-container">
+    <!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
+    <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
+      <img
+        (click)="clickDashboard()"
+        *ngIf="isExpanded || isShowing"
+        alt=""
+        src="assets/logo.png"
+        style="margin: 18px 10px 10px 63px"
+       width="100px"/>
+      <mat-nav-list>
+        <mat-list-item
+          (click)="clickDashboard()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Home"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>home</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Home</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickManageHardwarePanels()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Aircraft Models"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>airplanemode_active</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Aircraft Models</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickManageHardwarePanels()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Hardware Panels"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>dashboard</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Panels</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickManageHardwareInputTypes()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Hardware Input Types"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>login</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Input Types</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickManageHardwareOutputTypes()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Hardware Output Types"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>logout</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Output Types</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickManageHardwareBoards()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Hardware Boards"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>developer_board</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Boards</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickManageSimulatorEvents()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Simulator Events"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>laptop</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Simulator Events</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickManageHardwareOutputTypes()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Connectivity"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>cell_wifi</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Connectivity</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickManageHardwareOutputTypes()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Monitoring"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>bar_chart</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Monitoring</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickConsole()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Console"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>web_asset</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Real Time Console</span>
+        </mat-list-item>
+
+        <mat-list-item
+          (click)="clickSettings()"
+          class="parent"
+          matTooltip="1 Pending Notification"
+          matTooltipPosition="after"
+        >
+          <mat-icon
+            matListItemIcon
+            matBadge="1"
+            matBadgeColor="accent"
+            matBadgePosition="before"
+            matBadgeSize="small"
+          >notification_important</mat-icon
+          >
+          <span *ngIf="isExpanded || isShowing" class="full-width">Notifications</span>
+
+        </mat-list-item>
+        <mat-list-item
+          (click)="clickSettings()"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Settings"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>settings</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Settings</span>
+        </mat-list-item>
+        <mat-list-item
+          (click)="exit()"
+          *ngIf="isElectron"
+          [matTooltipDisabled]="isExpanded"
+          class="parent"
+          matTooltip="Exit"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>exit_to_app</mat-icon>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Quit App</span>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <div class="opena3xx-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+
+    <mat-sidenav class="opena3xx-sidenav-right" mode="side" opened="true" position="end">
+      <mat-nav-list>
+        <mat-list-item *ngIf="isRightMenuExpanded || isRightMenuShowing" class="parent" title="Home">
+          <span class="full-width" style="font-weight: bold">System Status</span>
+        </mat-list-item>
+        <mat-list-item class="parent" title="Flight Simulator 2020">
+          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">MSFS 2020</span>
+          <mat-icon class="error">flight</mat-icon>
+        </mat-list-item>
+        <mat-list-item class="parent" title="RabbitMQ">
+          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">RabbitMQ</span>
+          <mat-icon class="ok">mail</mat-icon>
+        </mat-list-item>
+        <mat-list-item class="parent" title="SEQ">
+          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">SEQ</span>
+          <mat-icon class="ok">format_align_left</mat-icon>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>

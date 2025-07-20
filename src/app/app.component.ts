@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from './services/data.service';
@@ -14,7 +15,8 @@ import { ExitAppDialog } from './views/exit-app-dialog.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit
+{
   isElectron: boolean = false;
   isExpanded: boolean = true;
   isRightMenuExpanded: boolean = true;
@@ -55,7 +57,10 @@ export class AppComponent {
     private cookieService: CookieService,
     private dataService: DataService,
     private dialog: MatDialog,
-    private coreHelper: CoreHelper
+    private coreHelper: CoreHelper,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
+
   ) {
     this.isExpanded = this.coreHelper.toBoolean(
       this.cookieService.get('opena3xx.sidemenu.left.visibility.state')
@@ -70,6 +75,15 @@ export class AppComponent {
     }, this.apiHealthPollingTime);
 
     this.isElectron = this.coreHelper.isRunningAsApp();
+  }
+
+  ngOnInit() {
+    this.isElectron = this.coreHelper.isRunningAsApp();
+
+    if (this.isElectron) {
+      // Add electron-app class to body
+      this.renderer.addClass(this.document.body, 'electron-app');
+    }
   }
 
   private checkApiHealth() {
