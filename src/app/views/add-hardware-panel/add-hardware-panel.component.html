@@ -1,40 +1,70 @@
 <mat-toolbar>
-  <mat-icon>dashboard</mat-icon>&nbsp;
+  <mat-icon>add_box</mat-icon>&nbsp;
   <span>Add Hardware Panel</span>
 </mat-toolbar>
-<mat-toolbar class="sub-menu-navigation">
+<mat-toolbar>
   <button mat-flat-button color="primary" (click)="back()">Back</button>
 </mat-toolbar>
 
-<mat-expansion-panel expanded>
-  <mat-expansion-panel-header>
-    <mat-panel-title> Add Hardware Panel </mat-panel-title>
-  </mat-expansion-panel-header>
-  <div class="container">
-    <div class="container">
-      <form [formGroup]="addHardwarePanelForm" (submit)="onSubmit($event)">
-        <opena3xx-input [field]="hardwarePanelNameFieldConfig" [group]="addHardwarePanelForm">
-        </opena3xx-input>
+<div class="container">
+  <form [formGroup]="addHardwarePanelForm" (ngSubmit)="onSubmit($event)">
 
-        <opena3xx-forms-select [field]="aircraftModelFieldConfig" [group]="addHardwarePanelForm">
-        </opena3xx-forms-select>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{hardwarePanelNameFieldConfig.label}}</mat-label>
+      <input matInput
+             [type]="hardwarePanelNameFieldConfig.inputType"
+             formControlName="hardwarePanelName"
+             [placeholder]="hardwarePanelNameFieldConfig.label">
+      <mat-hint>{{hardwarePanelNameFieldConfig.hint}}</mat-hint>
+      <mat-error *ngIf="addHardwarePanelForm.get('hardwarePanelName')?.hasError('required')">
+        Hardware Panel Name is Required
+      </mat-error>
+    </mat-form-field>
 
-        <opena3xx-forms-select [field]="cockpitAreaFieldConfig" [group]="addHardwarePanelForm">
-        </opena3xx-forms-select>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{aircraftModelFieldConfig.label}}</mat-label>
+      <mat-select formControlName="aircraftModel">
+        <mat-option *ngFor="let option of aircraftModelFieldConfig.options" [value]="option.value">
+          {{option.value}}
+        </mat-option>
+      </mat-select>
+      <mat-hint>{{aircraftModelFieldConfig.hint}}</mat-hint>
+      <mat-error *ngIf="addHardwarePanelForm.get('aircraftModel')?.hasError('required')">
+        Aircraft Model is Required
+      </mat-error>
+    </mat-form-field>
 
-        <opena3xx-forms-select
-          [field]="hardwarePanelOwnerFieldConfig"
-          [group]="addHardwarePanelForm"
-        >
-        </opena3xx-forms-select>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{cockpitAreaFieldConfig.label}}</mat-label>
+      <mat-select formControlName="cockpitArea">
+        <mat-option *ngFor="let option of cockpitAreaFieldConfig.options" [value]="option.value">
+          {{option.value}}
+        </mat-option>
+      </mat-select>
+      <mat-hint>{{cockpitAreaFieldConfig.hint}}</mat-hint>
+      <mat-error *ngIf="addHardwarePanelForm.get('cockpitArea')?.hasError('required')">
+        Cockpit Area is Required
+      </mat-error>
+    </mat-form-field>
 
-        <div class="full-width margin-top">
-          <button type="submit" mat-flat-button color="primary" (click)="onSave()">
-            <mat-icon>check</mat-icon>
-            Save
-          </button>
-        </div>
-      </form>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{hardwarePanelOwnerFieldConfig.label}}</mat-label>
+      <mat-select formControlName="hardwarePanelOwner">
+        <mat-option *ngFor="let option of hardwarePanelOwnerFieldConfig.options" [value]="option.value">
+          {{option.value}}
+        </mat-option>
+      </mat-select>
+      <mat-hint>{{hardwarePanelOwnerFieldConfig.hint}}</mat-hint>
+      <mat-error *ngIf="addHardwarePanelForm.get('hardwarePanelOwner')?.hasError('required')">
+        Hardware Panel Owner is Required
+      </mat-error>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button type="submit" mat-flat-button color="primary">
+        <mat-icon>save</mat-icon>
+        Save
+      </button>
     </div>
-  </div>
-</mat-expansion-panel>
+  </form>
+</div>

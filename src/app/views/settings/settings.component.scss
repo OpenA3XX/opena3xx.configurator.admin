@@ -1,13 +1,70 @@
+
 mat-toolbar {
   margin-bottom: 20px;
 }
 
-.container .mat-mdc-form-field {
-  width: 100%;
-  display: block;
+.container {
+  // Force vertical layout for form fields
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 100%; // Optional: limit width for better UX
+  margin: 0 auto;   // Optional: center the form
+
+  .mat-mdc-form-field {
+    width: 100%;
+    display: block;
+
+
+    // Ensure each form field takes full width and breaks to new line
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    // Fix for any inline display issues
+    .mat-mdc-form-field-flex {
+      width: 100%;
+    }
+
+    // Ensure the input control spans full width
+    .mat-mdc-form-field-infix {
+      width: 100%;
+    }
+  }
+
+  // If you're using dynamic-form, ensure it doesn't interfere
+  dynamic-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+  }
 }
 
 button {
   margin-top: 40px;
-  float: right
+  float: right;
+  clear: both; // Ensure button appears below all form fields
+}
+
+// Alternative approach if the above doesn't work:
+// Force each form field wrapper to be full width
+::ng-deep .container {
+  .mat-mdc-form-field {
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box;
+
+    // Override any flexbox properties that might cause horizontal layout
+    flex: none !important;
+    flex-direction: column !important;
+  }
+
+  // If using Angular Reactive Forms or dynamic forms
+  .form-group,
+  .field-wrapper {
+    width: 100%;
+    display: block;
+    margin-bottom: 16px;
+  }
 }

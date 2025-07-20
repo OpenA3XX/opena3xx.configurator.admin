@@ -1,10 +1,10 @@
+
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FieldConfig } from 'src/app/models/field.interface';
-import { AddHardwarePanelDto } from 'src/app/models/models';
-import { DataService } from 'src/app/services/data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DataService } from '../../services/data.service'; // Adjust path as needed
+import { FieldConfig } from '../../models/field.interface'; // Adjust path as needed
 
 @Component({
   selector: 'opena3xx-add-hardware-panel',
@@ -14,6 +14,7 @@ import { DataService } from 'src/app/services/data.service';
 export class AddHardwarePanelComponent {
   addHardwarePanelForm: FormGroup;
 
+  // Your field configs remain the same
   public hardwarePanelNameFieldConfig: FieldConfig = {
     type: 'input',
     label: 'Hardware Panel Name',
@@ -45,7 +46,7 @@ export class AddHardwarePanelComponent {
       {
         name: 'required',
         validator: Validators.required,
-        message: 'Aircraft Model is  Required',
+        message: 'Aircraft Model is Required',
       },
     ],
   };
@@ -74,7 +75,7 @@ export class AddHardwarePanelComponent {
       {
         name: 'required',
         validator: Validators.required,
-        message: 'Cockpit Area is  Required',
+        message: 'Cockpit Area is Required',
       },
     ],
   };
@@ -103,24 +104,46 @@ export class AddHardwarePanelComponent {
       {
         name: 'required',
         validator: Validators.required,
-        message: 'Hardware Panel Owner is is Required',
+        message: 'Hardware Panel Owner is Required',
       },
     ],
   };
 
   constructor(
     private router: Router,
-    formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
-    this.addHardwarePanelForm = formBuilder.group({
-      hardwarePanelName: [, { validators: [Validators.required], updateOn: 'change' }],
-      aircraftModel: [, { validators: [Validators.required], updateOn: 'change' }],
-      cockpitArea: [, { validators: [Validators.required], updateOn: 'change' }],
-      hardwarePanelOwner: [, { validators: [Validators.required], updateOn: 'change' }],
+    // ✅ Correct way to define FormControls in Angular 17
+    this.addHardwarePanelForm = this.formBuilder.group({
+      hardwarePanelName: ['', [Validators.required]],
+      aircraftModel: ['', [Validators.required]],
+      cockpitArea: ['', [Validators.required]],
+      hardwarePanelOwner: ['', [Validators.required]],
     });
+
+    // Alternative syntax if you need updateOn strategy:
+    // this.addHardwarePanelForm = this.formBuilder.group({
+    //   hardwarePanelName: this.formBuilder.control('', {
+    //     validators: [Validators.required],
+    //     updateOn: 'change'
+    //   }),
+    //   aircraftModel: this.formBuilder.control('', {
+    //     validators: [Validators.required],
+    //     updateOn: 'change'
+    //   }),
+    //   cockpitArea: this.formBuilder.control('', {
+    //     validators: [Validators.required],
+    //     updateOn: 'change'
+    //   }),
+    //   hardwarePanelOwner: this.formBuilder.control('', {
+    //     validators: [Validators.required],
+    //     updateOn: 'change'
+    //   }),
+    // });
   }
+
   back() {
     this.router.navigateByUrl('/manage/hardware-panels');
   }
@@ -136,9 +159,12 @@ export class AddHardwarePanelComponent {
           this.snackBar.open('Hardware Panel Added Successfully', 'Ok', {
             duration: 3000,
           });
+          // Navigate back after successful save
+          this.back();
         })
-        .catch(() => {
-          this.snackBar.open('Error has occured when adding Hardware Panel', 'Ok', {
+        .catch((error) => {
+          console.error('Error adding hardware panel:', error);
+          this.snackBar.open('Error has occurred when adding Hardware Panel', 'Ok', {
             duration: 3000,
           });
         });
@@ -150,7 +176,7 @@ export class AddHardwarePanelComponent {
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
-      control!.markAsTouched({ onlySelf: true });
+      control?.markAsTouched({ onlySelf: true });
     });
   }
 }

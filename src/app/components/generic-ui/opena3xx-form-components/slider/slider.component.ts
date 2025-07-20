@@ -1,55 +1,49 @@
-
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { FieldConfig } from "../../../../models/field.interface";
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FieldConfig } from '../../../../models/field.interface';
 
 @Component({
   selector: 'opena3xx-slider',
-  styles: [
-    `
-      mat-hint {
-        font-size: 75%;
-      }
-
-      mat-slider {
-        width: 100%;
-      }
-    `,
-  ],
   template: `
-    <div class="full-width margin-top" [formGroup]="group">
-      <label class="radio-label-padding">{{ field.label }}: {{ value }}</label>
-      <mat-slider [min]="field.minValue" [max]="field.maxValue" [step]="field.stepValue">
-        <input
-          matSliderThumb
-          [formControlName]="field.name"
-          (input)="onSliderValuetChange($event)"
-          [value]="field.value"
-        />
+    <div class="slider-container" [formGroup]="group" *ngIf="field">
+      <mat-label>{{field.label}}</mat-label>
+      <mat-slider
+        [min]="field.minValue || 0"
+        [max]="field.maxValue || 100"
+        [step]="field.stepValue || 1"
+        [value]="field.value || 0"
+        (input)="onSliderChange($event)"
+        class="full-width">
+        <input matSliderThumb [formControlName]="field.name">
       </mat-slider>
+      <mat-hint *ngIf="field.hint">{{field.hint}}</mat-hint>
     </div>
-    <mat-hint>{{ field.hint }}</mat-hint>
   `,
+  styles: [`
+    .slider-container {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .full-width {
+      width: 100%;
+    }
+  `]
 })
 export class SliderComponent implements OnInit {
-  @Output() onSliderValueChange = new EventEmitter<any>();
   @Input() field!: FieldConfig;
   @Input() group!: FormGroup;
-  value: number = 0;
-
-  constructor() {}
+  @Output() onSliderValueChange = new EventEmitter<any>();
 
   ngOnInit() {
-    this.value = this.field.value;
-    if (this.group.get(this.field.name)) {
-      this.group.get(this.field.name)?.valueChanges.subscribe((value) => {
-        this.value = value;
-      });
+    if (!this.field) {
+      console.error('SliderComponent: field input is required');
+    }
+    if (!this.group) {
+      console.error('SliderComponent: group input is required');
     }
   }
 
-  onSliderValuetChange(event: any) {
-    this.value = event.target.value;
+  onSliderChange(event: any) {
     this.onSliderValueChange.emit(event);
   }
 }

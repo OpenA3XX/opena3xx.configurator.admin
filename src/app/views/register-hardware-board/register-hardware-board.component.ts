@@ -1,4 +1,3 @@
-
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,7 +12,6 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class RegisterHardwareBoardComponent implements OnInit {
   public registerHardwareBoardForm: FormGroup;
-
   public totalDiscreteInputOutput: number;
 
   public boardNameFieldConfig: FieldConfig = {
@@ -43,16 +41,17 @@ export class RegisterHardwareBoardComponent implements OnInit {
   };
 
   constructor(
-    formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router,
     private dataService: DataService,
     private _snackBar: MatSnackBar,
   ) {
-    this.registerHardwareBoardForm = formBuilder.group({
-      name: [, { validators: [Validators.required], updateOn: 'change' }],
-      hardwareBusExtendersCount: [, { validators: [Validators.required], updateOn: 'change' }],
+    // ✅ Fixed FormControl syntax
+    this.registerHardwareBoardForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      hardwareBusExtendersCount: [1, [Validators.required]],
     });
-    this.totalDiscreteInputOutput = 16; //Default
+    this.totalDiscreteInputOutput = 16; // Default
   }
 
   ngOnInit() {}
@@ -63,7 +62,14 @@ export class RegisterHardwareBoardComponent implements OnInit {
         .addHardwareBoards(this.registerHardwareBoardForm.value)
         .toPromise()
         .then(() => {
-          this._snackBar.open('Hardware Board Registed Successfully', 'Ok', {
+          this._snackBar.open('Hardware Board Registered Successfully', 'Ok', {
+            duration: 5000,
+          });
+          this.goBack();
+        })
+        .catch((error) => {
+          console.error('Error registering hardware board:', error);
+          this._snackBar.open('Error occurred while registering Hardware Board', 'Ok', {
             duration: 5000,
           });
         });
@@ -75,7 +81,7 @@ export class RegisterHardwareBoardComponent implements OnInit {
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
-      control!.markAsTouched({ onlySelf: true });
+      control?.markAsTouched({ onlySelf: true });
     });
   }
 

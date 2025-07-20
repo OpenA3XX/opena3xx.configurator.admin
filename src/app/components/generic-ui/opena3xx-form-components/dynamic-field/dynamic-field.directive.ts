@@ -1,10 +1,11 @@
+
 import {
-  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   Input,
   OnInit,
-  ViewContainerRef
+  ViewContainerRef,
+  Type
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
@@ -18,7 +19,7 @@ import { HeadingComponent } from "../heading/heading.component";
 import { SlideToggleComponent } from "../slide-toggle/slide-toggle.component";
 import { SliderComponent } from "../slider/slider.component";
 
-const componentMapper = {
+const componentMapper: { [key: string]: Type<any> } = {
   input: InputComponent,
   button: ButtonComponent,
   select: SelectComponent,
@@ -29,22 +30,26 @@ const componentMapper = {
   slidertoggle: SlideToggleComponent,
   slider: SliderComponent
 };
+
 @Directive({
-  selector: "[dynamicField]"
+  selector: '[opena3xxDynamicField]'
 })
 export class DynamicFieldDirective implements OnInit {
   @Input() field!: FieldConfig;
   @Input() group!: FormGroup;
-  componentRef: any;
-  constructor(
-    private resolver: ComponentFactoryResolver,
-    private container: ViewContainerRef
-  ) {}
+  componentRef: ComponentRef<any> | null = null;
+
+  constructor(private container: ViewContainerRef) {}
+
   ngOnInit() {
-    const factory = this.resolver.resolveComponentFactory(
-      componentMapper[this.field.type]
-    );
-    this.componentRef = this.container.createComponent(factory);
+    const componentType = componentMapper[this.field.type];
+    if (!componentType) {
+      console.error(`Component type "${this.field.type}" not found in componentMapper`);
+      return;
+    }
+
+    // Modern way to create components (Angular 13+)
+    this.componentRef = this.container.createComponent(componentType);
     this.componentRef.instance.field = this.field;
     this.componentRef.instance.group = this.group;
   }

@@ -18,6 +18,10 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
     "lib": [
       "ES2022",
       "dom"
@@ -25,8 +29,13 @@
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
+//    "strictInjectionParameters": true,
+//    "strictInputAccessModifiers": true,
+    "enableIvy": true,
+    "preserveWhitespaces": false,
+    "strictInjectionParameters": false,
+    "strictInputAccessModifiers": false,
     "strictTemplates": false
+
   }
 }

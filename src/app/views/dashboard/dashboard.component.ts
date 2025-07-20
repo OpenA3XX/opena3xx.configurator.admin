@@ -7,19 +7,19 @@ import { Component } from '@angular/core';
     <mat-grid-list cols="8" rowHeight="6:3">
       <mat-grid-tile>
         <button mat-flat-button color="primary">
-          <mat-icon mat-list-icon>home</mat-icon>
+          <mat-icon>home</mat-icon>
           Home
         </button>
       </mat-grid-tile>
       <mat-grid-tile>
         <button mat-flat-button color="primary">
-          <mat-icon mat-list-icon>login</mat-icon>
+          <mat-icon>login</mat-icon>
           Hardware Input Types
         </button>
       </mat-grid-tile>
       <mat-grid-tile>
         <button mat-flat-button color="primary">
-          <mat-icon mat-list-icon>logout</mat-icon>
+          <mat-icon>logout</mat-icon>
           Hardware Output Types
         </button>
       </mat-grid-tile>

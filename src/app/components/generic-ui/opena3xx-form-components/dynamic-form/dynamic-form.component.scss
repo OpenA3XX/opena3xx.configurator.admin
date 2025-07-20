@@ -1,0 +1,20 @@
+.dynamic-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .field-container {
+    width: 100%;
+    margin-bottom: 16px;
+    display: block;
+
+    .mat-mdc-form-field {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .full-width {
+    width: 100% !important;
+  }
+}

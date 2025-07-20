@@ -67,4 +67,60 @@ body{
   background: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
 }
+// Additional fixes for common v17 issues
+.mat-mdc-form-field {
+  .mat-mdc-form-field-flex {
+    align-items: center;
+  }
+}
+
+// Ensure proper spacing for toolbars
+.mat-toolbar {
+  &.mat-primary {
+    background: mat.get-color-from-palette($primary);
+    color: mat.get-color-from-palette($primary, default-contrast);
+  }
+}
+
+.mat-drawer-container {
+  margin-bottom: 30px;
+}
+
+// Global form styling
+.form-container {
+  .mat-mdc-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  // Custom component styling
+  opena3xx-input,
+  opena3xx-forms-select,
+  opena3xx-slider {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}
+
+// Utility classes
+.full-width {
+  width: 100% !important;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  &.column {
+    flex-direction: column;
+  }
+
+  .form-field {
+    flex: 1;
+  }
+}
+
+
 @include mat.all-component-themes($theme);

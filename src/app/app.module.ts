@@ -76,6 +76,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     DateComponent,
     RadiobuttonComponent,
     CheckboxComponent,
+    HeadingComponent,
     SlideToggleComponent,
     SliderComponent,
     AutocompleteComponent,
@@ -102,8 +103,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    CodeEditorModule.forRoot(),
-    HeadingComponent,
+    CodeEditorModule.forRoot()
   ],
   providers: [
     DataService,

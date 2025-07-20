@@ -4,7 +4,8 @@
   "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --hmr --live-reload=false --poll=2000",
+    "start:fast": "ng serve --hmr --live-reload=false --source-map=false --vendor-chunk=false --optimization=false",
     "build": "ng build",
     "test": "ng test",
     "e2e": "ng e2e",
