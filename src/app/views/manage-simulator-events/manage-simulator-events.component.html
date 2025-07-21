@@ -21,27 +21,47 @@
 
   <ng-container matColumnDef="friendlyName">
     <th mat-header-cell *matHeaderCellDef>Friendly Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.friendlyName }}</td>
+    <td mat-cell *matCellDef="let element"
+        [matTooltip]="element.friendlyName"
+        matTooltipPosition="above">
+      {{ element.friendlyName }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="eventName">
     <th mat-header-cell *matHeaderCellDef>Event name</th>
-    <td mat-cell *matCellDef="let element">{{ element.eventName }}</td>
+    <td mat-cell *matCellDef="let element"
+        [matTooltip]="element.eventName"
+        matTooltipPosition="above">
+      {{ element.eventName }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="simulatorEventTypeName">
     <th mat-header-cell *matHeaderCellDef>Simulator Event Type</th>
-    <td mat-cell *matCellDef="let element">{{ element.simulatorEventTypeName }}</td>
+    <td mat-cell *matCellDef="let element"
+        [matTooltip]="element.simulatorEventTypeName"
+        matTooltipPosition="above">
+      {{ element.simulatorEventTypeName }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="simulatorSoftwareName">
     <th mat-header-cell *matHeaderCellDef>Simulator Software</th>
-    <td mat-cell *matCellDef="let element">{{ element.simulatorSoftwareName }}</td>
+    <td mat-cell *matCellDef="let element"
+        [matTooltip]="element.simulatorSoftwareName"
+        matTooltipPosition="above">
+      {{ element.simulatorSoftwareName }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="simulatorEventSdkTypeName">
     <th mat-header-cell *matHeaderCellDef>Simulator Event SDK Type</th>
-    <td mat-cell *matCellDef="let element">{{ element.simulatorEventSdkTypeName }}</td>
+    <td mat-cell *matCellDef="let element"
+        [matTooltip]="element.simulatorEventSdkTypeName"
+        matTooltipPosition="above">
+      {{ element.simulatorEventSdkTypeName }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="details">

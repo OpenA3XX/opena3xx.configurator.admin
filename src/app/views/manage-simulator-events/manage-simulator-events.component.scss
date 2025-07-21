@@ -1,6 +1,74 @@
 table {
   width: 100%;
+  table-layout: fixed; // Ensures columns respect width settings
+
   mat-icon.dark {
     color: #404040;
+  }
+
+  // Optimized column widths for 8 columns
+  .mat-column-id {
+    width: 60px;
+    min-width: 60px;
+  }
+
+  .mat-column-friendlyName {
+    width: 180px;
+    min-width: 180px;
+  }
+
+  .mat-column-eventName {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  .mat-column-simulatorEventTypeName {
+    width: 150px;
+    min-width: 150px;
+  }
+
+  .mat-column-simulatorSoftwareName {
+    width: 130px;
+    min-width: 130px;
+  }
+
+  .mat-column-simulatorEventSdkTypeName {
+    width: 150px;
+    min-width: 150px;
+  }
+
+  .mat-column-details {
+    width: 100px;
+    min-width: 100px;
+  }
+
+  .mat-column-info {
+    width: 60px;
+    min-width: 60px;
+  }
+
+  // Ensure cells don't wrap content
+  .mat-cell, .mat-header-cell {
+    padding: 8px 4px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  // Handle text overflow for long content columns
+  .mat-column-friendlyName .mat-cell,
+  .mat-column-eventName .mat-cell,
+  .mat-column-simulatorEventTypeName .mat-cell,
+  .mat-column-simulatorSoftwareName .mat-cell,
+  .mat-column-simulatorEventSdkTypeName .mat-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 0; // Forces text-overflow to work with table-layout: fixed
+  }
+
+  // Button styling
+  button {
+    margin: 2px;
+    font-size: 12px;
+    min-width: 80px;
   }
 }

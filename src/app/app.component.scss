@@ -26,10 +26,14 @@
 
 // General toolbar styles
 .opena3xx-toolbar {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow-sm);
+  background-color: var(--mat-sys-primary, #1976d2);
 
   .spacer {
     flex: 1 1 auto;
@@ -46,6 +50,11 @@
 
 // API status styles
 .api-status {
+  position: fixed;
+  top: 64px; // Position below the fixed toolbar
+  left: 0;
+  right: 0;
+  z-index: 999;
   background-color: var(--error-color);
   color: white;
   padding: var(--spacing-sm) var(--spacing-md);
@@ -85,6 +94,12 @@
   height: calc(100vh - 64px);
   width: 100% !important;
   position: relative;
+  margin-top: 64px; // Add margin to account for fixed toolbar
+
+  // Adjust margin when API status is shown
+  &.with-api-status {
+    margin-top: 112px; // 64px toolbar + 48px API status
+  }
 
   // Let Angular Material handle the layout, just ensure proper dimensions
   .mat-sidenav-container {

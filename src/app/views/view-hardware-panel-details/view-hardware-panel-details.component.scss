@@ -9,33 +9,65 @@ mat-toolbar.hardware-outputs {
 
 table {
   width: 100%;
+  table-layout: fixed; // Ensures columns respect width settings
+
   button {
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 2px;
   }
   button.view-button {
-    width: 64px;
+    width: 45px;
+    // min-width: 45px;
   }
   button.small {
-    width: 50px;
+    width: 45px;
+    // min-width: 45px;
   }
   button.small:hover {
     background-color: #505050;
     color: #ffffff;
   }
+
+  // Optimized column widths
   .mat-column-id {
-    width: 200px;
+    width: 80px;
+    min-width: 80px;
   }
   .mat-column-name {
-    width: 400px;
+    width: 250px;
+    min-width: 250px;
   }
-  .mat-column-hardwareOutputType,
+    .mat-column-hardwareOutputType,
   .mat-column-hardwareInputType {
-    width: 400px;
+    width: 200px;
+    min-width: 200px;
+  }
+
+  // Action column needs the most space
+  .mat-column-action {
+    width: calc(100% - 530px); // Takes remaining space
+    min-width: 500px;
+  }
+
+  // Ensure cells don't wrap content
+  .mat-cell {
+    padding: 8px 4px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  // Handle text overflow for specific columns
+  .mat-column-hardwareInputType .mat-cell,
+  .mat-column-hardwareOutputType .mat-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 0; // Forces text-overflow to work with table-layout: fixed
   }
 }
 
 mat-grid-list {
   .mat-grid-tile {
+    height:16px;
     .data-wrapper {
       border: 1px solid #d0d0d0;
       padding: 5px;
@@ -82,38 +114,38 @@ mat-grid-list {
 
 // Button styling for action columns
 .action-button {
-  min-width: 140px !important;
+  min-width: 120px !important;
   margin: 2px !important;
   text-align: center;
+  font-size: 12px;
 }
 
 .action-button-small {
-  min-width: 120px !important;
+  min-width: 100px !important;
   margin: 2px !important;
+  font-size: 12px;
 }
 
 .action-button-large {
-  min-width: 160px !important;
+  min-width: 140px !important;
   margin: 2px !important;
+  font-size: 12px;
 }
 
-// Alternative: Flexible button container
+// Flexible button container for action columns
 .action-buttons-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px;
+  align-items: center;
 
   .mat-mdc-button {
-    min-width: 140px;
+    flex-shrink: 0;
     white-space: nowrap;
   }
 }
 
-// Make action column wider
-.mat-column-action {
-  width: 400px !important;
-  min-width: 400px !important;
-}
+// Action column styles moved to table section above
 
 // Responsive table
 .mat-mdc-table {

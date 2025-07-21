@@ -2,18 +2,21 @@
   <opena3xx-forms-select
     [field]="hardwareBoardsFieldConfig"
     [group]="mapHardwareInputSelectorsForm"
-    (onSelectChange)="onHardwareBoardSelectChange($event)"
+    (selectChange)="onHardwareBoardSelectChange($event)"
   >
   </opena3xx-forms-select>
 
   <opena3xx-forms-select
     [field]="ioExtenderFieldConfig"
     [group]="mapHardwareInputSelectorsForm"
-    (onSelectChange)="onIoExtenderSelectChange($event)"
+    (selectChange)="onIoExtenderSelectChange($event)"
   >
   </opena3xx-forms-select>
 
-  <opena3xx-forms-select [field]="ioExtenderBitFieldConfig" [group]="mapHardwareInputSelectorsForm">
+  <opena3xx-forms-select
+    [field]="ioExtenderBitFieldConfig"
+    [group]="mapHardwareInputSelectorsForm"
+    (selectChange)="onIoExtenderBitSelectChange($event)">
   </opena3xx-forms-select>
 
   <div class="full-width margin-top">

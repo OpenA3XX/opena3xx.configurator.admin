@@ -32,6 +32,16 @@ export class SelectComponent {
 
   @Input() group!: FormGroup;
 
+  ngOnInit() {
+    console.log('SelectComponent initialized with field:', this.field);
+    console.log('Field options:', this.field?.options);
+  }
+
+  ngOnChanges() {
+    console.log('SelectComponent field changed:', this.field);
+    console.log('Field options updated:', this.field?.options);
+  }
+
   onSelectComponentChange(event: {value: string}) {
     this.selectChange.emit(event);
     console.log('Event OnSelectComponent Change Emmited');

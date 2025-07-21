@@ -284,6 +284,10 @@ mat-sidenav-content, .mat-sidenav-content,
   }
 }
 
+.mat-expansion-panel{
+  overflow:scroll !important;
+}
+
 // Angular Material Dual-Sidenav Layout - Work WITH Material's System
 ::ng-deep {
   // Main sidenav container - let Material handle the layout

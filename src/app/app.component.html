@@ -46,7 +46,7 @@
     </button>
   </mat-toolbar>
 
-  <mat-sidenav-container autosize class="opena3xx-container">
+  <mat-sidenav-container autosize class="opena3xx-container" [class.with-api-status]="!apiAvailabilityStatus">
     <!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
     <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
       <img

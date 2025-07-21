@@ -23,7 +23,7 @@
   <span>General Information</span>
 </mat-toolbar>
 
-<mat-grid-list cols="8" rowHeight="6:3" *ngIf="hardwarePanelDto">
+<mat-grid-list cols="8" rowHeight="6:4" *ngIf="hardwarePanelDto">
   <mat-grid-tile>
     <div class="data-wrapper">
       <div class="title">Hardware Panel Name</div>
@@ -115,76 +115,84 @@
 
     <ng-container matColumnDef="hardwareInputType">
       <th mat-header-cell *matHeaderCellDef>Discrete Inputs & Input Type</th>
-      <td mat-cell *matCellDef="let element">{{ element.hardwareInputType }} input type.</td>
+      <td mat-cell *matCellDef="let element"
+          [matTooltip]="element.hardwareInputType + ' input type.'"
+          matTooltipPosition="above">
+        {{ element.hardwareInputType }} input type.
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element">
-        <button
-          (click)="showInputSelectorDetails(element)"
-          mat-stroked-button
-          color="primary"
-          class="view-button"
-          matTooltip=" View {{ element.hardwareInputSelectors.length }} Input(s)"
-          matTooltipPosition="before"
-        >
-          <mat-icon>remove_red_eye</mat-icon>
-        </button>
+        <div class="action-buttons-container">
+          <button
+            (click)="showInputSelectorDetails(element)"
+            mat-stroked-button
+            color="primary"
+            class="view-button"
+            matTooltip="View {{ element.hardwareInputSelectors.length }} Input(s)"
+            matTooltipPosition="before"
+          >
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
 
-        <button
-          (click)="mapInputSelector(element)"
-          *ngIf="
-            element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware === false
-          "
-          mat-stroked-button
-          color="accent"
-        >
-          <mat-icon>link</mat-icon>
-          Set Mapping
-        </button>
-        <button
-          (click)="mapInputSelector(element)"
-          *ngIf="
-            element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware === true
-          "
-          mat-flat-button
-          color="warn"
-        >
-          <mat-icon>link</mat-icon>
-          Edit Mapping
-        </button>
+          <button
+            (click)="mapInputSelector(element)"
+            *ngIf="
+              element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware === false
+            "
+            mat-flat-button
+            color="primary"
+            class="action-button-small"
+          >
+            <mat-icon>link</mat-icon>
+            Set Mapping
+          </button>
+          <button
+            (click)="mapInputSelector(element)"
+            *ngIf="
+              element.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware === true
+            "
+            mat-flat-button
+            color="warn"
+            class="action-button-small"
+          >
+            <mat-icon>link</mat-icon>
+            Edit Mapping
+          </button>
 
-        <button
-          (click)="linkInputSelector(element)"
-          *ngIf="element.hardwareInputSelectors[0].simulatorEventDto !== null"
-          mat-flat-button
-          color="warn"
-          class="action-button-large"
-        >
-          <mat-icon>laptop</mat-icon>
-          Edit Sim Linking
-        </button>
-        <button
-          (click)="linkInputSelector(element)"
-          *ngIf="element.hardwareInputSelectors[0].simulatorEventDto === null"
-          mat-stroked-button
-          class="action-button-large"
-          color="accent"
-        >
-          <mat-icon>laptop</mat-icon>
-          Set Sim Linking
-        </button>
+          <button
+            (click)="linkInputSelector(element)"
+            *ngIf="element.hardwareInputSelectors[0].simulatorEventDto !== null"
+            mat-flat-button
+            color="warn"
+            class="action-button-large"
+          >
+            <mat-icon>laptop</mat-icon>
+            Edit Sim Link
+          </button>
+          <button
+            (click)="linkInputSelector(element)"
+            *ngIf="element.hardwareInputSelectors[0].simulatorEventDto === null"
+            mat-flat-button
+            class="action-button-large"
+            color="primary"
+          >
+            <mat-icon>laptop</mat-icon>
+            Set Sim Link
+          </button>
 
-        <button
-          matTooltip="Delete Hardware Input"
-          class="small"
-          (click)="deleteHardwareInput(element)"
-          mat-stroked-button
-          color="flat"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+          <button
+            matTooltip="Delete Hardware Input"
+            class="small"
+            (click)="deleteHardwareInput(element)"
+            mat-stroked-button
+            color="flat"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </td>
     </ng-container>
 
@@ -199,6 +207,7 @@
     <span>No Hardware Outputs Defined</span>
   </mat-toolbar>
 </div>
+
 <div *ngIf="showHardwareOutputs">
   <mat-toolbar class="hardware-outputs">
     <mat-icon>logout</mat-icon>&nbsp;
@@ -217,32 +226,38 @@
 
     <ng-container matColumnDef="hardwareOutputType">
       <th mat-header-cell *matHeaderCellDef>Output Type</th>
-      <td mat-cell *matCellDef="let element">{{ element.hardwareOutputType }}</td>
+      <td mat-cell *matCellDef="let element"
+          [matTooltip]="element.hardwareOutputType"
+          matTooltipPosition="above">
+        {{ element.hardwareOutputType }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
 
       <td mat-cell *matCellDef="let element">
-        <button
-          (click)="showOutputSelectorDetails(element)"
-          mat-stroked-button
-          color="primary"
-          class="view-button"
-          matTooltip=" View {{ element.hardwareOutputSelectors.length }} Output(s)"
-          matTooltipPosition="before"
-        >
-          <mat-icon>remove_red_eye</mat-icon>
-        </button>
+        <div class="action-buttons-container">
+          <button
+            (click)="showOutputSelectorDetails(element)"
+            mat-stroked-button
+            color="primary"
+            class="view-button"
+            matTooltip="View {{ element.hardwareOutputSelectors.length }} Output(s)"
+            matTooltipPosition="before"
+          >
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
 
-        <button (click)="mapOutputSelector(element)" mat-stroked-button color="warn">
-          <mat-icon>link</mat-icon>
-          Set Mapping
-        </button>
-        <button (click)="mapOutputSelector(element)" mat-stroked-button color="accent">
-          <mat-icon>laptop</mat-icon>
-          Set Sim Linking
-        </button>
+          <button (click)="mapOutputSelector(element)" mat-stroked-button color="warn" class="action-button-small">
+            <mat-icon>link</mat-icon>
+            Set Mapping
+          </button>
+          <button (click)="mapOutputSelector(element)" mat-stroked-button color="accent" class="action-button-large">
+            <mat-icon>laptop</mat-icon>
+            Set Sim Link
+          </button>
+        </div>
       </td>
     </ng-container>
 

@@ -2,10 +2,30 @@ mat-form-field {
   width: 100%;
 }
 
-mat-expansion-panel {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  button {
-    float: right;
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+
+  h1 {
+    padding: 16px 24px;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface, #333);
+    border-bottom: 1px solid var(--mat-sys-outline-variant, #e0e0e0);
+    flex-shrink: 0;
+  }
+
+  mat-expansion-panel {
+    flex: 1;
+    overflow-y: auto;
+    margin: 0;
+
+    .mat-expansion-panel-body {
+      padding: 16px;
+    }
   }
 }
