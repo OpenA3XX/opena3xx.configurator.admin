@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FieldConfig, OptionList } from 'src/app/models/field.interface';
 import * as _ from 'lodash';
@@ -134,7 +134,10 @@ export class LinkHardwareInputSelectorsFormComponent {
     this.simulatorEventTestInProgress = false;
   }
 
-  onSubmit(formData: any) {
+  onSubmit(event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
     //if (this.linkHardwareInputSelectorsForm.valid) {
     if (this.simulatorEventTestInProgress) {
       this.dataService

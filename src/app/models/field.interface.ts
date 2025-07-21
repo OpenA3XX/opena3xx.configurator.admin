@@ -1,17 +1,24 @@
+import { ValidatorFn } from '@angular/forms';
+
 export interface Validator {
   name: string;
-  validator: any;
+  validator: ValidatorFn;
   message: string;
+  pattern?: string;
 }
+
+export interface FormConfiguration {
+  [key: string]: string | number | boolean;
+}
+
 export interface FieldConfig {
   label?: string;
   name?: string;
   inputType?: string;
-  //options?: {[key: string]: string};
   options?: OptionList[];
-  collections?: any;
+  collections?: OptionList[];
   type?: string;
-  value?: any;
+  value?: string | number | boolean;
   validations?: Validator[];
   hint?: string;
   stepValue?: string;

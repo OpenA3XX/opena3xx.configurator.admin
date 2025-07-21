@@ -32,7 +32,7 @@ import { FieldConfig } from '../../../../models/field.interface';
 export class SliderComponent implements OnInit {
   @Input() field!: FieldConfig;
   @Input() group!: FormGroup;
-  @Output() onSliderValueChange = new EventEmitter<any>();
+  @Output() sliderValueChange = new EventEmitter<number>();
 
   ngOnInit() {
     if (!this.field) {
@@ -43,7 +43,9 @@ export class SliderComponent implements OnInit {
     }
   }
 
-  onSliderChange(event: any) {
-    this.onSliderValueChange.emit(event);
+  onSliderChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const value = parseInt(target.value, 10);
+    this.sliderValueChange.emit(value);
   }
 }

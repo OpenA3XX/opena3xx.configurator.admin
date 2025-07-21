@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { LinkHardwareInputSelectorsDialogComponent } from 'src/app/components/link-hardware-input-selectors-dialog/link-hardware-input-selectors-dialog.component';
 import { MapHardwareInputSelectorsDialogComponent } from 'src/app/components/map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
 import { MapHardwareOutputSelectorsDialogComponent } from 'src/app/components/map-hardware-output-selectors-dialog/map-hardware-output-selectors-dialog.component';
@@ -88,7 +88,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
         width: '900px',
       }
     );
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.fetchData();
     });
   }
@@ -101,7 +101,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
         width: '900px',
       }
     );
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.fetchData();
     });
   }

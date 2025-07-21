@@ -3,6 +3,6 @@
   <span>Settings</span>
 </mat-toolbar>
 <div class="container">
-  <opena3xx-dynamic-form *ngIf="dataLoaded" [fields]="settingsConfig" (submit)="submit($event)">
+  <opena3xx-dynamic-form *ngIf="dataLoaded" [fields]="settingsConfig" (formSubmit)="onFormSubmit($event)">
   </opena3xx-dynamic-form>
 </div>

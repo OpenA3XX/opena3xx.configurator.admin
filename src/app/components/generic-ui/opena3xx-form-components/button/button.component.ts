@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../../../models/field.interface";
 @Component({
@@ -10,9 +10,8 @@ import { FieldConfig } from "../../../../models/field.interface";
 `,
   styles: []
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
   field!: FieldConfig;
   group!: FormGroup;
   constructor() {}
-  ngOnInit() {}
 }

@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../services/data.service'; // Adjust path as needed
 import { FieldConfig } from '../../models/field.interface'; // Adjust path as needed
@@ -150,12 +151,11 @@ export class AddHardwarePanelComponent {
 
   onSave() {}
 
-  onSubmit(hardwarePanelDto: any) {
+  onSubmit() {
     if (this.addHardwarePanelForm.valid) {
-      this.dataService
-        .addHardwarePanel(this.addHardwarePanelForm.value)
-        .toPromise()
-        .then(() => {
+              firstValueFrom(this.dataService
+          .addHardwarePanel(this.addHardwarePanelForm.value))
+          .then(() => {
           this.snackBar.open('Hardware Panel Added Successfully', 'Ok', {
             duration: 3000,
           });

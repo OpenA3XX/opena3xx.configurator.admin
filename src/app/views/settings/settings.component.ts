@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { map} from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { FieldConfig } from 'src/app/models/field.interface';
+import { FieldConfig, FormConfiguration } from 'src/app/models/field.interface';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { DataService } from 'src/app/services/data.service';
 import { DynamicFormComponent } from 'src/app/components/generic-ui/opena3xx-form-components/dynamic-form/dynamic-form.component';
@@ -41,8 +42,8 @@ export class SettingsComponent{
     this.router.navigateByUrl(`/`)
   }
 
-  submit(configuration: any) {
-    this.dataService.updateAllConfiguration(configuration).toPromise().then(()=>{
+  onFormSubmit(configuration: FormConfiguration) {
+    firstValueFrom(this.dataService.updateAllConfiguration(configuration)).then(()=>{
       this._snackBar.open("Settings Saved Successfully", "Ok", {
         duration: 5000
       });

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
+
 import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HardwareInputTypeDto } from 'src/app/models/models';
 
 @Component({
   selector: 'opena3xx-edit-hardware-input-type',
@@ -12,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditHardwareInputTypeComponent implements OnInit {
   idParam!: number;
-  public data!: any;
+  public data!: HardwareInputTypeDto;
 
   constructor(
     private dataService: DataService,
@@ -31,12 +32,12 @@ export class EditHardwareInputTypeComponent implements OnInit {
       .pipe(
         tap((data) => console.log('Data received', data)),
         filter((x) => !!x),
-        map((data) => (this.data = data))
+        map((data) => (this.data = data as HardwareInputTypeDto))
       )
       .subscribe();
   }
 
-  updateHardwareInputType(f: NgForm) {
+  updateHardwareInputType() {
     console.log(this.data);
     this.dataService.updateHardwareInputType(this.data).subscribe();
 

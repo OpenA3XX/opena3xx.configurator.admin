@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FieldConfig } from 'src/app/models/field.interface';
-import { AddHardwarePanelDto } from 'src/app/models/models';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -116,10 +115,10 @@ export class EditHardwarePanelComponent {
     private dataService: DataService
   ) {
     this.addHardwarePanelForm = formBuilder.group({
-      hardwarePanelName: [, { validators: [Validators.required], updateOn: 'change' }],
-      aircraftModel: [, { validators: [Validators.required], updateOn: 'change' }],
-      cockpitArea: [, { validators: [Validators.required], updateOn: 'change' }],
-      hardwarePanelOwner: [, { validators: [Validators.required], updateOn: 'change' }],
+      hardwarePanelName: [null, { validators: [Validators.required], updateOn: 'change' }],
+      aircraftModel: [null, { validators: [Validators.required], updateOn: 'change' }],
+      cockpitArea: [null, { validators: [Validators.required], updateOn: 'change' }],
+      hardwarePanelOwner: [null, { validators: [Validators.required], updateOn: 'change' }],
     });
   }
   back() {
@@ -128,7 +127,10 @@ export class EditHardwarePanelComponent {
 
   onSave() {}
 
-  onSubmit(hardwarePanelDto: any) {
+  onSubmit(event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
     if (this.addHardwarePanelForm.valid) {
       this.dataService
         .addHardwarePanel(this.addHardwarePanelForm.value)

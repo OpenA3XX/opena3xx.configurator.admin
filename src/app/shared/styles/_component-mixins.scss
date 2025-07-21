@@ -1,0 +1,274 @@
+// OpenA3XX Component Mixins & Shared Styles
+
+// Table Mixin - Always 100% Width
+@mixin data-table {
+  table, mat-table, .mat-mdc-table {
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+
+    button {
+      margin-left: var(--spacing-sm);
+      transition: var(--transition-fast);
+
+      &.view-button {
+        min-width: 64px;
+      }
+
+      &.small {
+        min-width: 50px;
+
+        &:hover {
+          background-color: var(--mat-sys-surface-variant, #505050);
+          color: var(--mat-sys-on-surface-variant, #ffffff);
+        }
+      }
+    }
+
+    .mat-column-id {
+      width: 200px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.875rem;
+    }
+
+    .mat-column-name {
+      width: 400px;
+      font-weight: 500;
+    }
+
+    .mat-column-hardwareOutputType,
+    .mat-column-hardwareInputType {
+      width: 400px;
+    }
+
+    .mat-column-action {
+      width: 400px !important;
+      min-width: 400px !important;
+    }
+  }
+}
+
+// Action Button System
+@mixin action-buttons {
+  .action-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+
+    .mat-mdc-button {
+      min-width: 140px;
+      white-space: nowrap;
+      transition: var(--transition-fast);
+
+      &.small {
+        min-width: 120px;
+      }
+
+      &.large {
+        min-width: 160px;
+      }
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+      }
+    }
+  }
+}
+
+// Form Container Mixin - Always 100% Width
+@mixin form-container {
+  .container, form, .form-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg);
+    box-sizing: border-box !important;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      width: 100% !important;
+    }
+
+    .mat-mdc-form-field {
+      width: 100% !important;
+      margin-bottom: var(--spacing-md);
+    }
+
+    button {
+      align-self: flex-end;
+      margin-top: var(--spacing-lg);
+      min-width: 120px;
+    }
+  }
+}
+
+// Card Grid Mixin - Always 100% Width
+@mixin card-grid {
+  .card-grid, mat-grid-list, .mat-grid-list {
+    width: 100% !important;
+    max-width: none !important;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md);
+    box-sizing: border-box !important;
+
+    .card {
+      transition: var(--transition-normal);
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+    }
+  }
+}
+
+// Filter System - Always 100% Width
+@mixin filter-form {
+  .filter-form {
+    width: 100% !important;
+    max-width: none !important;
+    padding: var(--spacing-md);
+    background: var(--mat-sys-surface-container, #f5f5f5);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-md);
+    box-sizing: border-box !important;
+
+    mat-form-field {
+      width: 100% !important;
+    }
+  }
+}
+
+// Loader Mixin
+@mixin loading-state {
+  .loader {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--mat-sys-surface, white);
+
+    mat-progress-bar {
+      height: 3px;
+    }
+  }
+}
+
+// Expansion Panel Styling
+@mixin expansion-panel {
+  mat-expansion-panel {
+    margin-top: var(--spacing-md);
+    border-radius: var(--border-radius-md) !important;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+
+    &[aria-expanded="true"] {
+      box-shadow: var(--shadow-md);
+    }
+
+    .mat-expansion-panel-header {
+      font-weight: 500;
+    }
+
+    .mat-expansion-panel-content {
+      .mat-expansion-panel-body {
+        padding: var(--spacing-lg);
+      }
+    }
+  }
+}
+
+// Status Indicators
+@mixin status-indicators {
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    &.success {
+      background-color: rgba(76, 175, 80, 0.1);
+      color: var(--success-color);
+    }
+
+    &.error {
+      background-color: rgba(244, 67, 54, 0.1);
+      color: var(--error-color);
+    }
+
+    &.warning {
+      background-color: rgba(255, 152, 0, 0.1);
+      color: var(--warning-color);
+    }
+
+    &.info {
+      background-color: rgba(33, 150, 243, 0.1);
+      color: var(--info-color);
+    }
+  }
+}
+
+// Console/Terminal Styling
+@mixin terminal-style {
+  .console-container {
+    background: rgba(0, 0, 0, 0.95);
+    color: #ffffff;
+    padding: var(--spacing-md);
+    height: 300px;
+    overflow-y: auto;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-md);
+
+    b {
+      font-weight: 600;
+      color: #ffeb3b;
+    }
+
+    .cursor {
+      font-weight: bold;
+      color: #00bcd4;
+    }
+
+    .cursor-blink {
+      animation: blink 1500ms linear infinite;
+      display: inline-block;
+      height: 16px;
+      width: 8px;
+      margin-left: 4px;
+      background-color: #ffffff;
+      vertical-align: -1px;
+      border-radius: 1px;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+  }
+}
+
+// Responsive Utilities
+@mixin responsive-utilities {
+  // Hide/show on mobile
+  @media (max-width: 768px) {
+    .hide-mobile { display: none !important; }
+    .show-mobile { display: block !important; }
+  }
+
+  @media (min-width: 769px) {
+    .hide-desktop { display: none !important; }
+    .show-desktop { display: block !important; }
+  }
+}

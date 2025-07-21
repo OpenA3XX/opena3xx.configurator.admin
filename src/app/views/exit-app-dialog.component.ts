@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
     </div>
   `,
 })
-export class ExitAppDialog {
+export class ExitAppDialogComponent {
   exit() {
     window.close();
   }

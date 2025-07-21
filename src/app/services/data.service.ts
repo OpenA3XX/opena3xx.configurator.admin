@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+
 import {
   AddHardwarePanelDto,
   HardwareBoardDto,
@@ -121,7 +121,7 @@ export class DataService {
           responseType: 'text',
         })
         .toPromise();
-      if (data === 'Pong from OpenA3XX') {
+      if (data === '"Pong from OpenA3XX"') {
         return true;
       } else {
         return false;

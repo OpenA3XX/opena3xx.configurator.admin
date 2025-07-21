@@ -28,6 +28,8 @@
 .opena3xx-toolbar {
   position: relative;
   z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
 
   .spacer {
     flex: 1 1 auto;
@@ -38,22 +40,27 @@
     font-weight: 500;
     margin: 0;
     user-select: none;
+    color: var(--mat-sys-on-primary, white);
   }
 }
 
 // API status styles
 .api-status {
-  background-color: #f44336;
+  background-color: var(--error-color);
   color: white;
-  padding: 8px 16px;
+  padding: var(--spacing-sm) var(--spacing-md);
   text-align: center;
+  transition: var(--transition-normal);
+  border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+  box-shadow: var(--shadow-md);
 
   p {
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: var(--spacing-sm);
+    font-weight: 500;
   }
 
   mat-icon {
@@ -61,62 +68,173 @@
     width: 18px;
     height: 18px;
   }
+
+  &.connected {
+    background-color: var(--success-color);
+    animation: slideDown var(--transition-normal) ease-out;
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
 }
 
-// Sidenav styles
+// Angular Material Dual-Sidenav System (Working WITH Material's Layout)
 .opena3xx-container {
-  height: calc(100vh - 64px); // Subtract toolbar height
+  height: calc(100vh - 64px);
+  width: 100% !important;
+  position: relative;
+
+  // Let Angular Material handle the layout, just ensure proper dimensions
+  .mat-sidenav-container {
+    height: 100% !important;
+    width: 100% !important;
+  }
 }
 
 .opena3xx-sidenav {
-  width: 250px;
-  transition: width 0.3s ease;
+  transition: width var(--transition-normal) ease, box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  background: var(--mat-sys-surface-container, #f5f5f5);
 
   &.collapsed {
-    width: 20px;
+    width: 56px !important; // Material Design standard for collapsed nav
+
+    .nav-label {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
   }
 
   mat-nav-list {
-    padding: 0;
+    padding: var(--spacing-sm) 0;
   }
 
   mat-list-item {
     height: 48px;
     cursor: pointer;
+    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+    margin: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-sm);
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--opena3xx-primary);
+      transform: scaleY(0);
+      transition: var(--transition-fast);
+    }
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.08));
+      transform: translateX(2px);
+
+      &::before {
+        transform: scaleY(1);
+      }
+    }
+
+    &.active {
+      background-color: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.12));
+      color: var(--mat-sys-on-primary-container, var(--opena3xx-primary));
+
+      &::before {
+        transform: scaleY(1);
+      }
     }
 
     mat-icon {
-      margin-right: 16px;
+      margin-right: var(--spacing-md);
+      transition: var(--transition-fast);
     }
 
-    .full-width {
+    .nav-label {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      transition: opacity var(--transition-normal), transform var(--transition-normal);
     }
   }
 }
 
 .opena3xx-sidenav-right {
-  width: 200px;
+  // width: 200px !important;
+  box-shadow: var(--shadow-sm);
+  background: var(--mat-sys-surface-container, #f5f5f5);
+  transition: width var(--transition-normal) ease;
+
+  &.collapsed {
+    width: 56px !important;
+  }
 
   mat-list-item {
     height: 48px;
+    padding: var(--spacing-sm);
 
     .ok {
-      color: #4caf50;
+      color: var(--success-color);
+      font-weight: 500;
     }
 
     .error {
-      color: #f44336;
+      color: var(--error-color);
+      font-weight: 500;
+    }
+
+    .warning {
+      color: var(--warning-color);
+      font-weight: 500;
+    }
+
+    .info {
+      color: var(--info-color);
+      font-weight: 500;
     }
   }
 }
 
 .opena3xx-sidenav-content {
-  padding: 20px;
+  padding: var(--spacing-lg);
   overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--mat-sys-background, #fafafa);
+  box-sizing: border-box !important;
+
+  // Let Angular Material handle the width calculation
+  // It will automatically calculate: 100% - left-sidenav-width - right-sidenav-width
+
+  // Add smooth scrolling
+  scroll-behavior: smooth;
+
+  // Force all content inside to use available width
+  > * {
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+  }
+
+  // Custom scrollbar for webkit browsers
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--mat-sys-surface-variant, #f1f1f1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--mat-sys-outline, #888);
+    border-radius: var(--border-radius-sm);
+
+    &:hover {
+      background: var(--mat-sys-outline-variant, #555);
+    }
+  }
 }

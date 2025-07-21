@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { HardwareBoardDto } from 'src/app/models/models';
 import { DataService } from 'src/app/services/data.service';
 
@@ -18,15 +19,13 @@ export class ManageHardwareBoardsComponent {
     'details',
   ];
   dataSource = new MatTableDataSource<HardwareBoardDto>();
-  public data: any;
+  public data: HardwareBoardDto[];
   public data_loaded: boolean = false;
 
   constructor(private router: Router, private dataService: DataService) {
-    this.dataService
-      .getAllHardwareBoards()
-      .toPromise()
+    firstValueFrom(this.dataService.getAllHardwareBoards())
       .then((data) => {
-        this.data = data;
+        this.data = data as HardwareBoardDto[];
         this.dataSource = new MatTableDataSource<HardwareBoardDto>(this.data);
         this.data_loaded = true;
       });
@@ -35,5 +34,5 @@ export class ManageHardwareBoardsComponent {
     this.router.navigateByUrl('/register/hardware-board');
   }
 
-  onEditClick(id: number) {}
+  onEditClick() {}
 }

@@ -51,8 +51,11 @@
     <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
       <img
         (click)="clickDashboard()"
+        (keydown.enter)="clickDashboard()"
+        (keydown.space)="clickDashboard()"
+        tabindex="0"
         *ngIf="isExpanded || isShowing"
-        alt=""
+        alt="Dashboard"
         src="assets/logo.png"
         style="margin: 18px 10px 10px 63px"
        width="100px"/>
@@ -199,9 +202,9 @@
       </mat-nav-list>
     </mat-sidenav>
 
-    <div class="opena3xx-sidenav-content">
+    <mat-sidenav-content class="opena3xx-sidenav-content">
       <router-outlet></router-outlet>
-    </div>
+    </mat-sidenav-content>
 
     <mat-sidenav class="opena3xx-sidenav-right" mode="side" opened="true" position="end">
       <mat-nav-list>

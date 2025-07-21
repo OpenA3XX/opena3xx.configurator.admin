@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../../../../models/field.interface';
 @Component({
@@ -26,14 +26,14 @@ import { FieldConfig } from '../../../../models/field.interface';
   styles: [],
 })
 export class SelectComponent {
-  @Output() onSelectChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectChange: EventEmitter<{value: string}> = new EventEmitter<{value: string}>();
 
   @Input() field!: FieldConfig;
 
   @Input() group!: FormGroup;
 
-  onSelectComponentChange(event: any) {
-    this.onSelectChange.emit(event);
+  onSelectComponentChange(event: {value: string}) {
+    this.selectChange.emit(event);
     console.log('Event OnSelectComponent Change Emmited');
   }
 }

@@ -1,5 +1,6 @@
 // Update Material imports for v17
 @use '@angular/material' as mat;
+@import 'app/shared/styles/component-mixins';
 
 // Include the common styles for Angular Material
 @include mat.core();
@@ -52,20 +53,61 @@ $theme: mat.define-light-theme((
     accent: $accent,
     warn: $warn,
   ),
-  typography: mat.define-typography-config(),
-  plain-family: Roboto,
-  brand-family: Open Sans,
-  bold-weight: 900,
-  medium-weight: 500,
-  regular-weight: 300,
+  typography: mat.define-typography-config(
+    $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+    $headline-1: mat.define-typography-level(96px, 96px, 300, 'Roboto, "Helvetica Neue", sans-serif'),
+    $headline-2: mat.define-typography-level(60px, 60px, 300, 'Roboto, "Helvetica Neue", sans-serif'),
+    $headline-3: mat.define-typography-level(48px, 50px, 400, 'Roboto, "Helvetica Neue", sans-serif'),
+    $headline-4: mat.define-typography-level(34px, 40px, 400, 'Roboto, "Helvetica Neue", sans-serif'),
+    $headline-5: mat.define-typography-level(24px, 32px, 400, 'Roboto, "Helvetica Neue", sans-serif'),
+    $headline-6: mat.define-typography-level(20px, 32px, 500, 'Roboto, "Helvetica Neue", sans-serif'),
+  ),
 ));
+
+// CSS Custom Properties for Design System
+:root {
+  // OpenA3XX Brand Colors
+  --opena3xx-primary: #0061ed;
+  --opena3xx-primary-light: #64b5f6;
+  --opena3xx-primary-dark: #1976d2;
+
+  // Semantic Colors
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+
+  // Spacing System (8px base)
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  // Border Radius
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+
+  // Shadows
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  // Animation
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+}
 
 body{
   margin: 0;
   padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  background: var(--mat-sys-surface, #fff);
+  color: var(--mat-sys-on-surface, #1f1f1f);
+  line-height: 1.5;
 }
 // Additional fixes for common v17 issues
 .mat-mdc-form-field {
@@ -86,41 +128,223 @@ body{
   margin-bottom: 30px;
 }
 
-// Global form styling
-.form-container {
+// Global Form System - Always 100% Width
+form, .form-container {
+  width: 100% !important;
+  max-width: none !important;
+
   .mat-mdc-form-field {
-    width: 100%;
-    margin-bottom: 16px;
+    width: 100% !important;
+    margin-bottom: var(--spacing-md);
+
+    &.compact {
+      margin-bottom: var(--spacing-sm);
+    }
   }
 
-  // Custom component styling
+  // OpenA3XX Custom Components
   opena3xx-input,
   opena3xx-forms-select,
-  opena3xx-slider {
-    display: block;
-    width: 100%;
-    margin-bottom: 16px;
+  opena3xx-slider,
+  opena3xx-autocomplete {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: var(--spacing-md);
+    transition: var(--transition-fast);
   }
 }
 
-// Utility classes
+// Force all forms to be 100%
+form {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+// Modern Utility Classes
 .full-width {
   width: 100% !important;
 }
 
-.form-row {
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+// Flexbox Layout System
+.flex {
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
 
-  &.column {
-    flex-direction: column;
-  }
+  &.column { flex-direction: column; }
+  &.row { flex-direction: row; }
+  &.wrap { flex-wrap: wrap; }
+  &.center { align-items: center; justify-content: center; }
+  &.between { justify-content: space-between; }
+  &.around { justify-content: space-around; }
+  &.gap-sm { gap: var(--spacing-sm); }
+  &.gap-md { gap: var(--spacing-md); }
+  &.gap-lg { gap: var(--spacing-lg); }
+}
 
-  .form-field {
-    flex: 1;
+// Responsive Grid System - Always 100% Width
+.grid, mat-grid-list, mat-table, table {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.grid {
+  display: grid;
+  gap: var(--spacing-md);
+  width: 100% !important;
+
+  &.cols-1 { grid-template-columns: 1fr; }
+  &.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  &.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  &.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+  @media (max-width: 768px) {
+    &.cols-2, &.cols-3, &.cols-4 {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
+// Spacing Utilities
+.m-0 { margin: 0 !important; }
+.mt-sm { margin-top: var(--spacing-sm) !important; }
+.mt-md { margin-top: var(--spacing-md) !important; }
+.mt-lg { margin-top: var(--spacing-lg) !important; }
+.mb-sm { margin-bottom: var(--spacing-sm) !important; }
+.mb-md { margin-bottom: var(--spacing-md) !important; }
+.mb-lg { margin-bottom: var(--spacing-lg) !important; }
+.p-sm { padding: var(--spacing-sm) !important; }
+.p-md { padding: var(--spacing-md) !important; }
+.p-lg { padding: var(--spacing-lg) !important; }
+
+// Status Colors
+.success { color: var(--success-color) !important; }
+.warning { color: var(--warning-color) !important; }
+.error { color: var(--error-color) !important; }
+.info { color: var(--info-color) !important; }
+
 
 @include mat.all-component-themes($theme);
+
+// Force all tables, grids, and forms to be 100% width
+table, mat-table, .mat-mdc-table,
+mat-grid-list, .mat-grid-list,
+form, .form-container, .dynamic-form,
+.container,
+mat-sidenav-content, .mat-sidenav-content,
+.opena3xx-sidenav-content {
+  // width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+// Apply global component styles
+@include data-table;
+@include action-buttons;
+@include filter-form;
+@include loading-state;
+@include expansion-panel;
+@include status-indicators;
+@include terminal-style;
+@include responsive-utilities;
+
+// Global component overrides for better Material Design integration
+.mat-mdc-form-field {
+  &.mat-focused {
+    .mat-mdc-form-field-outline {
+      color: var(--opena3xx-primary) !important;
+    }
+  }
+}
+
+// Enhanced button styles
+.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-flat-button {
+  border-radius: var(--border-radius-md) !important;
+  transition: var(--transition-fast) !important;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+// Enhanced card styles
+.mat-mdc-card {
+  border-radius: var(--border-radius-md) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: var(--transition-normal) !important;
+
+  &:hover {
+    box-shadow: var(--shadow-md) !important;
+  }
+}
+
+// Angular Material Dual-Sidenav Layout - Work WITH Material's System
+::ng-deep {
+  // Main sidenav container - let Material handle the layout
+  mat-sidenav-container, .mat-sidenav-container {
+    width: 100% !important;
+    height: 100% !important;
+
+    // Ensure proper flexbox behavior for dual sidnavs
+    .mat-sidenav-backdrop {
+      display: none !important; // Prevent backdrop from interfering
+    }
+  }
+
+  // Main content area - let Angular Material calculate the width
+  mat-sidenav-content, .mat-sidenav-content {
+    // Remove width overrides that conflict with Material's calculations
+    // Angular Material will automatically calculate the correct width
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+
+    // Force all child elements in sidenav content to use available width
+    > * {
+      width: 100% !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+    }
+  }
+
+  // Ensure sidnavs have proper positioning
+  mat-sidenav {
+    &[position="start"], &:not([position]) {
+      // Left sidenav - let Material handle positioning
+      z-index: 1;
+    }
+
+    &[position="end"] {
+      // Right sidenav - ensure it's positioned correctly
+      z-index: 1;
+    }
+  }
+
+  // OpenA3XX specific content styling
+  .opena3xx-sidenav-content {
+    // Let Angular Material handle width calculation
+    // Just ensure content inside uses available space
+    table, form, .container, .dynamic-form,
+    mat-table, mat-grid-list, .filter-form {
+      width: 100% !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mat-sys-surface: #121212;
+    --mat-sys-on-surface: #ffffff;
+    --mat-sys-surface-container: #1e1e1e;
+    --mat-sys-surface-variant: #2a2a2a;
+    --mat-sys-background: #0f0f0f;
+  }
+}

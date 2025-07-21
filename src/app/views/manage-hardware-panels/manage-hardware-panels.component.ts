@@ -2,8 +2,6 @@ import {
   AfterViewInit,
   Component,
   OnChanges,
-  OnInit,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -42,7 +40,7 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnChanges {
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

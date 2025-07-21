@@ -2,9 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   HardwareBoardDetailsDto,
-  HardwareInputDto,
   HardwareOutputDto,
-  MapExtenderBitToHardwareInputSelectorDto,
   MapExtenderBitToHardwareOutputSelectorDto,
 } from 'src/app/models/models';
 import { FieldConfig, OptionList } from 'src/app/models/field.interface';
@@ -86,9 +84,9 @@ export class MapHardwareOutputSelectorsFormComponent implements OnInit {
     this.hardwareOutputDto = data;
 
     this.mapHardwareOutputSelectorsForm = formBuilder.group({
-      hardwareBoards: [, { validators: [Validators.required], updateOn: 'change' }],
-      hardwareBusExtenders: [, { validators: [Validators.required], updateOn: 'change' }],
-      hardwareBusExtenderBits: [, { validators: [Validators.required], updateOn: 'change' }],
+      hardwareBoards: [null, { validators: [Validators.required], updateOn: 'change' }],
+      hardwareBusExtenders: [null, { validators: [Validators.required], updateOn: 'change' }],
+      hardwareBusExtenderBits: [null, { validators: [Validators.required], updateOn: 'change' }],
     });
   }
   ngOnInit(): void {
@@ -144,7 +142,10 @@ export class MapHardwareOutputSelectorsFormComponent implements OnInit {
     });
   }
 
-  onSubmit(formData: any) {
+  onSubmit(event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
     if (this.mapHardwareOutputSelectorsForm.valid) {
       const linkExtenderBitToHardwareOutputSelector: MapExtenderBitToHardwareOutputSelectorDto = {
         hardwareBoardId: this.mapHardwareOutputSelectorsForm.value.hardwareBoards,
@@ -202,26 +203,26 @@ export class MapHardwareOutputSelectorsFormComponent implements OnInit {
       .toPromise()
       .then((hardwareBoardDetailsDto: HardwareBoardDetailsDto) => {
         _.each(hardwareBoardDetailsDto.ioExtenderBuses, (ioExtender) => {
-          if (ioExtender.id == extenderId) {
+          if (ioExtender.id === extenderId) {
             _.each(ioExtender.ioExtenderBusBits, (ioExtenderBit) => {
               let optionListValue: string = `${ioExtenderBit.name} `;
 
               if (
-                ioExtenderBit.hardwareInputSelectorFullName == null &&
-                ioExtenderBit.hardwareOutputSelectorFullName == null
+                            ioExtenderBit.hardwareInputSelectorFullName === null &&
+            ioExtenderBit.hardwareOutputSelectorFullName === null
               ) {
                 optionListValue += ' - Not Mapped';
               } else if (
-                ioExtenderBit.hardwareInputSelectorFullName != null &&
-                ioExtenderBit.hardwareOutputSelectorFullName == null
+                                  ioExtenderBit.hardwareInputSelectorFullName !== null &&
+                ioExtenderBit.hardwareOutputSelectorFullName === null
               ) {
                 optionListValue +=
                   ' - Currently Mapped to ' +
                   ioExtenderBit.hardwareInputSelectorFullName +
                   ' (Input from Board)';
               } else if (
-                ioExtenderBit.hardwareInputSelectorFullName == null &&
-                ioExtenderBit.hardwareOutputSelectorFullName != null
+                ioExtenderBit.hardwareInputSelectorFullName === null &&
+                                  ioExtenderBit.hardwareOutputSelectorFullName !== null
               ) {
                 optionListValue +=
                   ' - Currently Mapped to ' +

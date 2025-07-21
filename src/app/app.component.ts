@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DataService } from './services/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CoreHelper } from './helpers/core-helper';
-import { ExitAppDialog } from './views/exit-app-dialog.component';
+import { ExitAppDialogComponent } from './views/exit-app-dialog.component';
 
 /**
  * @title Autosize sidenav
@@ -101,7 +101,7 @@ export class AppComponent implements OnInit
       });
   }
   exit() {
-    this.dialog.open(ExitAppDialog);
+    this.dialog.open(ExitAppDialogComponent);
   }
   clickDashboard() {
     this.router.navigateByUrl(`/dashboard`);

@@ -1,20 +1,37 @@
 .dynamic-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
 
   .field-container {
-    width: 100%;
-    margin-bottom: 16px;
+    width: 100% !important;
+    margin-bottom: var(--spacing-md, 16px);
     display: block;
+    box-sizing: border-box !important;
 
     .mat-mdc-form-field {
-      width: 100%;
+      width: 100% !important;
       display: block;
     }
   }
 
   .full-width {
     width: 100% !important;
+    max-width: none !important;
+  }
+
+  // Force all child elements to be 100%
+  * {
+    box-sizing: border-box;
+  }
+
+  opena3xx-input,
+  opena3xx-forms-select,
+  opena3xx-slider,
+  opena3xx-autocomplete {
+    width: 100% !important;
+    display: block !important;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
+
 import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -36,7 +36,7 @@ export class EditHardwareOutputTypeComponent implements OnInit {
       .subscribe();
   }
 
-  updateHardwareOutputType(f: NgForm) {
+  updateHardwareOutputType() {
     console.log(this.data);
     this.dataService.updateHardwareOutputType(this.data).subscribe();
 

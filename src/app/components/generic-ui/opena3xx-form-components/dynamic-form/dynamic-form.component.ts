@@ -9,9 +9,10 @@ import {
 import {
   FormGroup,
   FormBuilder,
-  Validators
+  Validators,
+  ValidatorFn
 } from "@angular/forms";
-import { FieldConfig } from "../../../../models/field.interface";
+import { FieldConfig, Validator, FormConfiguration } from "../../../../models/field.interface";
 
 @Component({
   exportAs: "dynamicForm",
@@ -27,7 +28,7 @@ import { FieldConfig } from "../../../../models/field.interface";
 export class DynamicFormComponent implements OnInit {
   @Input() fields: FieldConfig[] = [];
   @Input() identifier!: number;
-  @Output() submit: EventEmitter<any> = new EventEmitter<any>();
+  @Output() formSubmit: EventEmitter<FormConfiguration> = new EventEmitter<FormConfiguration>();
 
   form: FormGroup;
 
@@ -50,7 +51,7 @@ export class DynamicFormComponent implements OnInit {
       if (this.identifier !== undefined) {
         this.form.value.identifier = this.identifier;
       }
-      this.submit.emit(this.form.value);
+      this.formSubmit.emit(this.form.value);
     } else {
       this.validateAllFormFields(this.form);
     }
@@ -77,13 +78,13 @@ export class DynamicFormComponent implements OnInit {
     return group;
   }
 
-  bindValidations(validations: any[]) {
+  bindValidations(validations: Validator[]): ValidatorFn[] | null {
     if (validations && validations.length > 0) {
-      const validList: any[] = [];
+      const validList: ValidatorFn[] = [];
       validations.forEach(valid => {
         if (valid.name === "required") {
           validList.push(Validators.required);
-        } else if (valid.name === "pattern") {
+        } else if (valid.name === "pattern" && valid.pattern) {
           validList.push(Validators.pattern(valid.pattern));
         } else if (valid.validator) {
           validList.push(valid.validator);

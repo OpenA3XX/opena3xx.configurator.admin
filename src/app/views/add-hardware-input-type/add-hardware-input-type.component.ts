@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
@@ -20,7 +20,7 @@ export class AddHardwareInputTypeComponent {
     private router: Router
   ) {}
 
-  addHardwareInputType(f: NgForm) {
+  addHardwareInputType() {
     if (this.hardwareInputTypeName !== '') {
       this.hardwreInputTypeDto.name = this.hardwareInputTypeName;
 

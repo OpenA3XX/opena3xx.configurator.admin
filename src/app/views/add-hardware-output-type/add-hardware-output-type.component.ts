@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter, map, tap } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,7 +21,7 @@ export class AddHardwareOutputTypeComponent {
     private router: Router
   ) {}
 
-  addHardwareOutputType(f: NgForm) {
+  addHardwareOutputType() {
     if (this.hardwareOutputTypeName !== '') {
       this.hardwreOutputTypeDto.name = this.hardwareOutputTypeName;
 

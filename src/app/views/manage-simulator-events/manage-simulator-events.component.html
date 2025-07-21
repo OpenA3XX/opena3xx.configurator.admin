@@ -11,7 +11,7 @@
 </mat-toolbar>
 
 <div class="loader">
-  <mat-progress-bar mode="indeterminate" *ngIf="data_loaded == false"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="data_loaded === false"></mat-progress-bar>
 </div>
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="id">

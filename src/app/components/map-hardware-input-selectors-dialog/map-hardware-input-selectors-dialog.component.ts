@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FieldConfig } from 'src/app/models/field.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -27,7 +27,7 @@ export class MapHardwareInputSelectorsDialogComponent {
 
   submit(formData: any) {
     const index = _.find(this.hardwareInputSelector.hardwareInputSelectors, (o) => {
-      return o.id == formData.identifier;
+      return o.id === formData.identifier;
     });
     this._snackBar.open(
       `Mapping for ${this.hardwareInputSelector.name} => State ${index.name} saved successfully`,

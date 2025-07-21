@@ -4,11 +4,7 @@ import {
   HubConnection,
   HubConnectionBuilder,
   HubConnectionState,
-  LogLevel,
 } from '@microsoft/signalr';
-import { from } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { MessagePackHubProtocol } from '@microsoft/signalr-protocol-msgpack';
 
 export interface FlightEvent {
   hardware_board_id: number;
@@ -56,7 +52,7 @@ export class RealTimeService {
 
   private pollReconnection = () => {
     return setInterval(() => {
-      if (this.hubConnection.state == HubConnectionState.Disconnected) {
+      if (this.hubConnection.state === HubConnectionState.Disconnected) {
         this.connect();
       }
     }, 1000);
@@ -66,7 +62,7 @@ export class RealTimeService {
     this.hubConnection
       .start()
       .then(() => (this.isConnected = true))
-      .catch((err) => (this.isConnected = false));
+      .catch(() => (this.isConnected = false));
   }
 
   private addListeners() {

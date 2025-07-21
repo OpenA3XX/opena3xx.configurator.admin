@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -54,9 +54,14 @@ export class RegisterHardwareBoardComponent implements OnInit {
     this.totalDiscreteInputOutput = 16; // Default
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Initialize component
+  }
 
-  onSubmit = (formData: any) => {
+  onSubmit = (event?: Event) => {
+    if (event) {
+      event.preventDefault();
+    }
     if (this.registerHardwareBoardForm.valid) {
       this.dataService
         .addHardwareBoards(this.registerHardwareBoardForm.value)

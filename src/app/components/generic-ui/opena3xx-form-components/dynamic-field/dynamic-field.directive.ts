@@ -19,7 +19,7 @@ import { HeadingComponent } from "../heading/heading.component";
 import { SlideToggleComponent } from "../slide-toggle/slide-toggle.component";
 import { SliderComponent } from "../slider/slider.component";
 
-const componentMapper: { [key: string]: Type<any> } = {
+const componentMapper: { [key: string]: Type<unknown> } = {
   input: InputComponent,
   button: ButtonComponent,
   select: SelectComponent,

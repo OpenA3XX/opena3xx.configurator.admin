@@ -49,7 +49,7 @@ import { RealTimeService } from './services/realtime.service';
 import { ConsoleComponent } from './views/console/console.component';
 import { AutocompleteComponent } from './components/generic-ui/opena3xx-form-components/autocomplete/autocomplete.component';
 import { MapHardwareOutputSelectorsFormComponent } from './components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component';
-import { ExitAppDialog } from './views/exit-app-dialog.component';
+import { ExitAppDialogComponent } from './views/exit-app-dialog.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
 
 @NgModule({
@@ -90,7 +90,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     DeleteHardwareInputDialogComponent,
     AddHardwarePanelComponent,
     EditHardwarePanelComponent,
-    ExitAppDialog,
+    ExitAppDialogComponent,
     ConsoleComponent,
     MapHardwareOutputSelectorsFormComponent,
   ],
