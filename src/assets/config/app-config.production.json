@@ -1,0 +1,13 @@
+{
+  "api": {
+    "baseUrl": "https://api.opena3xx.com"
+  },
+  "app": {
+    "name": "OpenA3XX Configurator Admin",
+    "version": "1.0.0"
+  },
+  "features": {
+    "enableDebugMode": false,
+    "enableConsoleLogging": false
+  }
+}

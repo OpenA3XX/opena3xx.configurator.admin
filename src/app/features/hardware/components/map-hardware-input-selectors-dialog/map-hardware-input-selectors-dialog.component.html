@@ -1,0 +1,21 @@
+<h1>Map {{ hardwareInputSelector.name }} - {{ hardwareInputSelector.hardwareInputType }}</h1>
+
+<div *ngIf="!hardwareInputSelector.hardwareInputSelectors || hardwareInputSelector.hardwareInputSelectors.length === 0" class="no-data">
+  <p>No hardware input selectors available for mapping.</p>
+</div>
+
+<mat-expansion-panel
+  expanded
+  *ngFor="let a of hardwareInputSelector.hardwareInputSelectors; let index = index"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Hardware Input Selector mapping -
+      {{ hardwareInputSelector.hardwareInputSelectors[index].name }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <opena3xx-map-hardware-input-selectors-form
+    [hardwareInputSelectorId]="hardwareInputSelector.hardwareInputSelectors[index].id"
+  >
+  </opena3xx-map-hardware-input-selectors-form>
+</mat-expansion-panel>

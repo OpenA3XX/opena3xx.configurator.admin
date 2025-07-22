@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddHardwareInputTypeComponent } from './views/add-hardware-input-type/add-hardware-input-type.component';
-import { AddHardwareOutputTypeComponent } from './views/add-hardware-output-type/add-hardware-output-type.component';
-import { AddHardwarePanelComponent } from './views/add-hardware-panel/add-hardware-panel.component';
-import { ConsoleComponent } from './views/console/console.component';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { EditHardwareInputTypeComponent } from './views/edit-hardware-input-type/edit-hardware-input-type.component';
-import { EditHardwareOutputTypeComponent } from './views/edit-hardware-output-type/edit-hardware-output-type.component';
-import { EditHardwarePanelComponent } from './views/edit-hardware-panel/edit-hardware-panel.component';
-import { ManageHardwareBoardsComponent } from './views/manage-hardware-boards/manage-hardware-board.component';
-import { ManageHardwareInputTypesComponent } from './views/manage-hardware-input-types/manage-hardware-input-types.component';
-import { ManageHardwareOutputTypesComponent } from './views/manage-hardware-output-types/manage-hardware-output-types.component';
-import { ManageHardwarePanelsComponent } from './views/manage-hardware-panels/manage-hardware-panels.component';
-import { ManageSimulatorEventsComponent } from './views/manage-simulator-events/manage-simulator-events.component';
-import { RegisterHardwareBoardComponent } from './views/register-hardware-board/register-hardware-board.component';
-import { SettingsComponent } from './views/settings/settings.component';
-import { ViewHardwarePanelDetailsComponent } from './views/view-hardware-panel-details/view-hardware-panel-details.component';
+
+// Hardware Components
+import { AddHardwareInputTypeComponent } from './features/hardware/components/add-hardware-input-type/add-hardware-input-type.component';
+import { AddHardwareOutputTypeComponent } from './features/hardware/components/add-hardware-output-type/add-hardware-output-type.component';
+import { AddHardwarePanelComponent } from './features/hardware/components/add-hardware-panel/add-hardware-panel.component';
+import { EditHardwareInputTypeComponent } from './features/hardware/components/edit-hardware-input-type/edit-hardware-input-type.component';
+import { EditHardwareOutputTypeComponent } from './features/hardware/components/edit-hardware-output-type/edit-hardware-output-type.component';
+import { EditHardwarePanelComponent } from './features/hardware/components/edit-hardware-panel/edit-hardware-panel.component';
+import { ManageHardwareBoardsComponent } from './features/hardware/components/manage-hardware-boards/manage-hardware-board.component';
+import { ManageHardwareInputTypesComponent } from './features/hardware/components/manage-hardware-input-types/manage-hardware-input-types.component';
+import { ManageHardwareOutputTypesComponent } from './features/hardware/components/manage-hardware-output-types/manage-hardware-output-types.component';
+import { ManageHardwarePanelsComponent } from './features/hardware/components/manage-hardware-panels/manage-hardware-panels.component';
+import { RegisterHardwareBoardComponent } from './features/hardware/components/register-hardware-board/register-hardware-board.component';
+import { ViewHardwarePanelDetailsComponent } from './features/hardware/components/view-hardware-panel-details/view-hardware-panel-details.component';
+
+// Dashboard Components
+import { ConsoleComponent } from './features/dashboard/components/console/console.component';
+import { DashboardComponent } from './features/dashboard/components/dashboard/dashboard.component';
+import { SettingsComponent } from './features/dashboard/components/settings/settings.component';
+
+// Simulator Components
+import { ManageSimulatorEventsComponent } from './features/simulator/components/manage-simulator-events/manage-simulator-events.component';
 
 const routes: Routes = [
   {

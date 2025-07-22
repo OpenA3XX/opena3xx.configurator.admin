@@ -1,0 +1,35 @@
+mat-form-field {
+  width: 100%;
+}
+
+mat-expansion-panel {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  button {
+    float: right;
+  }
+}
+
+.mat-flat-button + .mat-flat-button {
+  margin-left: 8px;
+  float: right;
+}
+
+.mat-flat-button.mat-accent {
+  background-color: #ff8d0b;
+  color: #ffffff;
+}
+
+.save-button {
+  margin-top: 16px;
+  min-width: 120px;
+  height: 40px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.margin-top {
+  margin-top: 16px;
+}

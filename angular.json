@@ -45,6 +45,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/assets/config/app-config.json",
+                  "with": "src/assets/config/app-config.production.json"
                 }
               ],
               "optimization": true,

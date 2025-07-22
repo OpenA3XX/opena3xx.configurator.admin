@@ -2,10 +2,10 @@ import { Component, OnInit, Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { DataService } from './services/data.service';
+import { DataService } from './core/services/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CoreHelper } from './helpers/core-helper';
-import { ExitAppDialogComponent } from './views/exit-app-dialog.component';
+import { CoreHelper } from './core/core-helper';
+import { ExitAppDialogComponent } from './core/components/exit-app-dialog.component';
 
 /**
  * @title Autosize sidenav

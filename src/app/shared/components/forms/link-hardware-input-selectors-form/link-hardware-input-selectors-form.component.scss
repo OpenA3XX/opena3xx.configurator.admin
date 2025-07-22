@@ -1,0 +1,27 @@
+mat-form-field {
+  width: 100%;
+}
+
+mat-expansion-panel {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  button {
+    float: right;
+  }
+}
+
+.button-container {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.test-event-button {
+  background-color: #ff9800 !important;
+  color: #ffffff !important;
+}
+
+.save-button {
+  min-width: 80px;
+}

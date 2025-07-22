@@ -1,0 +1,13 @@
+{
+  "api": {
+    "baseUrl": "http://localhost:5000"
+  },
+  "app": {
+    "name": "OpenA3XX Configurator Admin",
+    "version": "1.0.0"
+  },
+  "features": {
+    "enableDebugMode": false,
+    "enableConsoleLogging": true
+  }
+}
