@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -6,6 +6,8 @@ import { DataService } from './core/services/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CoreHelper } from './core/core-helper';
 import { ExitAppDialogComponent } from './core/components/exit-app-dialog.component';
+import { ThemeService } from './core/services/theme.service';
+import { Subscription } from 'rxjs';
 
 /**
  * @title Autosize sidenav
@@ -15,7 +17,7 @@ import { ExitAppDialogComponent } from './core/components/exit-app-dialog.compon
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit
+export class AppComponent implements OnInit, OnDestroy
 {
   isElectron: boolean = false;
   isExpanded: boolean = true;
@@ -26,6 +28,8 @@ export class AppComponent implements OnInit
   showSubSubMenu: boolean = false;
   isFullscreen: boolean = false;
   apiAvailabilityStatus: boolean = false;
+  isDarkMode: boolean = false;
+  private themeSubscription: Subscription = new Subscription();
 
   private apiHealthPollingTime: number = 5000;
 
@@ -52,6 +56,10 @@ export class AppComponent implements OnInit
       this.isRightMenuExpanded.toString()
     );
   }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
   constructor(
     public router: Router,
     private cookieService: CookieService,
@@ -59,6 +67,7 @@ export class AppComponent implements OnInit
     private dialog: MatDialog,
     private coreHelper: CoreHelper,
     private renderer: Renderer2,
+    private themeService: ThemeService,
     @Inject(DOCUMENT) private document: Document
 
   ) {
@@ -84,6 +93,15 @@ export class AppComponent implements OnInit
       // Add electron-app class to body
       this.renderer.addClass(this.document.body, 'electron-app');
     }
+
+    // Subscribe to theme changes
+    this.themeSubscription = this.themeService.isDarkMode$.subscribe(isDark => {
+      this.isDarkMode = isDark;
+    });
+  }
+
+  ngOnDestroy() {
+    this.themeSubscription.unsubscribe();
   }
 
   private checkApiHealth() {

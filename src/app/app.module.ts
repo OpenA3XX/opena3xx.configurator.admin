@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, APP_INITIALIZER } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,13 +7,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // Core Services
 import { DataService } from './core/services/data.service';
 import { ConfigurationService } from './core/services/configuration.service';
 import { RealTimeService } from './core/services/realtime.service';
 import { CoreHelper } from './core/core-helper';
 import { initializeApp } from './core/app-initializer';
+import { GlobalErrorHandler } from './core/services/error-handler.service';
+import { HttpRequestInterceptor } from './core/interceptors/http.interceptor';
+import { LoadingService } from './core/services/loading.service';
+import { PerformanceService } from './core/services/performance.service';
+import { AuthService } from './core/services/auth.service';
+import { ThemeService } from './core/services/theme.service';
+import { FormValidationService } from './core/services/form-validation.service';
 
 // Feature Modules
 import { HardwareModule } from './features/hardware/hardware.module';
@@ -53,10 +60,24 @@ import { ExitAppDialogComponent } from './core/components/exit-app-dialog.compon
     CoreHelper,
     ConfigurationService,
     RealTimeService,
+    LoadingService,
+    PerformanceService,
+    AuthService,
+    ThemeService,
+    FormValidationService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       deps: [ConfigurationService],
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
       multi: true
     },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

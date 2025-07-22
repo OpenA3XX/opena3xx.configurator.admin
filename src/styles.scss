@@ -47,7 +47,8 @@ $warn: mat.define-palette(mat.$red-palette);
 
 
 
-$theme: mat.define-light-theme((
+// Define light theme
+$light-theme: mat.define-light-theme((
   color: (
     primary: $primary,
     accent: $accent,
@@ -61,6 +62,18 @@ $theme: mat.define-light-theme((
     $headline-4: mat.define-typography-level(34px, 40px, 400, 'Roboto, "Helvetica Neue", sans-serif'),
     $headline-5: mat.define-typography-level(24px, 32px, 400, 'Roboto, "Helvetica Neue", sans-serif'),
     $headline-6: mat.define-typography-level(20px, 32px, 500, 'Roboto, "Helvetica Neue", sans-serif'),
+  ),
+));
+
+// Define dark theme
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  ),
+  typography: mat.define-typography-config(
+    $font-family: 'Roboto, "Helvetica Neue", sans-serif',
   ),
 ));
 
@@ -229,7 +242,44 @@ form {
 .info { color: var(--info-color) !important; }
 
 
-@include mat.all-component-themes($theme);
+// Apply default light theme
+@include mat.all-component-themes($light-theme);
+
+// Dark theme class
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+
+  // Dark theme CSS custom properties
+  --mat-sys-surface: #121212;
+  --mat-sys-on-surface: #ffffff;
+  --mat-sys-surface-container: #1e1e1e;
+  --mat-sys-surface-variant: #2a2a2a;
+  --mat-sys-background: #0f0f0f;
+  --mat-sys-on-background: #ffffff;
+  --mat-sys-primary-container: rgba(100, 181, 246, 0.24);
+  --mat-sys-on-primary-container: #90caf9;
+
+  background-color: var(--mat-sys-background);
+  color: var(--mat-sys-on-background);
+}
+
+// Light theme class (explicit)
+.light-theme {
+  @include mat.all-component-colors($light-theme);
+
+  // Light theme CSS custom properties
+  --mat-sys-surface: #ffffff;
+  --mat-sys-on-surface: #1f1f1f;
+  --mat-sys-surface-container: #f5f5f5;
+  --mat-sys-surface-variant: #e7e7e7;
+  --mat-sys-background: #fafafa;
+  --mat-sys-on-background: #1f1f1f;
+  --mat-sys-primary-container: rgba(100, 181, 246, 0.12);
+  --mat-sys-on-primary-container: #1976d2;
+
+  background-color: var(--mat-sys-background);
+  color: var(--mat-sys-on-background);
+}
 
 // Force all tables, grids, and forms to be 100% width
 table, mat-table, .mat-mdc-table,
@@ -342,13 +392,15 @@ mat-sidenav-content, .mat-sidenav-content,
   }
 }
 
-// Dark mode support
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mat-sys-surface: #121212;
-    --mat-sys-on-surface: #ffffff;
-    --mat-sys-surface-container: #1e1e1e;
-    --mat-sys-surface-variant: #2a2a2a;
-    --mat-sys-background: #0f0f0f;
-  }
+// Theme transitions for smooth switching
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Theme-aware component transitions
+.mat-mdc-card,
+.mat-sidenav,
+.mat-toolbar,
+.mat-mdc-form-field {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }

@@ -13,8 +13,13 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Show loading indicator
-    this.loadingService.show();
+    // Check if this is a ping/heartbeat request that should not show loading
+    const isPingRequest = this.isPingOrHeartbeatRequest(request);
+
+    // Show loading indicator only for non-ping requests
+    if (!isPingRequest) {
+      this.loadingService.show();
+    }
 
     // Add common headers
     const modifiedRequest = request.clone({
@@ -50,9 +55,36 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         return throwError(() => error);
       }),
       finalize(() => {
-        // Hide loading indicator
-        this.loadingService.hide();
+        // Hide loading indicator only if it was shown (for non-ping requests)
+        if (!isPingRequest) {
+          this.loadingService.hide();
+        }
       })
     );
+  }
+
+  /**
+   * Check if the request is a ping/heartbeat request that should not show loading
+   */
+  private isPingOrHeartbeatRequest(request: HttpRequest<any>): boolean {
+    const url = request.url.toLowerCase();
+
+    // List of URL patterns that should not trigger loading indicator
+    const excludedPatterns = [
+      '/core/heartbeat/ping',
+      '/heartbeat',
+      '/ping',
+      '/health',
+      '/status',
+      '/keepalive',
+      '/poll'
+    ];
+
+    // Check if request has a custom header to skip loading
+    if (request.headers.has('X-Skip-Loading')) {
+      return true;
+    }
+
+    return excludedPatterns.some(pattern => url.includes(pattern));
   }
 }

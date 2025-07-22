@@ -1,0 +1,14 @@
+{
+  "*.{ts,js}": [
+    "ng lint --fix",
+    "git add"
+  ],
+  "*.{html,scss,css}": [
+    "prettier --write",
+    "git add"
+  ],
+  "*.{json,md}": [
+    "prettier --write",
+    "git add"
+  ]
+}

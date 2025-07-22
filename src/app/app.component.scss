@@ -35,6 +35,19 @@
   box-shadow: var(--shadow-sm);
   background-color: var(--mat-sys-primary, #1976d2);
 
+  // Theme toggle button styles
+  button[matTooltip="Toggle Theme"] {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      transition: transform 0.3s ease;
+    }
+  }
+
   .spacer {
     flex: 1 1 auto;
   }

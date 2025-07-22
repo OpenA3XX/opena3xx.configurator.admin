@@ -114,11 +114,18 @@ export class DataService {
     return this.http.put<any>(`${this.BASE_URL}/simulator-event/test/${simulatorEventId}`, {});
   }
 
+  /**
+   * Check API health status with a ping request
+   * Uses X-Skip-Loading header to prevent loading indicator from flashing
+   */
   async checkApiHealth() {
     try {
       const data = await this.http
         .get(`${this.BASE_URL}/core/heartbeat/ping`, {
           responseType: 'text',
+          headers: {
+            'X-Skip-Loading': 'true'
+          }
         })
         .toPromise();
       if (data === '"Pong from OpenA3XX"') {

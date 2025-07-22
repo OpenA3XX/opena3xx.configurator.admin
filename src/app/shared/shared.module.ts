@@ -16,6 +16,7 @@ import { RadiobuttonComponent } from './components/ui/radiobutton/radiobutton.co
 import { SelectComponent } from './components/ui/select/select.component';
 import { SlideToggleComponent } from './components/ui/slide-toggle/slide-toggle.component';
 import { SliderComponent } from './components/ui/slider/slider.component';
+import { LoadingComponent } from './components/ui/loading/loading.component';
 
 // Form Components
 import { LinkHardwareInputSelectorsFormComponent } from './components/forms/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
@@ -44,6 +45,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SelectComponent,
     SlideToggleComponent,
     SliderComponent,
+    LoadingComponent,
 
     // Form Components
     LinkHardwareInputSelectorsFormComponent,
@@ -77,6 +79,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SelectComponent,
     SlideToggleComponent,
     SliderComponent,
+    LoadingComponent,
 
     // Form Components
     LinkHardwareInputSelectorsFormComponent,

@@ -1,3 +1,5 @@
+<opena3xx-loading></opena3xx-loading>
+
 <div [class.electron-app]="isElectron">
 
   <div *ngIf="!apiAvailabilityStatus" class="api-status">
@@ -36,6 +38,14 @@
     >
       <mat-icon *ngIf="!isFullscreen">settings_overscan</mat-icon>
       <mat-icon *ngIf="isFullscreen">close_fullscreen</mat-icon>
+    </button>
+    <button
+      (click)="toggleTheme()"
+      mat-icon-button
+      matTooltip="Toggle Theme"
+    >
+      <mat-icon *ngIf="isDarkMode">light_mode</mat-icon>
+      <mat-icon *ngIf="!isDarkMode">dark_mode</mat-icon>
     </button>
     <button (click)="toggleRight()" mat-icon-button>
       <mat-icon *ngIf="isRightMenuExpanded">menu</mat-icon>
