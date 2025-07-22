@@ -8,698 +8,1012 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	      <link rel="stylesheet" href="./styles/style.css">
-        <link rel="stylesheet" href="./styles/material.css">
+	    <link rel="stylesheet" href="./styles/style.css">
+                 <link rel="stylesheet" href="./styles/material.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="./" class="navbar-brand">opena3xx-configurator-webapp documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="./">opena3xx-configurator-webapp documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                         href="./overview.html" 
+                                        
+                                         href="./overview.html" 
+                                         class="active" >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="modules/AppModule.html" >AppModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="modules/DashboardModule.html" >DashboardModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="modules/HardwareModule.html" >HardwareModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="modules/MaterialModule.html" >MaterialModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="modules/SharedModule.html" >SharedModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="modules/SimulatorModule.html" >SimulatorModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="components/AddHardwareInputTypeComponent.html" >AddHardwareInputTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AddHardwareOutputTypeComponent.html" >AddHardwareOutputTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AddHardwarePanelComponent.html" >AddHardwarePanelComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AutocompleteComponent.html" >AutocompleteComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ButtonComponent.html" >ButtonComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CheckboxComponent.html" >CheckboxComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ConsoleComponent.html" >ConsoleComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DashboardComponent.html" >DashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DateComponent.html" >DateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DeleteHardwareInputDialogComponent.html" >DeleteHardwareInputDialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DynamicFormComponent.html" >DynamicFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EditHardwareInputTypeComponent.html" >EditHardwareInputTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EditHardwareOutputTypeComponent.html" >EditHardwareOutputTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EditHardwarePanelComponent.html" >EditHardwarePanelComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ExitAppDialogComponent.html" >ExitAppDialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/HeadingComponent.html" >HeadingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/InputComponent.html" >InputComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LinkHardwareInputSelectorsDialogComponent.html" >LinkHardwareInputSelectorsDialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LinkHardwareInputSelectorsFormComponent.html" >LinkHardwareInputSelectorsFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LoadingComponent.html" >LoadingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ManageHardwareBoardsComponent.html" >ManageHardwareBoardsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ManageHardwareInputTypesComponent.html" >ManageHardwareInputTypesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ManageHardwareOutputTypesComponent.html" >ManageHardwareOutputTypesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ManageHardwarePanelsComponent.html" >ManageHardwarePanelsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ManageSimulatorEventsComponent.html" >ManageSimulatorEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MapHardwareInputSelectorsDialogComponent.html" >MapHardwareInputSelectorsDialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MapHardwareInputSelectorsFormComponent.html" >MapHardwareInputSelectorsFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MapHardwareOutputSelectorsDialogComponent.html" >MapHardwareOutputSelectorsDialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MapHardwareOutputSelectorsFormComponent.html" >MapHardwareOutputSelectorsFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/RadiobuttonComponent.html" >RadiobuttonComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/RegisterHardwareBoardComponent.html" >RegisterHardwareBoardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SelectComponent.html" >SelectComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SettingsComponent.html" >SettingsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SlideToggleComponent.html" >SlideToggleComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SliderComponent.html" >SliderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ViewHardwareInputSelectorsDialogComponent.html" >ViewHardwareInputSelectorsDialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ViewHardwareOutputSelectorsDialogComponent.html" >ViewHardwareOutputSelectorsDialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ViewHardwarePanelDetailsComponent.html" >ViewHardwarePanelDetailsComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="directives/ClickOutsideDirective.html" >ClickOutsideDirective</a>
+                                </li>
+                                <li class="link">
+                                    <a href="directives/DynamicFieldDirective.html" >DynamicFieldDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-classes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="classes/AppPage.html" >AppPage</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/CoreHelper.html" >CoreHelper</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="injectables/AuthGuard.html" >AuthGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthService.html" >AuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ConfigurationService.html" >ConfigurationService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DashboardService.html" >DashboardService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DataService.html" >DataService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DependencyStatusService.html" >DependencyStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/FormValidationService.html" >FormValidationService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/GlobalErrorHandler.html" >GlobalErrorHandler</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/HardwareBoardService.html" >HardwareBoardService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/HardwareInputService.html" >HardwareInputService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/HardwareOutputService.html" >HardwareOutputService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/HardwarePanelService.html" >HardwarePanelService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/HttpRequestInterceptor.html" >HttpRequestInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LoadingService.html" >LoadingService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/PerformanceService.html" >PerformanceService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/RealTimeService.html" >RealTimeService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SettingsService.html" >SettingsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SimulatorEventService.html" >SimulatorEventService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ThemeService.html" >ThemeService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="interfaces/AddHardwarePanelDto.html" >AddHardwarePanelDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/AppConfig.html" >AppConfig</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/AppError.html" >AppError</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/BackendDependencyInfo.html" >BackendDependencyInfo</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/BackendDependencyResponse.html" >BackendDependencyResponse</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/BaseHardwarePanelDto.html" >BaseHardwarePanelDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/DependencyStatus.html" >DependencyStatus</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/DependencyStatusResponse.html" >DependencyStatusResponse</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/FieldConfig.html" >FieldConfig</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/FlightEvent.html" >FlightEvent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/FormConfiguration.html" >FormConfiguration</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwareBoardDetailsDto.html" >HardwareBoardDetailsDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwareBoardDto.html" >HardwareBoardDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwareInputDto.html" >HardwareInputDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwareInputSelectorDto.html" >HardwareInputSelectorDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwareInputTypeDto.html" >HardwareInputTypeDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwareOutputDto.html" >HardwareOutputDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwareOutputSelectorDto.html" >HardwareOutputSelectorDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwareOutputTypeDto.html" >HardwareOutputTypeDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwarePanelDto.html" >HardwarePanelDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/HardwarePanelOverviewDto.html" >HardwarePanelOverviewDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/IOExtenderBitDto.html" >IOExtenderBitDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/IOExtenderBusDto.html" >IOExtenderBusDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/IntegrationType.html" >IntegrationType</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/KeepAliveEvent.html" >KeepAliveEvent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/MapExtenderBitToHardwareInputSelectorDto.html" >MapExtenderBitToHardwareInputSelectorDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/MapExtenderBitToHardwareOutputSelectorDto.html" >MapExtenderBitToHardwareOutputSelectorDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/OptionList.html" >OptionList</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/PerformanceMetric.html" >PerformanceMetric</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/SimulatorEventDto.html" >SimulatorEventDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/SimulatorEventItemDto.html" >SimulatorEventItemDto</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/User.html" >User</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Validator.html" >Validator</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-plus"></span>
+                            <span>Pipes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-pipes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-pipes-links"
+                            >
+                                <li class="link">
+                                    <a href="pipes/FormatDatePipe.html" >FormatDatePipe</a>
+                                </li>
+                                <li class="link">
+                                    <a href="pipes/TruncatePipe.html" >TruncatePipe</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="./">opena3xx-configurator-webapp documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                                href="./overview.html" 
+                                               
+                                                href="./overview.html" 
+                                                class="active" >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="modules/AppModule.html" >AppModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="modules/DashboardModule.html" >DashboardModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="modules/HardwareModule.html" >HardwareModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="modules/MaterialModule.html" >MaterialModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="modules/SharedModule.html" >SharedModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="modules/SimulatorModule.html" >SimulatorModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="components/AddHardwareInputTypeComponent.html" >AddHardwareInputTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AddHardwareOutputTypeComponent.html" >AddHardwareOutputTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AddHardwarePanelComponent.html" >AddHardwarePanelComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AutocompleteComponent.html" >AutocompleteComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ButtonComponent.html" >ButtonComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CheckboxComponent.html" >CheckboxComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ConsoleComponent.html" >ConsoleComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DashboardComponent.html" >DashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DateComponent.html" >DateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DeleteHardwareInputDialogComponent.html" >DeleteHardwareInputDialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DynamicFormComponent.html" >DynamicFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EditHardwareInputTypeComponent.html" >EditHardwareInputTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EditHardwareOutputTypeComponent.html" >EditHardwareOutputTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EditHardwarePanelComponent.html" >EditHardwarePanelComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ExitAppDialogComponent.html" >ExitAppDialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/HeadingComponent.html" >HeadingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/InputComponent.html" >InputComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LinkHardwareInputSelectorsDialogComponent.html" >LinkHardwareInputSelectorsDialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LinkHardwareInputSelectorsFormComponent.html" >LinkHardwareInputSelectorsFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LoadingComponent.html" >LoadingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ManageHardwareBoardsComponent.html" >ManageHardwareBoardsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ManageHardwareInputTypesComponent.html" >ManageHardwareInputTypesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ManageHardwareOutputTypesComponent.html" >ManageHardwareOutputTypesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ManageHardwarePanelsComponent.html" >ManageHardwarePanelsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ManageSimulatorEventsComponent.html" >ManageSimulatorEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MapHardwareInputSelectorsDialogComponent.html" >MapHardwareInputSelectorsDialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MapHardwareInputSelectorsFormComponent.html" >MapHardwareInputSelectorsFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MapHardwareOutputSelectorsDialogComponent.html" >MapHardwareOutputSelectorsDialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MapHardwareOutputSelectorsFormComponent.html" >MapHardwareOutputSelectorsFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/RadiobuttonComponent.html" >RadiobuttonComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/RegisterHardwareBoardComponent.html" >RegisterHardwareBoardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SelectComponent.html" >SelectComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SettingsComponent.html" >SettingsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SlideToggleComponent.html" >SlideToggleComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SliderComponent.html" >SliderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ViewHardwareInputSelectorsDialogComponent.html" >ViewHardwareInputSelectorsDialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ViewHardwareOutputSelectorsDialogComponent.html" >ViewHardwareOutputSelectorsDialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ViewHardwarePanelDetailsComponent.html" >ViewHardwarePanelDetailsComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="directives/ClickOutsideDirective.html" >ClickOutsideDirective</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="directives/DynamicFieldDirective.html" >DynamicFieldDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#classes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="classes/AppPage.html" >AppPage</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/CoreHelper.html" >CoreHelper</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="injectables/AuthGuard.html" >AuthGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/AuthService.html" >AuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/ConfigurationService.html" >ConfigurationService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/DashboardService.html" >DashboardService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/DataService.html" >DataService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/DependencyStatusService.html" >DependencyStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/FormValidationService.html" >FormValidationService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/GlobalErrorHandler.html" >GlobalErrorHandler</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/HardwareBoardService.html" >HardwareBoardService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/HardwareInputService.html" >HardwareInputService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/HardwareOutputService.html" >HardwareOutputService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/HardwarePanelService.html" >HardwarePanelService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/HttpRequestInterceptor.html" >HttpRequestInterceptor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/LoadingService.html" >LoadingService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/PerformanceService.html" >PerformanceService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/RealTimeService.html" >RealTimeService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/SettingsService.html" >SettingsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/SimulatorEventService.html" >SimulatorEventService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/ThemeService.html" >ThemeService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="interfaces/AddHardwarePanelDto.html" >AddHardwarePanelDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/AppConfig.html" >AppConfig</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/AppError.html" >AppError</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/BackendDependencyInfo.html" >BackendDependencyInfo</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/BackendDependencyResponse.html" >BackendDependencyResponse</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/BaseHardwarePanelDto.html" >BaseHardwarePanelDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/DependencyStatus.html" >DependencyStatus</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/DependencyStatusResponse.html" >DependencyStatusResponse</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/FieldConfig.html" >FieldConfig</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/FlightEvent.html" >FlightEvent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/FormConfiguration.html" >FormConfiguration</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwareBoardDetailsDto.html" >HardwareBoardDetailsDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwareBoardDto.html" >HardwareBoardDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwareInputDto.html" >HardwareInputDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwareInputSelectorDto.html" >HardwareInputSelectorDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwareInputTypeDto.html" >HardwareInputTypeDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwareOutputDto.html" >HardwareOutputDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwareOutputSelectorDto.html" >HardwareOutputSelectorDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwareOutputTypeDto.html" >HardwareOutputTypeDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwarePanelDto.html" >HardwarePanelDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/HardwarePanelOverviewDto.html" >HardwarePanelOverviewDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/IOExtenderBitDto.html" >IOExtenderBitDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/IOExtenderBusDto.html" >IOExtenderBusDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/IntegrationType.html" >IntegrationType</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/KeepAliveEvent.html" >KeepAliveEvent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/MapExtenderBitToHardwareInputSelectorDto.html" >MapExtenderBitToHardwareInputSelectorDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/MapExtenderBitToHardwareOutputSelectorDto.html" >MapExtenderBitToHardwareOutputSelectorDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/OptionList.html" >OptionList</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/PerformanceMetric.html" >PerformanceMetric</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/SimulatorEventDto.html" >SimulatorEventDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/SimulatorEventItemDto.html" >SimulatorEventItemDto</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/User.html" >User</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Validator.html" >Validator</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-plus"></span>
+                                   <span>Pipes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#pipes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="pipes-links"
+                   >
+                                       <li class="link">
+                                           <a href="pipes/FormatDatePipe.html" >FormatDatePipe</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="pipes/TruncatePipe.html" >TruncatePipe</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content overview">
                    <div class="content-data">
-
-
-<ol class="breadcrumb">
-    <li>Overview</li>
-</ol>
-
-<div class="text-center module-graph-container">
-    <div id="module-graph-svg">
-        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
- "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Generated by graphviz version 2.47.0 (20210316.0004)
- -->
-<!-- Title: dependencies Pages: 1 -->
-<svg width="9077pt" height="284pt"
- viewBox="0.00 0.00 9077.00 284.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 280)">
-<title>dependencies</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-280 9073,-280 9073,4 -4,4"/>
-<text text-anchor="start" x="4513.51" y="-42.4" font-family="sans-serif" font-weight="bold" font-size="14.00">Legend</text>
-<polygon fill="#ffffb3" stroke="transparent" points="4300.5,-10 4300.5,-30 4320.5,-30 4320.5,-10 4300.5,-10"/>
-<text text-anchor="start" x="4324.13" y="-15.4" font-family="sans-serif" font-size="14.00"> &#160;Declarations</text>
-<polygon fill="#8dd3c7" stroke="transparent" points="4413.5,-10 4413.5,-30 4433.5,-30 4433.5,-10 4413.5,-10"/>
-<text text-anchor="start" x="4437.23" y="-15.4" font-family="sans-serif" font-size="14.00"> &#160;Module</text>
-<polygon fill="#80b1d3" stroke="transparent" points="4499.5,-10 4499.5,-30 4519.5,-30 4519.5,-10 4499.5,-10"/>
-<text text-anchor="start" x="4523.28" y="-15.4" font-family="sans-serif" font-size="14.00"> &#160;Bootstrap</text>
-<polygon fill="#fdb462" stroke="transparent" points="4596.5,-10 4596.5,-30 4616.5,-30 4616.5,-10 4596.5,-10"/>
-<text text-anchor="start" x="4620.17" y="-15.4" font-family="sans-serif" font-size="14.00"> &#160;Providers</text>
-<polygon fill="#fb8072" stroke="transparent" points="4692.5,-10 4692.5,-30 4712.5,-30 4712.5,-10 4692.5,-10"/>
-<text text-anchor="start" x="4716.23" y="-15.4" font-family="sans-serif" font-size="14.00"> &#160;Exports</text>
-<g id="clust1" class="cluster">
-<title>cluster_AppModule</title>
-<polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-70 8,-268 9061,-268 9061,-70 8,-70"/>
-</g>
-<g id="clust2" class="cluster">
-<title>cluster_AppModule_declarations</title>
-<polygon fill="none" stroke="black" points="813,-78 813,-130 9053,-130 9053,-78 813,-78"/>
-</g>
-<g id="clust42" class="cluster">
-<title>cluster_AppModule_imports</title>
-<polygon fill="none" stroke="black" points="536,-78 536,-130 805,-130 805,-78 536,-78"/>
-</g>
-<g id="clust44" class="cluster">
-<title>cluster_AppModule_bootstrap</title>
-<polygon fill="none" stroke="black" points="4806,-208 4806,-260 4930,-260 4930,-208 4806,-208"/>
-</g>
-<g id="clust45" class="cluster">
-<title>cluster_AppModule_providers</title>
-<polygon fill="none" stroke="black" points="16,-78 16,-130 528,-130 528,-78 16,-78"/>
-</g>
-<!-- AddHardwareInputTypeComponent -->
-<g id="node1" class="node">
-<title>AddHardwareInputTypeComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="9045.44,-122 8826.56,-122 8826.56,-86 9045.44,-86 9045.44,-122"/>
-<text text-anchor="middle" x="8936" y="-99.8" font-family="Times,serif" font-size="14.00">AddHardwareInputTypeComponent</text>
-</g>
-<!-- AppModule -->
-<g id="node40" class="node">
-<title>AppModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="4909.66,-187 4906.66,-191 4885.66,-191 4882.66,-187 4826.34,-187 4826.34,-151 4909.66,-151 4909.66,-187"/>
-<text text-anchor="middle" x="4868" y="-164.8" font-family="Times,serif" font-size="14.00">AppModule</text>
-</g>
-<!-- AddHardwareInputTypeComponent&#45;&gt;AppModule -->
-<g id="edge1" class="edge">
-<title>AddHardwareInputTypeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8936,-122.2C8936,-146.36 8936,-186 8936,-186 8936,-186 4919.92,-186 4919.92,-186"/>
-<polygon fill="black" stroke="black" points="4919.92,-182.5 4909.92,-186 4919.92,-189.5 4919.92,-182.5"/>
-</g>
-<!-- AddHardwareOutputTypeComponent -->
-<g id="node2" class="node">
-<title>AddHardwareOutputTypeComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8808.27,-122 8579.73,-122 8579.73,-86 8808.27,-86 8808.27,-122"/>
-<text text-anchor="middle" x="8694" y="-99.8" font-family="Times,serif" font-size="14.00">AddHardwareOutputTypeComponent</text>
-</g>
-<!-- AddHardwareOutputTypeComponent&#45;&gt;AppModule -->
-<g id="edge2" class="edge">
-<title>AddHardwareOutputTypeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8694,-122.15C8694,-145.76 8694,-184 8694,-184 8694,-184 4919.66,-184 4919.66,-184"/>
-<polygon fill="black" stroke="black" points="4919.66,-180.5 4909.66,-184 4919.66,-187.5 4919.66,-180.5"/>
-</g>
-<!-- AddHardwarePanelComponent -->
-<g id="node3" class="node">
-<title>AddHardwarePanelComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8561.72,-122 8370.28,-122 8370.28,-86 8561.72,-86 8561.72,-122"/>
-<text text-anchor="middle" x="8466" y="-99.8" font-family="Times,serif" font-size="14.00">AddHardwarePanelComponent</text>
-</g>
-<!-- AddHardwarePanelComponent&#45;&gt;AppModule -->
-<g id="edge3" class="edge">
-<title>AddHardwarePanelComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8466,-122.32C8466,-145.66 8466,-183 8466,-183 8466,-183 4919.97,-183 4919.97,-183"/>
-<polygon fill="black" stroke="black" points="4919.97,-179.5 4909.97,-183 4919.97,-186.5 4919.97,-179.5"/>
-</g>
-<!-- AppComponent -->
-<g id="node4" class="node">
-<title>AppComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8351.94,-122 8246.06,-122 8246.06,-86 8351.94,-86 8351.94,-122"/>
-<text text-anchor="middle" x="8299" y="-99.8" font-family="Times,serif" font-size="14.00">AppComponent</text>
-</g>
-<!-- AppComponent&#45;&gt;AppModule -->
-<g id="edge4" class="edge">
-<title>AppComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8299,-122.25C8299,-145.02 8299,-181 8299,-181 8299,-181 4919.84,-181 4919.84,-181"/>
-<polygon fill="black" stroke="black" points="4919.84,-177.5 4909.84,-181 4919.84,-184.5 4919.84,-177.5"/>
-</g>
-<!-- AutocompleteComponent -->
-<g id="node5" class="node">
-<title>AutocompleteComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8228.15,-122 8067.85,-122 8067.85,-86 8228.15,-86 8228.15,-122"/>
-<text text-anchor="middle" x="8148" y="-99.8" font-family="Times,serif" font-size="14.00">AutocompleteComponent</text>
-</g>
-<!-- AutocompleteComponent&#45;&gt;AppModule -->
-<g id="edge5" class="edge">
-<title>AutocompleteComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8148,-122.16C8148,-144.35 8148,-179 8148,-179 8148,-179 4919.77,-179 4919.77,-179"/>
-<polygon fill="black" stroke="black" points="4919.77,-175.5 4909.77,-179 4919.77,-182.5 4919.77,-175.5"/>
-</g>
-<!-- ButtonComponent -->
-<g id="node6" class="node">
-<title>ButtonComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8049.95,-122 7930.05,-122 7930.05,-86 8049.95,-86 8049.95,-122"/>
-<text text-anchor="middle" x="7990" y="-99.8" font-family="Times,serif" font-size="14.00">ButtonComponent</text>
-</g>
-<!-- ButtonComponent&#45;&gt;AppModule -->
-<g id="edge6" class="edge">
-<title>ButtonComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7990,-122.29C7990,-144.21 7990,-178 7990,-178 7990,-178 4919.77,-178 4919.77,-178"/>
-<polygon fill="black" stroke="black" points="4919.77,-174.5 4909.77,-178 4919.77,-181.5 4919.77,-174.5"/>
-</g>
-<!-- CheckboxComponent -->
-<g id="node7" class="node">
-<title>CheckboxComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7912.1,-122 7773.9,-122 7773.9,-86 7912.1,-86 7912.1,-122"/>
-<text text-anchor="middle" x="7843" y="-99.8" font-family="Times,serif" font-size="14.00">CheckboxComponent</text>
-</g>
-<!-- CheckboxComponent&#45;&gt;AppModule -->
-<g id="edge7" class="edge">
-<title>CheckboxComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7843,-122.17C7843,-143.5 7843,-176 7843,-176 7843,-176 4919.77,-176 4919.77,-176"/>
-<polygon fill="black" stroke="black" points="4919.77,-172.5 4909.77,-176 4919.77,-179.5 4919.77,-172.5"/>
-</g>
-<!-- ConsoleComponent -->
-<g id="node8" class="node">
-<title>ConsoleComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7755.72,-122 7628.28,-122 7628.28,-86 7755.72,-86 7755.72,-122"/>
-<text text-anchor="middle" x="7692" y="-99.8" font-family="Times,serif" font-size="14.00">ConsoleComponent</text>
-</g>
-<!-- ConsoleComponent&#45;&gt;AppModule -->
-<g id="edge8" class="edge">
-<title>ConsoleComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7692,-122.03C7692,-142.77 7692,-174 7692,-174 7692,-174 4919.84,-174 4919.84,-174"/>
-<polygon fill="black" stroke="black" points="4919.84,-170.5 4909.84,-174 4919.84,-177.5 4919.84,-170.5"/>
-</g>
-<!-- DashboardComponent -->
-<g id="node9" class="node">
-<title>DashboardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7609.97,-122 7468.03,-122 7468.03,-86 7609.97,-86 7609.97,-122"/>
-<text text-anchor="middle" x="7539" y="-99.8" font-family="Times,serif" font-size="14.00">DashboardComponent</text>
-</g>
-<!-- DashboardComponent&#45;&gt;AppModule -->
-<g id="edge9" class="edge">
-<title>DashboardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7539,-122.13C7539,-142.57 7539,-173 7539,-173 7539,-173 4919.69,-173 4919.69,-173"/>
-<polygon fill="black" stroke="black" points="4919.69,-169.5 4909.69,-173 4919.69,-176.5 4919.69,-169.5"/>
-</g>
-<!-- DateComponent -->
-<g id="node10" class="node">
-<title>DateComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7449.76,-122 7342.24,-122 7342.24,-86 7449.76,-86 7449.76,-122"/>
-<text text-anchor="middle" x="7396" y="-99.8" font-family="Times,serif" font-size="14.00">DateComponent</text>
-</g>
-<!-- DateComponent&#45;&gt;AppModule -->
-<g id="edge10" class="edge">
-<title>DateComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7396,-122.31C7396,-142.15 7396,-171 7396,-171 7396,-171 4919.77,-171 4919.77,-171"/>
-<polygon fill="black" stroke="black" points="4919.77,-167.5 4909.77,-171 4919.77,-174.5 4919.77,-167.5"/>
-</g>
-<!-- DeleteHardwareInputDialogComponent -->
-<g id="node11" class="node">
-<title>DeleteHardwareInputDialogComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7323.86,-122 7148.14,-122 7148.14,-86 7323.86,-86 7323.86,-122"/>
-<text text-anchor="middle" x="7236" y="-99.8" font-family="Times,serif" font-size="14.00">DeleteHardwareInputDialogComponent</text>
-</g>
-<!-- DeleteHardwareInputDialogComponent&#45;&gt;AppModule -->
-<g id="edge11" class="edge">
-<title>DeleteHardwareInputDialogComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7236,-122.11C7236,-141.34 7236,-169 7236,-169 7236,-169 4919.85,-169 4919.85,-169"/>
-<polygon fill="black" stroke="black" points="4919.85,-165.5 4909.85,-169 4919.85,-172.5 4919.85,-165.5"/>
-</g>
-<!-- DynamicFieldDirective -->
-<g id="node12" class="node">
-<title>DynamicFieldDirective</title>
-<polygon fill="#ffffb3" stroke="black" points="7130.18,-122 6981.82,-122 6981.82,-86 7130.18,-86 7130.18,-122"/>
-<text text-anchor="middle" x="7056" y="-99.8" font-family="Times,serif" font-size="14.00">DynamicFieldDirective</text>
-</g>
-<!-- DynamicFieldDirective&#45;&gt;AppModule -->
-<g id="edge12" class="edge">
-<title>DynamicFieldDirective&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7056,-122.17C7056,-141.09 7056,-168 7056,-168 7056,-168 4919.75,-168 4919.75,-168"/>
-<polygon fill="black" stroke="black" points="4919.75,-164.5 4909.75,-168 4919.75,-171.5 4919.75,-164.5"/>
-</g>
-<!-- DynamicFormComponent -->
-<g id="node13" class="node">
-<title>DynamicFormComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6963.48,-122 6800.52,-122 6800.52,-86 6963.48,-86 6963.48,-122"/>
-<text text-anchor="middle" x="6882" y="-99.8" font-family="Times,serif" font-size="14.00">DynamicFormComponent</text>
-</g>
-<!-- DynamicFormComponent&#45;&gt;AppModule -->
-<g id="edge13" class="edge">
-<title>DynamicFormComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6882,-122.27C6882,-140.56 6882,-166 6882,-166 6882,-166 4920.07,-166 4920.07,-166"/>
-<polygon fill="black" stroke="black" points="4920.07,-162.5 4910.07,-166 4920.07,-169.5 4920.07,-162.5"/>
-</g>
-<!-- EditHardwareInputTypeComponent -->
-<g id="node14" class="node">
-<title>EditHardwareInputTypeComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6782.16,-122 6563.84,-122 6563.84,-86 6782.16,-86 6782.16,-122"/>
-<text text-anchor="middle" x="6673" y="-99.8" font-family="Times,serif" font-size="14.00">EditHardwareInputTypeComponent</text>
-</g>
-<!-- EditHardwareInputTypeComponent&#45;&gt;AppModule -->
-<g id="edge14" class="edge">
-<title>EditHardwareInputTypeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6673,-122.3C6673,-140.27 6673,-165 6673,-165 6673,-165 4919.96,-165 4919.96,-165"/>
-<polygon fill="black" stroke="black" points="4919.96,-161.5 4909.96,-165 4919.96,-168.5 4919.96,-161.5"/>
-</g>
-<!-- EditHardwareOutputTypeComponent -->
-<g id="node15" class="node">
-<title>EditHardwareOutputTypeComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6546,-122 6318,-122 6318,-86 6546,-86 6546,-122"/>
-<text text-anchor="middle" x="6432" y="-99.8" font-family="Times,serif" font-size="14.00">EditHardwareOutputTypeComponent</text>
-</g>
-<!-- EditHardwareOutputTypeComponent&#45;&gt;AppModule -->
-<g id="edge15" class="edge">
-<title>EditHardwareOutputTypeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6432,-122.02C6432,-139.37 6432,-163 6432,-163 6432,-163 4919.83,-163 4919.83,-163"/>
-<polygon fill="black" stroke="black" points="4919.83,-159.5 4909.83,-163 4919.83,-166.5 4919.83,-159.5"/>
-</g>
-<!-- EditHardwarePanelComponent -->
-<g id="node16" class="node">
-<title>EditHardwarePanelComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6300.45,-122 6109.55,-122 6109.55,-86 6300.45,-86 6300.45,-122"/>
-<text text-anchor="middle" x="6205" y="-99.8" font-family="Times,serif" font-size="14.00">EditHardwarePanelComponent</text>
-</g>
-<!-- EditHardwarePanelComponent&#45;&gt;AppModule -->
-<g id="edge16" class="edge">
-<title>EditHardwarePanelComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6205,-122.04C6205,-138.73 6205,-161 6205,-161 6205,-161 4919.85,-161 4919.85,-161"/>
-<polygon fill="black" stroke="black" points="4919.85,-157.5 4909.85,-161 4919.85,-164.5 4919.85,-157.5"/>
-</g>
-<!-- ExitAppDialog -->
-<g id="node17" class="node">
-<title>ExitAppDialog</title>
-<polygon fill="#ffffb3" stroke="black" points="6091.54,-122 5990.46,-122 5990.46,-86 6091.54,-86 6091.54,-122"/>
-<text text-anchor="middle" x="6041" y="-99.8" font-family="Times,serif" font-size="14.00">ExitAppDialog</text>
-</g>
-<!-- ExitAppDialog&#45;&gt;AppModule -->
-<g id="edge17" class="edge">
-<title>ExitAppDialog&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6041,-122.03C6041,-138.4 6041,-160 6041,-160 6041,-160 4919.75,-160 4919.75,-160"/>
-<polygon fill="black" stroke="black" points="4919.75,-156.5 4909.75,-160 4919.75,-163.5 4919.75,-156.5"/>
-</g>
-<!-- HeadingComponent -->
-<g id="node18" class="node">
-<title>HeadingComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5972.26,-122 5843.74,-122 5843.74,-86 5972.26,-86 5972.26,-122"/>
-<text text-anchor="middle" x="5908" y="-99.8" font-family="Times,serif" font-size="14.00">HeadingComponent</text>
-</g>
-<!-- HeadingComponent&#45;&gt;AppModule -->
-<g id="edge18" class="edge">
-<title>HeadingComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5908,-122.28C5908,-137.95 5908,-158 5908,-158 5908,-158 4919.73,-158 4919.73,-158"/>
-<polygon fill="black" stroke="black" points="4919.73,-154.5 4909.73,-158 4919.73,-161.5 4919.73,-154.5"/>
-</g>
-<!-- InputComponent -->
-<g id="node19" class="node">
-<title>InputComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5825.38,-122 5714.62,-122 5714.62,-86 5825.38,-86 5825.38,-122"/>
-<text text-anchor="middle" x="5770" y="-99.8" font-family="Times,serif" font-size="14.00">InputComponent</text>
-</g>
-<!-- InputComponent&#45;&gt;AppModule -->
-<g id="edge19" class="edge">
-<title>InputComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5770,-122.19C5770,-137.18 5770,-156 5770,-156 5770,-156 4919.7,-156 4919.7,-156"/>
-<polygon fill="black" stroke="black" points="4919.7,-152.5 4909.7,-156 4919.7,-159.5 4919.7,-152.5"/>
-</g>
-<!-- LinkHardwareInputSelectorsDialogComponent -->
-<g id="node20" class="node">
-<title>LinkHardwareInputSelectorsDialogComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5696.92,-122 5415.08,-122 5415.08,-86 5696.92,-86 5696.92,-122"/>
-<text text-anchor="middle" x="5556" y="-99.8" font-family="Times,serif" font-size="14.00">LinkHardwareInputSelectorsDialogComponent</text>
-</g>
-<!-- LinkHardwareInputSelectorsDialogComponent&#45;&gt;AppModule -->
-<g id="edge20" class="edge">
-<title>LinkHardwareInputSelectorsDialogComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5556,-122.12C5556,-136.78 5556,-155 5556,-155 5556,-155 4919.74,-155 4919.74,-155"/>
-<polygon fill="black" stroke="black" points="4919.74,-151.5 4909.74,-155 4919.74,-158.5 4919.74,-151.5"/>
-</g>
-<!-- LinkHardwareInputSelectorsFormComponent -->
-<g id="node21" class="node">
-<title>LinkHardwareInputSelectorsFormComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5397.15,-122 5122.85,-122 5122.85,-86 5397.15,-86 5397.15,-122"/>
-<text text-anchor="middle" x="5260" y="-99.8" font-family="Times,serif" font-size="14.00">LinkHardwareInputSelectorsFormComponent</text>
-</g>
-<!-- LinkHardwareInputSelectorsFormComponent&#45;&gt;AppModule -->
-<g id="edge21" class="edge">
-<title>LinkHardwareInputSelectorsFormComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5260,-122.25C5260,-136.18 5260,-153 5260,-153 5260,-153 4919.95,-153 4919.95,-153"/>
-<polygon fill="black" stroke="black" points="4919.95,-149.5 4909.95,-153 4919.95,-156.5 4919.95,-149.5"/>
-</g>
-<!-- ManageHardwareBoardsComponent -->
-<g id="node22" class="node">
-<title>ManageHardwareBoardsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5104.76,-122 4883.24,-122 4883.24,-86 5104.76,-86 5104.76,-122"/>
-<text text-anchor="middle" x="4994" y="-99.8" font-family="Times,serif" font-size="14.00">ManageHardwareBoardsComponent</text>
-</g>
-<!-- ManageHardwareBoardsComponent&#45;&gt;AppModule -->
-<g id="edge22" class="edge">
-<title>ManageHardwareBoardsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4896.6,-122.11C4896.6,-122.11 4896.6,-140.99 4896.6,-140.99"/>
-<polygon fill="black" stroke="black" points="4893.1,-140.99 4896.6,-150.99 4900.1,-140.99 4893.1,-140.99"/>
-</g>
-<!-- ManageHardwareInputTypesComponent -->
-<g id="node23" class="node">
-<title>ManageHardwareInputTypesComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4865.86,-122 4620.14,-122 4620.14,-86 4865.86,-86 4865.86,-122"/>
-<text text-anchor="middle" x="4743" y="-99.8" font-family="Times,serif" font-size="14.00">ManageHardwareInputTypesComponent</text>
-</g>
-<!-- ManageHardwareInputTypesComponent&#45;&gt;AppModule -->
-<g id="edge23" class="edge">
-<title>ManageHardwareInputTypesComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4845.93,-122.11C4845.93,-122.11 4845.93,-140.99 4845.93,-140.99"/>
-<polygon fill="black" stroke="black" points="4842.43,-140.99 4845.93,-150.99 4849.43,-140.99 4842.43,-140.99"/>
-</g>
-<!-- ManageHardwareOutputTypesComponent -->
-<g id="node24" class="node">
-<title>ManageHardwareOutputTypesComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4602.2,-122 4347.8,-122 4347.8,-86 4602.2,-86 4602.2,-122"/>
-<text text-anchor="middle" x="4475" y="-99.8" font-family="Times,serif" font-size="14.00">ManageHardwareOutputTypesComponent</text>
-</g>
-<!-- ManageHardwareOutputTypesComponent&#45;&gt;AppModule -->
-<g id="edge24" class="edge">
-<title>ManageHardwareOutputTypesComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4475,-122.25C4475,-136.18 4475,-153 4475,-153 4475,-153 4816.31,-153 4816.31,-153"/>
-<polygon fill="black" stroke="black" points="4816.31,-156.5 4826.31,-153 4816.31,-149.5 4816.31,-156.5"/>
-</g>
-<!-- ManageHardwarePanelsComponent -->
-<g id="node25" class="node">
-<title>ManageHardwarePanelsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4330.15,-122 4111.85,-122 4111.85,-86 4330.15,-86 4330.15,-122"/>
-<text text-anchor="middle" x="4221" y="-99.8" font-family="Times,serif" font-size="14.00">ManageHardwarePanelsComponent</text>
-</g>
-<!-- ManageHardwarePanelsComponent&#45;&gt;AppModule -->
-<g id="edge25" class="edge">
-<title>ManageHardwarePanelsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4221,-122.12C4221,-136.78 4221,-155 4221,-155 4221,-155 4816.05,-155 4816.05,-155"/>
-<polygon fill="black" stroke="black" points="4816.05,-158.5 4826.05,-155 4816.05,-151.5 4816.05,-158.5"/>
-</g>
-<!-- ManageSimulatorEventsComponent -->
-<g id="node26" class="node">
-<title>ManageSimulatorEventsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4093.74,-122 3874.26,-122 3874.26,-86 4093.74,-86 4093.74,-122"/>
-<text text-anchor="middle" x="3984" y="-99.8" font-family="Times,serif" font-size="14.00">ManageSimulatorEventsComponent</text>
-</g>
-<!-- ManageSimulatorEventsComponent&#45;&gt;AppModule -->
-<g id="edge26" class="edge">
-<title>ManageSimulatorEventsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3984,-122.19C3984,-137.18 3984,-156 3984,-156 3984,-156 4816.25,-156 4816.25,-156"/>
-<polygon fill="black" stroke="black" points="4816.25,-159.5 4826.25,-156 4816.25,-152.5 4816.25,-159.5"/>
-</g>
-<!-- MapHardwareInputSelectorsDialogComponent -->
-<g id="node27" class="node">
-<title>MapHardwareInputSelectorsDialogComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="3856.64,-122 3575.36,-122 3575.36,-86 3856.64,-86 3856.64,-122"/>
-<text text-anchor="middle" x="3716" y="-99.8" font-family="Times,serif" font-size="14.00">MapHardwareInputSelectorsDialogComponent</text>
-</g>
-<!-- MapHardwareInputSelectorsDialogComponent&#45;&gt;AppModule -->
-<g id="edge27" class="edge">
-<title>MapHardwareInputSelectorsDialogComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3716,-122.28C3716,-137.95 3716,-158 3716,-158 3716,-158 4816.32,-158 4816.32,-158"/>
-<polygon fill="black" stroke="black" points="4816.32,-161.5 4826.32,-158 4816.32,-154.5 4816.32,-161.5"/>
-</g>
-<!-- MapHardwareInputSelectorsFormComponent -->
-<g id="node28" class="node">
-<title>MapHardwareInputSelectorsFormComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="3557.87,-122 3284.13,-122 3284.13,-86 3557.87,-86 3557.87,-122"/>
-<text text-anchor="middle" x="3421" y="-99.8" font-family="Times,serif" font-size="14.00">MapHardwareInputSelectorsFormComponent</text>
-</g>
-<!-- MapHardwareInputSelectorsFormComponent&#45;&gt;AppModule -->
-<g id="edge28" class="edge">
-<title>MapHardwareInputSelectorsFormComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3421,-122.03C3421,-138.4 3421,-160 3421,-160 3421,-160 4816.25,-160 4816.25,-160"/>
-<polygon fill="black" stroke="black" points="4816.25,-163.5 4826.25,-160 4816.25,-156.5 4816.25,-163.5"/>
-</g>
-<!-- MapHardwareOutputSelectorsDialogComponent -->
-<g id="node29" class="node">
-<title>MapHardwareOutputSelectorsDialogComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="3266.47,-122 2975.53,-122 2975.53,-86 3266.47,-86 3266.47,-122"/>
-<text text-anchor="middle" x="3121" y="-99.8" font-family="Times,serif" font-size="14.00">MapHardwareOutputSelectorsDialogComponent</text>
-</g>
-<!-- MapHardwareOutputSelectorsDialogComponent&#45;&gt;AppModule -->
-<g id="edge29" class="edge">
-<title>MapHardwareOutputSelectorsDialogComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3121,-122.04C3121,-138.73 3121,-161 3121,-161 3121,-161 4816.11,-161 4816.11,-161"/>
-<polygon fill="black" stroke="black" points="4816.11,-164.5 4826.11,-161 4816.11,-157.5 4816.11,-164.5"/>
-</g>
-<!-- MapHardwareOutputSelectorsFormComponent -->
-<g id="node30" class="node">
-<title>MapHardwareOutputSelectorsFormComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2957.2,-122 2674.8,-122 2674.8,-86 2957.2,-86 2957.2,-122"/>
-<text text-anchor="middle" x="2816" y="-99.8" font-family="Times,serif" font-size="14.00">MapHardwareOutputSelectorsFormComponent</text>
-</g>
-<!-- MapHardwareOutputSelectorsFormComponent&#45;&gt;AppModule -->
-<g id="edge30" class="edge">
-<title>MapHardwareOutputSelectorsFormComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2816,-122.02C2816,-139.37 2816,-163 2816,-163 2816,-163 4816.08,-163 4816.08,-163"/>
-<polygon fill="black" stroke="black" points="4816.08,-166.5 4826.08,-163 4816.08,-159.5 4816.08,-166.5"/>
-</g>
-<!-- RadiobuttonComponent -->
-<g id="node31" class="node">
-<title>RadiobuttonComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2656.06,-122 2505.94,-122 2505.94,-86 2656.06,-86 2656.06,-122"/>
-<text text-anchor="middle" x="2581" y="-99.8" font-family="Times,serif" font-size="14.00">RadiobuttonComponent</text>
-</g>
-<!-- RadiobuttonComponent&#45;&gt;AppModule -->
-<g id="edge31" class="edge">
-<title>RadiobuttonComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2581,-122.3C2581,-140.27 2581,-165 2581,-165 2581,-165 4815.86,-165 4815.86,-165"/>
-<polygon fill="black" stroke="black" points="4815.86,-168.5 4825.86,-165 4815.86,-161.5 4815.86,-168.5"/>
-</g>
-<!-- RegisterHardwareBoardComponent -->
-<g id="node32" class="node">
-<title>RegisterHardwareBoardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2487.87,-122 2270.13,-122 2270.13,-86 2487.87,-86 2487.87,-122"/>
-<text text-anchor="middle" x="2379" y="-99.8" font-family="Times,serif" font-size="14.00">RegisterHardwareBoardComponent</text>
-</g>
-<!-- RegisterHardwareBoardComponent&#45;&gt;AppModule -->
-<g id="edge32" class="edge">
-<title>RegisterHardwareBoardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2379,-122.27C2379,-140.56 2379,-166 2379,-166 2379,-166 4816.1,-166 4816.1,-166"/>
-<polygon fill="black" stroke="black" points="4816.1,-169.5 4826.1,-166 4816.1,-162.5 4816.1,-169.5"/>
-</g>
-<!-- SelectComponent -->
-<g id="node33" class="node">
-<title>SelectComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2252.54,-122 2137.46,-122 2137.46,-86 2252.54,-86 2252.54,-122"/>
-<text text-anchor="middle" x="2195" y="-99.8" font-family="Times,serif" font-size="14.00">SelectComponent</text>
-</g>
-<!-- SelectComponent&#45;&gt;AppModule -->
-<g id="edge33" class="edge">
-<title>SelectComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2195,-122.17C2195,-141.09 2195,-168 2195,-168 2195,-168 4816.28,-168 4816.28,-168"/>
-<polygon fill="black" stroke="black" points="4816.28,-171.5 4826.28,-168 4816.28,-164.5 4816.28,-171.5"/>
-</g>
-<!-- SettingsComponent -->
-<g id="node34" class="node">
-<title>SettingsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2119.45,-122 1992.55,-122 1992.55,-86 2119.45,-86 2119.45,-122"/>
-<text text-anchor="middle" x="2056" y="-99.8" font-family="Times,serif" font-size="14.00">SettingsComponent</text>
-</g>
-<!-- SettingsComponent&#45;&gt;AppModule -->
-<g id="edge34" class="edge">
-<title>SettingsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2056,-122.11C2056,-141.34 2056,-169 2056,-169 2056,-169 4816.34,-169 4816.34,-169"/>
-<polygon fill="black" stroke="black" points="4816.34,-172.5 4826.34,-169 4816.34,-165.5 4816.34,-172.5"/>
-</g>
-<!-- SlideToggleComponent -->
-<g id="node35" class="node">
-<title>SlideToggleComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1974.77,-122 1825.23,-122 1825.23,-86 1974.77,-86 1974.77,-122"/>
-<text text-anchor="middle" x="1900" y="-99.8" font-family="Times,serif" font-size="14.00">SlideToggleComponent</text>
-</g>
-<!-- SlideToggleComponent&#45;&gt;AppModule -->
-<g id="edge35" class="edge">
-<title>SlideToggleComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1900,-122.31C1900,-142.15 1900,-171 1900,-171 1900,-171 4816.33,-171 4816.33,-171"/>
-<polygon fill="black" stroke="black" points="4816.33,-174.5 4826.33,-171 4816.33,-167.5 4816.33,-174.5"/>
-</g>
-<!-- SliderComponent -->
-<g id="node36" class="node">
-<title>SliderComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1807.27,-122 1692.73,-122 1692.73,-86 1807.27,-86 1807.27,-122"/>
-<text text-anchor="middle" x="1750" y="-99.8" font-family="Times,serif" font-size="14.00">SliderComponent</text>
-</g>
-<!-- SliderComponent&#45;&gt;AppModule -->
-<g id="edge36" class="edge">
-<title>SliderComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1750,-122.13C1750,-142.57 1750,-173 1750,-173 1750,-173 4816.28,-173 4816.28,-173"/>
-<polygon fill="black" stroke="black" points="4816.28,-176.5 4826.28,-173 4816.28,-169.5 4816.28,-176.5"/>
-</g>
-<!-- ViewHardwareInputSelectorsDialogComponent -->
-<g id="node37" class="node">
-<title>ViewHardwareInputSelectorsDialogComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1674.8,-122 1389.2,-122 1389.2,-86 1674.8,-86 1674.8,-122"/>
-<text text-anchor="middle" x="1532" y="-99.8" font-family="Times,serif" font-size="14.00">ViewHardwareInputSelectorsDialogComponent</text>
-</g>
-<!-- ViewHardwareInputSelectorsDialogComponent&#45;&gt;AppModule -->
-<g id="edge37" class="edge">
-<title>ViewHardwareInputSelectorsDialogComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1532,-122.03C1532,-142.77 1532,-174 1532,-174 1532,-174 4816.12,-174 4816.12,-174"/>
-<polygon fill="black" stroke="black" points="4816.12,-177.5 4826.12,-174 4816.12,-170.5 4816.12,-177.5"/>
-</g>
-<!-- ViewHardwareOutputSelectorsDialogComponent -->
-<g id="node38" class="node">
-<title>ViewHardwareOutputSelectorsDialogComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1371.63,-122 1076.37,-122 1076.37,-86 1371.63,-86 1371.63,-122"/>
-<text text-anchor="middle" x="1224" y="-99.8" font-family="Times,serif" font-size="14.00">ViewHardwareOutputSelectorsDialogComponent</text>
-</g>
-<!-- ViewHardwareOutputSelectorsDialogComponent&#45;&gt;AppModule -->
-<g id="edge38" class="edge">
-<title>ViewHardwareOutputSelectorsDialogComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1224,-122.17C1224,-143.5 1224,-176 1224,-176 1224,-176 4816.13,-176 4816.13,-176"/>
-<polygon fill="black" stroke="black" points="4816.13,-179.5 4826.13,-176 4816.13,-172.5 4816.13,-179.5"/>
-</g>
-<!-- ViewHardwarePanelDetailsComponent -->
-<g id="node39" class="node">
-<title>ViewHardwarePanelDetailsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1058.58,-122 821.42,-122 821.42,-86 1058.58,-86 1058.58,-122"/>
-<text text-anchor="middle" x="940" y="-99.8" font-family="Times,serif" font-size="14.00">ViewHardwarePanelDetailsComponent</text>
-</g>
-<!-- ViewHardwarePanelDetailsComponent&#45;&gt;AppModule -->
-<g id="edge39" class="edge">
-<title>ViewHardwarePanelDetailsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M940,-122.29C940,-144.21 940,-178 940,-178 940,-178 4816.22,-178 4816.22,-178"/>
-<polygon fill="black" stroke="black" points="4816.22,-181.5 4826.22,-178 4816.22,-174.5 4816.22,-181.5"/>
-</g>
-<!-- AppComponent  -->
-<g id="node43" class="node">
-<title>AppComponent </title>
-<polygon fill="#80b1d3" stroke="black" points="4922.44,-252 4813.56,-252 4813.56,-216 4922.44,-216 4922.44,-252"/>
-<text text-anchor="middle" x="4868" y="-229.8" font-family="Times,serif" font-size="14.00">AppComponent </text>
-</g>
-<!-- AppModule&#45;&gt;AppComponent  -->
-<g id="edge42" class="edge">
-<title>AppModule&#45;&gt;AppComponent </title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M4868,-187.11C4868,-187.11 4868,-205.99 4868,-205.99"/>
-<polygon fill="black" stroke="black" points="4864.5,-205.99 4868,-215.99 4871.5,-205.99 4864.5,-205.99"/>
-</g>
-<!-- AppRoutingModule -->
-<g id="node41" class="node">
-<title>AppRoutingModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="797.27,-122 794.27,-126 773.27,-126 770.27,-122 668.73,-122 668.73,-86 797.27,-86 797.27,-122"/>
-<text text-anchor="middle" x="733" y="-99.8" font-family="Times,serif" font-size="14.00">AppRoutingModule</text>
-</g>
-<!-- AppRoutingModule&#45;&gt;AppModule -->
-<g id="edge40" class="edge">
-<title>AppRoutingModule&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M733,-122.16C733,-144.35 733,-179 733,-179 733,-179 4816.07,-179 4816.07,-179"/>
-<polygon fill="black" stroke="black" points="4816.07,-182.5 4826.07,-179 4816.07,-175.5 4816.07,-182.5"/>
-</g>
-<!-- MaterialModule -->
-<g id="node42" class="node">
-<title>MaterialModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="650.47,-122 647.47,-126 626.47,-126 623.47,-122 543.53,-122 543.53,-86 650.47,-86 650.47,-122"/>
-<text text-anchor="middle" x="597" y="-99.8" font-family="Times,serif" font-size="14.00">MaterialModule</text>
-</g>
-<!-- MaterialModule&#45;&gt;AppModule -->
-<g id="edge41" class="edge">
-<title>MaterialModule&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M597,-122.25C597,-145.02 597,-181 597,-181 597,-181 4816.07,-181 4816.07,-181"/>
-<polygon fill="black" stroke="black" points="4816.07,-184.5 4826.07,-181 4816.07,-177.5 4816.07,-184.5"/>
-</g>
-<!-- ConfigurationService -->
-<g id="node44" class="node">
-<title>ConfigurationService</title>
-<ellipse fill="#fdb462" stroke="black" cx="426" cy="-104" rx="94.34" ry="18"/>
-<text text-anchor="middle" x="426" y="-99.8" font-family="Times,serif" font-size="14.00">ConfigurationService</text>
-</g>
-<!-- ConfigurationService&#45;&gt;AppModule -->
-<g id="edge43" class="edge">
-<title>ConfigurationService&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M426,-122.32C426,-145.66 426,-183 426,-183 426,-183 4816.16,-183 4816.16,-183"/>
-<polygon fill="black" stroke="black" points="4816.16,-186.5 4826.16,-183 4816.16,-179.5 4816.16,-186.5"/>
-</g>
-<!-- DataService -->
-<g id="node45" class="node">
-<title>DataService</title>
-<ellipse fill="#fdb462" stroke="black" cx="256" cy="-104" rx="58.44" ry="18"/>
-<text text-anchor="middle" x="256" y="-99.8" font-family="Times,serif" font-size="14.00">DataService</text>
-</g>
-<!-- DataService&#45;&gt;AppModule -->
-<g id="edge44" class="edge">
-<title>DataService&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M256,-122.15C256,-145.76 256,-184 256,-184 256,-184 4816.01,-184 4816.01,-184"/>
-<polygon fill="black" stroke="black" points="4816.01,-187.5 4826.01,-184 4816.01,-180.5 4816.01,-187.5"/>
-</g>
-<!-- RealTimeService -->
-<g id="node46" class="node">
-<title>RealTimeService</title>
-<ellipse fill="#fdb462" stroke="black" cx="102" cy="-104" rx="78.14" ry="18"/>
-<text text-anchor="middle" x="102" y="-99.8" font-family="Times,serif" font-size="14.00">RealTimeService</text>
-</g>
-<!-- RealTimeService&#45;&gt;AppModule -->
-<g id="edge45" class="edge">
-<title>RealTimeService&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M102,-122.2C102,-146.36 102,-186 102,-186 102,-186 4816.07,-186 4816.07,-186"/>
-<polygon fill="black" stroke="black" points="4816.07,-189.5 4826.07,-186 4816.07,-182.5 4816.07,-189.5"/>
-</g>
-</g>
-</svg>
-
-    </div>
-    <i id="fullscreen" class="icon ion-ios-resize module-graph-fullscreen-btn" aria-hidden="true"></i>
+<h3>Overview</h3>
+<div class="text-center">
+    <object id="demo-svg" type="image/svg+xml" data="graph/dependencies.svg" style="width: 100%; height: 250px;">
+            Your browser does not support SVG
+    </object>
     <div class="btn-group">
         <button id="zoom-in" class="btn btn-default btn-sm">Zoom in</button>
         <button id="reset" class="btn btn-default btn-sm">Reset</button>
         <button id="zoom-out" class="btn btn-default btn-sm">Zoom out</button>
     </div>
 </div>
-
 <div class="container-fluid overview">
     <div class="row">
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-ios-archive"></span></h4>
-                    <p class="card-text">
-                        <a href="./modules.html">3 Modules</a>
-                    </p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-archive"></span></h4>
+                        <p class="card-text">
+                            <a href="./modules.html">6 modules</a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-md-cog"></span></h4>
-                    <p class="card-text">38 Components</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-cogs"></span></h4>
+                        <p class="card-text">39 components</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-md-code-working"></span></h4>
-                    <p class="card-text">1 Directive</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-code"></span></h4>
+                        <p class="card-text">2 directives</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-md-arrow-round-down"></span></h4>
-                    <p class="card-text">3 Injectables</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-code-fork"></span></h4>
+                        <p class="card-text">19 injectables</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-ios-paper"></span></h4>
-                    <p class="card-text">1 Class</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-plus"></span></h4>
+                        <p class="card-text">2 pipes</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-md-information-circle-outline"></span></h4>
-                    <p class="card-text">24 Interfaces</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-file-code-o"></span></h4>
+                        <p class="card-text">2 classes</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-ios-git-branch"></span></h4>
-                    <p class="card-text">
-                        <a href="./routes.html">17 Routes</a>
-                    </p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-info"></span></h4>
+                        <p class="card-text">33 interfaces</p>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 <script src="js/libs/svg-pan-zoom.min.js"></script>
@@ -715,14 +1029,9 @@
 
 
 
-
-
-
-
-
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -730,22 +1039,8 @@
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'overview';
-            var COMPODOC_CURRENT_PAGE_URL = 'overview.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="./js/libs/custom-elements.min.js"></script>
-       <script src="./js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
-       <script src="./js/menu-wc.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 
@@ -756,17 +1051,20 @@
 
        <script src="./js/compodoc.js"></script>
 
-       <script src="./js/tabs.js"></script>
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/clipboard.min.js"></script>
-       <script src="./js/libs/prism.js"></script>
-       <script src="./js/sourceCode.js"></script>
-          <script src="./js/search/search.js"></script>
-          <script src="./js/search/lunr.min.js"></script>
-          <script src="./js/search/search-lunr.js"></script>
-          <script src="./js/search/search_index.js"></script>
-       <script src="./js/lazy-load-graphs.js"></script>
+       <script src="./js/search/search.js"></script>
+       <script src="./js/search/lunr.min.js"></script>
+       <script src="./js/search/search-lunr.js"></script>
 
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/highlight.pack.js"></script>
+       <script src="./js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="./js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>
