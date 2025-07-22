@@ -13,14 +13,14 @@
 <div class="loader">
   <mat-progress-bar mode="indeterminate" *ngIf="data_loaded === false"></mat-progress-bar>
 </div>
-<table mat-table [dataSource]="dataSource">
+<table mat-table [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
     <td mat-cell *matCellDef="let element">{{ element.id }}</td>
   </ng-container>
 
   <ng-container matColumnDef="friendlyName">
-    <th mat-header-cell *matHeaderCellDef>Friendly Name</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Friendly Name</th>
     <td mat-cell *matCellDef="let element"
         [matTooltip]="element.friendlyName"
         matTooltipPosition="above">
@@ -29,7 +29,7 @@
   </ng-container>
 
   <ng-container matColumnDef="eventName">
-    <th mat-header-cell *matHeaderCellDef>Event name</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Event name</th>
     <td mat-cell *matCellDef="let element"
         [matTooltip]="element.eventName"
         matTooltipPosition="above">
@@ -38,7 +38,7 @@
   </ng-container>
 
   <ng-container matColumnDef="simulatorEventTypeName">
-    <th mat-header-cell *matHeaderCellDef>Simulator Event Type</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Simulator Event Type</th>
     <td mat-cell *matCellDef="let element"
         [matTooltip]="element.simulatorEventTypeName"
         matTooltipPosition="above">
@@ -47,7 +47,7 @@
   </ng-container>
 
   <ng-container matColumnDef="simulatorSoftwareName">
-    <th mat-header-cell *matHeaderCellDef>Simulator Software</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Simulator Software</th>
     <td mat-cell *matCellDef="let element"
         [matTooltip]="element.simulatorSoftwareName"
         matTooltipPosition="above">
@@ -56,7 +56,7 @@
   </ng-container>
 
   <ng-container matColumnDef="simulatorEventSdkTypeName">
-    <th mat-header-cell *matHeaderCellDef>Simulator Event SDK Type</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Simulator Event SDK Type</th>
     <td mat-cell *matCellDef="let element"
         [matTooltip]="element.simulatorEventSdkTypeName"
         matTooltipPosition="above">
@@ -86,3 +86,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

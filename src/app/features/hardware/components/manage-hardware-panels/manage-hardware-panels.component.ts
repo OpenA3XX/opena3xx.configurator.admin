@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  OnChanges,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,7 +16,7 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './manage-hardware-panels.component.html',
   styleUrls: ['./manage-hardware-panels.component.scss'],
 })
-export class ManageHardwarePanelsComponent implements AfterViewInit, OnChanges {
+export class ManageHardwarePanelsComponent implements AfterViewInit {
   public displayedColumns: string[] = [
     'id',
     'name',
@@ -40,10 +39,7 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnChanges {
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnChanges(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -59,6 +55,16 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() {
+    this.connectDataSourceFeatures();
+    this.loadData();
+  }
+
+  private connectDataSourceFeatures() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  private loadData() {
     this.dataService
       .getAllHardwarePanelOverviewDetails()
       .toPromise()
@@ -66,6 +72,10 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnChanges {
         this.data = data;
         this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data);
         this.dataLoaded = true;
+
+        // Connect features to new data source
+        this.connectDataSourceFeatures();
+
         this._snackBar.open('Data Loading Completed', 'Ok', {
           duration: 1000,
         });

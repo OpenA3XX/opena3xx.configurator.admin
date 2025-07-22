@@ -1,15 +1,84 @@
 // OpenA3XX Component Mixins & Shared Styles
 
-// Table Mixin - Always 100% Width
+// Table Mixin - Always 100% Width with Hover Effects
 @mixin data-table {
   table, mat-table, .mat-mdc-table {
     width: 100% !important;
     max-width: none !important;
     box-sizing: border-box !important;
 
+    // Table row hover effects
+    .mat-mdc-row, .mat-row, tr[mat-row] {
+      transition: all var(--transition-fast) ease;
+      cursor: pointer;
+      border-radius: var(--border-radius-sm);
+
+      &:hover {
+        background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.04)) !important;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-sm);
+
+        // Dark theme hover
+        .dark-theme & {
+          background-color: var(--mat-sys-surface-variant, rgba(255, 255, 255, 0.08)) !important;
+        }
+
+        // Subtle scale effect for cells
+        .mat-mdc-cell, .mat-cell, td[mat-cell] {
+          transform: scale(1.002);
+        }
+
+        // Enhanced button visibility on row hover
+        button {
+          transform: scale(1.05);
+          box-shadow: var(--shadow-sm);
+        }
+      }
+
+      // Active/selected row state
+      &.selected, &[aria-selected="true"] {
+        background-color: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.12)) !important;
+        border-left: 3px solid var(--mat-sys-primary, #1976d2);
+      }
+    }
+
+    // Header row styling
+    .mat-mdc-header-row, .mat-header-row, tr[mat-header-row] {
+      background-color: var(--mat-sys-surface-container, #f5f5f5);
+
+      .dark-theme & {
+        background-color: var(--mat-sys-surface-container, #2a2a2a);
+      }
+
+      // Header cell hover effect
+      .mat-mdc-header-cell, .mat-header-cell, th[mat-header-cell] {
+        transition: var(--transition-fast);
+
+        &:hover {
+          background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.08));
+
+          .dark-theme & {
+            background-color: var(--mat-sys-surface-variant, rgba(255, 255, 255, 0.12));
+          }
+        }
+      }
+    }
+
+    // Cell styling enhancements
+    .mat-mdc-cell, .mat-cell, td[mat-cell] {
+      transition: all var(--transition-fast) ease;
+      border-bottom: 1px solid var(--mat-sys-outline-variant, #e0e0e0);
+
+      .dark-theme & {
+        border-bottom-color: var(--mat-sys-outline-variant, #404040);
+      }
+    }
+
+    // Button styling within tables
     button {
       margin-left: var(--spacing-sm);
-      transition: var(--transition-fast);
+      transition: all var(--transition-fast) ease;
+      border-radius: var(--border-radius-md);
 
       &.view-button {
         min-width: 64px;
@@ -21,14 +90,23 @@
         &:hover {
           background-color: var(--mat-sys-surface-variant, #505050);
           color: var(--mat-sys-on-surface-variant, #ffffff);
+          transform: scale(1.1);
         }
+      }
+
+      &:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: var(--shadow-md);
       }
     }
 
+    // Column-specific styling
     .mat-column-id {
       width: 200px;
       font-family: 'Roboto Mono', monospace;
       font-size: 0.875rem;
+      color: var(--mat-sys-primary, #1976d2);
+      font-weight: 500;
     }
 
     .mat-column-name {
@@ -44,6 +122,31 @@
     .mat-column-action {
       width: 400px !important;
       min-width: 400px !important;
+    }
+
+    // Alternating row colors (zebra striping)
+    .mat-mdc-row:nth-child(even), .mat-row:nth-child(even) {
+      background-color: var(--mat-sys-surface, rgba(0, 0, 0, 0.02));
+
+      .dark-theme & {
+        background-color: var(--mat-sys-surface, rgba(255, 255, 255, 0.02));
+      }
+    }
+
+    // Loading state styling
+    &.loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    // Empty state styling
+    .mat-mdc-no-data-row, .mat-no-data-row {
+      .mat-mdc-cell, .mat-cell {
+        text-align: center;
+        color: var(--mat-sys-on-surface-variant, #666);
+        font-style: italic;
+        padding: var(--spacing-xl) var(--spacing-md);
+      }
     }
   }
 }

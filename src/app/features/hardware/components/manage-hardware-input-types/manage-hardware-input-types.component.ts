@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
@@ -31,15 +32,26 @@ export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit 
         map((data_received) => {
           this.data = data_received;
           this.dataSource = new MatTableDataSource<HardwareInputTypeDto>(this.data);
+
+          // Connect paginator and sort after data is loaded
+          this.connectDataSourceFeatures();
         })
       )
       .subscribe();
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.connectDataSourceFeatures();
+  }
+
+  private connectDataSourceFeatures() {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   addHardwareInputType() {

@@ -24,8 +24,16 @@ table {
     // min-width: 45px;
   }
   button.small:hover {
-    background-color: #505050;
-    color: #ffffff;
+    background-color: var(--mat-sys-primary-container, rgba(0, 97, 237, 0.12));
+    color: var(--mat-sys-on-primary-container, #1976d2);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-fast);
+
+    .dark-theme & {
+      background-color: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.24));
+      color: var(--mat-sys-on-primary-container, #90caf9);
+    }
   }
 
   // Optimized column widths
@@ -67,24 +75,39 @@ table {
 
 mat-grid-list {
   .mat-grid-tile {
-    height:16px;
+    height: 16px;
+
     .data-wrapper {
-      border: 1px solid #d0d0d0;
+      border: 1px solid var(--mat-sys-outline-variant, #d0d0d0);
       padding: 5px;
       position: relative;
-      background-color: #ffffff;
+      background-color: var(--mat-sys-surface, #ffffff);
       width: 88%;
       height: 88%;
-      border-radius: 5px;
+      border-radius: var(--border-radius-md, 5px);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-fast);
+
+      .dark-theme & {
+        border-color: var(--mat-sys-outline-variant, #404040);
+        background-color: var(--mat-sys-surface-container, #1e1e1e);
+      }
+
       .title {
         position: absolute;
         top: 20px;
         width: 97%;
         text-align: center;
-        color: #00205c;
+        color: var(--opena3xx-primary, #0061ed);
         font-weight: bold;
         font-size: 12px;
+        transition: color var(--transition-fast);
+
+        .dark-theme & {
+          color: var(--opena3xx-primary-light, #64b5f6);
+        }
       }
+
       .value {
         position: absolute;
         width: 97%;
@@ -93,13 +116,42 @@ mat-grid-list {
         text-align: center;
         font-weight: bold;
         line-height: 33px;
+        color: var(--mat-sys-on-surface, #1f1f1f);
+        transition: color var(--transition-fast);
+
+        .dark-theme & {
+          color: var(--mat-sys-on-surface, #ffffff);
+        }
+
+        &.small {
+          font-size: 20px;
+        }
       }
-      .value.small {
-        font-size: 20px;
+
+      &:hover {
+        background-color: var(--mat-sys-surface-variant, #efefef);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+        cursor: pointer;
+
+        .dark-theme & {
+          background-color: var(--mat-sys-surface-variant, #2a2a2a);
+        }
+
+        .title {
+          color: var(--opena3xx-primary-dark, #1976d2);
+
+          .dark-theme & {
+            color: var(--opena3xx-primary-light, #90caf9);
+          }
+        }
       }
-    }
-    .data-wrapper:hover {
-      background-color: #efefef;
+
+      // Enhanced focus states for accessibility
+      &:focus-within {
+        outline: 2px solid var(--opena3xx-primary, #0061ed);
+        outline-offset: 2px;
+      }
     }
   }
 }

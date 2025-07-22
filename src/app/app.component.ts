@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CoreHelper } from './core/core-helper';
 import { ExitAppDialogComponent } from './core/components/exit-app-dialog.component';
 import { ThemeService } from './core/services/theme.service';
+import { DependencyStatusService, DependencyStatusResponse } from './core/services/dependency-status.service';
 import { Subscription } from 'rxjs';
 
 /**
@@ -29,7 +30,9 @@ export class AppComponent implements OnInit, OnDestroy
   isFullscreen: boolean = false;
   apiAvailabilityStatus: boolean = false;
   isDarkMode: boolean = false;
+  dependencyStatus: DependencyStatusResponse | null = null;
   private themeSubscription: Subscription = new Subscription();
+  private dependencyStatusSubscription: Subscription = new Subscription();
 
   private apiHealthPollingTime: number = 5000;
 
@@ -68,6 +71,7 @@ export class AppComponent implements OnInit, OnDestroy
     private coreHelper: CoreHelper,
     private renderer: Renderer2,
     private themeService: ThemeService,
+    private dependencyStatusService: DependencyStatusService,
     @Inject(DOCUMENT) private document: Document
 
   ) {
@@ -98,10 +102,19 @@ export class AppComponent implements OnInit, OnDestroy
     this.themeSubscription = this.themeService.isDarkMode$.subscribe(isDark => {
       this.isDarkMode = isDark;
     });
+
+    // Subscribe to dependency status updates
+    this.dependencyStatusSubscription = this.dependencyStatusService.status$.subscribe(status => {
+      this.dependencyStatus = status;
+    });
+
+    // Start polling for dependency status
+    this.dependencyStatusService.startPolling();
   }
 
   ngOnDestroy() {
     this.themeSubscription.unsubscribe();
+    this.dependencyStatusSubscription.unsubscribe();
   }
 
   private checkApiHealth() {
@@ -146,5 +159,46 @@ export class AppComponent implements OnInit, OnDestroy
   }
   clickConsole() {
     this.router.navigateByUrl(`/console`);
+  }
+
+  // Dependency Status Helper Methods
+  getStatusIcon(dependencyName: string): string {
+    return this.dependencyStatusService.getStatusIcon(dependencyName);
+  }
+
+  getStatusClass(status: string): string {
+    return this.dependencyStatusService.getStatusClass(status);
+  }
+
+  getDependencyTooltip(dependency: any): string {
+    if (!dependency) return 'Status unknown';
+
+    const lastChecked = new Date(dependency.lastChecked).toLocaleTimeString();
+    const serviceDescription = this.getServiceDescription(dependency.name);
+
+    return `${dependency.name} (${serviceDescription}): ${dependency.message} (Last checked: ${lastChecked})`;
+  }
+
+  getServiceDescription(serviceName: string): string {
+    const name = serviceName?.toLowerCase() || '';
+
+    if (name.includes('msfs') || name.includes('flight simulator')) {
+      return 'Flight Simulator';
+    }
+
+    if (name.includes('rabbitmq')) {
+      return 'Message Broker';
+    }
+
+    if (name.includes('seq')) {
+      return 'Logging Service';
+    }
+
+    return 'Service';
+  }
+
+  getFormattedTimestamp(timestamp: string | Date): string {
+    if (!timestamp) return '';
+    return new Date(timestamp).toLocaleTimeString();
   }
 }

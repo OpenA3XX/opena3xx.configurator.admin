@@ -112,6 +112,11 @@ $dark-theme: mat.define-dark-theme((
   --transition-fast: 150ms ease;
   --transition-normal: 300ms ease;
   --transition-slow: 500ms ease;
+
+  // Table-specific animations
+  --table-hover-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --table-scale-hover: 1.002;
+  --table-lift-hover: -2px;
 }
 
 body{
@@ -241,9 +246,139 @@ form {
 .error { color: var(--error-color) !important; }
 .info { color: var(--info-color) !important; }
 
+// Image Dark Mode Enhancement Utility Classes
+.image-dark-enhance {
+  transition: filter var(--transition-normal) ease;
 
-// Apply default light theme
-@include mat.all-component-themes($light-theme);
+  .dark-theme & {
+    filter:
+      brightness(1.3)
+      contrast(1.2)
+      saturate(1.1);
+  }
+}
+
+.image-dark-enhance-strong {
+  transition: filter var(--transition-normal) ease;
+
+  .dark-theme & {
+    filter:
+      brightness(1.5)
+      contrast(1.3)
+      saturate(1.2)
+      drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  }
+}
+
+.image-dark-glow {
+  transition: all var(--transition-normal) ease;
+
+  .dark-theme & {
+    filter:
+      brightness(1.4)
+      contrast(1.25)
+      saturate(1.15)
+      drop-shadow(0 0 10px rgba(255, 255, 255, 0.4))
+      drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+
+    &:hover {
+      filter:
+        brightness(1.5)
+        contrast(1.35)
+        saturate(1.25)
+        drop-shadow(0 0 15px rgba(255, 255, 255, 0.6))
+        drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+    }
+  }
+}
+
+// Global image dark mode enhancements
+img {
+  &.logo, &.brand, &[alt*="logo"], &[alt*="Logo"] {
+    .dark-theme & {
+      filter: brightness(1.2) contrast(1.1);
+      transition: filter var(--transition-normal) ease;
+    }
+  }
+}
+
+// Specific OpenA3XX Logo Dark Mode Enhancement
+.dark-theme {
+  .opena3xx-logo {
+    // Apply multiple filters for better contrast in dark mode
+    filter: brightness(41.1) contrast(13.9) saturate(1.01) drop-shadow(0 0 10px rgba(255,255,255,.4)) !important;
+    border-radius: 8px !important;
+
+    &:hover {
+      // filter: brightness(41.1) contrast(13.9) saturate(1.01) drop-shadow(0 0 10px rgba(255,255,255,.4)) !important;
+      transform: scale(1.08) !important;
+    }
+
+    &:active {
+      transform: scale(1.02) !important;
+      // filter: brightness(1.6) contrast(1.4) saturate(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important;
+    }
+
+    &:focus {
+      outline: 2px solid rgba(255, 255, 255, 0.6) !important;
+      outline-offset: 3px !important;
+    }
+  }
+}
+
+// Table Utility Classes
+.table-hover-enabled {
+  .mat-mdc-row, .mat-row {
+    &:hover {
+      background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.04)) !important;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+  }
+}
+
+.table-striped {
+  .mat-mdc-row:nth-child(even), .mat-row:nth-child(even) {
+    background-color: var(--mat-sys-surface, rgba(0, 0, 0, 0.02));
+
+    .dark-theme & {
+      background-color: var(--mat-sys-surface, rgba(255, 255, 255, 0.02));
+    }
+  }
+}
+
+.table-bordered {
+  border: 1px solid var(--mat-sys-outline-variant, #e0e0e0);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+
+  .dark-theme & {
+    border-color: var(--mat-sys-outline-variant, #404040);
+  }
+
+  .mat-mdc-cell, .mat-cell,
+  .mat-mdc-header-cell, .mat-header-cell {
+    border-right: 1px solid var(--mat-sys-outline-variant, #e0e0e0);
+
+    .dark-theme & {
+      border-right-color: var(--mat-sys-outline-variant, #404040);
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+
+// Apply base theme (typography + density) - only once
+@include mat.core-theme($light-theme);
+@include mat.all-component-typographies($light-theme);
+@include mat.all-component-densities($light-theme);
+
+// Apply default light theme colors
+@include mat.all-component-colors($light-theme);
 
 // Dark theme class
 .dark-theme {
@@ -263,7 +398,7 @@ form {
   color: var(--mat-sys-on-background);
 }
 
-// Light theme class (explicit)
+// Light theme class (explicit) - only colors needed since base is already light
 .light-theme {
   @include mat.all-component-colors($light-theme);
 
@@ -334,6 +469,99 @@ mat-sidenav-content, .mat-sidenav-content,
   }
 }
 
+// Global table hover enhancements
+table, mat-table, .mat-mdc-table {
+  // Ensure all tables have hover effects
+  .mat-mdc-row, .mat-row, tr:not(.mat-mdc-header-row):not(.mat-header-row) {
+    position: relative;
+    transition: var(--table-hover-transition);
+    border-radius: var(--border-radius-sm);
+    margin: 1px 0;
+
+    &:hover {
+      background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.04)) !important;
+      transform: translateY(var(--table-lift-hover)) scale(var(--table-scale-hover));
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+      border-radius: var(--border-radius-md);
+
+      // Enhanced hover for dark theme
+      .dark-theme & {
+        background-color: var(--mat-sys-surface-variant, rgba(255, 255, 255, 0.08)) !important;
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+      }
+
+      // Animate table cells on row hover
+      td, .mat-mdc-cell, .mat-cell {
+        color: var(--mat-sys-on-surface, #1f1f1f);
+
+        .dark-theme & {
+          color: var(--mat-sys-on-surface, #ffffff);
+        }
+      }
+
+      // Enhance buttons on row hover
+      button {
+        transform: scale(1.03);
+        box-shadow: var(--shadow-sm);
+
+        &:hover {
+          transform: scale(1.08);
+          box-shadow: var(--shadow-md);
+        }
+      }
+
+      // Icon enhancement on hover
+      mat-icon {
+        transform: scale(1.1);
+        transition: transform var(--transition-fast);
+      }
+    }
+
+    // Active/focus states
+    &:focus, &:active {
+      outline: 2px solid var(--mat-sys-primary, #1976d2);
+      outline-offset: -2px;
+    }
+  }
+
+  // Header hover effects
+  .mat-mdc-header-row, .mat-header-row {
+    .mat-mdc-header-cell, .mat-header-cell, th {
+      transition: all var(--transition-fast) ease;
+      position: relative;
+
+      &:hover {
+        background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.06));
+        cursor: pointer;
+
+        .dark-theme & {
+          background-color: var(--mat-sys-surface-variant, rgba(255, 255, 255, 0.1));
+        }
+
+        // Sort indicator enhancement
+        .mat-sort-header-arrow {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+
+  // Pagination hover effects
+  + mat-paginator, + .mat-mdc-paginator {
+    .mat-mdc-paginator-range-actions {
+      button {
+        transition: all var(--transition-fast) ease;
+
+        &:hover:not([disabled]) {
+          background-color: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.12));
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+
 .mat-expansion-panel{
   overflow:scroll !important;
 }
@@ -401,6 +629,76 @@ body {
 .mat-mdc-card,
 .mat-sidenav,
 .mat-toolbar,
-.mat-mdc-form-field {
+.mat-mdc-form-field,
+table,
+mat-table,
+.mat-mdc-table {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+// Enhanced table interactions
+.table-interactive {
+  // For tables that need enhanced interactivity
+  .mat-mdc-row, .mat-row {
+    &:hover {
+      cursor: pointer;
+      background-color: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.08)) !important;
+
+      .dark-theme & {
+        background-color: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.16)) !important;
+      }
+    }
+
+    &:active {
+      background-color: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.16)) !important;
+      transform: scale(0.998);
+    }
+  }
+}
+
+// Table loading states
+.table-loading {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    .dark-theme & {
+      background: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+
+// Compact table variant
+.table-compact {
+  .mat-mdc-row, .mat-row {
+    height: 40px;
+
+    .mat-mdc-cell, .mat-cell {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      font-size: 0.875rem;
+    }
+  }
+
+  .mat-mdc-header-row, .mat-header-row {
+    height: 36px;
+
+    .mat-mdc-header-cell, .mat-header-cell {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -46,6 +47,10 @@ export class ManageSimulatorEventsComponent implements OnInit, AfterViewInit {
           this.data = data_received;
           this.dataSource = new MatTableDataSource<SimulatorEventDto>(this.data);
           this.data_loaded = true;
+
+          // Connect paginator and sort after data is loaded
+          this.connectDataSourceFeatures();
+
           this._snackBar.open('Data Loading Completed', 'Ok', {
             duration: 1000,
           });
@@ -55,8 +60,16 @@ export class ManageSimulatorEventsComponent implements OnInit, AfterViewInit {
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.connectDataSourceFeatures();
+  }
+
+  private connectDataSourceFeatures() {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { LinkHardwareInputSelectorsDialogComponent } from '../link-hardware-input-selectors-dialog/link-hardware-input-selectors-dialog.component';
@@ -17,7 +18,7 @@ import { DeleteHardwareInputDialogComponent } from '../delete-hardware-input-dia
   templateUrl: './view-hardware-panel-details.component.html',
   styleUrls: ['./view-hardware-panel-details.component.scss'],
 })
-export class ViewHardwarePanelDetailsComponent implements OnInit {
+export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit {
   idParam!: number;
   public hardwarePanelDto: HardwarePanelDto;
   public displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType', 'action'];
@@ -27,6 +28,9 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
 
   showHardwareInputs: boolean = false;
   showHardwareOutputs: boolean = false;
+
+  @ViewChild('inputSort') inputSort: MatSort;
+  @ViewChild('outputSort') outputSort: MatSort;
 
   constructor(
     private dataService: DataService,
@@ -43,6 +47,19 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
     this.fetchData();
   }
 
+  ngAfterViewInit() {
+    this.connectSortToDataSources();
+  }
+
+  private connectSortToDataSources() {
+    if (this.inputSort && this.inputsDataSource) {
+      this.inputsDataSource.sort = this.inputSort;
+    }
+    if (this.outputSort && this.outputsDataSource) {
+      this.outputsDataSource.sort = this.outputSort;
+    }
+  }
+
   fetchData() {
     this.dataService
       .getAllHardwarePanelDetails(this.idParam)
@@ -56,6 +73,9 @@ export class ViewHardwarePanelDetailsComponent implements OnInit {
           this.outputsDataSource = new MatTableDataSource<HardwareOutputDto>(
             this.hardwarePanelDto.hardwareOutputs
           );
+
+          // Connect sorting after data is loaded
+          this.connectSortToDataSources();
 
           if (this.hardwarePanelDto.hardwareInputs.length > 0) {
             this.showHardwareInputs = true;

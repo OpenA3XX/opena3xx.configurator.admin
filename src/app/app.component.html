@@ -60,15 +60,18 @@
     <!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
     <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
       <img
+        class="opena3xx-logo image-dark-glow"
         (click)="clickDashboard()"
         (keydown.enter)="clickDashboard()"
         (keydown.space)="clickDashboard()"
         tabindex="0"
         *ngIf="isExpanded || isShowing"
-        alt="Dashboard"
+        alt="OpenA3XX Configurator - Go to Dashboard"
         src="assets/logo.png"
         style="margin: 18px 10px 10px 63px"
-       width="100px"/>
+        width="100px"
+        role="button"
+        aria-label="Navigate to dashboard"/>
       <mat-nav-list>
         <mat-list-item
           (click)="clickDashboard()"
@@ -218,20 +221,78 @@
 
     <mat-sidenav class="opena3xx-sidenav-right" mode="side" opened="true" position="end">
       <mat-nav-list>
-        <mat-list-item *ngIf="isRightMenuExpanded || isRightMenuShowing" class="parent" title="Home">
-          <span class="full-width" style="font-weight: bold">System Status</span>
+        <mat-list-item *ngIf="isRightMenuExpanded || isRightMenuShowing" class="parent system-status-header">
+
+          <mat-icon
+            matListItemIcon
+            *ngIf="dependencyStatus"
+            [class]="dependencyStatus.overall === 'healthy' ? 'ok' : dependencyStatus.overall === 'degraded' ? 'warning' : 'error'"
+            [matTooltip]="'Overall Status: ' + (dependencyStatus.overall | titlecase)"
+            matTooltipPosition="left">
+            {{ dependencyStatus.overall === 'healthy' ? 'check_circle' :
+               dependencyStatus.overall === 'degraded' ? 'warning' : 'error' }}
+          </mat-icon>
+          <span class="full-width system-status-title">System Status</span>
         </mat-list-item>
-        <mat-list-item class="parent" title="Flight Simulator 2020">
-          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">MSFS 2020</span>
-          <mat-icon class="error">flight</mat-icon>
+
+                        <!-- MSFS Status -->
+        <mat-list-item
+          class="parent dependency-status-item"
+          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.msfs)"
+          matTooltipPosition="left">
+
+          <mat-icon
+            matListItemIcon
+            [class]="getStatusClass(dependencyStatus?.dependencies?.msfs?.status || 'unknown')"
+            class="dependency-icon flight-icon">
+            {{ getStatusIcon(dependencyStatus?.dependencies?.msfs?.name || 'MSFS 2020/2024') }}
+          </mat-icon>
+          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width dependency-name">
+            {{ dependencyStatus?.dependencies?.msfs?.name || 'MSFS 2020/2024' }}
+          </span>
         </mat-list-item>
-        <mat-list-item class="parent" title="RabbitMQ">
-          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">RabbitMQ</span>
-          <mat-icon class="ok">mail</mat-icon>
+
+        <!-- RabbitMQ Status -->
+        <mat-list-item
+          class="parent dependency-status-item"
+          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.rabbitmq)"
+          matTooltipPosition="left">
+
+          <mat-icon
+            matListItemIcon
+            [class]="getStatusClass(dependencyStatus?.dependencies?.rabbitmq?.status || 'unknown')"
+            class="dependency-icon rabbitmq-icon">
+            {{ getStatusIcon(dependencyStatus?.dependencies?.rabbitmq?.name || 'RabbitMQ') }}
+          </mat-icon>
+          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width dependency-name">
+            {{ dependencyStatus?.dependencies?.rabbitmq?.name || 'RabbitMQ' }}
+          </span>
         </mat-list-item>
-        <mat-list-item class="parent" title="SEQ">
-          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width">SEQ</span>
-          <mat-icon class="ok">format_align_left</mat-icon>
+
+        <!-- SEQ Status -->
+        <mat-list-item
+          class="parent dependency-status-item"
+          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.seq)"
+          matTooltipPosition="left">
+
+          <mat-icon
+            matListItemIcon
+            [class]="getStatusClass(dependencyStatus?.dependencies?.seq?.status || 'unknown')"
+            class="dependency-icon seq-icon">
+            {{ getStatusIcon(dependencyStatus?.dependencies?.seq?.name || 'SEQ') }}
+          </mat-icon>
+          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width dependency-name">
+            {{ dependencyStatus?.dependencies?.seq?.name || 'SEQ' }}
+          </span>
+        </mat-list-item>
+
+                <!-- Status Update Timestamp -->
+        <mat-list-item
+          *ngIf="(isRightMenuExpanded || isRightMenuShowing) && dependencyStatus"
+          class="parent status-timestamp">
+          <span class="full-width timestamp-text">
+            Last updated: {{ getFormattedTimestamp(dependencyStatus.timestamp) }}
+          </span>
         </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>

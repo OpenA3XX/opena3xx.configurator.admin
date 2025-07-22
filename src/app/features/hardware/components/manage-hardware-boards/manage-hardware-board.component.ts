@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { HardwareBoardDto } from 'src/app/shared/models/models';
@@ -10,7 +11,7 @@ import { DataService } from 'src/app/core/services/data.service';
   styleUrls: ['./manage-hardware-board.component.scss'],
   selector: 'opena3xx-manage-hardware-boards',
 })
-export class ManageHardwareBoardsComponent {
+export class ManageHardwareBoardsComponent implements AfterViewInit {
   public displayedColumns: string[] = [
     'id',
     'name',
@@ -22,14 +23,36 @@ export class ManageHardwareBoardsComponent {
   public data: HardwareBoardDto[];
   public data_loaded: boolean = false;
 
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(private router: Router, private dataService: DataService) {
+    this.loadData();
+  }
+
+  ngAfterViewInit() {
+    console.log('Hardware Boards - ngAfterViewInit - Sort available:', !!this.sort);
+    this.dataSource.sort = this.sort;
+    if (this.sort) {
+      console.log('Hardware Boards - Sort connected successfully');
+    } else {
+      console.warn('Hardware Boards - Sort not available in ngAfterViewInit');
+    }
+  }
+
+  private loadData() {
     firstValueFrom(this.dataService.getAllHardwareBoards())
       .then((data) => {
         this.data = data as HardwareBoardDto[];
         this.dataSource = new MatTableDataSource<HardwareBoardDto>(this.data);
         this.data_loaded = true;
+
+        // Connect sort after view init if available
+        if (this.sort) {
+          this.dataSource.sort = this.sort;
+        }
       });
   }
+
   registerHardwareBoard() {
     this.router.navigateByUrl('/register/hardware-board');
   }

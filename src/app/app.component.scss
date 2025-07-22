@@ -126,6 +126,32 @@
   box-shadow: var(--shadow-sm);
   background: var(--mat-sys-surface-container, #f5f5f5);
 
+      // Logo styling with dark mode enhancements
+  .opena3xx-logo {
+    transition: all var(--transition-normal) ease;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    position: relative;
+
+    // Light theme - default appearance
+    filter: none;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    // Focus styles for accessibility
+    &:focus {
+      outline: 2px solid var(--mat-sys-primary, #1976d2);
+      outline-offset: 2px;
+    }
+  }
+
   &.collapsed {
     width: 56px !important; // Material Design standard for collapsed nav
 
@@ -197,6 +223,7 @@
   box-shadow: var(--shadow-sm);
   background: var(--mat-sys-surface-container, #f5f5f5);
   transition: width var(--transition-normal) ease;
+  border-left: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
 
   &.collapsed {
     width: 56px !important;
@@ -204,26 +231,357 @@
 
   mat-list-item {
     height: 48px;
-    padding: var(--spacing-sm);
+    // padding: var(--spacing-sm);
+    transition: var(--transition-fast);
 
+    // Base status color classes
     .ok {
-      color: var(--success-color);
+      color: var(--success-color, #4caf50);
       font-weight: 500;
     }
 
     .error {
-      color: var(--error-color);
+      color: var(--error-color, #f44336);
       font-weight: 500;
     }
 
     .warning {
-      color: var(--warning-color);
+      color: var(--warning-color, #ff9800);
       font-weight: 500;
     }
 
     .info {
-      color: var(--info-color);
+      color: var(--info-color, #2196f3);
       font-weight: 500;
+    }
+
+    // System status header styling
+    &.system-status-header {
+      border-bottom: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
+      margin-bottom: var(--spacing-xs);
+      // padding: var(--spacing-sm) var(--spacing-md);
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+
+      .system-status-title {
+        font-weight: 600;
+        font-size: 14px;
+        //color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.87));
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        animation: pulse 2s infinite;
+        margin-right: var(--spacing-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    // Individual dependency status items
+    &.dependency-status-item {
+      cursor: pointer;
+      border-radius: var(--border-radius-md);
+      margin: 2px var(--spacing-xs);
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      min-height: 48px;
+
+      &:hover {
+        background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.04));
+        transform: translateX(2px);
+      }
+
+      .dependency-name {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--mat-sys-on-surface, rgba(0, 0, 0, 0.87));
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+
+      .dependency-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        transition: var(--transition-fast);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: var(--spacing-sm);
+
+        &.ok {
+          animation: pulse-success 3s infinite;
+          filter: drop-shadow(0 0 2px rgba(76, 175, 80, 0.3));
+        }
+
+        &.error {
+          animation: pulse-error 1.5s infinite;
+          filter: drop-shadow(0 0 2px rgba(244, 67, 54, 0.3));
+        }
+
+        &.warning {
+          animation: pulse-warning 2s infinite;
+          filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.3));
+        }
+
+        &.info {
+          opacity: 0.7;
+          filter: drop-shadow(0 0 2px rgba(33, 150, 243, 0.3));
+        }
+
+                        // Service-specific styling enhancements
+
+        // Special styling for flight icon (rotate for better visual)
+        &.flight-icon {
+          transform: rotate(-45deg);
+        }
+
+        // Message broker arrows
+        &.rabbitmq-icon {
+          // Can add special styling if needed
+        }
+
+        // Log/list icon
+        &.seq-icon {
+          // Can add special styling if needed
+        }
+      }
+
+      // Status indicator dot for collapsed state
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: var(--transition-fast);
+      }
+
+      // Show status dot when collapsed
+      .opena3xx-sidenav-right.collapsed & {
+        &::after {
+          opacity: 1;
+        }
+
+        &:has(.ok)::after {
+          background-color: var(--success-color, #4caf50);
+          box-shadow: 0 0 6px var(--success-color, #4caf50);
+        }
+
+        &:has(.error)::after {
+          background-color: var(--error-color, #f44336);
+          box-shadow: 0 0 6px var(--error-color, #f44336);
+        }
+
+        &:has(.warning)::after {
+          background-color: var(--warning-color, #ff9800);
+          box-shadow: 0 0 6px var(--warning-color, #ff9800);
+        }
+
+        &:has(.info)::after {
+          background-color: var(--info-color, #2196f3);
+          box-shadow: 0 0 6px var(--info-color, #2196f3);
+        }
+      }
+    }
+
+    // Timestamp styling
+    &.status-timestamp {
+      margin-top: auto;
+      border-top: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
+      padding: var(--spacing-sm) var(--spacing-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .timestamp-text {
+        font-size: 11px;
+        // color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6));
+        font-style: italic;
+        text-align: center;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  // Animations
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+
+  @keyframes pulse-success {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes pulse-error {
+    0%, 100% { opacity: 1; }
+    25% { opacity: 0.6; }
+    50% { opacity: 1; }
+    75% { opacity: 0.6; }
+  }
+
+  @keyframes pulse-warning {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+        // Dark mode adjustments
+  .dark-theme & {
+    background: var(--mat-sys-surface-container, #1e1e1e);
+    border-left: 1px solid var(--mat-sys-outline-variant, rgba(255, 255, 255, 0.12));
+
+    .system-status-title {
+      color: var(--mat-sys-on-surface-variant, rgba(255, 255, 255, 0.87)) !important;
+      font-weight: 600;
+    }
+
+    .dependency-name {
+      color: var(--mat-sys-on-surface, rgba(255, 255, 255, 0.87)) !important;
+      font-weight: 500;
+    }
+
+    .timestamp-text {
+      color: var(--mat-sys-on-surface-variant, rgba(255, 255, 255, 0.6)) !important;
+      font-style: italic;
+    }
+
+    mat-list-item.dependency-status-item {
+      &:hover {
+        background-color: var(--mat-sys-surface-variant, rgba(255, 255, 255, 0.08));
+        border-radius: var(--border-radius-md);
+      }
+
+      .dependency-icon {
+        &.ok {
+          color: var(--success-color, #4caf50);
+          filter: drop-shadow(0 0 4px rgba(76, 175, 80, 0.4));
+        }
+
+        &.error {
+          color: var(--error-color, #f44336);
+          filter: drop-shadow(0 0 4px rgba(244, 67, 54, 0.4));
+        }
+
+        &.warning {
+          color: var(--warning-color, #ff9800);
+          filter: drop-shadow(0 0 4px rgba(255, 152, 0, 0.4));
+        }
+
+        &.info {
+          color: var(--info-color, #2196f3);
+          filter: drop-shadow(0 0 4px rgba(33, 150, 243, 0.4));
+        }
+      }
+    }
+
+    mat-list-item.system-status-header {
+      border-bottom: 1px solid var(--mat-sys-outline-variant, rgba(255, 255, 255, 0.12));
+
+      .system-status-title {
+        color: var(--mat-sys-on-surface-variant, rgba(255, 255, 255, 0.87)) !important;
+      }
+
+      mat-icon {
+        &.ok {
+          color: var(--success-color, #4caf50);
+          filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.5));
+        }
+
+        &.error {
+          color: var(--error-color, #f44336);
+          filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.5));
+        }
+
+        &.warning {
+          color: var(--warning-color, #ff9800);
+          filter: drop-shadow(0 0 6px rgba(255, 152, 0, 0.5));
+        }
+      }
+    }
+
+    mat-list-item.status-timestamp {
+      border-top: 1px solid var(--mat-sys-outline-variant, rgba(255, 255, 255, 0.12));
+
+      .timestamp-text {
+        color: var(--mat-sys-on-surface-variant, rgba(255, 255, 255, 0.6)) !important;
+      }
+    }
+  }
+
+      // Enhanced dark theme animations
+  .dark-theme & {
+    @keyframes pulse-success-dark {
+      0%, 100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 4px rgba(76, 175, 80, 0.4));
+      }
+      50% {
+        opacity: 0.8;
+        filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.6));
+      }
+    }
+
+    @keyframes pulse-error-dark {
+      0%, 100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 4px rgba(244, 67, 54, 0.4));
+      }
+      25% {
+        opacity: 0.6;
+        filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.6));
+      }
+      50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 4px rgba(244, 67, 54, 0.4));
+      }
+      75% {
+        opacity: 0.6;
+        filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.6));
+      }
+    }
+
+    @keyframes pulse-warning-dark {
+      0%, 100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 4px rgba(255, 152, 0, 0.4));
+      }
+      50% {
+        opacity: 0.7;
+        filter: drop-shadow(0 0 6px rgba(255, 152, 0, 0.6));
+      }
+    }
+
+    .dependency-icon {
+      &.ok {
+        animation: pulse-success-dark 3s infinite;
+      }
+
+      &.error {
+        animation: pulse-error-dark 1.5s infinite;
+      }
+
+      &.warning {
+        animation: pulse-warning-dark 2s infinite;
+      }
     }
   }
 }

@@ -1,0 +1,121 @@
+// Table Hover Styles Test
+// This file contains test cases to verify table hover functionality
+
+// Test: Basic table hover effects
+.test-table-hover {
+  // Verify row hover transforms
+  .mat-row:hover {
+    transform: translateY(-2px) scale(1.002);
+    background-color: rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+  }
+
+  // Verify header hover effects
+  .mat-header-cell:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+  }
+
+  // Verify button enhancement on row hover
+  .mat-row:hover button {
+    transform: scale(1.03);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+
+  // Verify icon scaling on hover
+  .mat-row:hover mat-icon {
+    transform: scale(1.1);
+  }
+}
+
+// Test: Dark theme hover effects
+.dark-theme .test-table-hover {
+  .mat-row:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  }
+
+  .mat-header-cell:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Test: Utility classes
+.test-table-striped {
+  .mat-row:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+}
+
+.test-table-bordered {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .mat-cell,
+  .mat-header-cell {
+    border-right: 1px solid #e0e0e0;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.test-table-compact {
+  .mat-row {
+    height: 40px;
+
+    .mat-cell {
+      padding: 4px 8px;
+      font-size: 0.875rem;
+    }
+  }
+
+  .mat-header-row {
+    height: 36px;
+
+    .mat-header-cell {
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// Test: Interactive table
+.test-table-interactive {
+  .mat-row {
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(100, 181, 246, 0.08);
+    }
+
+    &:active {
+      background-color: rgba(100, 181, 246, 0.16);
+      transform: scale(0.998);
+    }
+  }
+}
+
+// Test: Transitions
+.test-transitions {
+  .mat-row {
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mat-header-cell {
+    transition: all 150ms ease;
+  }
+
+  button {
+    transition: all 150ms ease;
+  }
+
+  mat-icon {
+    transition: transform 150ms ease;
+  }
+}
