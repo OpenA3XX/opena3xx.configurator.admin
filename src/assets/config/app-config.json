@@ -3,11 +3,11 @@
     "baseUrl": "http://localhost:5000"
   },
   "app": {
-    "name": "OpenA3XX Configurator Admin",
-    "version": "1.0.0"
+    "name": "OpenA3XX Configurator Admin (Development)",
+    "version": "1.0.0-dev"
   },
   "features": {
-    "enableDebugMode": false,
+    "enableDebugMode": true,
     "enableConsoleLogging": true
   }
 }

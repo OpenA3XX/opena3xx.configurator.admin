@@ -44,7 +44,6 @@ export interface DependencyStatusResponse {
   providedIn: 'root'
 })
 export class DependencyStatusService {
-  private BASE_URL: string;
   private statusSubject = new BehaviorSubject<DependencyStatusResponse | null>(null);
   public status$ = this.statusSubject.asObservable();
 
@@ -65,7 +64,10 @@ export class DependencyStatusService {
     private http: HttpClient,
     private configurationService: ConfigurationService
   ) {
-    this.BASE_URL = this.configurationService.getApiBaseUrl();
+  }
+
+  private get BASE_URL(): string {
+    return this.configurationService.getApiBaseUrl();
   }
 
   /**

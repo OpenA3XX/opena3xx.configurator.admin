@@ -14,8 +14,6 @@ import { ConfigurationService } from './configuration.service';
 
 @Injectable()
 export class DataService {
-  private BASE_URL;
-
   private httpOptions: any = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -23,7 +21,10 @@ export class DataService {
   };
 
   constructor(private http: HttpClient, private configurationService: ConfigurationService) {
-    this.BASE_URL = configurationService.getApiBaseUrl();
+  }
+
+  private get BASE_URL(): string {
+    return this.configurationService.getApiBaseUrl();
   }
 
   get(url: string) {
