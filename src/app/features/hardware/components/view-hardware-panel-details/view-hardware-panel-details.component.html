@@ -126,7 +126,6 @@
       <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element">
         <div class="action-buttons-container">
-
           <button
             (click)="showInputSelectorDetails(element)"
             mat-stroked-button
@@ -137,7 +136,6 @@
           >
             <mat-icon>remove_red_eye</mat-icon>
           </button>
-
           <button
             (click)="mapInputSelector(element)"
             *ngIf="
@@ -162,7 +160,6 @@
             <mat-icon>link</mat-icon>
             Edit Mapping
           </button>
-
           <button
             (click)="linkInputSelector(element)"
             *ngIf="element.hardwareInputSelectors[0].simulatorEventDto !== null"
@@ -183,7 +180,6 @@
             <mat-icon>laptop</mat-icon>
             Set Sim Link
           </button>
-
           <button
             matTooltip="Delete Hardware Input"
             class="small"
@@ -236,28 +232,37 @@
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
-
       <td mat-cell *matCellDef="let element">
         <div class="action-buttons-container">
-          <button
-            (click)="showOutputSelectorDetails(element)"
-            mat-stroked-button
-            color="primary"
-            class="view-button"
-            matTooltip="View {{ element.hardwareOutputSelectors.length }} Output(s)"
-            matTooltipPosition="before"
-          >
-            <mat-icon>remove_red_eye</mat-icon>
-          </button>
+            <button
+              (click)="showOutputSelectorDetails(element)"
+              mat-stroked-button
+              color="primary"
+              class="view-button"
+              matTooltip="View {{ element.hardwareOutputSelectors.length }} Output(s)"
+              matTooltipPosition="before">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+            <!-- *ngIf="element.hardwareOutputSelectors[0].isHardwareOutputSelectorMappedWithHardware === false" -->
+            <button
+              (click)="mapOutputSelector(element)"
 
-          <button (click)="mapOutputSelector(element)" mat-stroked-button color="warn" class="action-button-small">
-            <mat-icon>link</mat-icon>
-            Set Mapping
-          </button>
-          <button (click)="mapOutputSelector(element)" mat-stroked-button color="accent" class="action-button-large">
-            <mat-icon>laptop</mat-icon>
-            Set Sim Link
-          </button>
+              mat-flat-button
+              color="primary"
+              class="action-button-small">
+              <mat-icon>link</mat-icon>
+              Set Mapping
+            </button>
+
+             <!-- *ngIf="element.hardwareOutputSelectors[0].simulatorEventDto === null" -->
+            <button
+              (click)="mapOutputSelector(element)"
+              mat-flat-button
+              class="action-button-large"
+              color="primary">
+              <mat-icon>laptop</mat-icon>
+              Set Sim Link
+            </button>
         </div>
       </td>
     </ng-container>

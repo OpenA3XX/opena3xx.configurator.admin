@@ -4,19 +4,20 @@
   <p>No hardware input selector data available.</p>
 </div>
 
-<mat-expansion-panel
-  expanded
-  *ngFor="let a of hardwareInputSelector?.hardwareInputSelectors; let index = index"
->
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      Link Input Selector Mapping - {{ hardwareInputSelector?.hardwareInputSelectors[index]?.name }}
-    </mat-panel-title>
-  </mat-expansion-panel-header>
-  <div class="container">
-    <opena3xx-link-hardware-input-selectors-form
-      [hardwareInputSelectorId]="hardwareInputSelector?.hardwareInputSelectors[index]?.id"
-    >
-    </opena3xx-link-hardware-input-selectors-form>
-  </div>
-</mat-expansion-panel>
+<div class="expansion-panels-container">
+  <mat-expansion-panel
+    *ngFor="let a of hardwareInputSelector?.hardwareInputSelectors; let index = index"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Link Input Selector Mapping - {{ hardwareInputSelector?.hardwareInputSelectors[index]?.name }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container">
+      <opena3xx-link-hardware-input-selectors-form
+        [hardwareInputSelectorId]="hardwareInputSelector?.hardwareInputSelectors[index]?.id"
+      >
+      </opena3xx-link-hardware-input-selectors-form>
+    </div>
+  </mat-expansion-panel>
+</div>

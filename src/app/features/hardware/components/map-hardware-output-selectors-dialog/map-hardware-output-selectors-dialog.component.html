@@ -1,17 +1,18 @@
 <h1>Map {{ hardwareOutputSelector.name }} - {{ hardwareOutputSelector.hardwareOutputType }}</h1>
 
-<mat-expansion-panel
-  expanded
-  *ngFor="let a of hardwareOutputSelector.hardwareOutputSelectors; let index = index"
->
-  <mat-expansion-panel-header>
-    <mat-panel-title
-      >Hardware Output Selector mapping -
-      {{ hardwareOutputSelector.hardwareOutputSelectors[index].name }}</mat-panel-title
-    >
-  </mat-expansion-panel-header>
-  <opena3xx-map-hardware-output-selectors-form
-    [hardwareOutputSelectorId]="hardwareOutputSelector.hardwareOutputSelectors[index].id"
+<div class="expansion-panels-container">
+  <mat-expansion-panel
+    *ngFor="let a of hardwareOutputSelector.hardwareOutputSelectors; let index = index"
   >
-  </opena3xx-map-hardware-output-selectors-form>
-</mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title
+        >Hardware Output Selector mapping -
+        {{ hardwareOutputSelector.hardwareOutputSelectors[index].name }}</mat-panel-title
+      >
+    </mat-expansion-panel-header>
+    <opena3xx-map-hardware-output-selectors-form
+      [hardwareOutputSelectorId]="hardwareOutputSelector.hardwareOutputSelectors[index].id"
+    >
+    </opena3xx-map-hardware-output-selectors-form>
+  </mat-expansion-panel>
+</div>

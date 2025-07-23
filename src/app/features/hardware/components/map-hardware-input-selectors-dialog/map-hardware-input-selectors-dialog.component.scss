@@ -14,14 +14,13 @@ mat-form-field {
     margin: 0;
     font-size: 20px;
     font-weight: 500;
-    color: var(--mat-sys-on-surface, #333);
+    color: #0360ec;
     border-bottom: 1px solid var(--mat-sys-outline-variant, #e0e0e0);
     flex-shrink: 0;
   }
 
   > *:not(h1) {
     flex: 1;
-    overflow-y: auto;
     padding: 16px;
   }
 
@@ -29,5 +28,33 @@ mat-form-field {
     text-align: center;
     padding: 20px;
     color: #666;
+  }
+
+  .expansion-panels-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+
+    mat-expansion-panel {
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      // Override global styles to remove individual scrolling
+      overflow: visible !important;
+
+      // Remove individual scrolling from expansion panels
+      ::ng-deep .mat-expansion-panel-body {
+        overflow: visible !important;
+        max-height: none !important;
+      }
+
+      // Ensure the expansion panel content doesn't scroll
+      ::ng-deep .mat-expansion-panel-content {
+        overflow: visible !important;
+      }
+    }
   }
 }
