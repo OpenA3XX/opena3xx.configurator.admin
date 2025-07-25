@@ -24,7 +24,6 @@ export class ConsoleComponent implements OnInit, OnDestroy {
   private chartData: any[] = [];
   private boardActivity: any[] = [];
   private themeSubscription: any;
-  private hardwareBoards: HardwareBoardDto[] = [];
 
   // Form for advanced filtering
   filterForm: FormGroup;
@@ -59,7 +58,7 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     this.realtimeService.connect();
     this.startEventsPerMinuteTracking();
     this.initializeChartData();
-    this.fetchHardwareBoards();
+    // Removed fetchHardwareBoards() - now handled by console-filters component
 
     // Subscribe to theme changes
     this.themeSubscription = this.themeService.isDarkMode$.subscribe(isDark => {
@@ -70,8 +69,10 @@ export class ConsoleComponent implements OnInit, OnDestroy {
   // Hardware Boards API Integration
   private async fetchHardwareBoards(): Promise<void> {
     try {
-      this.hardwareBoards = await firstValueFrom(this.dataService.getAllHardwareBoards()) as HardwareBoardDto[];
-      console.log('Hardware Boards loaded:', this.hardwareBoards);
+      // This method is no longer needed as hardware boards are loaded by console-filters
+      // Keeping it for now to avoid breaking existing calls, but it will be removed later.
+      // const hardwareBoards = await firstValueFrom(this.dataService.getAllHardwareBoards()) as HardwareBoardDto[];
+      // console.log('Hardware Boards loaded:', hardwareBoards);
     } catch (error: any) {
       console.error('Error fetching hardware boards:', error);
       this.showSnackBar('Error loading hardware boards');
@@ -205,7 +206,9 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
   // Get hardware boards for dropdown
   getHardwareBoards(): HardwareBoardDto[] {
-    return this.hardwareBoards;
+    // This method is no longer needed as hardware boards are loaded by console-filters
+    // Keeping it for now to avoid breaking existing calls, but it will be removed later.
+    return [];
   }
 
   private filterByTimeRange(events: any[]): any[] {

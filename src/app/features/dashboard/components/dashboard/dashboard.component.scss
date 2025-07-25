@@ -1,6 +1,662 @@
-mat-grid-tile {
-  background: #e0e0e0;
+// Main dashboard container
+:host {
+  display: block;
+  padding: 24px;
+  background-color: #fafafa;
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+
+  &.dark-theme {
+    background-color: #121212;
+  }
 }
-iframe{
-  border: none;
+
+// Override Material Design card backgrounds for dark theme
+:host.dark-theme {
+  .overview-card,
+  .access-card,
+  .activity-panel,
+  .status-panel {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+  }
+
+  .overview-card mat-card-content,
+  .access-card mat-card-content,
+  .activity-panel,
+  .status-panel {
+    background-color: #1e1e1e !important;
+  }
+}
+
+// Header Section
+.dashboard-header {
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  border-radius: 12px;
+  padding: 32px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  transition: all 0.3s ease;
+
+  .welcome-section {
+    margin-bottom: 24px;
+
+    .welcome-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      line-height: 1.2;
+    }
+
+    .welcome-subtitle {
+      font-size: 1.125rem;
+      opacity: 0.9;
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+
+  .quick-stats-bar {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+
+      .stat-value {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+// Main Content Section
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+// Section Titles
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.3s ease;
+
+  &::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, #1976d2, #42a5f5);
+    border-radius: 2px;
+  }
+
+  .dark-theme & {
+    color: #e0e0e0;
+  }
+}
+
+// System Overview Cards
+.overview-section {
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .overview-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: white;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .dark-theme & {
+      background: #1e1e1e !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    mat-card-content {
+      padding: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        color: #1976d2;
+      }
+
+      .card-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #666;
+        margin: 0;
+        transition: color 0.3s ease;
+
+        .dark-theme & {
+          color: #b0b0b0;
+        }
+      }
+    }
+
+    .card-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1976d2;
+      transition: color 0.3s ease;
+    }
+
+    .card-subtitle {
+      font-size: 0.875rem;
+      color: #666;
+      margin: 0;
+      transition: color 0.3s ease;
+
+      .dark-theme & {
+        color: #b0b0b0;
+      }
+    }
+
+    // Card-specific styling - using semantic colors for health status
+    &.health-card {
+      .card-value {
+        color: #1976d2; // Default blue
+      }
+      mat-icon.healthy {
+        color: #4caf50; // Green for healthy
+      }
+      mat-icon.warning {
+        color: #ff9800; // Orange for warning
+      }
+      mat-icon.error {
+        color: #f44336; // Red for error
+      }
+
+      // Health status-specific colors
+      &.status-healthy {
+        .card-value {
+          color: #4caf50; // Green
+        }
+        mat-icon {
+          color: #4caf50; // Green
+        }
+      }
+
+      &.status-warning {
+        .card-value {
+          color: #ff9800; // Orange
+        }
+        mat-icon {
+          color: #ff9800; // Orange
+        }
+      }
+
+      &.status-error {
+        .card-value {
+          color: #f44336; // Red
+        }
+        mat-icon {
+          color: #f44336; // Red
+        }
+      }
+    }
+
+    &.boards-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.panels-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.events-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+  }
+}
+
+// Quick Access Grid
+.quick-access-section {
+  .quick-access-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .access-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: white;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      border-color: #1976d2;
+    }
+
+    .dark-theme & {
+      background: #1e1e1e !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    mat-card-content {
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .access-icon {
+      margin-bottom: 16px;
+
+      mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        color: #1976d2;
+      }
+    }
+
+    .access-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      color: #333;
+      transition: color 0.3s ease;
+
+      .dark-theme & {
+        color: #e0e0e0;
+      }
+    }
+
+    .access-description {
+      font-size: 0.875rem;
+      color: #666;
+      margin: 0;
+      line-height: 1.5;
+      transition: color 0.3s ease;
+
+      .dark-theme & {
+        color: #b0b0b0;
+      }
+    }
+  }
+}
+
+// Activity & Status Section
+.activity-status-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+
+  .activity-panel,
+  .status-panel {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    transition: all 0.3s ease;
+
+    .dark-theme & {
+      background: #1e1e1e !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .panel-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 20px 0;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s ease;
+
+      &::before {
+        content: '';
+        width: 3px;
+        height: 20px;
+        background: #1976d2;
+        border-radius: 2px;
+      }
+
+      .dark-theme & {
+        color: #e0e0e0;
+      }
+    }
+  }
+
+  .activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.02);
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      .dark-theme & {
+        background: rgba(255, 255, 255, 0.05);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+        }
+      }
+
+      .activity-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        color: #1976d2;
+        margin-top: 2px;
+      }
+
+      .activity-content {
+        flex: 1;
+
+        .activity-text {
+          font-size: 0.875rem;
+          color: #333;
+          margin-bottom: 4px;
+          transition: color 0.3s ease;
+
+          .dark-theme & {
+            color: #e0e0e0;
+          }
+        }
+
+        .activity-time {
+          font-size: 0.75rem;
+          color: #666;
+          transition: color 0.3s ease;
+
+          .dark-theme & {
+            color: #b0b0b0;
+          }
+        }
+      }
+    }
+
+    .no-activities {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 24px;
+      color: #666;
+      text-align: center;
+      justify-content: center;
+      transition: color 0.3s ease;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        opacity: 0.5;
+      }
+
+      .dark-theme & {
+        color: #b0b0b0;
+      }
+    }
+  }
+
+  .status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+
+      .dark-theme & {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+
+      .status-label {
+        flex: 1;
+        font-size: 0.875rem;
+        color: #333;
+        transition: color 0.3s ease;
+
+        .dark-theme & {
+          color: #e0e0e0;
+        }
+      }
+
+      .status-value {
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      // Status-specific styling - using theme colors
+      &.status-online {
+        background: rgba(25, 118, 210, 0.1);
+        border-left: 3px solid #1976d2;
+
+        mat-icon {
+          color: #1976d2;
+        }
+
+        .status-value {
+          color: #1976d2;
+        }
+
+        .dark-theme & {
+          background: rgba(25, 118, 210, 0.2);
+        }
+      }
+
+      &.status-offline {
+        background: rgba(244, 67, 54, 0.1);
+        border-left: 3px solid #f44336;
+
+        mat-icon {
+          color: #f44336;
+        }
+
+        .status-value {
+          color: #f44336;
+        }
+
+        .dark-theme & {
+          background: rgba(244, 67, 54, 0.2);
+        }
+      }
+
+      &.status-warning {
+        background: rgba(255, 152, 0, 0.1);
+        border-left: 3px solid #ff9800;
+
+        mat-icon {
+          color: #ff9800;
+        }
+
+        .status-value {
+          color: #ff9800;
+        }
+
+        .dark-theme & {
+          background: rgba(255, 152, 0, 0.2);
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .activity-status-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 16px;
+  }
+
+  .dashboard-header {
+    padding: 24px;
+    margin-bottom: 24px;
+
+    .welcome-title {
+      font-size: 2rem;
+    }
+
+    .welcome-subtitle {
+      font-size: 1rem;
+    }
+
+    .quick-stats-bar {
+      gap: 16px;
+
+      .stat-item {
+        padding: 8px 12px;
+      }
+    }
+  }
+
+  .overview-section .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .quick-access-section .quick-access-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    padding: 12px;
+  }
+
+  .dashboard-header {
+    padding: 20px;
+    margin-bottom: 20px;
+
+    .welcome-title {
+      font-size: 1.75rem;
+    }
+
+    .quick-stats-bar {
+      flex-direction: column;
+      gap: 12px;
+
+      .stat-item {
+        justify-content: center;
+      }
+    }
+  }
+
+  .overview-card {
+    mat-card-content {
+      padding: 16px;
+    }
+
+    .card-value {
+      font-size: 2rem;
+    }
+  }
+
+  .access-card {
+    mat-card-content {
+      padding: 24px 16px;
+    }
+
+    .access-icon mat-icon {
+      font-size: 36px;
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .activity-status-section {
+    gap: 16px;
+
+    .activity-panel,
+    .status-panel {
+      padding: 16px;
+    }
+  }
 }

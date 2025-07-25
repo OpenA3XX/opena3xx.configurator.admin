@@ -19,14 +19,15 @@
       <!-- Filter Form -->
       <form [formGroup]="filterForm" class="filter-form">
         <div class="filter-row">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" [class.loading]="isLoading">
             <mat-label>Board ID</mat-label>
             <mat-select formControlName="boardIdFilter">
               <mat-option value="">All Boards</mat-option>
-              <mat-option *ngFor="let board of hardwareBoards" [value]="board.id.toString()">
-                Board {{ board.id }}
+              <mat-option *ngFor="let board of getHardwareBoardsForFilter()" [value]="board.id.toString()">
+                Board {{ board.id }} {{ board.name ? '(' + board.name + ')' : '' }}
               </mat-option>
             </mat-select>
+            <mat-icon matSuffix *ngIf="isLoading">hourglass_empty</mat-icon>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -54,11 +55,11 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-button (click)="onApplyFilters()">
+    <button mat-button (click)="onApplyFilters()" [disabled]="isLoading">
       <mat-icon>filter_list</mat-icon>
       Apply Filters
     </button>
-    <button mat-button (click)="onClearFilters()">
+    <button mat-button (click)="onClearFilters()" [disabled]="isLoading">
       <mat-icon>clear</mat-icon>
       Clear All
     </button>

@@ -1,12 +1,19 @@
 .charts-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 24px;
+  margin-bottom: 0; // Handled by parent component
 }
 
 .chart-card {
   min-height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .chart-placeholder {
@@ -17,6 +24,7 @@
   height: 200px;
   color: rgba(0, 0, 0, 0.6);
   text-align: center;
+  padding: 24px;
 
   mat-icon {
     font-size: 48px;
@@ -27,24 +35,32 @@
   }
 
   p {
-    margin: 4px 0;
+    margin: 8px 0;
+    font-size: 14px;
   }
 }
 
 .board-activity-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+  padding: 8px 0;
 }
 
 .board-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 16px 20px;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.15);
+  }
 
   &.active {
     background-color: rgba(76, 175, 80, 0.1);
@@ -55,12 +71,13 @@
 .board-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .board-id {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1rem;
+  color: #1976d2;
 }
 
 .board-events {
@@ -73,6 +90,7 @@
   align-items: center;
   gap: 8px;
   font-size: 0.875rem;
+  font-weight: 500;
 
   mat-icon {
     font-size: 20px;
@@ -86,5 +104,94 @@
     &:not(.active) {
       color: #f44336;
     }
+  }
+}
+
+// Card header styling
+mat-card-header {
+  padding: 24px 24px 0 24px;
+
+  mat-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  mat-card-subtitle {
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+// Card content styling
+mat-card-content {
+  padding: 0 24px 16px 24px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .board-activity-list {
+    gap: 10px;
+  }
+
+  .board-item {
+    padding: 14px 16px;
+  }
+
+  mat-card-header {
+    padding: 20px 20px 0 20px;
+  }
+
+  mat-card-content {
+    padding: 0 20px 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .charts-container {
+    gap: 16px;
+  }
+
+  .board-activity-list {
+    gap: 8px;
+  }
+
+  .board-item {
+    padding: 12px 14px;
+  }
+
+  .board-id {
+    font-size: 0.875rem;
+  }
+
+  .board-events {
+    font-size: 0.75rem;
+  }
+
+  .board-status {
+    font-size: 0.75rem;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  mat-card-header {
+    padding: 16px 16px 0 16px;
+
+    mat-card-title {
+      font-size: 1.125rem;
+    }
+  }
+
+  mat-card-content {
+    padding: 0 16px 8px 16px;
   }
 }

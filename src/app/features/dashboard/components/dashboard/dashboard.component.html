@@ -1,35 +1,175 @@
-<h1>Welcome</h1>
-<mat-grid-list cols="8" rowHeight="6:3">
-  <mat-grid-tile>
-    <button mat-flat-button color="primary">
-      <mat-icon>home</mat-icon>
-      Home
-    </button>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <button mat-flat-button color="primary">
-      <mat-icon>login</mat-icon>
-      Hardware Input Types
-    </button>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <button mat-flat-button color="primary">
-      <mat-icon>logout</mat-icon>
-      Hardware Output Types
-    </button>
-  </mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-  <mat-grid-tile>5</mat-grid-tile>
-  <mat-grid-tile>6</mat-grid-tile>
-  <mat-grid-tile>7</mat-grid-tile>
-  <mat-grid-tile>8</mat-grid-tile>
-  <mat-grid-tile>9</mat-grid-tile>
-  <mat-grid-tile>10</mat-grid-tile>
-  <mat-grid-tile>11</mat-grid-tile>
-  <mat-grid-tile>12</mat-grid-tile>
-  <mat-grid-tile>13</mat-grid-tile>
-  <mat-grid-tile>14</mat-grid-tile>
-  <mat-grid-tile>15</mat-grid-tile>
-  <mat-grid-tile>16</mat-grid-tile>
-</mat-grid-list>
-<iframe src="http://localhost:15672/#/channels" width="100%" height="500px"></iframe>
+<!-- Header Section -->
+<div class="dashboard-header">
+  <div class="welcome-section">
+    <h1 class="welcome-title">Welcome to OpenA3XX Configurator Admin</h1>
+    <p class="welcome-subtitle">Manage your hardware configuration and monitor system status</p>
+  </div>
+
+  <div class="quick-stats-bar">
+    <div class="stat-item">
+      <mat-icon>hardware</mat-icon>
+      <span class="stat-value">{{ totalBoards }}</span>
+      <span class="stat-label">Boards</span>
+    </div>
+    <div class="stat-item">
+      <mat-icon>dashboard</mat-icon>
+      <span class="stat-value">{{ totalPanels }}</span>
+      <span class="stat-label">Panels</span>
+    </div>
+    <div class="stat-item">
+      <mat-icon>wifi</mat-icon>
+      <span class="stat-value">{{ connectedSystems }}</span>
+      <span class="stat-label">Connected</span>
+    </div>
+    <div class="stat-item">
+      <mat-icon>schedule</mat-icon>
+      <span class="stat-label">{{ lastUpdated | date:'short' }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content Section -->
+<div class="dashboard-content" [class.dark-theme]="isDarkMode">
+
+  <!-- System Overview Cards -->
+  <div class="overview-section">
+    <h2 class="section-title">System Overview</h2>
+    <div class="overview-grid">
+      <mat-card class="overview-card health-card" [class]="'status-' + systemHealth.status">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon [class]="systemHealth.status">{{ systemHealth.icon }}</mat-icon>
+            <span class="card-title">System Health</span>
+          </div>
+          <div class="card-value">{{ systemHealth.status }}</div>
+          <div class="card-subtitle">{{ systemHealth.message }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="overview-card boards-card">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon>memory</mat-icon>
+            <span class="card-title">Active Boards</span>
+          </div>
+          <div class="card-value">{{ activeBoards }}</div>
+          <div class="card-subtitle">{{ activeBoards }} of {{ totalBoards }} boards active</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="overview-card panels-card">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon>dashboard</mat-icon>
+            <span class="card-title">Total Panels</span>
+          </div>
+          <div class="card-value">{{ totalPanels }}</div>
+          <div class="card-subtitle">{{ configuredPanels }} configured</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="overview-card events-card">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon>event</mat-icon>
+            <span class="card-title">Recent Events</span>
+          </div>
+          <div class="card-value">{{ recentEvents }}</div>
+          <div class="card-subtitle">Last 24 hours</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Quick Access Grid -->
+  <div class="quick-access-section">
+    <h2 class="section-title">Quick Access</h2>
+    <div class="quick-access-grid">
+      <mat-card class="access-card" (click)="navigateToHardware()">
+        <mat-card-content>
+          <div class="access-icon">
+            <mat-icon>hardware</mat-icon>
+          </div>
+          <h3 class="access-title">Hardware Management</h3>
+          <p class="access-description">Manage hardware boards, input types, and output types</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="access-card" (click)="navigateToPanels()">
+        <mat-card-content>
+          <div class="access-icon">
+            <mat-icon>dashboard</mat-icon>
+          </div>
+          <h3 class="access-title">Panel Management</h3>
+          <p class="access-description">Configure and manage hardware panels</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="access-card" (click)="navigateToConsole()">
+        <mat-card-content>
+          <div class="access-icon">
+            <mat-icon>web_asset</mat-icon>
+          </div>
+          <h3 class="access-title">Real-time Console</h3>
+          <p class="access-description">Monitor real-time events and system activity</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="access-card" (click)="navigateToSettings()">
+        <mat-card-content>
+          <div class="access-icon">
+            <mat-icon>settings</mat-icon>
+          </div>
+          <h3 class="access-title">System Settings</h3>
+          <p class="access-description">Configure system settings and preferences</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Activity & Status Section -->
+  <div class="activity-status-section">
+    <div class="activity-panel">
+      <h3 class="panel-title">Recent Activities</h3>
+      <div class="activity-list">
+        <div *ngFor="let activity of recentActivities" class="activity-item">
+          <mat-icon class="activity-icon">{{ activity.icon }}</mat-icon>
+          <div class="activity-content">
+            <div class="activity-text">{{ activity.description }}</div>
+            <div class="activity-time">{{ activity.timestamp | date:'short' }}</div>
+          </div>
+        </div>
+        <div *ngIf="recentActivities.length === 0" class="no-activities">
+          <mat-icon>info</mat-icon>
+          <span>No recent activities</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="status-panel">
+      <h3 class="panel-title">System Status</h3>
+      <div class="status-list">
+        <div class="status-item" [class]="'status-' + apiStatus.status">
+          <mat-icon>{{ apiStatus.icon }}</mat-icon>
+          <span class="status-label">API Connection</span>
+          <span class="status-value">{{ apiStatus.status }}</span>
+        </div>
+        <div class="status-item" [class]="'status-' + databaseStatus.status">
+          <mat-icon>{{ databaseStatus.icon }}</mat-icon>
+          <span class="status-label">Database</span>
+          <span class="status-value">{{ databaseStatus.status }}</span>
+        </div>
+        <div class="status-item" [class]="'status-' + realtimeStatus.status">
+          <mat-icon>{{ realtimeStatus.icon }}</mat-icon>
+          <span class="status-label">Real-time Service</span>
+          <span class="status-value">{{ realtimeStatus.status }}</span>
+        </div>
+        <div class="status-item" [class]="'status-' + systemStatus.status">
+          <mat-icon>{{ systemStatus.icon }}</mat-icon>
+          <span class="status-label">System Resources</span>
+          <span class="status-value">{{ systemStatus.status }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
