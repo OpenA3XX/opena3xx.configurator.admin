@@ -21,9 +21,9 @@
     <h1 class="opena3xx-app-name">OpenA3XX Configurator</h1>
     <span class="spacer"></span>
     <button
-      (click)="toggle()"
+      (click)="clickNotifications()"
       mat-icon-button
-      matBadge="1"
+      [matBadge]="unreadNotificationCount > 0 ? unreadNotificationCount.toString() : null"
       matBadgeColor="accent"
       matBadgeSize="small"
       matTooltip="Notifications"
@@ -74,100 +74,110 @@
         aria-label="Navigate to dashboard"/>
       <mat-nav-list>
         <mat-list-item
-          (click)="clickDashboard()"
+          (click)="apiAvailabilityStatus ? clickDashboard() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Home"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Home'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>home</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Home</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickManageHardwarePanels()"
+          (click)="apiAvailabilityStatus ? clickManageHardwarePanels() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Aircraft Models"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Aircraft Models'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>airplanemode_active</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Aircraft Models</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickManageHardwarePanels()"
+          (click)="apiAvailabilityStatus ? clickManageHardwarePanels() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Hardware Panels"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Hardware Panels'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>dashboard</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Panels</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickManageHardwareInputTypes()"
+          (click)="apiAvailabilityStatus ? clickManageHardwareInputTypes() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Hardware Input Types"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Hardware Input Types'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>login</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Input Types</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickManageHardwareOutputTypes()"
+          (click)="apiAvailabilityStatus ? clickManageHardwareOutputTypes() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Hardware Output Types"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Hardware Output Types'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>logout</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Output Types</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickManageHardwareBoards()"
+          (click)="apiAvailabilityStatus ? clickManageHardwareBoards() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Hardware Boards"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Hardware Boards'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>developer_board</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Hardware Boards</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickManageSimulatorEvents()"
+          (click)="apiAvailabilityStatus ? clickManageSimulatorEvents() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Simulator Events"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Simulator Events'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>laptop</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Simulator Events</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickManageHardwareOutputTypes()"
+          (click)="apiAvailabilityStatus ? clickManageHardwareOutputTypes() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Connectivity"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Connectivity'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>cell_wifi</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Connectivity</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickManageHardwareOutputTypes()"
+          (click)="apiAvailabilityStatus ? clickManageHardwareOutputTypes() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Monitoring"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Monitoring'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>bar_chart</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Monitoring</span>
         </mat-list-item>
         <mat-list-item
-          (click)="clickConsole()"
+          (click)="apiAvailabilityStatus ? clickConsole() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Console"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Console'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>web_asset</mat-icon>
@@ -175,27 +185,29 @@
         </mat-list-item>
 
         <mat-list-item
-          (click)="clickSettings()"
+          (click)="apiAvailabilityStatus ? clickNotifications() : null"
           class="parent"
-          matTooltip="1 Pending Notification"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Notifications'"
           matTooltipPosition="after"
         >
           <mat-icon
             matListItemIcon
-            matBadge="1"
+            [matBadge]="unreadNotificationCount > 0 ? unreadNotificationCount.toString() : null"
             matBadgeColor="accent"
             matBadgePosition="before"
             matBadgeSize="small"
           >notification_important</mat-icon
           >
-          <span *ngIf="isExpanded || isShowing" class="full-width">Notifications</span>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Notifications Centre</span>
 
         </mat-list-item>
         <mat-list-item
-          (click)="clickSettings()"
+          (click)="apiAvailabilityStatus ? clickSettings() : null"
           [matTooltipDisabled]="isExpanded"
           class="parent"
-          matTooltip="Settings"
+          [class.disabled]="!apiAvailabilityStatus"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Settings'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>settings</mat-icon>
@@ -233,6 +245,23 @@
                dependencyStatus.overall === 'degraded' ? 'warning' : 'error' }}
           </mat-icon>
           <span class="full-width system-status-title">System Status</span>
+        </mat-list-item>
+
+                        <!-- Backend API Status -->
+        <mat-list-item
+          class="parent dependency-status-item"
+          [matTooltip]="getBackendApiTooltip()"
+          matTooltipPosition="left">
+
+          <mat-icon
+            matListItemIcon
+            [class]="getStatusClass(apiAvailabilityStatus ? 'online' : 'offline')"
+            class="dependency-icon api-icon">
+            hub
+          </mat-icon>
+          <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width dependency-name">
+            OpenA3XX Coordinator
+          </span>
         </mat-list-item>
 
                         <!-- MSFS Status -->

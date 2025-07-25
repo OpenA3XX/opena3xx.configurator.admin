@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, Inject, ChangeDetectorRef } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -8,6 +8,8 @@ import { CoreHelper } from './core/core-helper';
 import { ExitAppDialogComponent } from './core/components/exit-app-dialog.component';
 import { ThemeService } from './core/services/theme.service';
 import { DependencyStatusService, DependencyStatusResponse } from './core/services/dependency-status.service';
+import { NotificationService } from './features/notifications/services/notification.service';
+import { AppStateService } from './core/services/app-state.service';
 import { Subscription } from 'rxjs';
 
 /**
@@ -31,8 +33,10 @@ export class AppComponent implements OnInit, OnDestroy
   apiAvailabilityStatus: boolean = false;
   isDarkMode: boolean = false;
   dependencyStatus: DependencyStatusResponse | null = null;
+  unreadNotificationCount = 0;
   private themeSubscription: Subscription = new Subscription();
   private dependencyStatusSubscription: Subscription = new Subscription();
+  private notificationSubscription: Subscription = new Subscription();
 
   private apiHealthPollingTime: number = 5000;
 
@@ -72,6 +76,9 @@ export class AppComponent implements OnInit, OnDestroy
     private renderer: Renderer2,
     private themeService: ThemeService,
     private dependencyStatusService: DependencyStatusService,
+    private notificationService: NotificationService,
+    private appStateService: AppStateService,
+    private cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private document: Document
 
   ) {
@@ -108,6 +115,16 @@ export class AppComponent implements OnInit, OnDestroy
       this.dependencyStatus = status;
     });
 
+    // Subscribe to notification updates via shared service
+    console.log('Setting up notification subscription in app component');
+    this.notificationSubscription = this.appStateService.unreadCount$.subscribe(count => {
+      console.log('App component received unread count from AppStateService:', count);
+      this.unreadNotificationCount = count;
+      console.log('App component unreadNotificationCount updated to:', this.unreadNotificationCount);
+      this.cdr.detectChanges();
+    });
+    console.log('Notification subscription set up in app component');
+
     // Start polling for dependency status
     this.dependencyStatusService.startPolling();
   }
@@ -115,6 +132,7 @@ export class AppComponent implements OnInit, OnDestroy
   ngOnDestroy() {
     this.themeSubscription.unsubscribe();
     this.dependencyStatusSubscription.unsubscribe();
+    this.notificationSubscription.unsubscribe();
   }
 
   private checkApiHealth() {
@@ -150,6 +168,14 @@ export class AppComponent implements OnInit, OnDestroy
   }
   clickSettings() {
     this.router.navigateByUrl(`/settings`);
+  }
+
+  clickNotifications() {
+    this.router.navigateByUrl(`/notifications`);
+  }
+
+  updateUnreadCount(count: number) {
+    this.unreadNotificationCount = count;
   }
   clickManageSimulatorEvents() {
     this.router.navigateByUrl(`/manage/simulator-events`);
@@ -200,5 +226,13 @@ export class AppComponent implements OnInit, OnDestroy
   getFormattedTimestamp(timestamp: string | Date): string {
     if (!timestamp) return '';
     return new Date(timestamp).toLocaleTimeString();
+  }
+
+    getBackendApiTooltip(): string {
+    const status = this.apiAvailabilityStatus ? 'healthy' : 'error';
+    const statusText = this.apiAvailabilityStatus ? 'Online' : 'Offline';
+    const lastChecked = new Date().toLocaleTimeString();
+
+    return `OpenA3XX Coordinator (Backend API): ${statusText} (Last checked: ${lastChecked})`;
   }
 }

@@ -23,6 +23,9 @@ import { SettingsComponent } from './features/dashboard/components/settings/sett
 // Simulator Components
 import { ManageSimulatorEventsComponent } from './features/simulator/components/manage-simulator-events/manage-simulator-events.component';
 
+// Notifications Components
+import { NotificationCenterComponent } from './features/notifications/components/notification-center/notification-center.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -92,6 +95,10 @@ const routes: Routes = [
   {
     path: 'console',
     component: ConsoleComponent,
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./features/notifications/notifications.module').then(m => m.NotificationsModule),
   },
 ];
 

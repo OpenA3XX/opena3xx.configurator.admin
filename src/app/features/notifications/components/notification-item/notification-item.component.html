@@ -1,0 +1,56 @@
+<mat-card class="notification-item" [class.unread]="!notification.isRead">
+  <mat-card-content>
+    <div class="notification-header">
+      <div class="severity-indicator">
+        <mat-icon
+          [class]="getSeverityColor(notification.severity)"
+          [matTooltip]="notification.severity | titlecase">
+          {{ getSeverityIcon(notification.severity) }}
+        </mat-icon>
+      </div>
+
+      <div class="notification-content">
+        <div class="notification-title" [class.unread]="!notification.isRead">
+          {{ notification.title }}
+        </div>
+        <div class="notification-message">
+          {{ notification.message }}
+        </div>
+
+        <div class="notification-meta">
+          <div class="service-info" *ngIf="notification.service">
+            <mat-icon class="service-icon">{{ getServiceIcon(notification.service) }}</mat-icon>
+            <span class="service-name">{{ notification.service }}</span>
+          </div>
+
+          <div class="timestamp">
+            {{ formatTimestamp(notification.timestamp) }}
+          </div>
+        </div>
+      </div>
+
+      <div class="notification-status" *ngIf="!notification.isRead">
+        <mat-icon class="unread-indicator">fiber_manual_record</mat-icon>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="showActions" class="notification-actions">
+    <button
+      mat-button
+      color="primary"
+      (click)="onMarkAsRead()"
+      *ngIf="!notification.isRead">
+      <mat-icon>done</mat-icon>
+      Mark as Read
+    </button>
+
+    <button
+      mat-button
+      color="warn"
+      (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>

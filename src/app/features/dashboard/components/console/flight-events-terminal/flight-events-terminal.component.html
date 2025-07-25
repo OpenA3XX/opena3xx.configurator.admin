@@ -1,0 +1,76 @@
+<mat-expansion-panel expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon>flight</mat-icon>
+      Flight Events
+    </mat-panel-title>
+    <mat-panel-description>
+      <mat-chip [color]="isConnected ? 'accent' : 'warn'" selected>
+        {{ events.length }} events
+      </mat-chip>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div class="terminal-container">
+    <!-- Connection Status Bar -->
+    <mat-toolbar class="status-bar" [class.connected]="isConnected" [class.disconnected]="!isConnected">
+      <mat-icon>{{ isConnected ? 'wifi' : 'wifi_off' }}</mat-icon>
+      <span class="status-text">
+        {{ isConnected ? 'Connected & receiving realtime updates' : 'Disconnected from server' }}
+      </span>
+      <div class="status-indicator">
+        <div class="pulse-dot" [class.active]="isConnected"></div>
+      </div>
+    </mat-toolbar>
+
+    <!-- Events Container -->
+    <div class="events-container">
+      <div *ngIf="events.length === 0" class="no-events">
+        <mat-icon>info</mat-icon>
+        <span>No flight events received yet</span>
+      </div>
+
+      <mat-card *ngFor="let event of events; trackBy: trackByEvent" class="event-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>hardware</mat-icon>
+            Hardware Event
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ event.timestamp | date:'medium' }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="event-details">
+            <div class="detail-row">
+              <span class="detail-label">Hardware Board ID:</span>
+              <span class="detail-value">{{ event.hardware_board_id }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Bus Name:</span>
+              <span class="detail-value">{{ event.extender_bus_name }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Extender Bit:</span>
+              <span class="detail-value">{{ event.extender_bit_id }} ({{ event.extender_bit_name }})</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Input Selector:</span>
+              <span class="detail-value">{{ event.input_selector_name }} (ID: {{ event.input_selector_id }})</span>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+          <button mat-icon-button (click)="onCopyEvent(event)" matTooltip="Copy event details">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onExportEvent(event)" matTooltip="Export event">
+            <mat-icon>download</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</mat-expansion-panel>

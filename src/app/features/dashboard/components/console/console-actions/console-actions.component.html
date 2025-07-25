@@ -1,0 +1,35 @@
+<mat-card class="actions-card">
+  <mat-card-header>
+    <mat-card-title>Event Management</mat-card-title>
+    <mat-card-subtitle>Bulk operations and data management</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="actions-grid">
+      <button mat-raised-button color="warn" (click)="onClearEvents()">
+        <mat-icon>clear_all</mat-icon>
+        Clear All Events
+      </button>
+
+      <button mat-raised-button color="primary" (click)="onExportEvents()">
+        <mat-icon>download</mat-icon>
+        Export Events
+      </button>
+
+      <button mat-raised-button color="accent" (click)="onOpenSettings()">
+        <mat-icon>settings</mat-icon>
+        Settings
+      </button>
+
+      <button mat-raised-button color="accent" (click)="onOpenEventHistory()">
+        <mat-icon>history</mat-icon>
+        Event History
+      </button>
+
+      <button mat-raised-button color="accent" (click)="onOpenPerformance()">
+        <mat-icon>analytics</mat-icon>
+        Performance
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

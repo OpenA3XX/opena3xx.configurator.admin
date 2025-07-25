@@ -1,0 +1,29 @@
+.filters-card {
+  margin-bottom: 16px;
+}
+
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-field {
+  width: 100%;
+}
+
+.filter-form {
+  width: 100%;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}

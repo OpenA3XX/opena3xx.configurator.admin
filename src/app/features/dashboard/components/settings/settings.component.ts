@@ -32,7 +32,11 @@ export class SettingsComponent{
     this.dataService.getSettingsForm()
     .pipe(
       map(data_received => {
-        this.settingsConfig = data_received as FieldConfig[];
+        // Make all fields readonly by setting disabled to true and remove submit buttons
+        this.settingsConfig = (data_received as FieldConfig[]).map(field => ({
+          ...field,
+          disabled: true
+        }));
         this.dataLoaded = true;
       })
     ).subscribe();
@@ -42,11 +46,11 @@ export class SettingsComponent{
     this.router.navigateByUrl(`/`)
   }
 
+  // Remove form submission functionality since settings are now readonly
   onFormSubmit(configuration: FormConfiguration) {
-    firstValueFrom(this.dataService.updateAllConfiguration(configuration)).then(()=>{
-      this._snackBar.open("Settings Saved Successfully", "Ok", {
-        duration: 5000
-      });
+    // Form submission is disabled for readonly settings
+    this._snackBar.open("Settings are read-only and cannot be modified", "Ok", {
+      duration: 5000
     });
   }
 }

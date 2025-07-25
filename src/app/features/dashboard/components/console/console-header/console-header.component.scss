@@ -1,0 +1,22 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  &.connected {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+  }
+
+  &:not(.connected) {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+  }
+}

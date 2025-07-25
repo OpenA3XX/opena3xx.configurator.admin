@@ -12,6 +12,7 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
         [max]="field.maxValue || 100"
         [step]="field.stepValue || 1"
         [value]="field.value || 0"
+        [disabled]="field.disabled"
         (input)="onSliderChange($event)"
         class="full-width">
         <input matSliderThumb [formControlName]="field.name">

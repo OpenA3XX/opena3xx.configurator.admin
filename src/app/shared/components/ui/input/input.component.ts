@@ -10,7 +10,8 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
       <input matInput
              [type]="field.inputType || 'text'"
              [formControlName]="field.name"
-             [placeholder]="field.label">
+             [placeholder]="field.label"
+             [disabled]="field.disabled">
       <mat-hint *ngIf="field.hint">{{field.hint}}</mat-hint>
       <ng-container *ngFor="let validation of field.validations || [];">
         <mat-error *ngIf="group.get(field.name)?.hasError(validation.name)">

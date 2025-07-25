@@ -1,0 +1,66 @@
+<mat-card class="filters-card">
+  <mat-card-header>
+    <mat-card-title>Filters & Search</mat-card-title>
+    <mat-card-subtitle>Filter events by various criteria</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="filters-container">
+      <!-- Search Input -->
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search Events</mat-label>
+        <input matInput
+               placeholder="Search by board ID, bus name, selector..."
+               (input)="onSearchChange($event)"
+               [value]="searchValue">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <!-- Filter Form -->
+      <form [formGroup]="filterForm" class="filter-form">
+        <div class="filter-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Board ID</mat-label>
+            <mat-select formControlName="boardIdFilter">
+              <mat-option value="">All Boards</mat-option>
+              <mat-option *ngFor="let board of hardwareBoards" [value]="board.id.toString()">
+                Board {{ board.id }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Event Type</mat-label>
+            <mat-select formControlName="eventTypeFilter">
+              <mat-option value="">All Events</mat-option>
+              <mat-option value="flight">Flight Events</mat-option>
+              <mat-option value="keepalive">Keep Alive Events</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Time Range</mat-label>
+            <mat-select formControlName="timeRangeFilter">
+              <mat-option value="">All Time</mat-option>
+              <mat-option value="1min">Last 1 Minute</mat-option>
+              <mat-option value="5min">Last 5 Minutes</mat-option>
+              <mat-option value="15min">Last 15 Minutes</mat-option>
+              <mat-option value="1hour">Last Hour</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button (click)="onApplyFilters()">
+      <mat-icon>filter_list</mat-icon>
+      Apply Filters
+    </button>
+    <button mat-button (click)="onClearFilters()">
+      <mat-icon>clear</mat-icon>
+      Clear All
+    </button>
+  </mat-card-actions>
+</mat-card>

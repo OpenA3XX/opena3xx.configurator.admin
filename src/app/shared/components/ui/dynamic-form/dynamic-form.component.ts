@@ -4,7 +4,9 @@ import {
   EventEmitter,
   Input,
   OnInit,
-  Output
+  Output,
+  OnChanges,
+  SimpleChanges
 } from "@angular/core";
 import {
   FormGroup,
@@ -25,9 +27,10 @@ import { FieldConfig, Validator, FormConfiguration } from "src/app/shared/models
   `,
   styleUrls: ['./dynamic-form.component.scss'],
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, OnChanges {
   @Input() fields: FieldConfig[] = [];
   @Input() identifier!: number;
+  @Input() readonly: boolean = false;
   @Output() formSubmit: EventEmitter<FormConfiguration> = new EventEmitter<FormConfiguration>();
 
   form: FormGroup;
@@ -42,11 +45,21 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.createControl();
+    this.updateFormReadonlyState();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['readonly'] && this.form) {
+      this.updateFormReadonlyState();
+    }
   }
 
   onSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
+    if (this.readonly) {
+      return; // Prevent form submission when readonly
+    }
     if (this.form.valid) {
       if (this.identifier !== undefined) {
         this.form.value.identifier = this.identifier;
@@ -72,6 +85,11 @@ export class DynamicFormComponent implements OnInit {
       // ✅ Correct way to create FormControl with validators
       const validators = this.bindValidations(field.validations || []);
       const control = this.fb.control(field.value || '', validators);
+
+      // Disable the control if the field is disabled or form is readonly
+      if (field.disabled || this.readonly) {
+        control.disable();
+      }
 
       group.addControl(field.name, control);
     });
@@ -100,5 +118,16 @@ export class DynamicFormComponent implements OnInit {
       const control = formGroup.get(field);
       control?.markAsTouched({ onlySelf: true });
     });
+  }
+
+  private updateFormReadonlyState() {
+    if (this.readonly) {
+      Object.keys(this.form.controls).forEach(fieldName => {
+        const control = this.form.get(fieldName);
+        if (control) {
+          control.disable();
+        }
+      });
+    }
   }
 }

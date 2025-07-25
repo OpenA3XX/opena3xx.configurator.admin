@@ -1,0 +1,6 @@
+<div class="full-width margin-top" [formGroup]="group">
+  <mat-slide-toggle [formControlName]="field.name" [disabled]="field.disabled">
+    {{field.label}}
+  </mat-slide-toggle>
+</div>
+<mat-hint>{{field.hint}}</mat-hint>

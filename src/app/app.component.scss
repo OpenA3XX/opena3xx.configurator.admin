@@ -215,6 +215,30 @@
       text-overflow: ellipsis;
       transition: opacity var(--transition-normal), transform var(--transition-normal);
     }
+
+    // Disabled state styling
+    &.disabled {
+      cursor: not-allowed !important;
+      opacity: 0.5;
+      pointer-events: none;
+
+      &:hover {
+        background-color: transparent !important;
+        transform: none !important;
+
+        &::before {
+          transform: scaleY(0) !important;
+        }
+      }
+
+      mat-icon {
+        opacity: 0.5;
+      }
+
+      .nav-label {
+        opacity: 0.5;
+      }
+    }
   }
 }
 
@@ -355,6 +379,11 @@
 
         // Log/list icon
         &.seq-icon {
+          // Can add special styling if needed
+        }
+
+        // Central Coordinator API icon
+        &.api-icon {
           // Can add special styling if needed
         }
       }

@@ -1,0 +1,117 @@
+<div class="notification-filters">
+  <div class="filters-header">
+            <button
+      mat-button
+      (click)="toggleExpanded()"
+      class="expand-button">
+      <mat-icon>{{ expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+      Filters
+      <span class="filter-count" *ngIf="getActiveFiltersCount() > 0">
+        ({{ getActiveFiltersCount() }})
+      </span>
+    </button>
+
+        <button
+      mat-button
+      color="warn"
+      (click)="clearFilters()"
+      *ngIf="getActiveFiltersCount() > 0"
+      class="clear-button">
+      Clear
+    </button>
+  </div>
+
+  <div class="filters-content" [class.expanded]="expanded">
+    <form [formGroup]="filtersForm" class="filters-form">
+
+      <!-- Severity Filter -->
+      <div class="filter-section">
+        <label class="filter-label">
+          Severity
+        </label>
+        <div class="filter-options">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Severity</mat-label>
+            <mat-select formControlName="severity" multiple>
+              <mat-option
+                *ngFor="let option of severityOptions"
+                [value]="option.value">
+                {{ option.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Service Filter -->
+      <div class="filter-section">
+        <label class="filter-label">
+          Service
+        </label>
+        <div class="filter-options">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Service</mat-label>
+            <mat-select formControlName="service" multiple>
+              <mat-option (click)="selectAllServices()" class="select-all-option">
+                <strong>Select All</strong>
+              </mat-option>
+              <mat-divider></mat-divider>
+              <mat-option
+                *ngFor="let option of serviceOptions"
+                [value]="option.value">
+                {{ option.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Status Filter -->
+      <div class="filter-section">
+        <label class="filter-label">
+          Status
+        </label>
+        <div class="filter-options">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Status</mat-label>
+            <mat-select formControlName="isRead">
+              <mat-option [value]="null">All</mat-option>
+              <mat-option
+                *ngFor="let option of statusOptions"
+                [value]="option.value">
+                {{ option.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Date Range Filter -->
+      <div class="filter-section">
+        <label class="filter-label">
+          Date Range
+        </label>
+        <div class="filter-options date-range">
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Start Date</mat-label>
+            <input
+              matInput
+              type="date"
+              formControlName="startDate"
+              placeholder="Start date">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>End Date</mat-label>
+            <input
+              matInput
+              type="date"
+              formControlName="endDate"
+              placeholder="End date">
+          </mat-form-field>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

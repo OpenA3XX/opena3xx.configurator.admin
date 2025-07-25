@@ -3,27 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
 @Component({
   selector: 'opena3xx-forms-select',
-  template: `
-    <mat-form-field class="full-width margin-top" [formGroup]="group">
-      <mat-select
-        [disabled]="field.disabled"
-        [placeholder]="field.label"
-        [formControlName]="field.name"
-        (selectionChange)="onSelectComponentChange($event)"
-      >
-        <mat-option *ngFor="let item of field.options" [value]="item.key">{{
-          item.value
-        }}</mat-option>
-      </mat-select>
-      <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
-        <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{
-          validation.message
-        }}</mat-error>
-      </ng-container>
-      <mat-hint>{{ field.hint }}</mat-hint>
-    </mat-form-field>
-  `,
-  styles: [],
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss']
 })
 export class SelectComponent {
   @Output() selectChange: EventEmitter<{value: string}> = new EventEmitter<{value: string}>();

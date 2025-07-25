@@ -1,0 +1,241 @@
+.notification-item {
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+  border: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &.unread {
+    background: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.08));
+    border-color: var(--mat-sys-primary, #1976d2);
+
+    .notification-title {
+      font-weight: 600;
+    }
+  }
+
+  .notification-header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+
+    .severity-indicator {
+      flex-shrink: 0;
+      margin-top: 4px;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+
+        &.error {
+          color: var(--mat-sys-error, #f44336);
+        }
+
+        &.warning {
+          color: var(--mat-sys-warning, #ff9800);
+        }
+
+        &.success {
+          color: var(--mat-sys-success, #4caf50);
+        }
+
+        &.primary {
+          color: var(--mat-sys-primary, #1976d2);
+        }
+      }
+    }
+
+    .notification-content {
+      flex: 1;
+      min-width: 0;
+
+      .notification-title {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        line-height: 1.4;
+        color: var(--mat-sys-on-surface, rgba(0, 0, 0, 0.87));
+
+        &.unread {
+          color: var(--mat-sys-on-surface, rgba(0, 0, 0, 0.87));
+        }
+      }
+
+      .notification-message {
+        font-size: 14px;
+        color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6));
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
+
+      .notification-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        .service-info {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 12px;
+          color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6));
+
+          .service-icon {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+            color: var(--mat-sys-primary, #1976d2);
+          }
+
+          .service-name {
+            font-weight: 500;
+          }
+        }
+
+        .timestamp {
+          font-size: 12px;
+          color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6));
+          font-weight: 500;
+        }
+      }
+    }
+
+    .notification-status {
+      flex-shrink: 0;
+      margin-top: 4px;
+
+      .unread-indicator {
+        font-size: 12px;
+        width: 12px;
+        height: 12px;
+        color: var(--mat-sys-error, #f44336);
+        animation: pulse 2s infinite;
+      }
+    }
+  }
+
+  .notification-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 16px 16px 0 16px;
+    margin: 0;
+    border-top: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
+
+    button {
+      font-size: 13px;
+      min-width: auto;
+      padding: 0 12px;
+      height: 32px;
+      line-height: 32px;
+
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+// Animation for unread indicator
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .notification-item {
+    .notification-header {
+      gap: 12px;
+
+      .severity-indicator {
+        mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .notification-content {
+        .notification-title {
+          font-size: 15px;
+        }
+
+        .notification-message {
+          font-size: 13px;
+        }
+
+        .notification-meta {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+
+          .service-info {
+            font-size: 11px;
+
+            .service-icon {
+              font-size: 14px;
+              width: 14px;
+              height: 14px;
+            }
+          }
+
+          .timestamp {
+            font-size: 11px;
+          }
+        }
+      }
+
+      .notification-status {
+        .unread-indicator {
+          font-size: 10px;
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+
+    .notification-actions {
+      padding: 12px 12px 0 12px;
+
+      button {
+        font-size: 12px;
+        padding: 0 8px;
+        height: 28px;
+        line-height: 28px;
+
+        mat-icon {
+          font-size: 14px;
+          width: 14px;
+          height: 14px;
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+}
+
+// Dark mode adjustments
+@media (prefers-color-scheme: dark) {
+  .notification-item {
+    &.unread {
+      background: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.12));
+    }
+  }
+}

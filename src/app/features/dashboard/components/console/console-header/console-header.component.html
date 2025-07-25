@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <mat-icon>web_asset</mat-icon>&nbsp;
+  <span>Real Time Console</span>
+</mat-toolbar>
+<mat-toolbar>
+  <button mat-flat-button color="primary" (click)="goBack()">Back</button>
+  <span class="spacer"></span>
+  <button
+    mat-flat-button
+    [color]="isConnected ? 'warn' : 'primary'"
+    (click)="isConnected ? onDisconnect() : onConnect()">
+    {{ isConnected ? 'Disconnect' : 'Connect' }}
+  </button>
+  <span class="connection-status" [class.connected]="isConnected">
+    <mat-icon>{{ isConnected ? 'wifi' : 'wifi_off' }}</mat-icon>
+    {{ isConnected ? 'Connected' : 'Disconnected' }}
+  </span>
+</mat-toolbar>

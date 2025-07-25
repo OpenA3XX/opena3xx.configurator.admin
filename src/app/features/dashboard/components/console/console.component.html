@@ -1,82 +1,59 @@
-<mat-toolbar>
-  <mat-icon>web_asset</mat-icon>&nbsp;
-  <span>Real Time Console</span>
-</mat-toolbar>
-<mat-toolbar>
-  <button mat-flat-button color="primary" (click)="goBack()">Back</button>
-</mat-toolbar>
+<!-- Console Header -->
+<opena3xx-console-header
+  [isConnected]="realtimeService.isConnected"
+  (connect)="onConnect()"
+  (disconnect)="onDisconnect()">
+</opena3xx-console-header>
 
-<ngs-code-editor
-  [theme]="theme"
-  [codeModel]="codeModel"
-  [options]="options"
-  (valueChanged)="onCodeChanged($event)"
->
-</ngs-code-editor>
+<!-- Console Statistics -->
+<opena3xx-console-statistics
+  [totalEvents]="getTotalEvents()"
+  [eventsPerMinute]="getEventsPerMinute()"
+  [connectedBoards]="getConnectedBoards()"
+  [activeSelectors]="getActiveSelectors()"
+  [showCharts]="showCharts"
+  (toggleCharts)="onToggleCharts()"
+  (openSettings)="onOpenSettingsDialog()"
+  (openEventHistory)="onOpenEventHistoryDialog()"
+  (openPerformance)="onOpenPerformanceDialog()">
+</opena3xx-console-statistics>
 
-<mat-expansion-panel expanded>
-  <mat-expansion-panel-header>
-    <mat-panel-title> Flight Events </mat-panel-title>
-  </mat-expansion-panel-header>
-  <div class="container">
-    <section id="terminal__bar">
-      <div id="bar__buttons">
-        <button class="bar__button" id="bar__button--exit">&#10005;</button>
-        <button class="bar__button">&#9472;</button>
-        <button class="bar__button">&#9723;</button>
-      </div>
-      <p id="bar__user">OpenA3XX Terminal: Real Time Console</p>
-    </section>
-    <div class="console-container">
-      <span id="terminal__prompt--user"
-        >admin&#64;opena3xx:
-        <span class="cursor" *ngIf="realtimeService.isConnected"
-          >Connected & receiving realtime updates...</span
-        >
-        <span class="cursor" *ngIf="!realtimeService.isConnected">Disconnected from server...</span>
-        <span class="cursor-blink"></span>
-      </span>
+<!-- Console Filters -->
+<opena3xx-console-filters
+  [hardwareBoards]="getHardwareBoards()"
+  (filterChange)="onFilterChange($event)"
+  (searchChange)="onSearchChange($event)"
+  (clearFilters)="onClearFilters()">
+</opena3xx-console-filters>
 
-      <div *ngFor="let m of realtimeService.flightEvents">
-        <span id="terminal__prompt--user">admin&#64;opena3xx:</span>
-        Hardware Event: → Timestamp:
-        <b>{{ m.timestamp }}</b> | Hardware Board Id: <b>{{ m.hardware_board_id }}</b> | Hardware
-        Bus Name: <b>{{ m.extender_bus_name }}</b> | Extender Bit Id (Name):
-        <b>{{ m.extender_bit_id }} ({{ m.extender_bit_name }})</b> | Input Selector Name:
-        <b>{{ m.input_selector_name }}</b> | Input Selector Id:
-        <b>{{ m.input_selector_id }}</b>
-      </div>
-    </div>
-  </div>
-</mat-expansion-panel>
-<mat-expansion-panel expanded>
-  <mat-expansion-panel-header>
-    <mat-panel-title> Keep Alive Events </mat-panel-title>
-  </mat-expansion-panel-header>
-  <div class="container">
-    <section id="terminal__bar">
-      <div id="bar__buttons">
-        <button class="bar__button" id="bar__button--exit">&#10005;</button>
-        <button class="bar__button">&#9472;</button>
-        <button class="bar__button">&#9723;</button>
-      </div>
-      <p id="bar__user">OpenA3XX Terminal: Real Time Console</p>
-    </section>
-    <div class="console-container">
-      <span id="terminal__prompt--user"
-        >admin&#64;opena3xx:
-        <span class="cursor" *ngIf="realtimeService.isConnected"
-          >Connected & receiving realtime updates...</span
-        >
-        <span class="cursor" *ngIf="!realtimeService.isConnected">Disconnected from server...</span>
-        <span class="cursor-blink"></span>
-      </span>
-      <div *ngFor="let m of realtimeService.keepAliveEvents">
-        <span id="terminal__prompt--user">admin&#64;opena3xx:</span>
-        Keep Alive Event: → Timestamp:
-        <b>{{ m.timestamp }}</b> | Hardware Board Id: <b>{{ m.hardware_board_id }}</b> | Message:
-        <b>{{ m.message }}</b>
-      </div>
-    </div>
-  </div>
-</mat-expansion-panel>
+<!-- Console Actions -->
+<opena3xx-console-actions
+  (clearEvents)="onClearEvents()"
+  (exportEvents)="onExportEvents()"
+  (openSettings)="onOpenSettingsDialog()"
+  (openEventHistory)="onOpenEventHistoryDialog()"
+  (openPerformance)="onOpenPerformanceDialog()">
+</opena3xx-console-actions>
+
+<!-- Console Charts -->
+<opena3xx-console-charts
+  [chartData]="getChartData()"
+  [boardActivity]="getBoardActivity()"
+  [showCharts]="showCharts">
+</opena3xx-console-charts>
+
+<!-- Flight Events Terminal -->
+<opena3xx-flight-events-terminal
+  [events]="getFilteredFlightEvents()"
+  [isConnected]="realtimeService.isConnected"
+  (copyEvent)="onCopyEvent($event)"
+  (exportEvent)="onExportSingleEvent($event)">
+</opena3xx-flight-events-terminal>
+
+<!-- Keep Alive Events Terminal -->
+<opena3xx-keep-alive-events-terminal
+  [events]="getFilteredKeepAliveEvents()"
+  [isConnected]="realtimeService.isConnected"
+  (copyEvent)="onCopyEvent($event)"
+  (exportEvent)="onExportSingleEvent($event)">
+</opena3xx-keep-alive-events-terminal>

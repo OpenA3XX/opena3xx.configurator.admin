@@ -8,7 +8,7 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
   template: `
     <mat-form-field appearance="outline" class="full-width margin-top" [formGroup]="group">
       <mat-label>{{field?.label}}</mat-label>
-      <input matInput [matDatepicker]="picker" [formControlName]="field?.name" [placeholder]="field?.label">
+      <input matInput [matDatepicker]="picker" [formControlName]="field?.name" [placeholder]="field?.label" [disabled]="field?.disabled">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-hint>{{field?.hint}}</mat-hint>

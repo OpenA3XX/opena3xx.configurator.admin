@@ -21,27 +21,8 @@ import { map, startWith } from 'rxjs/operators';
 //       </ng-container>
 @Component({
   selector: 'opena3xx-forms-autocomplete',
-  template: `
-    <mat-form-field class="full-width margin-top" [formGroup]="group">
-      <input
-        [name]="field.name"
-        type="text"
-        [placeholder]="field.label"
-        matInput
-        [formControl]="myControl"
-        [formControlName]="field.name"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
-          {{ option.value }}
-        </mat-option>
-      </mat-autocomplete>
-
-      <mat-hint>{{ field.hint }}</mat-hint>
-    </mat-form-field>
-  `,
-  styles: [],
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss']
 })
 export class AutocompleteComponent implements OnInit {
   @Input() field!: FieldConfig;

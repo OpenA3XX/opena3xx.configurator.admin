@@ -1,0 +1,6 @@
+<div class="loading-overlay" *ngIf="loadingService.loading$ | async">
+  <div class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p class="loading-text">Loading...</p>
+  </div>
+</div>
