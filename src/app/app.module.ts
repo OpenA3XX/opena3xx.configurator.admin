@@ -28,6 +28,7 @@ import { SimulatorModule } from './features/simulator/simulator.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { ConsoleModule } from './features/console/console.module';
 import { SettingsModule } from './features/settings/settings.module';
+import { AircraftModelsModule } from './features/aircraft-models/aircraft-models.module';
 
 // Shared Module
 import { SharedModule } from './shared/shared.module';
@@ -55,6 +56,7 @@ import { ExitAppDialogComponent } from './core/components/exit-app-dialog.compon
     DashboardModule,
     ConsoleModule,
     SettingsModule,
+    AircraftModelsModule,
 
     // Shared Module
     SharedModule

@@ -1,0 +1,98 @@
+<div class="aircraft-models-container">
+  <mat-toolbar>
+    <mat-icon>flight</mat-icon>
+    <span>Aircraft Models</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" (click)="onAddAircraftModel()">
+      <mat-icon>add</mat-icon>
+      Add Aircraft Model
+    </button>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-card-content>
+      <div class="search-container">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search aircraft models</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, manufacturer, or type..." #input>
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="aircraft-models-table">
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let aircraftModel"> {{aircraftModel.id}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let aircraftModel"> {{aircraftModel.name}} </td>
+          </ng-container>
+
+          <!-- Manufacturer Column -->
+          <ng-container matColumnDef="manufacturer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Manufacturer </th>
+            <td mat-cell *matCellDef="let aircraftModel"> {{aircraftModel.manufacturer}} </td>
+          </ng-container>
+
+          <!-- Type Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+            <td mat-cell *matCellDef="let aircraftModel"> {{aircraftModel.type}} </td>
+          </ng-container>
+
+          <!-- Active Status Column -->
+          <ng-container matColumnDef="isActive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let aircraftModel">
+              <mat-icon [color]="getStatusColor(aircraftModel.isActive)">
+                {{getStatusIcon(aircraftModel.isActive)}}
+              </mat-icon>
+              <span class="status-text">{{aircraftModel.isActive ? 'Active' : 'Inactive'}}</span>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let aircraftModel">
+              <button mat-icon-button color="primary" (click)="onViewAircraftModel(aircraftModel.id)" matTooltip="View Details">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="onEditAircraftModel(aircraftModel.id)" matTooltip="Edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="onDeleteAircraftModel(aircraftModel.id)" matTooltip="Delete">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of aircraft models"></mat-paginator>
+
+        <!-- Loading indicator -->
+        <div *ngIf="loading" class="loading-container">
+          <mat-spinner diameter="50"></mat-spinner>
+          <p>Loading aircraft models...</p>
+        </div>
+
+        <!-- No data message -->
+        <div *ngIf="!loading && dataSource.data.length === 0" class="no-data-container">
+          <mat-icon>flight_off</mat-icon>
+          <p>No aircraft models found</p>
+          <button mat-raised-button color="primary" (click)="onAddAircraftModel()">
+            Add First Aircraft Model
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

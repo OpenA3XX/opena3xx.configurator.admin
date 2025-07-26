@@ -1,0 +1,110 @@
+.edit-aircraft-model-container {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+mat-toolbar {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+  color: white;
+
+  mat-icon {
+    margin-right: 12px;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: rgba(0, 0, 0, 0.6);
+
+  p {
+    margin-top: 16px;
+    font-size: 16px;
+  }
+}
+
+.aircraft-model-form {
+  .form-row {
+    margin-bottom: 24px;
+
+    .form-field {
+      width: 100%;
+    }
+
+    .toggle-description {
+      margin-left: 12px;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 0.875rem;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+    button {
+      min-width: 120px;
+    }
+  }
+}
+
+// Dark theme support
+:host.dark-theme {
+  .loading-container {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .aircraft-model-form {
+    .toggle-description {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .form-actions {
+      border-top-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .edit-aircraft-model-container {
+    padding: 16px;
+  }
+
+  .aircraft-model-form {
+    .form-actions {
+      flex-direction: column;
+      gap: 8px;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-aircraft-model-container {
+    padding: 12px;
+  }
+
+  mat-toolbar {
+    flex-direction: column;
+    height: auto;
+    padding: 16px;
+  }
+}

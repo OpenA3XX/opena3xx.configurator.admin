@@ -159,6 +159,10 @@ export class AppComponent implements OnInit, OnDestroy
     this.router.navigateByUrl(`/manage/hardware-panels`);
   }
 
+  clickManageAircraftModels() {
+    this.router.navigateByUrl(`/manage/aircraft-models`);
+  }
+
   clickManageHardwareInputTypes() {
     this.router.navigateByUrl(`/manage/hardware-input-types`);
   }

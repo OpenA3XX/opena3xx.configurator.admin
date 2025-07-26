@@ -1,0 +1,117 @@
+<div class="view-aircraft-model-details-container">
+  <mat-toolbar>
+    <mat-icon>visibility</mat-icon>
+    <span>Aircraft Model Details</span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="onBack()" matTooltip="Back to List">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading aircraft model details...</p>
+  </div>
+
+  <div *ngIf="!loading && aircraftModel" class="details-content">
+    <mat-card class="details-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>flight</mat-icon>
+          {{ aircraftModel.name }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ aircraftModel.manufacturer }} - {{ aircraftModel.type }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="details-grid">
+          <div class="detail-item">
+            <div class="detail-label">
+              <mat-icon>label</mat-icon>
+              Name
+            </div>
+            <div class="detail-value">{{ aircraftModel.name }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <mat-icon>business</mat-icon>
+              Manufacturer
+            </div>
+            <div class="detail-value">{{ aircraftModel.manufacturer }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <mat-icon>category</mat-icon>
+              Type
+            </div>
+            <div class="detail-value">{{ aircraftModel.type }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <mat-icon>info</mat-icon>
+              Status
+            </div>
+            <div class="detail-value">
+              <mat-icon [color]="getStatusColor(aircraftModel.isActive)">
+                {{ getStatusIcon(aircraftModel.isActive) }}
+              </mat-icon>
+              <span class="status-text">{{ getStatusText(aircraftModel.isActive) }}</span>
+            </div>
+          </div>
+
+          <div class="detail-item" *ngIf="aircraftModel.description">
+            <div class="detail-label">
+              <mat-icon>description</mat-icon>
+              Description
+            </div>
+            <div class="detail-value">{{ aircraftModel.description }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <mat-icon>schedule</mat-icon>
+              Created
+            </div>
+            <div class="detail-value">{{ formatDate(aircraftModel.createdAt) }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <mat-icon>update</mat-icon>
+              Last Updated
+            </div>
+            <div class="detail-value">{{ formatDate(aircraftModel.updatedAt) }}</div>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onEdit()">
+          <mat-icon>edit</mat-icon>
+          Edit
+        </button>
+        <button mat-raised-button color="warn" (click)="onDelete()">
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
+        <button mat-button (click)="onBack()">
+          <mat-icon>arrow_back</mat-icon>
+          Back to List
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!loading && !aircraftModel" class="error-container">
+    <mat-icon>error</mat-icon>
+    <p>Aircraft model not found</p>
+    <button mat-raised-button color="primary" (click)="onBack()">
+      Back to List
+    </button>
+  </div>
+</div>

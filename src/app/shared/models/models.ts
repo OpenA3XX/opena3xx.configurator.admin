@@ -151,3 +151,31 @@ export interface AddHardwarePanelDto {
   cockpitArea: number;
   owner: number;
 }
+
+export interface AircraftModelDto {
+  id: number;
+  name: string;
+  manufacturer: string;
+  type: string;
+  description?: string;
+  isActive: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface AddAircraftModelDto {
+  name: string;
+  manufacturer: string;
+  type: string;
+  description?: string;
+  isActive: boolean;
+}
+
+export interface UpdateAircraftModelDto {
+  id: number;
+  name: string;
+  manufacturer: string;
+  type: string;
+  description?: string;
+  isActive: boolean;
+}
