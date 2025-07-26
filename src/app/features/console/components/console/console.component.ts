@@ -8,6 +8,31 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { DataService } from 'src/app/core/services/data.service';
 import { HardwareBoardDto } from 'src/app/shared/models/models';
+import { Subscription } from 'rxjs';
+
+interface ConsoleEvent {
+  id: string;
+  timestamp: Date;
+  type: string;
+  data: unknown;
+}
+
+interface ConsoleFilters {
+  boardIdFilter: string;
+  eventTypeFilter: string;
+  timeRangeFilter: string;
+}
+
+interface ChartDataPoint {
+  time: number;
+  value: number;
+}
+
+interface BoardActivityData {
+  id: number;
+  events: number;
+  isActive: boolean;
+}
 
 @Component({
     selector: 'opena3xx-console',
@@ -18,11 +43,15 @@ import { HardwareBoardDto } from 'src/app/shared/models/models';
 export class ConsoleComponent implements OnInit, OnDestroy {
   private filterValue: string = '';
   private eventsPerMinute: number = 0;
-  private lastMinuteEvents: any[] = [];
-  private activeFilters: any = {};
-  private chartData: any[] = [];
-  private boardActivity: any[] = [];
-  private themeSubscription: any;
+  private lastMinuteEvents: ConsoleEvent[] = [];
+  private activeFilters: ConsoleFilters = {
+    boardIdFilter: '',
+    eventTypeFilter: '',
+    timeRangeFilter: ''
+  };
+  private chartData: ChartDataPoint[] = [];
+  private boardActivity: BoardActivityData[] = [];
+  private themeSubscription: Subscription = new Subscription();
 
   // Form for advanced filtering
   filterForm: FormGroup;
@@ -86,7 +115,7 @@ export class ConsoleComponent implements OnInit, OnDestroy {
       // Keeping it for now to avoid breaking existing calls, but it will be removed later.
       // const hardwareBoards = await firstValueFrom(this.dataService.getAllHardwareBoards()) as HardwareBoardDto[];
       // console.log('Hardware Boards loaded:', hardwareBoards);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching hardware boards:', error);
       this.showSnackBar('Error loading hardware boards');
     }
@@ -150,11 +179,11 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     this.showCharts = !this.showCharts;
   }
 
-  getChartData(): any[] {
+  getChartData(): ChartDataPoint[] {
     return this.chartData;
   }
 
-  getBoardActivity(): any[] {
+  getBoardActivity(): BoardActivityData[] {
     return this.boardActivity;
   }
 
@@ -223,13 +252,17 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     this.filterValue = searchValue;
   }
 
-  onFilterChange(filters: any): void {
+  onFilterChange(filters: ConsoleFilters): void {
     this.activeFilters = filters;
   }
 
   onClearFilters(): void {
     this.filterValue = '';
-    this.activeFilters = {};
+    this.activeFilters = {
+      boardIdFilter: '',
+      eventTypeFilter: '',
+      timeRangeFilter: ''
+    };
     this.showSnackBar('Filters cleared');
   }
 
@@ -381,13 +414,13 @@ export class ConsoleComponent implements OnInit, OnDestroy {
   }
 
   // Event Actions
-  onCopyEvent(event: any): void {
+  onCopyEvent(event: FlightEvent | KeepAliveEvent): void {
     const eventDetails = JSON.stringify(event, null, 2);
     this.clipboard.copy(eventDetails);
     this.showSnackBar('Event details copied to clipboard');
   }
 
-  onExportSingleEvent(event: any): void {
+  onExportSingleEvent(event: FlightEvent | KeepAliveEvent): void {
     const dataStr = JSON.stringify(event, null, 2);
     const dataBlob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(dataBlob);
