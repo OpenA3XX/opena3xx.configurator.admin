@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/core/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HardwareInputDto, SimulatorEventItemDto } from 'src/app/shared/models/models';
+import { SimulatorEventItemDto } from 'src/app/shared/models/models';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -161,11 +161,11 @@ export class LinkHardwareInputSelectorsFormComponent implements OnInit {
     }
   }
 
-  async onIntegrationTypeChange(selectChangeEvent: any) {
+  async onIntegrationTypeChange() {
     try {
       this.simulatorEventsFieldConfig.options = [];
       const data = await firstValueFrom(
-        this.dataService.getAllSimulatorEventsByIntegrationType(selectChangeEvent.value)
+        this.dataService.getAllSimulatorEventsByIntegrationType(this.linkHardwareInputSelectorsForm.value.integrationTypes)
       ) as SimulatorEventItemDto[];
 
       _.each(data, (entry) => {

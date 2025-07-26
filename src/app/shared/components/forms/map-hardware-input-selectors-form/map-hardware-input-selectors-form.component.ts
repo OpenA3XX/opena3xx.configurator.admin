@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import {
   HardwareBoardDetailsDto,
-  HardwareInputDto,
   MapExtenderBitToHardwareInputSelectorDto,
 } from 'src/app/shared/models/models';
 import { FieldConfig, OptionList } from 'src/app/shared/models/field.interface';
