@@ -12,9 +12,23 @@ import {
 } from '../../shared/models/models';
 import { ConfigurationService } from './configuration.service';
 
+interface HttpOptions {
+  headers: HttpHeaders;
+}
+
+interface ConfigurationData {
+  [key: string]: unknown;
+}
+
+interface ApiResponse<T> {
+  data: T;
+  message?: string;
+  success: boolean;
+}
+
 @Injectable()
 export class DataService {
-  private httpOptions: any = {
+  private httpOptions: HttpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
@@ -93,15 +107,15 @@ export class DataService {
     return this.http.get(`${this.BASE_URL}/configuration`);
   }
 
-  updateAllConfiguration(data: any) {
+  updateAllConfiguration(data: ConfigurationData) {
     console.log(data);
-    return this.http.post<any>(`${this.BASE_URL}/configuration`, data);
+    return this.http.post<ApiResponse<ConfigurationData>>(`${this.BASE_URL}/configuration`, data);
   }
 
   linkSimulatorEventToHardwareInputSelector(hardwareInputSelectorId: number, eventCode: string) {
     //Change to this endpoint to use autocomplete in admin ui
     // `${this.BASE_URL}/simulator-event/link/hardware-input-selector/${hardwareInputSelectorId}/${simulatorEventId}`,
-    return this.http.post<any>(
+    return this.http.post<ApiResponse<unknown>>(
       `${this.BASE_URL}/simulator-event/link/hardware-input-selector/by-event-code/${hardwareInputSelectorId}/${eventCode}`,
       {}
     );
@@ -112,7 +126,7 @@ export class DataService {
   }
 
   sendSimulatorTestEvent(simulatorEventId: number) {
-    return this.http.put<any>(`${this.BASE_URL}/simulator-event/test/${simulatorEventId}`, {});
+    return this.http.put<ApiResponse<unknown>>(`${this.BASE_URL}/simulator-event/test/${simulatorEventId}`, {});
   }
 
   /**

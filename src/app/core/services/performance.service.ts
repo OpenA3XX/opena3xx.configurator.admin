@@ -8,6 +8,21 @@ export interface PerformanceMetric {
   url: string;
 }
 
+interface LayoutShiftEntry extends PerformanceEntry {
+  hadRecentInput: boolean;
+  value: number;
+}
+
+interface MemoryInfo {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
+interface PerformanceWithMemory extends Performance {
+  memory: MemoryInfo;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -49,7 +64,7 @@ export class PerformanceService {
       // Observe cumulative layout shift
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const layoutShiftEntry = entry as any;
+          const layoutShiftEntry = entry as LayoutShiftEntry;
           if (!layoutShiftEntry.hadRecentInput) {
             this.recordMetric('cls', layoutShiftEntry.value, 'cumulative-layout-shift');
           }
@@ -140,12 +155,13 @@ export class PerformanceService {
   /**
    * Get memory usage (if available)
    */
-  getMemoryUsage(): any {
+  getMemoryUsage(): MemoryInfo | null {
     if ('memory' in performance) {
+      const perfWithMemory = performance as PerformanceWithMemory;
       return {
-        usedJSHeapSize: (performance as any).memory.usedJSHeapSize,
-        totalJSHeapSize: (performance as any).memory.totalJSHeapSize,
-        jsHeapSizeLimit: (performance as any).memory.jsHeapSizeLimit
+        usedJSHeapSize: perfWithMemory.memory.usedJSHeapSize,
+        totalJSHeapSize: perfWithMemory.memory.totalJSHeapSize,
+        jsHeapSizeLimit: perfWithMemory.memory.jsHeapSizeLimit
       };
     }
     return null;

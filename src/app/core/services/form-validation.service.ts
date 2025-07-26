@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
+interface ValidationError {
+  message: string;
+}
+
+interface FormErrors {
+  [key: string]: ValidationErrors;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,8 +33,8 @@ export class FormValidationService {
   /**
    * Get all validation errors from a form group
    */
-  getFormErrors(formGroup: FormGroup): { [key: string]: any } {
-    let errors: { [key: string]: any } = {};
+  getFormErrors(formGroup: FormGroup): FormErrors {
+    let errors: FormErrors = {};
 
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
