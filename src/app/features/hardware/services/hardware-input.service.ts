@@ -4,6 +4,22 @@ import { Observable } from 'rxjs';
 import { HardwareInputTypeDto } from 'src/app/shared/models/models';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
+interface ApiResponse<T> {
+  data: T;
+  message?: string;
+  success: boolean;
+}
+
+interface HardwareInputSelectorDetails {
+  id: number;
+  name: string;
+  hardwareInputTypeId: number;
+  hardwareInputTypeName: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,28 +50,28 @@ export class HardwareInputService {
   /**
    * Add a new hardware input type
    */
-  addHardwareInputType(hardwareInputType: HardwareInputTypeDto): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/hardware-input-types`, hardwareInputType);
+  addHardwareInputType(hardwareInputType: HardwareInputTypeDto): Observable<ApiResponse<HardwareInputTypeDto>> {
+    return this.http.post<ApiResponse<HardwareInputTypeDto>>(`${this.BASE_URL}/hardware-input-types`, hardwareInputType);
   }
 
   /**
    * Update hardware input type
    */
-  updateHardwareInputType(hardwareInputType: HardwareInputTypeDto): Observable<any> {
-    return this.http.patch(`${this.BASE_URL}/hardware-input-types`, hardwareInputType);
+  updateHardwareInputType(hardwareInputType: HardwareInputTypeDto): Observable<ApiResponse<HardwareInputTypeDto>> {
+    return this.http.patch<ApiResponse<HardwareInputTypeDto>>(`${this.BASE_URL}/hardware-input-types`, hardwareInputType);
   }
 
   /**
    * Delete hardware input type
    */
-  deleteHardwareInputType(id: number): Observable<any> {
-    return this.http.delete(`${this.BASE_URL}/hardware-input-types/${id}`);
+  deleteHardwareInputType(id: number): Observable<ApiResponse<unknown>> {
+    return this.http.delete<ApiResponse<unknown>>(`${this.BASE_URL}/hardware-input-types/${id}`);
   }
 
   /**
    * Get hardware input selector details
    */
-  getHardwareInputSelectorDetails(hardwareInputSelectorId: number): Observable<any> {
-    return this.http.get(`${this.BASE_URL}/hardware-input-selectors/${hardwareInputSelectorId}`);
+  getHardwareInputSelectorDetails(hardwareInputSelectorId: number): Observable<HardwareInputSelectorDetails> {
+    return this.http.get<HardwareInputSelectorDetails>(`${this.BASE_URL}/hardware-input-selectors/${hardwareInputSelectorId}`);
   }
 }

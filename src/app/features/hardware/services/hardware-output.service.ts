@@ -4,6 +4,22 @@ import { Observable } from 'rxjs';
 import { HardwareOutputTypeDto } from 'src/app/shared/models/models';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
+interface ApiResponse<T> {
+  data: T;
+  message?: string;
+  success: boolean;
+}
+
+interface HardwareOutputSelectorDetails {
+  id: number;
+  name: string;
+  hardwareOutputTypeId: number;
+  hardwareOutputTypeName: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,28 +50,28 @@ export class HardwareOutputService {
   /**
    * Add a new hardware output type
    */
-  addHardwareOutputType(hardwareOutputType: HardwareOutputTypeDto): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/hardware-output-types`, hardwareOutputType);
+  addHardwareOutputType(hardwareOutputType: HardwareOutputTypeDto): Observable<ApiResponse<HardwareOutputTypeDto>> {
+    return this.http.post<ApiResponse<HardwareOutputTypeDto>>(`${this.BASE_URL}/hardware-output-types`, hardwareOutputType);
   }
 
   /**
    * Update hardware output type
    */
-  updateHardwareOutputType(hardwareOutputType: HardwareOutputTypeDto): Observable<any> {
-    return this.http.patch(`${this.BASE_URL}/hardware-output-types`, hardwareOutputType);
+  updateHardwareOutputType(hardwareOutputType: HardwareOutputTypeDto): Observable<ApiResponse<HardwareOutputTypeDto>> {
+    return this.http.patch<ApiResponse<HardwareOutputTypeDto>>(`${this.BASE_URL}/hardware-output-types`, hardwareOutputType);
   }
 
   /**
    * Delete hardware output type
    */
-  deleteHardwareOutputType(id: number): Observable<any> {
-    return this.http.delete(`${this.BASE_URL}/hardware-output-types/${id}`);
+  deleteHardwareOutputType(id: number): Observable<ApiResponse<unknown>> {
+    return this.http.delete<ApiResponse<unknown>>(`${this.BASE_URL}/hardware-output-types/${id}`);
   }
 
   /**
    * Get hardware output selector details
    */
-  getHardwareOutputSelectorDetails(hardwareOutputSelectorId: number): Observable<any> {
-    return this.http.get(`${this.BASE_URL}/hardware-output-selectors/${hardwareOutputSelectorId}`);
+  getHardwareOutputSelectorDetails(hardwareOutputSelectorId: number): Observable<HardwareOutputSelectorDetails> {
+    return this.http.get<HardwareOutputSelectorDetails>(`${this.BASE_URL}/hardware-output-selectors/${hardwareOutputSelectorId}`);
   }
 }
