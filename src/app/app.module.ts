@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 // Core Services
 import { DataService } from './core/services/data.service';
 import { ConfigurationService } from './core/services/configuration.service';
@@ -36,59 +36,52 @@ import { SharedModule } from './shared/shared.module';
 // Core Components
 import { ExitAppDialogComponent } from './core/components/exit-app-dialog.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ExitAppDialogComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatNativeDateModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
-    // Feature Modules
-    HardwareModule,
-    SimulatorModule,
-    DashboardModule,
-    ConsoleModule,
-    SettingsModule,
-    AircraftModelsModule,
-
-    // Shared Module
-    SharedModule
-  ],
-  providers: [
-    DataService,
-    CoreHelper,
-    ConfigurationService,
-    RealTimeService,
-    LoadingService,
-    PerformanceService,
-    AuthService,
-    ThemeService,
-    FormValidationService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp,
-      deps: [ConfigurationService],
-      multi: true
-    },
-    {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandler
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpRequestInterceptor,
-      multi: true
-    },
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
-  ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ExitAppDialogComponent
+    ],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatNativeDateModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
+        // Feature Modules
+        HardwareModule,
+        SimulatorModule,
+        DashboardModule,
+        ConsoleModule,
+        SettingsModule,
+        AircraftModelsModule,
+        // Shared Module
+        SharedModule], providers: [
+        DataService,
+        CoreHelper,
+        ConfigurationService,
+        RealTimeService,
+        LoadingService,
+        PerformanceService,
+        AuthService,
+        ThemeService,
+        FormValidationService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeApp,
+            deps: [ConfigurationService],
+            multi: true
+        },
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpRequestInterceptor,
+            multi: true
+        },
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}

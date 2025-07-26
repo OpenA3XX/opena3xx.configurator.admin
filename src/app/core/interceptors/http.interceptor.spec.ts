@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HttpRequestInterceptor } from './http.interceptor';
 import { LoadingService } from '../services/loading.service';
 import { ConfigurationService } from '../services/configuration.service';
@@ -16,17 +16,19 @@ describe('HttpRequestInterceptor', () => {
     const configSpy = jasmine.createSpyObj('ConfigurationService', ['isDebugModeEnabled']);
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         {
-          provide: HTTP_INTERCEPTORS,
-          useClass: HttpRequestInterceptor,
-          multi: true
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpRequestInterceptor,
+            multi: true
         },
         { provide: LoadingService, useValue: loadingSpy },
-        { provide: ConfigurationService, useValue: configSpy }
-      ]
-    });
+        { provide: ConfigurationService, useValue: configSpy },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
 
     httpClient = TestBed.inject(HttpClient);
     httpMock = TestBed.inject(HttpTestingController);
