@@ -3,7 +3,8 @@
 @import 'app/shared/styles/component-mixins';
 
 // Include the common styles for Angular Material
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // Define your theme
 
@@ -349,7 +350,8 @@ img {
 
 
 // Apply base theme (typography + density) - only once
-@include mat.core-theme($light-theme);
+@include mat.elevation-classes();
+@include mat.app-background();
 @include mat.all-component-typographies($light-theme);
 @include mat.all-component-densities($light-theme);
 
