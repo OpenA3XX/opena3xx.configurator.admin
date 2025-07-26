@@ -47,7 +47,7 @@ export class SettingsComponent{
   }
 
   // Remove form submission functionality since settings are now readonly
-  onFormSubmit(configuration: FormConfiguration) {
+  onFormSubmit() {
     // Form submission is disabled for readonly settings
     this._snackBar.open("Settings are read-only and cannot be modified", "Ok", {
       duration: 5000

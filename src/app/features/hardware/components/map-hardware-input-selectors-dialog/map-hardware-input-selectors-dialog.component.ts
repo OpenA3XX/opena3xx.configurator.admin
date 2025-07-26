@@ -6,10 +6,6 @@ import * as _ from 'lodash';
 import { DataService } from 'src/app/core/services/data.service';
 import { HardwareInputDto } from 'src/app/shared/models/models';
 
-interface DialogData {
-  data: HardwareInputDto;
-}
-
 interface FormData {
   identifier: number;
   [key: string]: unknown;

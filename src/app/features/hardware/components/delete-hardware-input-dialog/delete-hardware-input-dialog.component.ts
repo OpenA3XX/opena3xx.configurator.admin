@@ -16,7 +16,7 @@ export class DeleteHardwareInputDialogComponent implements OnInit {
   ngOnInit() {
     this.hardwareInputName = this.hardwareInput.name;
   }
-  onInputChange(target) {
-    target.value === this.hardwareInputName ? (this.disabled = false) : (this.disabled = true);
+  onInputChange(target: HTMLInputElement) {
+    this.disabled = target.value !== this.hardwareInputName;
   }
 }
