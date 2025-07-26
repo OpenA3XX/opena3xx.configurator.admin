@@ -28,7 +28,7 @@ import { ConsoleComponent } from './features/console/components/console/console.
 import { ManageSimulatorEventsComponent } from './features/simulator/components/manage-simulator-events/manage-simulator-events.component';
 
 // Notifications Components
-import { NotificationCenterComponent } from './features/notifications/components/notification-center/notification-center.component';
+// import { NotificationCenterComponent } from './features/notifications/components/notification-center/notification-center.component';
 
 // Aircraft Models Components
 import { ManageAircraftModelsComponent } from './features/aircraft-models/components/manage-aircraft-models/manage-aircraft-models.component';

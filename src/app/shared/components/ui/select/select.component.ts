@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
 @Component({
@@ -7,18 +7,18 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
     styleUrls: ['./select.component.scss'],
     standalone: false
 })
-export class SelectComponent {
+export class SelectComponent implements OnInit, OnChanges {
   @Output() selectChange: EventEmitter<{value: string}> = new EventEmitter<{value: string}>();
 
   @Input() field!: FieldConfig;
 
   @Input() group!: FormGroup;
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Component initialized
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     // Field configuration changed
   }
 
