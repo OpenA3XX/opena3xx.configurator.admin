@@ -8,6 +8,32 @@ import {
 } from 'src/app/shared/models/models';
 import { ConfigurationService } from 'src/app/core/services/configuration.service';
 
+interface ApiResponse<T> {
+  data: T;
+  message?: string;
+  success: boolean;
+}
+
+interface HardwareBoardDetails {
+  id: number;
+  name: string;
+  hardwareBusExtendersCount: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface MappingResponse {
+  success: boolean;
+  message: string;
+}
+
+interface AssociationResponse {
+  hardwareBoardId: number;
+  hardwareBoardName: string;
+  associationType: 'input' | 'output';
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,15 +57,15 @@ export class HardwareBoardService {
   /**
    * Add a new hardware board
    */
-  addHardwareBoard(hardwareBoard: HardwareBoardDto): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/hardware-boards`, hardwareBoard);
+  addHardwareBoard(hardwareBoard: HardwareBoardDto): Observable<ApiResponse<HardwareBoardDto>> {
+    return this.http.post<ApiResponse<HardwareBoardDto>>(`${this.BASE_URL}/hardware-boards`, hardwareBoard);
   }
 
   /**
    * Get hardware board details by ID
    */
-  getHardwareBoardDetails(id: number): Observable<any> {
-    return this.http.get(`${this.BASE_URL}/hardware-boards/${id}`);
+  getHardwareBoardDetails(id: number): Observable<HardwareBoardDetails> {
+    return this.http.get<HardwareBoardDetails>(`${this.BASE_URL}/hardware-boards/${id}`);
   }
 
   /**
@@ -47,8 +73,8 @@ export class HardwareBoardService {
    */
   mapExtenderBitToHardwareInputSelector(
     mapping: MapExtenderBitToHardwareInputSelectorDto
-  ): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/hardware-board/map-input-selector`, mapping);
+  ): Observable<MappingResponse> {
+    return this.http.post<MappingResponse>(`${this.BASE_URL}/hardware-board/map-input-selector`, mapping);
   }
 
   /**
@@ -56,8 +82,8 @@ export class HardwareBoardService {
    */
   mapExtenderBitToHardwareOutputSelector(
     mapping: MapExtenderBitToHardwareOutputSelectorDto
-  ): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/hardware-board/map-output-selector`, mapping);
+  ): Observable<MappingResponse> {
+    return this.http.post<MappingResponse>(`${this.BASE_URL}/hardware-board/map-output-selector`, mapping);
   }
 
   /**
@@ -65,8 +91,8 @@ export class HardwareBoardService {
    */
   getHardwareBoardAssociationForHardwareInputSelector(
     hardwareInputSelectorId: number
-  ): Observable<any> {
-    return this.http.get(`${this.BASE_URL}/hardware-board/input-selector/${hardwareInputSelectorId}`);
+  ): Observable<AssociationResponse> {
+    return this.http.get<AssociationResponse>(`${this.BASE_URL}/hardware-board/input-selector/${hardwareInputSelectorId}`);
   }
 
   /**
@@ -74,7 +100,7 @@ export class HardwareBoardService {
    */
   getHardwareBoardAssociationForHardwareOutputSelector(
     hardwareOutputSelectorId: number
-  ): Observable<any> {
-    return this.http.get(`${this.BASE_URL}/hardware-board/output-selector/${hardwareOutputSelectorId}`);
+  ): Observable<AssociationResponse> {
+    return this.http.get<AssociationResponse>(`${this.BASE_URL}/hardware-board/output-selector/${hardwareOutputSelectorId}`);
   }
 }
