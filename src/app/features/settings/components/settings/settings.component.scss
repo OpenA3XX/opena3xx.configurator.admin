@@ -4,14 +4,63 @@ mat-toolbar {
   width: 100% !important;
 }
 
-.container {
+// Settings header styling
+.settings-header {
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  border-radius: 12px;
+  padding: 32px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  transition: all 0.3s ease;
+
+  .header-content {
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+
+      mat-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.2;
+      }
+    }
+
+    .header-subtitle {
+      p {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin: 0;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+// Dark theme adjustments for header
+:host.dark-theme .settings-header {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+// Settings content styling - using more generous padding
+.settings-content {
   width: 100% !important;
   max-width: none !important;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md, 16px);
   margin: 0;
-  padding: var(--spacing-lg, 20px);
+  // padding: var(--spacing-xl, 32px);
   box-sizing: border-box !important;
 
   .mat-mdc-form-field {
@@ -41,6 +90,57 @@ mat-toolbar {
   }
 }
 
+// Responsive Design for header
+@media (max-width: 768px) {
+  .settings-header {
+    padding: 24px;
+    margin-bottom: 24px;
+
+    .header-content {
+      .header-title {
+        h1 {
+          font-size: 2rem;
+        }
+      }
+
+      .header-subtitle {
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .settings-content {
+    padding: var(--spacing-lg, 24px);
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-header {
+    padding: 20px;
+    margin-bottom: 20px;
+
+    .header-content {
+      .header-title {
+        h1 {
+          font-size: 1.75rem;
+        }
+
+        mat-icon {
+          font-size: 28px;
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+  }
+
+  .settings-content {
+    padding: var(--spacing-md, 16px);
+  }
+}
+
 button {
   margin-top: var(--spacing-xl, 40px);
   align-self: flex-end;
@@ -51,7 +151,7 @@ button {
 ::ng-deep opena3xx-settings {
   width: 100% !important;
 
-  .container, .mat-mdc-form-field, form, .form-group, .field-wrapper {
+  .settings-content, .mat-mdc-form-field, form, .form-group, .field-wrapper {
     width: 100% !important;
     max-width: none !important;
     display: block !important;

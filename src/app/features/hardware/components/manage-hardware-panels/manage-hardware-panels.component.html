@@ -1,13 +1,24 @@
-<div class="hardware-panels-container">
-  <mat-toolbar>
-    <mat-icon>dashboard</mat-icon>
-    <span>Hardware Panels</span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary" (click)="addHardwarePanel()">
-      <mat-icon>add</mat-icon>
-      Add Hardware Panel
-    </button>
-  </mat-toolbar>
+<!-- Hardware Panels Content Wrapper -->
+<div class="hardware-panels-content">
+
+  <div class="hardware-panels-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon>dashboard</mat-icon>
+        <h1>Hardware Panels</h1>
+      </div>
+      <div class="header-subtitle">
+        <p>Manage hardware panel configurations and assignments</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="addHardwarePanel()" class="action-button">
+        <mat-icon>add</mat-icon>
+        Add Hardware Panel
+      </button>
+    </div>
+  </div>
 
   <mat-card>
     <mat-card-content>
@@ -91,4 +102,5 @@
       </div>
     </mat-card-content>
   </mat-card>
+
 </div>

@@ -111,4 +111,11 @@ export class ThemeService {
   setThemeColor(property: string, value: string): void {
     document.documentElement.style.setProperty(`--${property}`, value);
   }
+
+  /**
+   * Get the appropriate logo path based on current theme
+   */
+  getLogoPath(): string {
+    return this.isDarkMode() ? 'assets/logo-dark-theme.png' : 'assets/logo.png';
+  }
 }

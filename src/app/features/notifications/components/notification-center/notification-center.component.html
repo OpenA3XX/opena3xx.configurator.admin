@@ -1,28 +1,40 @@
-<mat-toolbar>
-  <span>Notification Center</span>
-</mat-toolbar>
+<!-- Notification Centre Content Wrapper -->
+<div class="notification-content">
 
-<mat-toolbar>
+  <!-- Notification Centre Header -->
+  <div class="notification-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon>notifications</mat-icon>
+        <h1>Notification Centre</h1>
+      </div>
+      <div class="header-subtitle">
+        <p>Manage system notifications and alerts</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
       <button
-    mat-flat-button
-    color="primary"
-    (click)="markAllAsRead()"
-    [disabled]="unreadCount === 0">
-    <mat-icon>done_all</mat-icon>
-    Mark All Read
-  </button>
-
-  <span style="margin-left: 16px;"></span>
+        mat-raised-button
+        color="primary"
+        (click)="markAllAsRead()"
+        [disabled]="unreadCount === 0"
+        class="action-button">
+        <mat-icon>done_all</mat-icon>
+        Mark All Read
+      </button>
 
       <button
-    mat-flat-button
-    color="warn"
-    (click)="clearAllNotifications()"
-    [disabled]="totalNotifications === 0">
-    <mat-icon>clear_all</mat-icon>
-    Clear All
-  </button>
-</mat-toolbar>
+        mat-raised-button
+        color="warn"
+        (click)="clearAllNotifications()"
+        [disabled]="totalNotifications === 0"
+        class="action-button">
+        <mat-icon>clear_all</mat-icon>
+        Clear All
+      </button>
+    </div>
+  </div>
 
   <!-- Filters Section -->
   <app-notification-filters
@@ -30,7 +42,7 @@
     (filtersCleared)="clearFilters()">
   </app-notification-filters>
 
-    <!-- Search Bar -->
+  <!-- Search Bar -->
   <div class="filter-form">
     <mat-form-field>
       <mat-label>Filter</mat-label>
@@ -163,3 +175,5 @@
     </table>
 
   <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+
+</div>

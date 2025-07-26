@@ -1,21 +1,55 @@
-# 🌙 Image Dark Mode Enhancement System
+# Image Dark Mode Support
 
-## Overview
-The OpenA3XX Configurator includes comprehensive CSS filters and effects to enhance image contrast and visibility in dark mode, ensuring logos and images remain clearly visible against dark backgrounds.
+The OpenA3XX Flight Deck includes comprehensive support for dark mode images and logos, ensuring optimal visibility and contrast in both light and dark themes.
 
 ## Features
 
-### 🎨 CSS Filter Effects
-- **Brightness Enhancement** - Increases image brightness by 20-60%
-- **Contrast Boost** - Improves contrast by 10-40%
-- **Saturation Adjustment** - Enhances color saturation by 10-30%
-- **Glow Effects** - Adds white drop-shadow glow for better visibility
-- **Background Overlays** - Subtle radial gradients for additional contrast
+### 🎨 Logo Management
+- **Separate Logo Files** - Uses different logo files for light and dark themes
+- **Automatic Switching** - Logo automatically changes based on current theme
+- **No CSS Filters** - Clean, optimized logos without filter manipulations
+- **Theme Responsive** - Seamless transitions between themes
 
 ### 🎯 Smart Detection
 - **Automatic Enhancement** - Images with "logo" in alt text get automatic enhancement
 - **Class-based Control** - Utility classes for precise control
 - **Theme Responsive** - Effects only apply in dark mode
+
+## Logo Implementation
+
+### File Structure
+```
+assets/
+├── logo.png              # Light theme logo
+└── logo-dark-theme.png   # Dark theme logo
+```
+
+### Usage in Components
+```html
+<img 
+  class="opena3xx-logo"
+  [src]="getLogoPath()"
+  alt="OpenA3XX Flight Deck Logo"
+  width="100px">
+```
+
+### Theme Service Integration
+```typescript
+// In your component
+constructor(private themeService: ThemeService) {}
+
+getLogoPath(): string {
+  return this.themeService.getLogoPath();
+}
+```
+
+### Theme Service Method
+```typescript
+// In ThemeService
+getLogoPath(): string {
+  return this.isDarkMode() ? 'assets/logo-dark-theme.png' : 'assets/logo.png';
+}
+```
 
 ## CSS Utility Classes
 
@@ -58,9 +92,9 @@ The OpenA3XX Configurator includes comprehensive CSS filters and effects to enha
 <img src="brand.png" alt="Brand Logo" class="image-dark-enhance-strong">
 ```
 
-### Full Glow Effect (Used for OpenA3XX Logo)
+### Full Glow Effect
 ```html
-<img src="logo.png" alt="OpenA3XX Logo" class="image-dark-glow">
+<img src="logo.png" alt="Brand Logo" class="image-dark-glow">
 ```
 
 ## Automatic Enhancement
@@ -75,42 +109,45 @@ Images are automatically enhanced in dark mode if they have:
 <img src="brand.png" class="logo">
 ```
 
-## OpenA3XX Logo Specific Enhancements
+## OpenA3XX Logo Implementation
 
-The main navigation logo includes:
-- **40% brightness increase**
-- **25% contrast boost**
-- **15% saturation enhancement**
-- **Dual white glow effects**
-- **Subtle background gradient**
-- **Enhanced hover animations**
+The main navigation logo now uses:
+- **Separate logo files** for light and dark themes
+- **Automatic theme switching** via ThemeService
+- **Clean styling** without CSS filter manipulations
+- **Smooth transitions** between themes
 - **Accessibility focus states**
 
-### Dark Mode Effects
+### Logo Styling
 ```scss
-.dark-theme .opena3xx-logo {
-  filter: 
-    brightness(1.4)
-    contrast(1.25)
-    saturate(1.15)
-    drop-shadow(0 0 10px rgba(255, 255, 255, 0.4))
-    drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
-    
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.06) 40%,
-    rgba(255, 255, 255, 0.02) 70%,
-    transparent 100%
-  );
+.opena3xx-logo {
+  transition: all var(--transition-normal) ease;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus {
+    outline: 2px solid var(--mat-sys-primary, #1976d2);
+    outline-offset: 2px;
+  }
 }
 ```
 
-### Hover Effects
-- **Stronger brightness** (+50%)
-- **Enhanced glow** (larger radius)
-- **Scale animation** (1.08x)
-- **Box shadow** for depth
+### Benefits of Separate Logo Files
+- **Better Quality** - No filter artifacts or quality loss
+- **Performance** - No CSS filter processing overhead
+- **Flexibility** - Can optimize each logo for its specific theme
+- **Maintainability** - Easier to update and manage
+- **Accessibility** - Better contrast and visibility
 
 ## Customization
 
@@ -144,4 +181,4 @@ The main navigation logo includes:
 
 ---
 
-**All images automatically benefit from dark mode enhancements with no additional configuration required!** 🌙✨ 
+**The OpenA3XX logo now uses separate files for optimal dark mode support!** 🌙✨ 

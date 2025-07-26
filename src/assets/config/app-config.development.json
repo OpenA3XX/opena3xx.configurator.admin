@@ -3,11 +3,11 @@
     "baseUrl": "http://localhost:5000"
   },
   "app": {
-    "name": "OpenA3XX Configurator Admin (Development)",
-    "version": "1.0.0-dev"
+    "name": "OpenA3XX Flight Deck (Development)",
+    "version": "1.0.0"
   },
   "features": {
-    "enableDebugMode": true,
+    "enableDebugMode": false,
     "enableConsoleLogging": true
   }
 }

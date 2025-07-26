@@ -1,13 +1,24 @@
-<div class="simulator-events-container">
-  <mat-toolbar>
-    <mat-icon>laptop</mat-icon>
-    <span>Simulator Events</span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary">
-      <mat-icon>add</mat-icon>
-      Add Simulator Event
-    </button>
-  </mat-toolbar>
+<!-- Simulator Events Content Wrapper -->
+<div class="simulator-events-content">
+
+  <div class="simulator-events-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon>laptop</mat-icon>
+        <h1>Simulator Events</h1>
+      </div>
+      <div class="header-subtitle">
+        <p>Manage simulator event configurations and integrations</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button mat-raised-button color="primary" class="action-button">
+        <mat-icon>add</mat-icon>
+        Add Simulator Event
+      </button>
+    </div>
+  </div>
 
   <mat-card>
     <mat-card-content>
@@ -105,7 +116,7 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of simulator events"></mat-paginator>
 
         <!-- Loading indicator -->
-        <div *ngIf="data_loaded === false" class="loading-container">
+        <div *ngIf="!data_loaded" class="loading-container">
           <mat-spinner diameter="50"></mat-spinner>
           <p>Loading simulator events...</p>
         </div>
@@ -121,4 +132,5 @@
       </div>
     </mat-card-content>
   </mat-card>
+
 </div>

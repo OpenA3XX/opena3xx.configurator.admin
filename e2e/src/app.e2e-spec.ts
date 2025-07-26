@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('opena3xx-configurator-webapp app is running!');
+    expect(await page.getTitleText()).toEqual('opena3xx-flight-deck-webapp app is running!');
   });
 
   afterEach(async () => {

@@ -1,13 +1,24 @@
-<div class="aircraft-models-container">
-  <mat-toolbar>
-    <mat-icon>flight</mat-icon>
-    <span>Aircraft Models</span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary" (click)="onAddAircraftModel()">
-      <mat-icon>add</mat-icon>
-      Add Aircraft Model
-    </button>
-  </mat-toolbar>
+<!-- Aircraft Models Content Wrapper -->
+<div class="aircraft-models-content">
+
+  <div class="aircraft-models-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon>flight</mat-icon>
+        <h1>Aircraft Models</h1>
+      </div>
+      <div class="header-subtitle">
+        <p>Manage aircraft models and configurations</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="onAddAircraftModel()" class="action-button">
+        <mat-icon>add</mat-icon>
+        Add Aircraft Model
+      </button>
+    </div>
+  </div>
 
   <mat-card>
     <mat-card-content>
@@ -95,4 +106,5 @@
       </div>
     </mat-card-content>
   </mat-card>
+
 </div>

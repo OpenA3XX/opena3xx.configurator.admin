@@ -1,13 +1,24 @@
-<div class="hardware-output-types-container">
-  <mat-toolbar>
-    <mat-icon>logout</mat-icon>
-    <span>Hardware Output Types</span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary" (click)="addHardwareOutputType()">
-      <mat-icon>add</mat-icon>
-      Add Hardware Output Type
-    </button>
-  </mat-toolbar>
+<!-- Hardware Output Types Content Wrapper -->
+<div class="hardware-output-types-content">
+
+  <div class="hardware-output-types-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon>logout</mat-icon>
+        <h1>Hardware Output Types</h1>
+      </div>
+      <div class="header-subtitle">
+        <p>Manage hardware output type configurations</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="addHardwareOutputType()" class="action-button">
+        <mat-icon>add</mat-icon>
+        Add Hardware Output Type
+      </button>
+    </div>
+  </div>
 
   <mat-card>
     <mat-card-content>
@@ -51,14 +62,14 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of hardware output types"></mat-paginator>
 
         <!-- Loading indicator -->
-        <div *ngIf="dataLoaded === false" class="loading-container">
+        <div *ngIf="!dataLoaded" class="loading-container">
           <mat-spinner diameter="50"></mat-spinner>
           <p>Loading hardware output types...</p>
         </div>
 
         <!-- No data message -->
         <div *ngIf="dataLoaded && dataSource.data.length === 0" class="no-data-container">
-          <mat-icon>output_off</mat-icon>
+          <mat-icon>logout_off</mat-icon>
           <p>No hardware output types found</p>
           <button mat-raised-button color="primary" (click)="addHardwareOutputType()">
             Add First Hardware Output Type
@@ -67,4 +78,5 @@
       </div>
     </mat-card-content>
   </mat-card>
+
 </div>

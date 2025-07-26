@@ -1,25 +1,79 @@
-.hardware-input-types-container {
-  padding: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
+.hardware-input-types-content {
+  width: 100% !important;
+  max-width: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md, 16px);
+  margin: 0;
+  // padding: var(--spacing-xl, 32px);
+  box-sizing: border-box !important;
 }
 
-mat-toolbar {
-  margin-bottom: 24px;
-  border-radius: 8px;
+.hardware-input-types-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-lg, 24px);
+  padding: var(--spacing-lg, 24px);
   background: linear-gradient(135deg, #1976d2, #42a5f5);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(25, 118, 210, 0.15);
   color: white;
 
-  mat-icon {
-    margin-right: 12px;
+  .header-content {
+    flex: 1;
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--spacing-sm, 8px);
+
+      mat-icon {
+        margin-right: var(--spacing-sm, 8px);
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+      }
+    }
+
+    .header-subtitle {
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.9);
+        opacity: 0.9;
+      }
+    }
   }
 
-  .spacer {
-    flex: 1 1 auto;
-  }
+  .header-actions {
+    display: flex;
+    gap: var(--spacing-sm, 8px);
 
-  button {
-    margin-left: 12px;
+    .action-button {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      mat-icon {
+        margin-right: var(--spacing-xs, 4px);
+      }
+    }
   }
 }
 
@@ -108,8 +162,18 @@ mat-toolbar {
 
 // Responsive design
 @media (max-width: 768px) {
-  .hardware-input-types-container {
-    padding: 16px;
+  .hardware-input-types-content {
+    padding: var(--spacing-lg, 24px);
+  }
+
+  .hardware-input-types-header {
+    flex-direction: column;
+    gap: var(--spacing-md, 16px);
+
+    .header-actions {
+      width: 100%;
+      justify-content: flex-start;
+    }
   }
 
   .search-field {
@@ -124,18 +188,7 @@ mat-toolbar {
 }
 
 @media (max-width: 480px) {
-  .hardware-input-types-container {
-    padding: 12px;
-  }
-
-  mat-toolbar {
-    flex-direction: column;
-    height: auto;
-    padding: 16px;
-
-    button {
-      margin: 8px 0 0 0;
-      width: 100%;
-    }
+  .hardware-input-types-content {
+    padding: var(--spacing-md, 16px);
   }
 }

@@ -1,8 +1,19 @@
 // Main console container
 :host {
   display: block;
-  padding: 24px;
   min-height: 100vh;
+}
+
+// Console content wrapper - matches Settings view padding
+.console-content {
+  width: 100% !important;
+  max-width: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  // padding: var(--spacing-xl, 32px);
+  box-sizing: border-box !important;
 }
 
 // Consistent spacing between all console components
@@ -23,8 +34,8 @@ opena3xx-keep-alive-events-terminal {
 
 // Responsive design
 @media (max-width: 768px) {
-  :host {
-    padding: 16px;
+  .console-content {
+    padding: var(--spacing-lg, 24px);
   }
 
   opena3xx-console-header,
@@ -39,8 +50,8 @@ opena3xx-keep-alive-events-terminal {
 }
 
 @media (max-width: 480px) {
-  :host {
-    padding: 12px;
+  .console-content {
+    padding: var(--spacing-md, 16px);
   }
 
   opena3xx-console-header,

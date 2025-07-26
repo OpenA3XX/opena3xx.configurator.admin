@@ -1,13 +1,24 @@
-<div class="hardware-boards-container">
-  <mat-toolbar>
-    <mat-icon>developer_board</mat-icon>
-    <span>Hardware Boards</span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary" (click)="registerHardwareBoard()">
-      <mat-icon>add</mat-icon>
-      Register Hardware Board
-    </button>
-  </mat-toolbar>
+<!-- Hardware Boards Content Wrapper -->
+<div class="hardware-boards-content">
+
+  <div class="hardware-boards-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon>developer_board</mat-icon>
+        <h1>Hardware Boards</h1>
+      </div>
+      <div class="header-subtitle">
+        <p>Manage hardware board configurations and registrations</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="registerHardwareBoard()" class="action-button">
+        <mat-icon>add</mat-icon>
+        Register Hardware Board
+      </button>
+    </div>
+  </div>
 
   <mat-card>
     <mat-card-content>
@@ -49,9 +60,9 @@
           <ng-container matColumnDef="details">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-raised-button color="accent" (click)="onEditClick(element.id)" matTooltip="Edit">
-                <mat-icon>edit</mat-icon>
-                Edit
+              <button mat-raised-button color="primary" (click)="onViewDetailsClick(element.id)" matTooltip="View Details">
+                <mat-icon>visibility</mat-icon>
+                View Details
               </button>
             </td>
           </ng-container>
@@ -63,7 +74,7 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of hardware boards"></mat-paginator>
 
         <!-- Loading indicator -->
-        <div *ngIf="data_loaded === false" class="loading-container">
+        <div *ngIf="!data_loaded" class="loading-container">
           <mat-spinner diameter="50"></mat-spinner>
           <p>Loading hardware boards...</p>
         </div>
@@ -79,4 +90,5 @@
       </div>
     </mat-card-content>
   </mat-card>
+
 </div>

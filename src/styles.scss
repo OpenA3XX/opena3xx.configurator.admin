@@ -302,30 +302,6 @@ img {
   }
 }
 
-// Specific OpenA3XX Logo Dark Mode Enhancement
-.dark-theme {
-  .opena3xx-logo {
-    // Apply multiple filters for better contrast in dark mode
-    filter: brightness(41.1) contrast(13.9) saturate(1.01) drop-shadow(0 0 10px rgba(255,255,255,.4)) !important;
-    border-radius: 8px !important;
-
-    &:hover {
-      // filter: brightness(41.1) contrast(13.9) saturate(1.01) drop-shadow(0 0 10px rgba(255,255,255,.4)) !important;
-      transform: scale(1.08) !important;
-    }
-
-    &:active {
-      transform: scale(1.02) !important;
-      // filter: brightness(1.6) contrast(1.4) saturate(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important;
-    }
-
-    &:focus {
-      outline: 2px solid rgba(255, 255, 255, 0.6) !important;
-      outline-offset: 3px !important;
-    }
-  }
-}
-
 // Table Utility Classes
 .table-hover-enabled {
   .mat-mdc-row, .mat-row {

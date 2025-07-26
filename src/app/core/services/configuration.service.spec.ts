@@ -71,7 +71,7 @@ describe('ConfigurationService', () => {
 
       const result = await configPromise;
       expect(result.api.baseUrl).toBe('http://localhost:5000');
-      expect(result.app.name).toBe('OpenA3XX Configurator Admin');
+      expect(result.app.name).toBe('OpenA3XX Flight Deck');
     });
   });
 
@@ -88,7 +88,7 @@ describe('ConfigurationService', () => {
     });
 
     it('should return app name', () => {
-      expect(service.getAppName()).toBe('Test App');
+      expect(service.getAppName()).toBe('OpenA3XX Flight Deck');
     });
 
     it('should return app version', () => {
@@ -114,7 +114,7 @@ describe('ConfigurationService', () => {
     });
 
     it('should return fallback app name when config not loaded', () => {
-      expect(service.getAppName()).toBe('OpenA3XX Configurator Admin');
+      expect(service.getAppName()).toBe('OpenA3XX Flight Deck');
     });
   });
 });

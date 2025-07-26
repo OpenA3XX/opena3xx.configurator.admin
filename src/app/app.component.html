@@ -18,7 +18,7 @@
       style="position: absolute; left: 50px; width: 80%; height: 50px"
     ></div>
 
-    <h1 class="opena3xx-app-name">OpenA3XX Configurator</h1>
+    <h1 class="opena3xx-app-name">OpenA3XX Flight Deck</h1>
     <span class="spacer"></span>
     <button
       (click)="clickNotifications()"
@@ -60,14 +60,14 @@
     <!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
     <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
       <img
-        class="opena3xx-logo image-dark-glow"
+        class="opena3xx-logo"
         (click)="clickDashboard()"
         (keydown.enter)="clickDashboard()"
         (keydown.space)="clickDashboard()"
         tabindex="0"
         *ngIf="isExpanded || isShowing"
-        alt="OpenA3XX Configurator - Go to Dashboard"
-        src="assets/logo.png"
+        alt="OpenA3XX Flight Deck - Go to Dashboard"
+        [src]="getLogoPath()"
         style="margin: 18px 10px 10px 63px"
         width="100px"
         role="button"
@@ -167,10 +167,10 @@
           [matTooltipDisabled]="isExpanded"
           class="parent"
           [class.disabled]="!apiAvailabilityStatus"
-          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Console'"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Observability Console'"
           matTooltipPosition="right"
         >
-          <mat-icon matListItemIcon>web_asset</mat-icon>
+          <mat-icon matListItemIcon>monitoring</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Observability Console</span>
         </mat-list-item>
 
@@ -189,7 +189,7 @@
             matBadgeSize="small"
           >notification_important</mat-icon
           >
-          <span *ngIf="isExpanded || isShowing" class="full-width">Notifications Centre</span>
+          <span *ngIf="isExpanded || isShowing" class="full-width">Notification Centre</span>
 
         </mat-list-item>
         <mat-list-item
@@ -197,11 +197,11 @@
           [matTooltipDisabled]="isExpanded"
           class="parent"
           [class.disabled]="!apiAvailabilityStatus"
-          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Settings'"
+          [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'System Settings'"
           matTooltipPosition="right"
         >
           <mat-icon matListItemIcon>settings</mat-icon>
-          <span *ngIf="isExpanded || isShowing" class="full-width">Settings</span>
+          <span *ngIf="isExpanded || isShowing" class="full-width">System Settings</span>
         </mat-list-item>
         <mat-list-item
           (click)="exit()"

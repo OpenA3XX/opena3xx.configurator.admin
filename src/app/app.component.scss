@@ -126,15 +126,12 @@
   box-shadow: var(--shadow-sm);
   background: var(--mat-sys-surface-container, #f5f5f5);
 
-      // Logo styling with dark mode enhancements
+      // Logo styling - simplified without dark mode filters
   .opena3xx-logo {
     transition: all var(--transition-normal) ease;
     border-radius: var(--border-radius-md);
     cursor: pointer;
     position: relative;
-
-    // Light theme - default appearance
-    filter: none;
 
     &:hover {
       transform: scale(1.05);

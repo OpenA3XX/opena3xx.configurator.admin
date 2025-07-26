@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/OpenA3XX-darwin-arm64/*
 # Only exists if Bazel was run
 /bazel-out
 
@@ -49,3 +50,6 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+
+

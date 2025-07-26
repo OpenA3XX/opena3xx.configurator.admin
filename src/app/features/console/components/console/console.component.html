@@ -1,65 +1,70 @@
-<!-- Console Header -->
-<opena3xx-console-header
-  [isConnected]="realtimeService.isConnected"
-  [isDarkMode]="isDarkMode"
-  (connect)="onConnect()"
-  (disconnect)="onDisconnect()">
-</opena3xx-console-header>
+<!-- Console Content Wrapper -->
+<div class="console-content">
 
-<!-- Console Statistics -->
-<opena3xx-console-statistics
-  [totalEvents]="getTotalEvents()"
-  [eventsPerMinute]="getEventsPerMinute()"
-  [connectedBoards]="getConnectedBoards()"
-  [activeSelectors]="getActiveSelectors()"
-  [showCharts]="showCharts"
-  [isDarkMode]="isDarkMode"
-  (toggleCharts)="onToggleCharts()"
-  (openSettings)="onOpenSettingsDialog()"
-  (openEventHistory)="onOpenEventHistoryDialog()"
-  (openPerformance)="onOpenPerformanceDialog()">
-</opena3xx-console-statistics>
+  <!-- Console Header -->
+  <opena3xx-console-header
+    [isConnected]="realtimeService.isConnected"
+    [isDarkMode]="isDarkMode"
+    (connect)="onConnect()"
+    (disconnect)="onDisconnect()">
+  </opena3xx-console-header>
 
-<!-- Console Filters -->
-<opena3xx-console-filters
-  [isDarkMode]="isDarkMode"
-  (filterChange)="onFilterChange($event)"
-  (searchChange)="onSearchChange($event)"
-  (clearFilters)="onClearFilters()">
-</opena3xx-console-filters>
+  <!-- Console Statistics -->
+  <opena3xx-console-statistics
+    [totalEvents]="getTotalEvents()"
+    [eventsPerMinute]="getEventsPerMinute()"
+    [connectedBoards]="getConnectedBoards()"
+    [activeSelectors]="getActiveSelectors()"
+    [showCharts]="showCharts"
+    [isDarkMode]="isDarkMode"
+    (toggleCharts)="onToggleCharts()"
+    (openSettings)="onOpenSettingsDialog()"
+    (openEventHistory)="onOpenEventHistoryDialog()"
+    (openPerformance)="onOpenPerformanceDialog()">
+  </opena3xx-console-statistics>
 
-<!-- Console Actions -->
-<opena3xx-console-actions
-  [isDarkMode]="isDarkMode"
-  (clearEvents)="onClearEvents()"
-  (exportEvents)="onExportEvents()"
-  (openSettings)="onOpenSettingsDialog()"
-  (openEventHistory)="onOpenEventHistoryDialog()"
-  (openPerformance)="onOpenPerformanceDialog()">
-</opena3xx-console-actions>
+  <!-- Console Filters -->
+  <opena3xx-console-filters
+    [isDarkMode]="isDarkMode"
+    (filterChange)="onFilterChange($event)"
+    (searchChange)="onSearchChange($event)"
+    (clearFilters)="onClearFilters()">
+  </opena3xx-console-filters>
 
-<!-- Console Charts -->
-<opena3xx-console-charts
-  [chartData]="getChartData()"
-  [boardActivity]="getBoardActivity()"
-  [showCharts]="showCharts"
-  [isDarkMode]="isDarkMode">
-</opena3xx-console-charts>
+  <!-- Console Actions -->
+  <opena3xx-console-actions
+    [isDarkMode]="isDarkMode"
+    (clearEvents)="onClearEvents()"
+    (exportEvents)="onExportEvents()"
+    (openSettings)="onOpenSettingsDialog()"
+    (openEventHistory)="onOpenEventHistoryDialog()"
+    (openPerformance)="onOpenPerformanceDialog()">
+  </opena3xx-console-actions>
 
-<!-- Flight Events Terminal -->
-<opena3xx-flight-events-terminal
-  [events]="getFilteredFlightEvents()"
-  [isConnected]="realtimeService.isConnected"
-  [isDarkMode]="isDarkMode"
-  (copyEvent)="onCopyEvent($event)"
-  (exportEvent)="onExportSingleEvent($event)">
-</opena3xx-flight-events-terminal>
+  <!-- Console Charts -->
+  <opena3xx-console-charts
+    [chartData]="getChartData()"
+    [boardActivity]="getBoardActivity()"
+    [showCharts]="showCharts"
+    [isDarkMode]="isDarkMode">
+  </opena3xx-console-charts>
 
-<!-- Keep Alive Events Terminal -->
-<opena3xx-keep-alive-events-terminal
-  [events]="getFilteredKeepAliveEvents()"
-  [isConnected]="realtimeService.isConnected"
-  [isDarkMode]="isDarkMode"
-  (copyEvent)="onCopyEvent($event)"
-  (exportEvent)="onExportSingleEvent($event)">
-</opena3xx-keep-alive-events-terminal>
+  <!-- Flight Events Terminal -->
+  <opena3xx-flight-events-terminal
+    [events]="getFilteredFlightEvents()"
+    [isConnected]="realtimeService.isConnected"
+    [isDarkMode]="isDarkMode"
+    (copyEvent)="onCopyEvent($event)"
+    (exportEvent)="onExportSingleEvent($event)">
+  </opena3xx-flight-events-terminal>
+
+  <!-- Keep Alive Events Terminal -->
+  <opena3xx-keep-alive-events-terminal
+    [events]="getFilteredKeepAliveEvents()"
+    [isConnected]="realtimeService.isConnected"
+    [isDarkMode]="isDarkMode"
+    (copyEvent)="onCopyEvent($event)"
+    (exportEvent)="onExportSingleEvent($event)">
+  </opena3xx-keep-alive-events-terminal>
+
+</div>

@@ -1,7 +1,6 @@
 // Main dashboard container
 :host {
   display: block;
-  padding: 24px;
   background-color: #fafafa;
   min-height: 100vh;
   transition: background-color 0.3s ease;
@@ -11,22 +10,27 @@
   }
 }
 
-// Main Content Section
+// Dashboard content wrapper - matches Settings view padding
 .dashboard-content {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0;
+  padding: var(--spacing-xl, 32px);
+  box-sizing: border-box !important;
 }
 
 // Responsive Design
 @media (max-width: 768px) {
-  :host {
-    padding: 16px;
+  .dashboard-content {
+    padding: var(--spacing-lg, 24px);
   }
 }
 
 @media (max-width: 480px) {
-  :host {
-    padding: 12px;
+  .dashboard-content {
+    padding: var(--spacing-md, 16px);
   }
 }

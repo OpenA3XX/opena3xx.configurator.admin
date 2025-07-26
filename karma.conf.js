@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/opena3xx-configurator-webapp'),
+      dir: require('path').join(__dirname, './coverage/opena3xx-flight-deck-webapp'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -1,18 +1,27 @@
-<mat-toolbar>
-  <mat-icon>web_asset</mat-icon>&nbsp;
-  <span>Real Time Console</span>
-</mat-toolbar>
-<mat-toolbar>
-  <button mat-flat-button color="primary" (click)="goBack()">Back</button>
-  <span class="spacer"></span>
-  <button
-    mat-flat-button
-    [color]="isConnected ? 'warn' : 'primary'"
-    (click)="isConnected ? onDisconnect() : onConnect()">
-    {{ isConnected ? 'Disconnect' : 'Connect' }}
-  </button>
-  <span class="connection-status" [class.connected]="isConnected">
-    <mat-icon>{{ isConnected ? 'wifi' : 'wifi_off' }}</mat-icon>
-    {{ isConnected ? 'Connected' : 'Disconnected' }}
-  </span>
-</mat-toolbar>
+<div class="console-header">
+  <div class="header-content">
+    <div class="header-title">
+      <mat-icon>monitoring</mat-icon>
+      <h1>Observability Console</h1>
+    </div>
+    <div class="header-subtitle">
+      <p>Monitor real-time system events and performance metrics</p>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <button
+      mat-raised-button
+      [color]="isConnected ? 'warn' : 'primary'"
+      (click)="isConnected ? onDisconnect() : onConnect()"
+      class="connection-button">
+      <mat-icon>{{ isConnected ? 'wifi_off' : 'wifi' }}</mat-icon>
+      {{ isConnected ? 'Disconnect' : 'Connect' }}
+    </button>
+
+    <div class="connection-status" [class.connected]="isConnected">
+      <mat-icon>{{ isConnected ? 'wifi' : 'wifi_off' }}</mat-icon>
+      <span>{{ isConnected ? 'Connected' : 'Disconnected' }}</span>
+    </div>
+  </div>
+</div>

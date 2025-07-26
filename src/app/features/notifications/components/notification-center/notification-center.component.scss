@@ -1,3 +1,178 @@
+// Notification content wrapper - matches Settings view padding
+.notification-content {
+  width: 100% !important;
+  max-width: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  // padding: var(--spacing-xl, 32px);
+  box-sizing: border-box !important;
+}
+
+// Notification header styling
+.notification-header {
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  border-radius: 12px;
+  padding: 32px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  .header-content {
+    flex: 1;
+    min-width: 0;
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+
+      mat-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.2;
+      }
+    }
+
+    .header-subtitle {
+      p {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin: 0;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+
+    .action-button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+
+      &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Dark theme adjustments for header
+:host.dark-theme .notification-header {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+// Responsive Design for content wrapper
+@media (max-width: 768px) {
+  .notification-content {
+    padding: var(--spacing-lg, 24px);
+  }
+}
+
+@media (max-width: 480px) {
+  .notification-content {
+    padding: var(--spacing-md, 16px);
+  }
+}
+
+// Responsive Design for header
+@media (max-width: 768px) {
+  .notification-header {
+    padding: 24px;
+    margin-bottom: 24px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+
+    .header-content {
+      .header-title {
+        h1 {
+          font-size: 2rem;
+        }
+      }
+
+      .header-subtitle {
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .header-actions {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .notification-header {
+    padding: 20px;
+    margin-bottom: 20px;
+
+    .header-content {
+      .header-title {
+        h1 {
+          font-size: 1.75rem;
+        }
+
+        mat-icon {
+          font-size: 28px;
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+
+    .header-actions {
+      flex-direction: column;
+      gap: 12px;
+
+      .action-button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+// Existing table styling
 table {
   width: 100%;
 }

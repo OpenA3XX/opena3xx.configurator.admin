@@ -1,7 +1,6 @@
-# 🎨 Table Hover Styling System
+# Table Styles
 
-## Overview
-All tables in the OpenA3XX Configurator Admin application now have comprehensive hover effects that provide smooth, modern interactions with both light and dark theme support.
+All tables in the OpenA3XX Flight Deck application now have comprehensive hover effects that provide smooth, modern interactions with both light and dark theme support.
 
 ## Features
 

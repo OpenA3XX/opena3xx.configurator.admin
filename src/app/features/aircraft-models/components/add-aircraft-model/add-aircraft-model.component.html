@@ -1,12 +1,23 @@
-<div class="add-aircraft-model-container">
-  <mat-toolbar>
-    <mat-icon>add</mat-icon>
-    <span>Add Aircraft Model</span>
-    <span class="spacer"></span>
-    <button mat-icon-button (click)="onCancel()" matTooltip="Cancel">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-toolbar>
+<!-- Add Aircraft Model Content Wrapper -->
+<div class="add-aircraft-model-content">
+
+  <div class="add-aircraft-model-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon>add</mat-icon>
+        <h1>Add Aircraft Model</h1>
+      </div>
+      <div class="header-subtitle">
+        <p>Create a new aircraft model configuration</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button mat-icon-button (click)="onCancel()" matTooltip="Cancel" class="action-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
 
   <mat-card>
     <mat-card-content>
@@ -73,4 +84,5 @@
       </form>
     </mat-card-content>
   </mat-card>
+
 </div>

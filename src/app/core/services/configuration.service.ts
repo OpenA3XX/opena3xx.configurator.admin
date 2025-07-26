@@ -11,6 +11,20 @@ export class ConfigurationService {
   private configSubject = new BehaviorSubject<AppConfig | null>(null);
   public config$ = this.configSubject.asObservable();
 
+  private defaultConfig: AppConfig = {
+    api: {
+      baseUrl: 'http://localhost:5000'
+    },
+    app: {
+      name: 'OpenA3XX Flight Deck',
+      version: '1.0.0'
+    },
+    features: {
+      enableDebugMode: false,
+      enableConsoleLogging: true
+    }
+  };
+
   constructor(private http: HttpClient) {}
 
   async loadConfiguration(): Promise<AppConfig> {
@@ -31,7 +45,7 @@ export class ConfigurationService {
           baseUrl: 'http://localhost:5000'
         },
         app: {
-          name: 'OpenA3XX Configurator Admin',
+          name: 'OpenA3XX Flight Deck',
           version: '1.0.0'
         },
         features: {
@@ -53,7 +67,7 @@ export class ConfigurationService {
   }
 
   getAppName(): string {
-    return this.config?.app.name || 'OpenA3XX Configurator Admin';
+    return this.config?.app.name || 'OpenA3XX Flight Deck';
   }
 
   getAppVersion(): string {

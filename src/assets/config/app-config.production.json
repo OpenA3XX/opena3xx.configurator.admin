@@ -3,7 +3,7 @@
     "baseUrl": "https://api.opena3xx.com"
   },
   "app": {
-    "name": "OpenA3XX Configurator Admin",
+    "name": "OpenA3XX Flight Deck",
     "version": "1.0.0"
   },
   "features": {

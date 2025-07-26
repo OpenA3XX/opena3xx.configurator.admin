@@ -210,33 +210,36 @@ export class AppComponent implements OnInit, OnDestroy
   }
 
   getServiceDescription(serviceName: string): string {
-    const name = serviceName?.toLowerCase() || '';
-
-    if (name.includes('msfs') || name.includes('flight simulator')) {
-      return 'Flight Simulator';
-    }
-
-    if (name.includes('rabbitmq')) {
-      return 'Message Broker';
-    }
-
-    if (name.includes('seq')) {
-      return 'Logging Service';
-    }
-
-    return 'Service';
+    const descriptions: { [key: string]: string } = {
+      'Backend API': 'Core backend API service for data management and business logic',
+      'Database': 'Database connection and data persistence service',
+      'File System': 'File system access and storage management service',
+      'Hardware Interface': 'Hardware communication and control interface',
+      'Simulator Interface': 'Flight simulator integration and event handling service',
+      'Notification Service': 'Real-time notification and alert management service',
+      'Authentication Service': 'User authentication and authorization service',
+      'Configuration Service': 'Application configuration and settings management',
+      'Logging Service': 'System logging and error tracking service',
+      'Cache Service': 'Data caching and performance optimization service'
+    };
+    return descriptions[serviceName] || 'Service description not available';
   }
 
   getFormattedTimestamp(timestamp: string | Date): string {
-    if (!timestamp) return '';
-    return new Date(timestamp).toLocaleTimeString();
+    const date = new Date(timestamp);
+    return date.toLocaleString();
   }
 
-    getBackendApiTooltip(): string {
-    const status = this.apiAvailabilityStatus ? 'healthy' : 'error';
-    const statusText = this.apiAvailabilityStatus ? 'Online' : 'Offline';
-    const lastChecked = new Date().toLocaleTimeString();
+  getBackendApiTooltip(): string {
+    return this.apiAvailabilityStatus
+      ? 'Backend API is online and responding'
+      : 'Backend API is offline or not responding';
+  }
 
-    return `OpenA3XX Coordinator (Backend API): ${statusText} (Last checked: ${lastChecked})`;
+  /**
+   * Get the appropriate logo path based on current theme
+   */
+  getLogoPath(): string {
+    return this.themeService.getLogoPath();
   }
 }
