@@ -2,10 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HardwareOutputDto } from 'src/app/shared/models/models';
 
-interface DialogData {
-  data: HardwareOutputDto;
-}
-
 @Component({
     selector: 'opena3xx-map-hardware-output-selectors-dialog',
     templateUrl: './map-hardware-output-selectors-dialog.component.html',
@@ -13,9 +9,9 @@ interface DialogData {
     standalone: false
 })
 export class MapHardwareOutputSelectorsDialogComponent {
-  public hardwareOutputSelector: DialogData;
+  public hardwareOutputSelector: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { data: HardwareOutputDto }) {
     this.hardwareOutputSelector = data;
     console.log('Dialog Component', data);
   }

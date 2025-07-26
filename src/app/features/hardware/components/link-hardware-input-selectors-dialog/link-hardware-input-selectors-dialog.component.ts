@@ -9,9 +9,9 @@ import { HardwareInputDto } from 'src/app/shared/models/models';
     standalone: false
 })
 export class LinkHardwareInputSelectorsDialogComponent {
-  public hardwareInputSelector: HardwareInputDto;
+  public hardwareInputSelector: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: HardwareInputDto) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { data: HardwareInputDto }) {
     this.hardwareInputSelector = data;
   }
 }

@@ -32,7 +32,7 @@ export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit,
         tap((data) => console.log('Data received', data)),
         filter((x) => !!x),
         map((data_received) => {
-          this.data = data_received;
+          this.data = data_received as unknown as HardwareInputTypeDto[];
           this.dataSource = new MatTableDataSource<HardwareInputTypeDto>(this.data);
           this.dataLoaded = true;
 
