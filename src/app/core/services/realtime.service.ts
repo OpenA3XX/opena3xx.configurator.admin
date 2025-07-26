@@ -32,7 +32,7 @@ export class RealTimeService {
   public isConnected: boolean = false;
   public keepAliveEvents: KeepAliveEvent[] = [];
   private connectionUrl = 'http://localhost:5000/signalr';
-  private reconnectionInterval: NodeJS.Timeout | null = null;
+  private reconnectionInterval: any = null;
 
   constructor(private http: HttpClient) {}
 
@@ -57,7 +57,7 @@ export class RealTimeService {
     return new HubConnectionBuilder().withUrl(this.connectionUrl).build();
   }
 
-  private pollReconnection = () => {
+  private pollReconnection = (): any => {
     return setInterval(() => {
       if (this.hubConnection && this.hubConnection.state === HubConnectionState.Disconnected) {
         this.connect();
