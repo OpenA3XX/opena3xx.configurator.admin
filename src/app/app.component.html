@@ -57,8 +57,8 @@
   </mat-toolbar>
 
   <mat-sidenav-container autosize class="opena3xx-container" [class.with-api-status]="!apiAvailabilityStatus">
-    <!-- <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"></mat-sidenav> -->
-    <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" opened="true">
+    <!-- Left Sidenav -->
+    <mat-sidenav #sidenav class="opena3xx-sidenav" mode="side" [opened]="isExpanded" [style.width]="isExpanded ? '250px' : '56px'">
       <img
         class="opena3xx-logo"
         (click)="clickDashboard()"
@@ -221,7 +221,8 @@
       <router-outlet></router-outlet>
     </mat-sidenav-content>
 
-    <mat-sidenav class="opena3xx-sidenav-right" mode="side" opened="true" position="end">
+    <!-- Right Sidenav -->
+    <mat-sidenav class="opena3xx-sidenav-right" mode="side" position="end" [opened]="isRightMenuExpanded" [style.width]="isRightMenuExpanded ? '250px' : '56px'">
       <mat-nav-list>
         <mat-list-item *ngIf="isRightMenuExpanded || isRightMenuShowing" class="parent system-status-header">
 
@@ -254,37 +255,37 @@
           </span>
         </mat-list-item>
 
-                        <!-- MSFS Status -->
+        <!-- Database Status -->
         <mat-list-item
           class="parent dependency-status-item"
-          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.msfs)"
+          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.database)"
           matTooltipPosition="left">
 
           <mat-icon
             matListItemIcon
-            [class]="getStatusClass(dependencyStatus?.dependencies?.msfs?.status || 'unknown')"
-            class="dependency-icon flight-icon">
-            {{ getStatusIcon(dependencyStatus?.dependencies?.msfs?.name || 'MSFS 2020/2024') }}
+            [class]="getStatusClass(dependencyStatus?.dependencies?.database?.status || 'unknown')"
+            class="dependency-icon database-icon">
+            {{ getStatusIcon(dependencyStatus?.dependencies?.database?.name || 'Database') }}
           </mat-icon>
           <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width dependency-name">
-            {{ dependencyStatus?.dependencies?.msfs?.name || 'MSFS 2020/2024' }}
+            {{ dependencyStatus?.dependencies?.database?.name || 'Database' }}
           </span>
         </mat-list-item>
 
-        <!-- RabbitMQ Status -->
+        <!-- Real-time Service Status -->
         <mat-list-item
           class="parent dependency-status-item"
-          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.rabbitmq)"
+          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.realtime)"
           matTooltipPosition="left">
 
           <mat-icon
             matListItemIcon
-            [class]="getStatusClass(dependencyStatus?.dependencies?.rabbitmq?.status || 'unknown')"
-            class="dependency-icon rabbitmq-icon">
-            {{ getStatusIcon(dependencyStatus?.dependencies?.rabbitmq?.name || 'RabbitMQ') }}
+            [class]="getStatusClass(dependencyStatus?.dependencies?.realtime?.status || 'unknown')"
+            class="dependency-icon realtime-icon">
+            {{ getStatusIcon(dependencyStatus?.dependencies?.realtime?.name || 'Real-time') }}
           </mat-icon>
           <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width dependency-name">
-            {{ dependencyStatus?.dependencies?.rabbitmq?.name || 'RabbitMQ' }}
+            {{ dependencyStatus?.dependencies?.realtime?.name || 'Real-time' }}
           </span>
         </mat-list-item>
 

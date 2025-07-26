@@ -125,8 +125,9 @@
   transition: width var(--transition-normal) ease, box-shadow var(--transition-fast);
   box-shadow: var(--shadow-sm);
   background: var(--mat-sys-surface-container, #f5f5f5);
+  width: 250px !important; // Default expanded width
 
-      // Logo styling - simplified without dark mode filters
+  // Logo styling - simplified without dark mode filters
   .opena3xx-logo {
     transition: all var(--transition-normal) ease;
     border-radius: var(--border-radius-md);
@@ -240,7 +241,7 @@
 }
 
 .opena3xx-sidenav-right {
-  // width: 200px !important;
+  width: 250px !important; // Default expanded width
   box-shadow: var(--shadow-sm);
   background: var(--mat-sys-surface-container, #f5f5f5);
   transition: width var(--transition-normal) ease;
@@ -298,151 +299,46 @@
         font-size: 20px;
         width: 20px;
         height: 20px;
-        animation: pulse 2s infinite;
-        margin-right: var(--spacing-sm);
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
     }
 
-    // Individual dependency status items
+    // Dependency status item styling
     &.dependency-status-item {
-      cursor: pointer;
-      border-radius: var(--border-radius-md);
-      margin: 2px var(--spacing-xs);
-      position: relative;
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      min-height: 48px;
+      margin: var(--spacing-xs) 0;
+      border-radius: var(--border-radius-sm);
+      transition: var(--transition-fast);
 
       &:hover {
-        background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.04));
-        transform: translateX(2px);
+        background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.08));
       }
 
       .dependency-name {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 500;
         color: var(--mat-sys-on-surface, rgba(0, 0, 0, 0.87));
-        display: flex;
-        align-items: center;
-        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .dependency-icon {
-        font-size: 20px;
-        width: 20px;
-        height: 20px;
-        transition: var(--transition-fast);
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
         margin-right: var(--spacing-sm);
-
-        &.ok {
-          animation: pulse-success 3s infinite;
-          filter: drop-shadow(0 0 2px rgba(76, 175, 80, 0.3));
-        }
-
-        &.error {
-          animation: pulse-error 1.5s infinite;
-          filter: drop-shadow(0 0 2px rgba(244, 67, 54, 0.3));
-        }
-
-        &.warning {
-          animation: pulse-warning 2s infinite;
-          filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.3));
-        }
-
-        &.info {
-          opacity: 0.7;
-          filter: drop-shadow(0 0 2px rgba(33, 150, 243, 0.3));
-        }
-
-                        // Service-specific styling enhancements
-
-        // Special styling for flight icon (rotate for better visual)
-        &.flight-icon {
-          transform: rotate(-45deg);
-        }
-
-        // Message broker arrows
-        &.rabbitmq-icon {
-          // Can add special styling if needed
-        }
-
-        // Log/list icon
-        &.seq-icon {
-          // Can add special styling if needed
-        }
-
-        // Central Coordinator API icon
-        &.api-icon {
-          // Can add special styling if needed
-        }
-      }
-
-      // Status indicator dot for collapsed state
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 8px;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        transform: translateY(-50%);
-        opacity: 0;
-        transition: var(--transition-fast);
-      }
-
-      // Show status dot when collapsed
-      .opena3xx-sidenav-right.collapsed & {
-        &::after {
-          opacity: 1;
-        }
-
-        &:has(.ok)::after {
-          background-color: var(--success-color, #4caf50);
-          box-shadow: 0 0 6px var(--success-color, #4caf50);
-        }
-
-        &:has(.error)::after {
-          background-color: var(--error-color, #f44336);
-          box-shadow: 0 0 6px var(--error-color, #f44336);
-        }
-
-        &:has(.warning)::after {
-          background-color: var(--warning-color, #ff9800);
-          box-shadow: 0 0 6px var(--warning-color, #ff9800);
-        }
-
-        &:has(.info)::after {
-          background-color: var(--info-color, #2196f3);
-          box-shadow: 0 0 6px var(--info-color, #2196f3);
-        }
       }
     }
 
-    // Timestamp styling
+    // Status timestamp styling
     &.status-timestamp {
-      margin-top: auto;
-      border-top: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
-      padding: var(--spacing-sm) var(--spacing-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-top: var(--spacing-sm);
+      padding: var(--spacing-xs) var(--spacing-sm);
 
       .timestamp-text {
-        font-size: 11px;
-        // color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6));
-        font-style: italic;
+        font-size: 10px;
+        color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6));
         text-align: center;
-        display: flex;
-        align-items: center;
+        width: 100%;
       }
     }
   }
