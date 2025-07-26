@@ -1,6 +1,6 @@
-// Update Material imports for v17
+// Update Material imports for v20
 @use '@angular/material' as mat;
-@import 'app/shared/styles/component-mixins';
+@use 'app/shared/styles/component-mixins' as mixins;
 
 // Include the common styles for Angular Material
 @include mat.elevation-classes();
@@ -405,14 +405,14 @@ mat-sidenav-content, .mat-sidenav-content,
 }
 
 // Apply global component styles
-@include data-table;
-@include action-buttons;
-@include filter-form;
-@include loading-state;
-@include expansion-panel;
-@include status-indicators;
-@include terminal-style;
-@include responsive-utilities;
+@include mixins.data-table;
+@include mixins.action-buttons;
+@include mixins.filter-form;
+@include mixins.loading-state;
+@include mixins.expansion-panel;
+@include mixins.status-indicators;
+@include mixins.terminal-style;
+@include mixins.responsive-utilities;
 
 // Global component overrides for better Material Design integration
 .mat-mdc-form-field {
