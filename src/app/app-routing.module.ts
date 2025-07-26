@@ -17,7 +17,9 @@ import { ViewHardwarePanelDetailsComponent } from './features/hardware/component
 
 // Dashboard Components
 import { DashboardComponent } from './features/dashboard/components/dashboard/dashboard.component';
-import { SettingsComponent } from './features/dashboard/components/settings/settings.component';
+
+// Settings Components
+import { SettingsComponent } from './features/settings/components/settings/settings.component';
 
 // Console Components
 import { ConsoleComponent } from './features/console/components/console/console.component';

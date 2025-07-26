@@ -45,6 +45,10 @@ export class NotificationCenterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    // Clean up ViewChild references
+    if (this.dataSource) {
+      this.dataSource.disconnect();
+    }
   }
 
   ngAfterViewInit(): void {

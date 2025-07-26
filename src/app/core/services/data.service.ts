@@ -32,7 +32,7 @@ export class DataService {
   }
 
   getAllHardwarePanelOverviewDetails() {
-    return this.http.get<HardwarePanelOverviewDto>(`${this.BASE_URL}/hardware-panel/overview/all`);
+    return this.http.get<HardwarePanelOverviewDto[]>(`${this.BASE_URL}/hardware-panel/overview/all`);
   }
 
   getAllHardwarePanelDetails(id: number) {

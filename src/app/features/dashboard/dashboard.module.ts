@@ -10,9 +10,6 @@ import { SystemOverviewComponent } from './components/dashboard/system-overview/
 import { QuickAccessComponent } from './components/dashboard/quick-access/quick-access.component';
 import { ActivityStatusComponent } from './components/dashboard/activity-status/activity-status.component';
 
-// Settings Component
-import { SettingsComponent } from './components/settings/settings.component';
-
 @NgModule({
   declarations: [
     // Dashboard Components
@@ -20,10 +17,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     DashboardHeaderComponent,
     SystemOverviewComponent,
     QuickAccessComponent,
-    ActivityStatusComponent,
-
-    // Settings Component
-    SettingsComponent
+    ActivityStatusComponent
   ],
   imports: [
     CommonModule,
@@ -31,8 +25,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     SharedModule
   ],
   exports: [
-    DashboardComponent,
-    SettingsComponent
+    DashboardComponent
   ]
 })
 export class DashboardModule { }

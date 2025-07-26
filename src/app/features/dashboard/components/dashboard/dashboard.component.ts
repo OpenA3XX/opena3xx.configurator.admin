@@ -110,11 +110,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       // Since HardwareBoardDto doesn't have isActive, we'll assume all boards are active for now
       this.activeBoards = boards.length;
 
-      // Load hardware panels - this returns a single object, not an array
+      // Load hardware panels - now as an array
       try {
-        const panelOverview = await firstValueFrom(this.dataService.getAllHardwarePanelOverviewDetails()) as HardwarePanelOverviewDto;
-        this.totalPanels = 1; // Since it's a single overview object
-        this.configuredPanels = 1; // Assume configured for now
+        const panelOverviews = await firstValueFrom(this.dataService.getAllHardwarePanelOverviewDetails()) as HardwarePanelOverviewDto[];
+        this.totalPanels = panelOverviews.length;
+        this.configuredPanels = panelOverviews.length; // If you have a property to filter configured, use it here
       } catch (panelError) {
         console.warn('Panel overview not available:', panelError);
         this.totalPanels = 0;

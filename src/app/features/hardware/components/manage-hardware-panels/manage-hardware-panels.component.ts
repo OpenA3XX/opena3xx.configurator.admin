@@ -74,7 +74,7 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnDestroy {
     this.dataService
       .getAllHardwarePanelOverviewDetails()
       .toPromise()
-      .then((data: HardwarePanelOverviewDto) => {
+      .then((data: HardwarePanelOverviewDto[]) => {
         this.data = data;
         this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data);
         this.dataLoaded = true;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,7 +13,7 @@ import { DataService } from 'src/app/core/services/data.service';
   templateUrl: './manage-simulator-events.component.html',
   styleUrls: ['./manage-simulator-events.component.scss'],
 })
-export class ManageSimulatorEventsComponent implements OnInit, AfterViewInit {
+export class ManageSimulatorEventsComponent implements OnInit, AfterViewInit, OnDestroy {
   public displayedColumns: string[] = [
     'id',
     'friendlyName',
@@ -33,6 +33,13 @@ export class ManageSimulatorEventsComponent implements OnInit, AfterViewInit {
     public router: Router,
     private _snackBar: MatSnackBar
   ) {}
+
+  ngOnDestroy(): void {
+    // Clean up ViewChild references
+    if (this.dataSource) {
+      this.dataSource.disconnect();
+    }
+  }
 
   onEditClick(id: number) {
     this.router.navigateByUrl(`/edit/simulator-event?id=${id}`);

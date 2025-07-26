@@ -23,8 +23,8 @@ export class HardwarePanelService {
   /**
    * Get all hardware panel overview details
    */
-  getAllHardwarePanelOverviewDetails(): Observable<HardwarePanelOverviewDto> {
-    return this.http.get<HardwarePanelOverviewDto>(`${this.BASE_URL}/hardware-panel/overview/all`);
+  getAllHardwarePanelOverviewDetails(): Observable<HardwarePanelOverviewDto[]> {
+    return this.http.get<HardwarePanelOverviewDto[]>(`${this.BASE_URL}/hardware-panel/overview/all`);
   }
 
   /**
