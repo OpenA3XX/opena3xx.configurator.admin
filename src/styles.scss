@@ -421,7 +421,189 @@ mat-sidenav-content, .mat-sidenav-content,
       color: var(--opena3xx-primary) !important;
     }
   }
+
+  // Fix input padding to prevent placeholder text from touching borders
+  .mat-mdc-form-field-infix {
+    padding: 16px 0 8px 0 !important;
+    min-height: 56px !important;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    padding: 0 16px !important;
+  }
+
+  .mat-mdc-form-field-flex {
+    padding: 0 !important;
+  }
+
+  // Ensure proper spacing for input content
+  input.mat-mdc-input-element {
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+  }
+
+  // Fix label positioning
+  .mat-mdc-form-field-label {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  // Fix outline appearance spacing
+  &.mat-mdc-form-field-appearance-outline {
+    .mat-mdc-form-field-infix {
+      padding: 16px 0 8px 0 !important;
+    }
+
+    .mat-mdc-form-field-outline {
+      padding: 0 16px !important;
+    }
+  }
+
+  // Fix fill appearance spacing
+  &.mat-mdc-form-field-appearance-fill {
+    .mat-mdc-form-field-infix {
+      padding: 16px 0 8px 0 !important;
+    }
+
+    .mat-mdc-form-field-flex {
+      padding: 0 16px !important;
+    }
+  }
+
+  // Fix legacy appearance spacing
+  &.mat-mdc-form-field-appearance-legacy {
+    .mat-mdc-form-field-infix {
+      padding: 16px 0 8px 0 !important;
+    }
+
+    .mat-mdc-form-field-flex {
+      padding: 0 16px !important;
+    }
+  }
+
+  // Fix select field spacing
+  .mat-mdc-select {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  // Fix autocomplete spacing
+  .mat-mdc-autocomplete-panel {
+    .mat-mdc-option {
+      padding: 12px 16px !important;
+      min-height: 48px !important;
+    }
+  }
+
+  // Fix hint and error spacing
+  .mat-mdc-form-field-hint,
+  .mat-mdc-form-field-error {
+    padding: 4px 0 0 0 !important;
+    margin: 0 !important;
+  }
+
+  // Fix suffix and prefix spacing
+  .mat-mdc-form-field-suffix,
+  .mat-mdc-form-field-prefix {
+    padding: 0 8px !important;
+  }
+
+  // Search field specific styling
+  &.search-field {
+    .mat-mdc-form-field-infix {
+      padding: 12px 0 8px 0 !important;
+    }
+
+    .mat-mdc-text-field-wrapper {
+      padding: 0 12px !important;
+    }
+  }
+
+  // Compact form field styling
+  &.compact {
+    .mat-mdc-form-field-infix {
+      padding: 12px 0 6px 0 !important;
+      min-height: 48px !important;
+    }
+
+    .mat-mdc-text-field-wrapper {
+      padding: 0 12px !important;
+    }
+  }
 }
+
+// Additional form field improvements
+.mat-mdc-form-field-wrapper {
+  // Ensure proper border radius
+  border-radius: var(--border-radius-md) !important;
+
+  // Smooth transitions
+  transition: all var(--transition-fast) !important;
+}
+
+// Let Material Design handle input styling - removed global overrides
+
+// Fix placeholder visibility - should only show on focus
+.mat-mdc-form-field {
+  .mat-mdc-input-element::placeholder {
+    opacity: 0 !important; // Hide placeholder by default
+    transition: opacity var(--transition-fast) !important;
+  }
+
+  // Show placeholder only when focused
+  &.mat-focused .mat-mdc-input-element::placeholder {
+    opacity: 1 !important;
+  }
+
+  // Show placeholder when input has value (for better UX)
+  .mat-mdc-input-element:not(:placeholder-shown)::placeholder {
+    opacity: 0 !important;
+  }
+
+  // Show placeholder when input is empty and focused
+  .mat-mdc-input-element:placeholder-shown:focus::placeholder {
+    opacity: 1 !important;
+  }
+}
+
+// Additional fix for all input types to ensure consistent behavior
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="number"]::placeholder,
+input[type="search"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="url"]::placeholder,
+textarea::placeholder {
+  opacity: 0 !important;
+  transition: opacity var(--transition-fast) !important;
+}
+
+input[type="text"]:focus::placeholder,
+input[type="email"]:focus::placeholder,
+input[type="password"]:focus::placeholder,
+input[type="number"]:focus::placeholder,
+input[type="search"]:focus::placeholder,
+input[type="tel"]:focus::placeholder,
+input[type="url"]:focus::placeholder,
+textarea:focus::placeholder {
+  opacity: 1 !important;
+}
+
+// Hide placeholder when input has content
+input[type="text"]:not(:placeholder-shown)::placeholder,
+input[type="email"]:not(:placeholder-shown)::placeholder,
+input[type="password"]:not(:placeholder-shown)::placeholder,
+input[type="number"]:not(:placeholder-shown)::placeholder,
+input[type="search"]:not(:placeholder-shown)::placeholder,
+input[type="tel"]:not(:placeholder-shown)::placeholder,
+input[type="url"]:not(:placeholder-shown)::placeholder,
+textarea:not(:placeholder-shown)::placeholder {
+  opacity: 0 !important;
+}
+
+// Let Material Design handle its own styling - removed problematic overrides
 
 // Enhanced button styles
 .mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-flat-button {

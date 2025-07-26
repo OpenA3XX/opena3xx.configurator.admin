@@ -27,8 +27,9 @@
 .overview-section {
   .overview-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
   }
 
   .overview-card {
@@ -37,6 +38,9 @@
     transition: all 0.3s ease;
     cursor: pointer;
     background: white;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
 
     &:hover {
       transform: translateY(-4px);
@@ -44,7 +48,11 @@
     }
 
     mat-card-content {
-      padding: 24px;
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .card-header {
@@ -75,6 +83,7 @@
       margin-bottom: 8px;
       color: #1976d2;
       transition: color 0.3s ease;
+      line-height: 1;
     }
 
     .card-subtitle {
@@ -169,6 +178,13 @@
 }
 
 // Responsive Design
+@media (max-width: 1200px) {
+  .overview-section .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .overview-section .overview-grid {
     grid-template-columns: 1fr;
