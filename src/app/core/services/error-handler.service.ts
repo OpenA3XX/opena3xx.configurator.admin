@@ -11,6 +11,14 @@ export interface AppError {
   userId?: string;
 }
 
+interface ErrorWithMessage {
+  message: string;
+  error?: {
+    message: string;
+  };
+  stack?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +28,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     private configService: ConfigurationService
   ) {}
 
-  handleError(error: any): void {
+  handleError(error: unknown): void {
     const appError = this.createAppError(error);
 
     // Log error based on configuration
@@ -37,32 +45,34 @@ export class GlobalErrorHandler implements ErrorHandler {
     }
   }
 
-  private createAppError(error: any): AppError {
+  private createAppError(error: unknown): AppError {
+    const errorWithStack = error as ErrorWithMessage;
     return {
       message: this.getErrorMessage(error),
-      stack: error?.stack,
+      stack: errorWithStack?.stack,
       timestamp: new Date(),
       url: window.location.href
     };
   }
 
-  private getErrorMessage(error: any): string {
+  private getErrorMessage(error: unknown): string {
     if (error instanceof HttpErrorResponse) {
       return `HTTP Error ${error.status}: ${error.message}`;
     }
 
-    if (error?.error?.message) {
-      return error.error.message;
+    const errorWithMessage = error as ErrorWithMessage;
+    if (errorWithMessage?.error?.message) {
+      return errorWithMessage.error.message;
     }
 
-    if (error?.message) {
-      return error.message;
+    if (errorWithMessage?.message) {
+      return errorWithMessage.message;
     }
 
     return 'An unexpected error occurred';
   }
 
-  private showUserError(error: any): void {
+  private showUserError(error: unknown): void {
     let message = 'An error occurred. Please try again.';
 
     if (error instanceof HttpErrorResponse) {
