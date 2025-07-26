@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CoreHelper } from './core/core-helper';
 import { ExitAppDialogComponent } from './core/components/exit-app-dialog.component';
 import { ThemeService } from './core/services/theme.service';
-import { DependencyStatusService, DependencyStatusResponse } from './core/services/dependency-status.service';
+import { DependencyStatusService, DependencyStatusResponse, DependencyStatus } from './core/services/dependency-status.service';
 import { NotificationService } from './features/notifications/services/notification.service';
 import { AppStateService } from './core/services/app-state.service';
 import { Subscription } from 'rxjs';
@@ -201,7 +201,7 @@ export class AppComponent implements OnInit, OnDestroy
     return this.dependencyStatusService.getStatusClass(status);
   }
 
-  getDependencyTooltip(dependency: any): string {
+  getDependencyTooltip(dependency: DependencyStatus | null): string {
     if (!dependency) return 'Status unknown';
 
     const lastChecked = new Date(dependency.lastChecked).toLocaleTimeString();

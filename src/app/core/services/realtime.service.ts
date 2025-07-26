@@ -32,7 +32,7 @@ export class RealTimeService {
   public isConnected: boolean = false;
   public keepAliveEvents: KeepAliveEvent[] = [];
   private connectionUrl = 'http://localhost:5000/signalr';
-  private reconnectionInterval: any;
+  private reconnectionInterval: NodeJS.Timeout | null = null;
 
   constructor(private http: HttpClient) {}
 

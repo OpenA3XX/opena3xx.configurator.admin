@@ -5,6 +5,10 @@ import { catchError, finalize } from 'rxjs/operators';
 import { LoadingService } from '../services/loading.service';
 import { ConfigurationService } from '../services/configuration.service';
 
+interface RequestBody {
+  [key: string]: unknown;
+}
+
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
   constructor(
@@ -12,7 +16,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     private configService: ConfigurationService
   ) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<RequestBody>, next: HttpHandler): Observable<HttpEvent<RequestBody>> {
     // Check if this is a ping/heartbeat request that should not show loading
     const isPingRequest = this.isPingOrHeartbeatRequest(request);
 
@@ -66,7 +70,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   /**
    * Check if the request is a ping/heartbeat request that should not show loading
    */
-  private isPingOrHeartbeatRequest(request: HttpRequest<any>): boolean {
+  private isPingOrHeartbeatRequest(request: HttpRequest<RequestBody>): boolean {
     const url = request.url.toLowerCase();
 
     // List of URL patterns that should not trigger loading indicator
