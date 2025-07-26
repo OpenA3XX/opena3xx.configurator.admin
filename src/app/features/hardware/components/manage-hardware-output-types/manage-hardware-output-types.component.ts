@@ -16,7 +16,7 @@ import { HardwareOutputTypeDto } from 'src/app/shared/models/models';
 export class ManageHardwareOutputTypesComponent implements OnInit, AfterViewInit, OnDestroy {
   public displayedColumns: string[] = ['id', 'name', 'details'];
   dataSource = new MatTableDataSource<HardwareOutputTypeDto>();
-  public data: any;
+  public data: HardwareOutputTypeDto[] = [];
   dataLoaded = false;
 
   constructor(private dataService: DataService, public router: Router) {}
@@ -32,7 +32,7 @@ export class ManageHardwareOutputTypesComponent implements OnInit, AfterViewInit
         tap((data) => console.log('Data received', data)),
         filter((x) => !!x),
         map((data_received) => {
-          this.data = data_received;
+          this.data = data_received as HardwareOutputTypeDto[];
           this.dataSource = new MatTableDataSource<HardwareOutputTypeDto>(this.data);
           this.dataLoaded = true;
 

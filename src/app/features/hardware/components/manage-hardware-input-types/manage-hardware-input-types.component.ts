@@ -16,7 +16,7 @@ import { HardwareInputTypeDto } from 'src/app/shared/models/models';
 export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit, OnDestroy {
   public displayedColumns: string[] = ['id', 'name', 'details'];
   dataSource = new MatTableDataSource<HardwareInputTypeDto>();
-  public data: any;
+  public data: HardwareInputTypeDto[] = [];
   dataLoaded = false;
 
   constructor(private dataService: DataService, public router: Router) {}

@@ -29,7 +29,7 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnDestroy {
     'details',
   ];
   dataSource = new MatTableDataSource<HardwarePanelOverviewDto>();
-  public data: any;
+  public data: HardwarePanelOverviewDto[] = [];
   public dataLoaded: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

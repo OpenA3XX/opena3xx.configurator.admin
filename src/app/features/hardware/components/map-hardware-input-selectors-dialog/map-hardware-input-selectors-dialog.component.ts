@@ -6,6 +6,14 @@ import * as _ from 'lodash';
 import { DataService } from 'src/app/core/services/data.service';
 import { HardwareInputDto } from 'src/app/shared/models/models';
 
+interface DialogData {
+  data: HardwareInputDto;
+}
+
+interface FormData {
+  identifier: number;
+  [key: string]: unknown;
+}
 
 @Component({
     selector: 'opena3xx-map-hardware-input-selectors-dialog',
@@ -26,8 +34,8 @@ export class MapHardwareInputSelectorsDialogComponent {
     this.hardwareInputSelector = data;
   }
 
-  submit(formData: any) {
-    const index = _.find(this.hardwareInputSelector.hardwareInputSelectors, (o) => {
+  submit(formData: FormData) {
+    const index = _.find(this.hardwareInputSelector.hardwareInputSelectors, (o: any) => {
       return o.id === formData.identifier;
     });
     this._snackBar.open(
