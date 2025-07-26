@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { map} from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { FieldConfig, FormConfiguration } from 'src/app/shared/models/field.interface';
+import { FieldConfig } from 'src/app/shared/models/field.interface';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { DataService } from 'src/app/core/services/data.service';
 import { DynamicFormComponent } from 'src/app/shared/components/ui/dynamic-form/dynamic-form.component';
