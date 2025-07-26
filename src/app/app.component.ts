@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Renderer2, Inject, ChangeDetectorRef } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, OnDestroy, Renderer2, Inject, ChangeDetectorRef, DOCUMENT } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from './core/services/data.service';
