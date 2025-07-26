@@ -16,6 +16,7 @@ export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit,
   public displayedColumns: string[] = ['id', 'name', 'details'];
   dataSource = new MatTableDataSource<HardwareInputTypeDto>();
   public data: any;
+  dataLoaded = false;
 
   constructor(private dataService: DataService, public router: Router) {}
 
@@ -32,6 +33,7 @@ export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit,
         map((data_received) => {
           this.data = data_received;
           this.dataSource = new MatTableDataSource<HardwareInputTypeDto>(this.data);
+          this.dataLoaded = true;
 
           // Connect paginator and sort after data is loaded
           this.connectDataSourceFeatures();
@@ -63,5 +65,14 @@ export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit,
 
   addHardwareInputType() {
     this.router.navigateByUrl(`/add/hardware-input-type`);
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

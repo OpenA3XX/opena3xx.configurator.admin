@@ -158,9 +158,10 @@
           [matTooltip]="!apiAvailabilityStatus ? 'API not available - Navigation disabled' : 'Connectivity'"
           matTooltipPosition="right"
         >
-          <mat-icon matListItemIcon>cell_wifi</mat-icon>
+          <mat-icon matListItemIcon>wifi</mat-icon>
           <span *ngIf="isExpanded || isShowing" class="full-width">Connectivity</span>
         </mat-list-item>
+
         <mat-list-item
           (click)="apiAvailabilityStatus ? clickConsole() : null"
           [matTooltipDisabled]="isExpanded"
