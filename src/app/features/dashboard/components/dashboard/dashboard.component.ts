@@ -4,8 +4,14 @@ import { DashboardService } from '../../services/dashboard.service';
 import { DataService } from 'src/app/core/services/data.service';
 import { RealTimeService } from 'src/app/core/services/realtime.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Subscription } from 'rxjs';
 import { HardwareBoardDto, HardwarePanelOverviewDto } from 'src/app/shared/models/models';
+
+interface ActivityItem {
+  icon: string;
+  description: string;
+  timestamp: Date;
+}
 
 @Component({
     selector: 'opena3xx-dashboard',
@@ -33,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   };
 
   // Recent activities
-  recentActivities: any[] = [];
+  recentActivities: ActivityItem[] = [];
 
   // System status
   apiStatus = {
@@ -58,7 +64,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   // Theme support
   isDarkMode: boolean = false;
-  private themeSubscription: any;
+  private themeSubscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
