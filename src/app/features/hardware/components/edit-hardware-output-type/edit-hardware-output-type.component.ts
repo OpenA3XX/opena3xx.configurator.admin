@@ -4,6 +4,7 @@ import { filter, map, tap } from 'rxjs/operators';
 
 import { DataService } from 'src/app/core/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HardwareOutputTypeDto } from 'src/app/shared/models/models';
 
 @Component({
     selector: 'opena3xx-edit-hardware-output-type',
@@ -13,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditHardwareOutputTypeComponent implements OnInit {
   idParam!: number;
-  public data!: any;
+  public data!: HardwareOutputTypeDto;
 
   constructor(
     private dataService: DataService,
@@ -32,7 +33,7 @@ export class EditHardwareOutputTypeComponent implements OnInit {
       .pipe(
         tap((data) => console.log('Data received', data)),
         filter((x) => !!x),
-        map((data) => (this.data = data))
+        map((data) => (this.data = data as unknown as HardwareOutputTypeDto))
       )
       .subscribe();
   }

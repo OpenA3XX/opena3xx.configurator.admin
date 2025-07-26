@@ -1,5 +1,11 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
+interface SystemHealth {
+  status: 'healthy' | 'degraded' | 'critical' | 'error' | 'warning';
+  icon: string;
+  message: string;
+}
+
 @Component({
     selector: 'opena3xx-system-overview',
     templateUrl: './system-overview.component.html',
@@ -7,7 +13,7 @@ import { Component, Input, HostBinding } from '@angular/core';
     standalone: false
 })
 export class SystemOverviewComponent {
-  @Input() systemHealth: any = {
+  @Input() systemHealth: SystemHealth = {
     status: 'healthy',
     icon: 'check_circle',
     message: 'All systems operational'
