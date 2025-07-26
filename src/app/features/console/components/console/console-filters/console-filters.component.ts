@@ -4,6 +4,12 @@ import { HardwareBoardDto } from 'src/app/shared/models/models';
 import { DataService } from 'src/app/core/services/data.service';
 import { firstValueFrom } from 'rxjs';
 
+interface ConsoleFilters {
+  boardIdFilter: string;
+  eventTypeFilter: string;
+  timeRangeFilter: string;
+}
+
 @Component({
     selector: 'opena3xx-console-filters',
     templateUrl: './console-filters.component.html',
@@ -13,7 +19,7 @@ import { firstValueFrom } from 'rxjs';
 export class ConsoleFiltersComponent implements OnInit, OnDestroy {
   @Input() hardwareBoards: HardwareBoardDto[] = [];
   @Input() isDarkMode: boolean = false;
-  @Output() filterChange = new EventEmitter<any>();
+  @Output() filterChange = new EventEmitter<ConsoleFilters>();
   @Output() searchChange = new EventEmitter<string>();
   @Output() clearFilters = new EventEmitter<void>();
 
@@ -47,7 +53,7 @@ export class ConsoleFiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Cleanup if needed
+    // Component cleanup handled automatically
   }
 
   private async loadHardwareBoards(): Promise<void> {
@@ -55,7 +61,7 @@ export class ConsoleFiltersComponent implements OnInit, OnDestroy {
     try {
       this.loadedHardwareBoards = await firstValueFrom(this.dataService.getAllHardwareBoards()) as HardwareBoardDto[];
       console.log('Console Filters - Hardware Boards loaded:', this.loadedHardwareBoards);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Console Filters - Error fetching hardware boards:', error);
       // Fallback to input data if available
       if (this.hardwareBoards && this.hardwareBoards.length > 0) {
