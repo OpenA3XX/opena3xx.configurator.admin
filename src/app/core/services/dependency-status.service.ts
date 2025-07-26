@@ -7,7 +7,7 @@ import { ConfigurationService } from './configuration.service';
 export interface BackendDependencyInfo {
   isRunning: boolean;
   status: string;
-  metadata?: any;
+  metadata?: Record<string, unknown>;
 }
 
 export interface BackendDependencyResponse {
@@ -27,7 +27,7 @@ export interface DependencyStatus {
   lastChecked: Date;
   responseTime?: number;
   version?: string;
-  details?: any;
+  details?: Record<string, unknown>;
 }
 
 export interface DependencyStatusResponse {
@@ -221,8 +221,9 @@ export class DependencyStatusService {
    */
   private generateStatusMessage(backendDep: BackendDependencyInfo): string {
     if (!backendDep.isRunning) {
-      if (backendDep.metadata?.error) {
-        return backendDep.metadata.error;
+      const error = backendDep.metadata?.['error'];
+      if (error && typeof error === 'string') {
+        return error;
       }
       return 'Service is not running';
     }
@@ -231,12 +232,14 @@ export class DependencyStatusService {
       return 'Service is running normally';
     }
 
-    if (backendDep.metadata?.error) {
-      return backendDep.metadata.error;
+    const error = backendDep.metadata?.['error'];
+    if (error && typeof error === 'string') {
+      return error;
     }
 
-    if (backendDep.metadata?.reasonPhrase) {
-      return `${backendDep.status}: ${backendDep.metadata.reasonPhrase}`;
+    const reasonPhrase = backendDep.metadata?.['reasonPhrase'];
+    if (reasonPhrase && typeof reasonPhrase === 'string') {
+      return `${backendDep.status}: ${reasonPhrase}`;
     }
 
     return `Status: ${backendDep.status}`;
@@ -245,7 +248,7 @@ export class DependencyStatusService {
   /**
    * Determine overall system status
    */
-  private determineOverallStatus(isHealthy: boolean, dependencies: any): 'healthy' | 'degraded' | 'critical' {
+  private determineOverallStatus(isHealthy: boolean, dependencies: Record<string, BackendDependencyInfo>): 'healthy' | 'degraded' | 'critical' {
     if (isHealthy) {
       return 'healthy';
     }
@@ -268,7 +271,7 @@ export class DependencyStatusService {
    * Handle HTTP errors
    */
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: unknown): Observable<T> => {
       console.error(`${operation} failed:`, error);
 
       // Return a fallback result
