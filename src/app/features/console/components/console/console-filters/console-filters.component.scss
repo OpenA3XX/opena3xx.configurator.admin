@@ -1,0 +1,256 @@
+.filters-card {
+  margin-bottom: 0; // Handled by parent component
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+// Dark theme for filters card
+:host.dark-theme .filters-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+}
+
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 8px 0;
+}
+
+.search-field {
+  width: 100%;
+  margin-bottom: 8px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.filter-form {
+  width: 100%;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+// Loading state styling
+mat-form-field {
+  &.loading {
+    mat-icon[matSuffix] {
+      animation: spin 1s linear infinite;
+      color: #1976d2;
+    }
+  }
+
+  mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+}
+
+// Dark theme for form fields
+:host.dark-theme mat-form-field {
+  .mat-mdc-form-field-label {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .mat-mdc-form-field-outline {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .mat-mdc-select-value {
+    color: #e0e0e0;
+  }
+
+  .mat-mdc-select-arrow {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  &.loading {
+    mat-icon[matSuffix] {
+      color: #64b5f6;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Disabled state styling
+mat-card-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+
+  button {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 8px 16px;
+    min-height: 40px;
+    font-weight: 500;
+
+    &:hover:not([disabled]) {
+      background-color: rgba(25, 118, 210, 0.1);
+      transform: translateY(-1px);
+    }
+
+    &[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    mat-icon {
+      margin-right: 6px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+// Dark theme for card actions
+:host.dark-theme mat-card-actions {
+  border-top-color: rgba(255, 255, 255, 0.1);
+
+  button {
+    color: rgba(255, 255, 255, 0.8);
+
+    &:hover:not([disabled]) {
+      color: #64b5f6;
+      background-color: rgba(100, 181, 246, 0.1);
+    }
+
+    mat-icon {
+      color: inherit;
+    }
+  }
+}
+
+// Board name styling in dropdown
+mat-option {
+  .board-name {
+    color: #666;
+    font-size: 0.875rem;
+  }
+}
+
+// Dark theme for dropdown options
+:host.dark-theme mat-option {
+  .board-name {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// Card header styling
+mat-card-header {
+  padding: 24px 24px 0 24px;
+
+  mat-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  mat-card-subtitle {
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+// Dark theme for card header
+:host.dark-theme mat-card-header {
+  mat-card-title {
+    color: #e0e0e0;
+  }
+
+  mat-card-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// Card content styling
+mat-card-content {
+  padding: 0 24px 16px 24px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .filters-container {
+    gap: 20px;
+  }
+
+  .filter-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  mat-card-actions {
+    padding: 16px 20px;
+    gap: 8px;
+  }
+
+  mat-card-header {
+    padding: 20px 20px 0 20px;
+  }
+
+  mat-card-content {
+    padding: 0 20px 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters-container {
+    gap: 16px;
+  }
+
+  .filter-row {
+    gap: 12px;
+  }
+
+  mat-card-actions {
+    padding: 12px 16px;
+    gap: 6px;
+
+    button {
+      padding: 6px 12px;
+      min-height: 36px;
+      font-size: 13px;
+
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  mat-card-header {
+    padding: 16px 16px 0 16px;
+
+    mat-card-title {
+      font-size: 1.125rem;
+    }
+  }
+
+  mat-card-content {
+    padding: 0 16px 8px 16px;
+  }
+}

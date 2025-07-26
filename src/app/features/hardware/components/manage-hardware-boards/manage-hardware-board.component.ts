@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { DataService } from 'src/app/core/services/data.service';
   styleUrls: ['./manage-hardware-board.component.scss'],
   selector: 'opena3xx-manage-hardware-boards',
 })
-export class ManageHardwareBoardsComponent implements AfterViewInit {
+export class ManageHardwareBoardsComponent implements AfterViewInit, OnDestroy {
   public displayedColumns: string[] = [
     'id',
     'name',
@@ -36,6 +36,13 @@ export class ManageHardwareBoardsComponent implements AfterViewInit {
       console.log('Hardware Boards - Sort connected successfully');
     } else {
       console.warn('Hardware Boards - Sort not available in ngAfterViewInit');
+    }
+  }
+
+  ngOnDestroy(): void {
+    // Clean up ViewChild references
+    if (this.dataSource) {
+      this.dataSource.disconnect();
     }
   }
 

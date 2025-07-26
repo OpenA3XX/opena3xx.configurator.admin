@@ -1,0 +1,48 @@
+<div class="overview-section">
+  <h2 class="section-title">System Overview</h2>
+  <div class="overview-grid">
+    <mat-card class="overview-card health-card" [class]="'status-' + systemHealth.status">
+      <mat-card-content>
+        <div class="card-header">
+          <mat-icon [class]="systemHealth.status">{{ systemHealth.icon }}</mat-icon>
+          <span class="card-title">System Health</span>
+        </div>
+        <div class="card-value">{{ systemHealth.status }}</div>
+        <div class="card-subtitle">{{ systemHealth.message }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="overview-card boards-card">
+      <mat-card-content>
+        <div class="card-header">
+          <mat-icon>memory</mat-icon>
+          <span class="card-title">Active Boards</span>
+        </div>
+        <div class="card-value">{{ activeBoards }}</div>
+        <div class="card-subtitle">{{ activeBoards }} of {{ totalBoards }} boards active</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="overview-card panels-card">
+      <mat-card-content>
+        <div class="card-header">
+          <mat-icon>dashboard</mat-icon>
+          <span class="card-title">Total Panels</span>
+        </div>
+        <div class="card-value">{{ totalPanels }}</div>
+        <div class="card-subtitle">{{ configuredPanels }} configured</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="overview-card events-card">
+      <mat-card-content>
+        <div class="card-header">
+          <mat-icon>event</mat-icon>
+          <span class="card-title">Recent Events</span>
+        </div>
+        <div class="card-value">{{ recentEvents }}</div>
+        <div class="card-subtitle">Last 24 hours</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

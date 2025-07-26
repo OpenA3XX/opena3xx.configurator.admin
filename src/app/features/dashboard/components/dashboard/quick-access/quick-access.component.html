@@ -1,0 +1,44 @@
+<div class="quick-access-section">
+  <h2 class="section-title">Quick Access</h2>
+  <div class="quick-access-grid">
+    <mat-card class="access-card" (click)="navigateToHardware()">
+      <mat-card-content>
+        <div class="access-icon">
+          <mat-icon>hardware</mat-icon>
+        </div>
+        <h3 class="access-title">Hardware Management</h3>
+        <p class="access-description">Manage hardware boards, input types, and output types</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="access-card" (click)="navigateToPanels()">
+      <mat-card-content>
+        <div class="access-icon">
+          <mat-icon>dashboard</mat-icon>
+        </div>
+        <h3 class="access-title">Panel Management</h3>
+        <p class="access-description">Configure and manage hardware panels</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="access-card" (click)="navigateToConsole()">
+      <mat-card-content>
+        <div class="access-icon">
+          <mat-icon>web_asset</mat-icon>
+        </div>
+        <h3 class="access-title">Real-time Console</h3>
+        <p class="access-description">Monitor real-time events and system activity</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="access-card" (click)="navigateToSettings()">
+      <mat-card-content>
+        <div class="access-icon">
+          <mat-icon>settings</mat-icon>
+        </div>
+        <h3 class="access-title">System Settings</h3>
+        <p class="access-description">Configure system settings and preferences</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

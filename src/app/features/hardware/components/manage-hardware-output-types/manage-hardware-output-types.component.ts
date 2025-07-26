@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { HardwareOutputTypeDto } from 'src/app/shared/models/models';
   templateUrl: './manage-hardware-output-types.component.html',
   styleUrls: ['./manage-hardware-output-types.component.scss'],
 })
-export class ManageHardwareOutputTypesComponent implements OnInit, AfterViewInit {
+export class ManageHardwareOutputTypesComponent implements OnInit, AfterViewInit, OnDestroy {
   public displayedColumns: string[] = ['id', 'name', 'details'];
   dataSource = new MatTableDataSource<HardwareOutputTypeDto>();
   public data: any;
@@ -38,6 +38,13 @@ export class ManageHardwareOutputTypesComponent implements OnInit, AfterViewInit
         })
       )
       .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    // Clean up ViewChild references
+    if (this.dataSource) {
+      this.dataSource.disconnect();
+    }
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -1,0 +1,44 @@
+<div class="activity-status-section">
+  <div class="activity-panel">
+    <h3 class="panel-title">Recent Activities</h3>
+    <div class="activity-list">
+      <div *ngFor="let activity of recentActivities" class="activity-item">
+        <mat-icon class="activity-icon">{{ activity.icon }}</mat-icon>
+        <div class="activity-content">
+          <div class="activity-text">{{ activity.description }}</div>
+          <div class="activity-time">{{ activity.timestamp | date:'short' }}</div>
+        </div>
+      </div>
+      <div *ngIf="recentActivities.length === 0" class="no-activities">
+        <mat-icon>info</mat-icon>
+        <span>No recent activities</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-panel">
+    <h3 class="panel-title">System Status</h3>
+    <div class="status-list">
+      <div class="status-item" [class]="'status-' + apiStatus.status">
+        <mat-icon>{{ apiStatus.icon }}</mat-icon>
+        <span class="status-label">API Connection</span>
+        <span class="status-value">{{ apiStatus.status }}</span>
+      </div>
+      <div class="status-item" [class]="'status-' + databaseStatus.status">
+        <mat-icon>{{ databaseStatus.icon }}</mat-icon>
+        <span class="status-label">Database</span>
+        <span class="status-value">{{ databaseStatus.status }}</span>
+      </div>
+      <div class="status-item" [class]="'status-' + realtimeStatus.status">
+        <mat-icon>{{ realtimeStatus.icon }}</mat-icon>
+        <span class="status-label">Real-time Service</span>
+        <span class="status-value">{{ realtimeStatus.status }}</span>
+      </div>
+      <div class="status-item" [class]="'status-' + systemStatus.status">
+        <mat-icon>{{ systemStatus.icon }}</mat-icon>
+        <span class="status-label">System Resources</span>
+        <span class="status-value">{{ systemStatus.status }}</span>
+      </div>
+    </div>
+  </div>
+</div>

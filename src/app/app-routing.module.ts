@@ -16,9 +16,11 @@ import { RegisterHardwareBoardComponent } from './features/hardware/components/r
 import { ViewHardwarePanelDetailsComponent } from './features/hardware/components/view-hardware-panel-details/view-hardware-panel-details.component';
 
 // Dashboard Components
-import { ConsoleComponent } from './features/dashboard/components/console/console.component';
 import { DashboardComponent } from './features/dashboard/components/dashboard/dashboard.component';
 import { SettingsComponent } from './features/dashboard/components/settings/settings.component';
+
+// Console Components
+import { ConsoleComponent } from './features/console/components/console/console.component';
 
 // Simulator Components
 import { ManageSimulatorEventsComponent } from './features/simulator/components/manage-simulator-events/manage-simulator-events.component';

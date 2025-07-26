@@ -26,6 +26,7 @@ import { FormValidationService } from './core/services/form-validation.service';
 import { HardwareModule } from './features/hardware/hardware.module';
 import { SimulatorModule } from './features/simulator/simulator.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
+import { ConsoleModule } from './features/console/console.module';
 
 // Shared Module
 import { SharedModule } from './shared/shared.module';
@@ -51,6 +52,7 @@ import { ExitAppDialogComponent } from './core/components/exit-app-dialog.compon
     HardwareModule,
     SimulatorModule,
     DashboardModule,
+    ConsoleModule,
 
     // Shared Module
     SharedModule

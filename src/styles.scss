@@ -400,8 +400,6 @@ img {
 
 // Light theme class (explicit) - only colors needed since base is already light
 .light-theme {
-  @include mat.all-component-colors($light-theme);
-
   // Light theme CSS custom properties
   --mat-sys-surface: #ffffff;
   --mat-sys-on-surface: #1f1f1f;

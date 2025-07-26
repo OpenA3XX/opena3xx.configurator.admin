@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -18,7 +18,7 @@ import { DeleteHardwareInputDialogComponent } from '../delete-hardware-input-dia
   templateUrl: './view-hardware-panel-details.component.html',
   styleUrls: ['./view-hardware-panel-details.component.scss'],
 })
-export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit {
+export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   idParam!: number;
   public hardwarePanelDto: HardwarePanelDto;
   public displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType', 'action'];
@@ -38,6 +38,16 @@ export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit 
     public viewHardwareInputOutputSelectorsDialog: MatDialog,
     public dialog: MatDialog
   ) {}
+
+  ngOnDestroy(): void {
+    // Clean up ViewChild references
+    if (this.inputsDataSource) {
+      this.inputsDataSource.disconnect();
+    }
+    if (this.outputsDataSource) {
+      this.outputsDataSource.disconnect();
+    }
+  }
 
   ngOnInit(): void {
     this.router.routerState.root.queryParams.subscribe((params) => {

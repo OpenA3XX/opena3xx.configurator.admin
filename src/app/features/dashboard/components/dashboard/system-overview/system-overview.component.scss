@@ -1,0 +1,193 @@
+// Section Titles
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.3s ease;
+
+  &::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, #1976d2, #42a5f5);
+    border-radius: 2px;
+  }
+}
+
+// Dark theme for section title
+:host.dark-theme .section-title {
+  color: #e0e0e0;
+}
+
+// System Overview Cards
+.overview-section {
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .overview-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: white;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    mat-card-content {
+      padding: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        color: #1976d2;
+      }
+
+      .card-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #666;
+        margin: 0;
+        transition: color 0.3s ease;
+      }
+    }
+
+    .card-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1976d2;
+      transition: color 0.3s ease;
+    }
+
+    .card-subtitle {
+      font-size: 0.875rem;
+      color: #666;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+
+    // Card-specific styling - using semantic colors for health status
+    &.health-card {
+      .card-value {
+        color: #1976d2; // Default blue
+      }
+      mat-icon.healthy {
+        color: #4caf50; // Green for healthy
+      }
+      mat-icon.warning {
+        color: #ff9800; // Orange for warning
+      }
+      mat-icon.error {
+        color: #f44336; // Red for error
+      }
+
+      // Health status-specific colors
+      &.status-healthy {
+        .card-value {
+          color: #4caf50; // Green
+        }
+        mat-icon {
+          color: #4caf50; // Green
+        }
+      }
+
+      &.status-warning {
+        .card-value {
+          color: #ff9800; // Orange
+        }
+        mat-icon {
+          color: #ff9800; // Orange
+        }
+      }
+
+      &.status-error {
+        .card-value {
+          color: #f44336; // Red
+        }
+        mat-icon {
+          color: #f44336; // Red
+        }
+      }
+    }
+
+    &.boards-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.panels-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.events-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+  }
+}
+
+// Dark theme styles for overview cards
+:host.dark-theme {
+  .overview-card {
+    background: #1e1e1e !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-title {
+      color: #b0b0b0 !important;
+    }
+
+    .card-subtitle {
+      color: #b0b0b0 !important;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .overview-section .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .overview-card {
+    mat-card-content {
+      padding: 16px;
+    }
+
+    .card-value {
+      font-size: 2rem;
+    }
+  }
+}

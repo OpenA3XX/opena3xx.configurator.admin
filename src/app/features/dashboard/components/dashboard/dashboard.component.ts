@@ -72,23 +72,33 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadDashboardData();
-    this.updateLastUpdated();
-
-    // Subscribe to theme changes
-    this.themeSubscription = this.themeService.isDarkMode$.subscribe(isDark => {
-      this.isDarkMode = isDark;
-    });
-
-    // Update every 30 seconds
-    setInterval(() => {
+    try {
+      this.loadDashboardData();
       this.updateLastUpdated();
-    }, 30000);
+
+      // Subscribe to theme changes
+      if (this.themeService) {
+        this.themeSubscription = this.themeService.isDarkMode$.subscribe(isDark => {
+          this.isDarkMode = isDark;
+        });
+      }
+
+      // Update every 30 seconds
+      setInterval(() => {
+        this.updateLastUpdated();
+      }, 30000);
+    } catch (error) {
+      console.error('Error in dashboard ngOnInit:', error);
+    }
   }
 
   ngOnDestroy(): void {
-    if (this.themeSubscription) {
-      this.themeSubscription.unsubscribe();
+    try {
+      if (this.themeSubscription) {
+        this.themeSubscription.unsubscribe();
+      }
+    } catch (error) {
+      console.error('Error in dashboard ngOnDestroy:', error);
     }
   }
 
@@ -112,11 +122,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
 
       // Update connected systems
-      this.connectedSystems = this.realtimeService.isConnected ? 1 : 0;
+      this.connectedSystems = this.realtimeService && this.realtimeService.isConnected ? 1 : 0;
 
       // Update real-time status
-      this.realtimeStatus.status = this.realtimeService.isConnected ? 'online' : 'offline';
-      this.realtimeStatus.icon = this.realtimeService.isConnected ? 'sync' : 'sync_disabled';
+      this.realtimeStatus.status = this.realtimeService && this.realtimeService.isConnected ? 'online' : 'offline';
+      this.realtimeStatus.icon = this.realtimeService && this.realtimeService.isConnected ? 'sync' : 'sync_disabled';
 
       // Load recent activities (mock data for now)
       this.loadRecentActivities();
@@ -188,18 +198,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   // Navigation methods
   navigateToHardware(): void {
-    this.router.navigateByUrl('/manage/hardware-boards');
+    try {
+      this.router.navigateByUrl('/manage/hardware-boards');
+    } catch (error) {
+      console.error('Error navigating to hardware:', error);
+    }
   }
 
   navigateToPanels(): void {
-    this.router.navigateByUrl('/manage/hardware-panels');
+    try {
+      this.router.navigateByUrl('/manage/hardware-panels');
+    } catch (error) {
+      console.error('Error navigating to panels:', error);
+    }
   }
 
   navigateToConsole(): void {
-    this.router.navigateByUrl('/console');
+    try {
+      this.router.navigateByUrl('/console');
+    } catch (error) {
+      console.error('Error navigating to console:', error);
+    }
   }
 
   navigateToSettings(): void {
-    this.router.navigateByUrl('/settings');
+    try {
+      this.router.navigateByUrl('/settings');
+    } catch (error) {
+      console.error('Error navigating to settings:', error);
+    }
   }
 }

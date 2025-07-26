@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,7 +17,7 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './manage-hardware-panels.component.html',
   styleUrls: ['./manage-hardware-panels.component.scss'],
 })
-export class ManageHardwarePanelsComponent implements AfterViewInit {
+export class ManageHardwarePanelsComponent implements AfterViewInit, OnDestroy {
   public displayedColumns: string[] = [
     'id',
     'name',
@@ -39,7 +40,12 @@ export class ManageHardwarePanelsComponent implements AfterViewInit {
     private _snackBar: MatSnackBar
   ) {}
 
-
+  ngOnDestroy(): void {
+    // Clean up ViewChild references
+    if (this.dataSource) {
+      this.dataSource.disconnect();
+    }
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

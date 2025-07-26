@@ -1,0 +1,97 @@
+// Quick Access Grid
+.quick-access-section {
+  .quick-access-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .access-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: white;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      border-color: #1976d2;
+    }
+
+    mat-card-content {
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .access-icon {
+      margin-bottom: 16px;
+
+      mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        color: #1976d2;
+      }
+    }
+
+    .access-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    .access-description {
+      font-size: 0.875rem;
+      color: #666;
+      margin: 0;
+      line-height: 1.5;
+      transition: color 0.3s ease;
+    }
+  }
+}
+
+// Dark theme styles for quick access cards
+:host.dark-theme {
+  .access-card {
+    background: #1e1e1e !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .access-title {
+      color: #e0e0e0 !important;
+    }
+
+    .access-description {
+      color: #b0b0b0 !important;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .quick-access-section .quick-access-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .access-card {
+    mat-card-content {
+      padding: 24px 16px;
+    }
+
+    .access-icon mat-icon {
+      font-size: 36px;
+      width: 36px;
+      height: 36px;
+    }
+  }
+}

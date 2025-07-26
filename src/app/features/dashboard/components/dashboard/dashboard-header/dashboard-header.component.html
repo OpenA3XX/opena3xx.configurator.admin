@@ -1,0 +1,28 @@
+<div class="dashboard-header">
+  <div class="welcome-section">
+    <h1 class="welcome-title">Welcome to OpenA3XX Configurator Admin</h1>
+    <p class="welcome-subtitle">Manage your hardware configuration and monitor system status</p>
+  </div>
+
+  <div class="quick-stats-bar">
+    <div class="stat-item">
+      <mat-icon>hardware</mat-icon>
+      <span class="stat-value">{{ totalBoards }}</span>
+      <span class="stat-label">Boards</span>
+    </div>
+    <div class="stat-item">
+      <mat-icon>dashboard</mat-icon>
+      <span class="stat-value">{{ totalPanels }}</span>
+      <span class="stat-label">Panels</span>
+    </div>
+    <div class="stat-item">
+      <mat-icon>wifi</mat-icon>
+      <span class="stat-value">{{ connectedSystems }}</span>
+      <span class="stat-label">Connected</span>
+    </div>
+    <div class="stat-item">
+      <mat-icon>schedule</mat-icon>
+      <span class="stat-label">{{ lastUpdated | date:'short' }}</span>
+    </div>
+  </div>
+</div>

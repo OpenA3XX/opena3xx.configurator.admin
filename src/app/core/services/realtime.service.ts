@@ -27,12 +27,13 @@ export interface KeepAliveEvent {
   providedIn: 'root',
 })
 export class RealTimeService {
-  private hubConnection: HubConnection;
+  private hubConnection: HubConnection | null = null;
   public flightEvents: FlightEvent[] = [];
   public isConnected: boolean = false;
   public keepAliveEvents: KeepAliveEvent[] = [];
   private connectionUrl = 'http://localhost:5000/signalr';
   private reconnectionInterval: any;
+
   constructor(private http: HttpClient) {}
 
   public connect = () => {
@@ -43,7 +44,13 @@ export class RealTimeService {
   };
 
   public disconnect = () => {
-    this.hubConnection.stop();
+    if (this.hubConnection && this.hubConnection.state !== HubConnectionState.Disconnected) {
+      this.hubConnection.stop().catch(error => {
+        console.error('Error disconnecting from SignalR:', error);
+      });
+    }
+    this.isConnected = false;
+    clearInterval(this.reconnectionInterval);
   };
 
   private getConnection(): HubConnection {
@@ -52,27 +59,50 @@ export class RealTimeService {
 
   private pollReconnection = () => {
     return setInterval(() => {
-      if (this.hubConnection.state === HubConnectionState.Disconnected) {
+      if (this.hubConnection && this.hubConnection.state === HubConnectionState.Disconnected) {
         this.connect();
       }
     }, 1000);
   };
+
   private startConnection() {
-    this.hubConnection = this.getConnection();
-    this.hubConnection
-      .start()
-      .then(() => (this.isConnected = true))
-      .catch(() => (this.isConnected = false));
+    try {
+      this.hubConnection = this.getConnection();
+      this.hubConnection
+        .start()
+        .then(() => (this.isConnected = true))
+        .catch((error) => {
+          console.error('Error connecting to SignalR:', error);
+          this.isConnected = false;
+        });
+    } catch (error) {
+      console.error('Error creating SignalR connection:', error);
+      this.isConnected = false;
+    }
   }
 
   private addListeners() {
+    if (!this.hubConnection) {
+      console.error('HubConnection is null, cannot add listeners');
+      return;
+    }
+
     this.hubConnection.on('HardwareInputSelectors', (payload: string) => {
-      const data: FlightEvent = JSON.parse(payload);
-      this.flightEvents.unshift(data);
+      try {
+        const data: FlightEvent = JSON.parse(payload);
+        this.flightEvents.unshift(data);
+      } catch (error) {
+        console.error('Error parsing HardwareInputSelectors payload:', error);
+      }
     });
+
     this.hubConnection.on('KeepAlive', (payload: string) => {
-      const data: KeepAliveEvent = JSON.parse(payload);
-      this.keepAliveEvents.unshift(data);
+      try {
+        const data: KeepAliveEvent = JSON.parse(payload);
+        this.keepAliveEvents.unshift(data);
+      } catch (error) {
+        console.error('Error parsing KeepAlive payload:', error);
+      }
     });
 
     this.hubConnection.onclose(() => {
