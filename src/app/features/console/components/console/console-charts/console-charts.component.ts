@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'opena3xx-console-charts',
-  templateUrl: './console-charts.component.html',
-  styleUrls: ['./console-charts.component.scss']
+    selector: 'opena3xx-console-charts',
+    templateUrl: './console-charts.component.html',
+    styleUrls: ['./console-charts.component.scss'],
+    standalone: false
 })
 export class ConsoleChartsComponent {
   @Input() chartData: any[] = [];

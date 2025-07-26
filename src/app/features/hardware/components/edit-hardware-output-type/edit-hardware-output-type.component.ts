@@ -6,9 +6,10 @@ import { DataService } from 'src/app/core/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'opena3xx-edit-hardware-output-type',
-  templateUrl: './edit-hardware-output-type.component.html',
-  styleUrls: ['./edit-hardware-output-type.component.scss'],
+    selector: 'opena3xx-edit-hardware-output-type',
+    templateUrl: './edit-hardware-output-type.component.html',
+    styleUrls: ['./edit-hardware-output-type.component.scss'],
+    standalone: false
 })
 export class EditHardwareOutputTypeComponent implements OnInit {
   idParam!: number;

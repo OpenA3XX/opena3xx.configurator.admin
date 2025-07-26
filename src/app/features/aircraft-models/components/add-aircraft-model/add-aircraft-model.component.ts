@@ -6,9 +6,10 @@ import { AircraftModelService } from '../../services/aircraft-model.service';
 import { AddAircraftModelDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-add-aircraft-model',
-  templateUrl: './add-aircraft-model.component.html',
-  styleUrls: ['./add-aircraft-model.component.scss']
+    selector: 'opena3xx-add-aircraft-model',
+    templateUrl: './add-aircraft-model.component.html',
+    styleUrls: ['./add-aircraft-model.component.scss'],
+    standalone: false
 })
 export class AddAircraftModelComponent implements OnInit {
   aircraftModelForm: FormGroup;

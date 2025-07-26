@@ -4,9 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HardwareInputDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-view-hardware-input-selectors-dialog',
-  templateUrl: './view-hardware-input-selectors-dialog.component.html',
-  styleUrls: ['./view-hardware-input-selectors-dialog.component.scss'],
+    selector: 'opena3xx-view-hardware-input-selectors-dialog',
+    templateUrl: './view-hardware-input-selectors-dialog.component.html',
+    styleUrls: ['./view-hardware-input-selectors-dialog.component.scss'],
+    standalone: false
 })
 export class ViewHardwareInputSelectorsDialogComponent {
   public displayedInputColumns: string[] = ['id', 'name'];

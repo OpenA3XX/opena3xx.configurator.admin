@@ -5,9 +5,10 @@ import { AircraftModelService } from '../../services/aircraft-model.service';
 import { AircraftModelDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-view-aircraft-model-details',
-  templateUrl: './view-aircraft-model-details.component.html',
-  styleUrls: ['./view-aircraft-model-details.component.scss']
+    selector: 'opena3xx-view-aircraft-model-details',
+    templateUrl: './view-aircraft-model-details.component.html',
+    styleUrls: ['./view-aircraft-model-details.component.scss'],
+    standalone: false
 })
 export class ViewAircraftModelDetailsComponent implements OnInit {
   aircraftModel: AircraftModelDto | null = null;

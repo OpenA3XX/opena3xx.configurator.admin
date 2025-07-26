@@ -8,9 +8,10 @@ import { DataService } from 'src/app/core/services/data.service';
 import { HardwareOutputTypeDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-manage-hardware-output-types',
-  templateUrl: './manage-hardware-output-types.component.html',
-  styleUrls: ['./manage-hardware-output-types.component.scss'],
+    selector: 'opena3xx-manage-hardware-output-types',
+    templateUrl: './manage-hardware-output-types.component.html',
+    styleUrls: ['./manage-hardware-output-types.component.scss'],
+    standalone: false
 })
 export class ManageHardwareOutputTypesComponent implements OnInit, AfterViewInit, OnDestroy {
   public displayedColumns: string[] = ['id', 'name', 'details'];

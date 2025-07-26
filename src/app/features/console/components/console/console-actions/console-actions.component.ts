@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'opena3xx-console-actions',
-  templateUrl: './console-actions.component.html',
-  styleUrls: ['./console-actions.component.scss']
+    selector: 'opena3xx-console-actions',
+    templateUrl: './console-actions.component.html',
+    styleUrls: ['./console-actions.component.scss'],
+    standalone: false
 })
 export class ConsoleActionsComponent {
   @Input() isDarkMode: boolean = false;

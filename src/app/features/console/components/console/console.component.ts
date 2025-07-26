@@ -12,9 +12,10 @@ import { HardwareBoardDto } from 'src/app/shared/models/models';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'opena3xx-console',
-  templateUrl: './console.component.html',
-  styleUrls: ['./console.component.scss'],
+    selector: 'opena3xx-console',
+    templateUrl: './console.component.html',
+    styleUrls: ['./console.component.scss'],
+    standalone: false
 })
 export class ConsoleComponent implements OnInit, OnDestroy {
   private filterValue: string = '';

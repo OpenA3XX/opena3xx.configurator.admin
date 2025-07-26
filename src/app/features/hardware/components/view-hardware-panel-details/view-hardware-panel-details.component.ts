@@ -14,9 +14,10 @@ import { DataService } from 'src/app/core/services/data.service';
 import { DeleteHardwareInputDialogComponent } from '../delete-hardware-input-dialog/delete-hardware-input-dialog.component';
 
 @Component({
-  selector: 'opena3xx-view-hardware-panel-details',
-  templateUrl: './view-hardware-panel-details.component.html',
-  styleUrls: ['./view-hardware-panel-details.component.scss'],
+    selector: 'opena3xx-view-hardware-panel-details',
+    templateUrl: './view-hardware-panel-details.component.html',
+    styleUrls: ['./view-hardware-panel-details.component.scss'],
+    standalone: false
 })
 export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   idParam!: number;

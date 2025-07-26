@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HardwareInputDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-delete-hardware-input-dialog-confirm',
-  templateUrl: './delete-hardware-input-dialog.component.html',
-  styleUrls: ['./delete-hardware-input-dialog.component.scss']
+    selector: 'opena3xx-delete-hardware-input-dialog-confirm',
+    templateUrl: './delete-hardware-input-dialog.component.html',
+    styleUrls: ['./delete-hardware-input-dialog.component.scss'],
+    standalone: false
 })
 export class DeleteHardwareInputDialogComponent implements OnInit {
   disabled: boolean = true;

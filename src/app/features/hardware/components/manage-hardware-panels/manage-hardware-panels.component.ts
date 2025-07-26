@@ -13,9 +13,10 @@ import { HardwarePanelOverviewDto } from 'src/app/shared/models/models';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
-  selector: 'opena3xx-manage-hardware-panels',
-  templateUrl: './manage-hardware-panels.component.html',
-  styleUrls: ['./manage-hardware-panels.component.scss'],
+    selector: 'opena3xx-manage-hardware-panels',
+    templateUrl: './manage-hardware-panels.component.html',
+    styleUrls: ['./manage-hardware-panels.component.scss'],
+    standalone: false
 })
 export class ManageHardwarePanelsComponent implements AfterViewInit, OnDestroy {
   public displayedColumns: string[] = [

@@ -1,9 +1,10 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'opena3xx-dashboard-header',
-  templateUrl: './dashboard-header.component.html',
-  styleUrls: ['./dashboard-header.component.scss']
+    selector: 'opena3xx-dashboard-header',
+    templateUrl: './dashboard-header.component.html',
+    styleUrls: ['./dashboard-header.component.scss'],
+    standalone: false
 })
 export class DashboardHeaderComponent {
   @Input() totalBoards: number = 0;

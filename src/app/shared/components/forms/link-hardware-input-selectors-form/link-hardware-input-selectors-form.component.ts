@@ -8,9 +8,10 @@ import { HardwareInputDto, SimulatorEventItemDto } from 'src/app/shared/models/m
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'opena3xx-link-hardware-input-selectors-form',
-  templateUrl: './link-hardware-input-selectors-form.component.html',
-  styleUrls: ['./link-hardware-input-selectors-form.component.scss'],
+    selector: 'opena3xx-link-hardware-input-selectors-form',
+    templateUrl: './link-hardware-input-selectors-form.component.html',
+    styleUrls: ['./link-hardware-input-selectors-form.component.scss'],
+    standalone: false
 })
 export class LinkHardwareInputSelectorsFormComponent implements OnInit {
   @Input() hardwareInputSelectorId!: number;

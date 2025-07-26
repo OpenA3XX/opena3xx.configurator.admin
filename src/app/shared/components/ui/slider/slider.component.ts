@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
 
 @Component({
-  selector: 'opena3xx-slider',
-  template: `
+    selector: 'opena3xx-slider',
+    template: `
     <div class="slider-container" [formGroup]="group" *ngIf="field">
       <mat-label>{{field.label}}</mat-label>
       <mat-slider
@@ -20,7 +20,7 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
       <mat-hint *ngIf="field.hint">{{field.hint}}</mat-hint>
     </div>
   `,
-  styles: [`
+    styles: [`
     .slider-container {
       width: 100%;
       margin-bottom: 16px;
@@ -28,7 +28,8 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
     .full-width {
       width: 100%;
     }
-  `]
+  `],
+    standalone: false
 })
 export class SliderComponent implements OnInit {
   @Input() field!: FieldConfig;

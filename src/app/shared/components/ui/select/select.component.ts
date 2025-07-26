@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
 @Component({
-  selector: 'opena3xx-forms-select',
-  templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss']
+    selector: 'opena3xx-forms-select',
+    templateUrl: './select.component.html',
+    styleUrls: ['./select.component.scss'],
+    standalone: false
 })
 export class SelectComponent {
   @Output() selectChange: EventEmitter<{value: string}> = new EventEmitter<{value: string}>();

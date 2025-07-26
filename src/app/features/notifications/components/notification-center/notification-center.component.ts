@@ -8,9 +8,10 @@ import { Subscription } from 'rxjs';
 import { NotificationService, Notification, NotificationFilters } from '../../services/notification.service';
 
 @Component({
-  selector: 'app-notification-center',
-  templateUrl: './notification-center.component.html',
-  styleUrls: ['./notification-center.component.scss']
+    selector: 'app-notification-center',
+    templateUrl: './notification-center.component.html',
+    styleUrls: ['./notification-center.component.scss'],
+    standalone: false
 })
 export class NotificationCenterComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -8,9 +8,10 @@ import { firstValueFrom } from 'rxjs';
 import { HardwareBoardDto, HardwarePanelOverviewDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+    selector: 'opena3xx-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   // Quick stats

@@ -6,9 +6,10 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
 import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
-  selector: 'opena3xx-edit-hardware-panel',
-  templateUrl: './edit-hardware-panel.component.html',
-  styleUrls: ['./edit-hardware-panel.component.scss'],
+    selector: 'opena3xx-edit-hardware-panel',
+    templateUrl: './edit-hardware-panel.component.html',
+    styleUrls: ['./edit-hardware-panel.component.scss'],
+    standalone: false
 })
 export class EditHardwarePanelComponent {
   addHardwarePanelForm: FormGroup;

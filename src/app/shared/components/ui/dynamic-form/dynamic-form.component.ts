@@ -17,15 +17,16 @@ import {
 import { FieldConfig, Validator, FormConfiguration } from "src/app/shared/models/field.interface";
 
 @Component({
-  exportAs: "dynamicForm",
-  selector: 'opena3xx-dynamic-form',
-  template: `
+    exportAs: "dynamicForm",
+    selector: 'opena3xx-dynamic-form',
+    template: `
     <form class="dynamic-form" [formGroup]="form" (submit)="onSubmit($event)">
       <ng-container *ngFor="let field of fields;" opena3xxDynamicField [field]="field" [group]="form">
       </ng-container>
     </form>
   `,
-  styleUrls: ['./dynamic-form.component.scss'],
+    styleUrls: ['./dynamic-form.component.scss'],
+    standalone: false
 })
 export class DynamicFormComponent implements OnInit, OnChanges {
   @Input() fields: FieldConfig[] = [];

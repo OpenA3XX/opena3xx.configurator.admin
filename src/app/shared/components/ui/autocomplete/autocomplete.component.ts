@@ -20,9 +20,10 @@ import { map, startWith } from 'rxjs/operators';
 //         }}</mat-error>
 //       </ng-container>
 @Component({
-  selector: 'opena3xx-forms-autocomplete',
-  templateUrl: './autocomplete.component.html',
-  styleUrls: ['./autocomplete.component.scss']
+    selector: 'opena3xx-forms-autocomplete',
+    templateUrl: './autocomplete.component.html',
+    styleUrls: ['./autocomplete.component.scss'],
+    standalone: false
 })
 export class AutocompleteComponent implements OnInit {
   @Input() field!: FieldConfig;

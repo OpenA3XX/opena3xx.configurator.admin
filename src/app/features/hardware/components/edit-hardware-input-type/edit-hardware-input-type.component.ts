@@ -7,9 +7,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HardwareInputTypeDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-edit-hardware-input-type',
-  templateUrl: './edit-hardware-input-type.component.html',
-  styleUrls: ['./edit-hardware-input-type.component.scss'],
+    selector: 'opena3xx-edit-hardware-input-type',
+    templateUrl: './edit-hardware-input-type.component.html',
+    styleUrls: ['./edit-hardware-input-type.component.scss'],
+    standalone: false
 })
 export class EditHardwareInputTypeComponent implements OnInit {
   idParam!: number;

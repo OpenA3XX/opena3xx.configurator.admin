@@ -32,7 +32,8 @@ const componentMapper: { [key: string]: Type<unknown> } = {
 };
 
 @Directive({
-  selector: '[opena3xxDynamicField]'
+    selector: '[opena3xxDynamicField]',
+    standalone: false
 })
 export class DynamicFieldDirective implements OnInit {
   @Input() field!: FieldConfig;

@@ -6,9 +6,10 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
 import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
-  templateUrl: './register-hardware-board.component.html',
-  styleUrls: ['./register-hardware-board.component.scss'],
-  selector: 'opena3xx-register-hardware-board',
+    templateUrl: './register-hardware-board.component.html',
+    styleUrls: ['./register-hardware-board.component.scss'],
+    selector: 'opena3xx-register-hardware-board',
+    standalone: false
 })
 export class RegisterHardwareBoardComponent implements OnInit {
   public registerHardwareBoardForm: FormGroup;

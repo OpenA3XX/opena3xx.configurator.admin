@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
 
 @Component({
-  selector: 'opena3xx-input',
-  template: `
+    selector: 'opena3xx-input',
+    template: `
     <mat-form-field appearance="outline" class="full-width" [formGroup]="group" *ngIf="field">
       <mat-label>{{field.label}}</mat-label>
       <input matInput
@@ -20,12 +20,13 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
       </ng-container>
     </mat-form-field>
   `,
-  styles: [`
+    styles: [`
     .full-width {
       width: 100%;
       margin-bottom: 16px;
     }
-  `]
+  `],
+    standalone: false
 })
 export class InputComponent implements OnInit {
   @Input() field!: FieldConfig;

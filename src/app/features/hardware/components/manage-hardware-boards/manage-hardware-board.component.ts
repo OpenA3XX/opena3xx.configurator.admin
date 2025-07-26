@@ -7,9 +7,10 @@ import { HardwareBoardDto } from 'src/app/shared/models/models';
 import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
-  templateUrl: './manage-hardware-board.component.html',
-  styleUrls: ['./manage-hardware-board.component.scss'],
-  selector: 'opena3xx-manage-hardware-boards',
+    templateUrl: './manage-hardware-board.component.html',
+    styleUrls: ['./manage-hardware-board.component.scss'],
+    selector: 'opena3xx-manage-hardware-boards',
+    standalone: false
 })
 export class ManageHardwareBoardsComponent implements AfterViewInit, OnDestroy {
   public displayedColumns: string[] = [

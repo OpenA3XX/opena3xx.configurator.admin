@@ -10,9 +10,10 @@ import { DataService } from 'src/app/core/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HardwareBoardDto } from 'src/app/shared/models/models';
 @Component({
-  selector: 'opena3xx-map-hardware-output-selectors-form',
-  templateUrl: './map-hardware-output-selectors-form.component.html',
-  styleUrls: ['./map-hardware-output-selectors-form.component.scss'],
+    selector: 'opena3xx-map-hardware-output-selectors-form',
+    templateUrl: './map-hardware-output-selectors-form.component.html',
+    styleUrls: ['./map-hardware-output-selectors-form.component.scss'],
+    standalone: false
 })
 export class MapHardwareOutputSelectorsFormComponent implements OnInit {
   public hardwareBoardId: number;

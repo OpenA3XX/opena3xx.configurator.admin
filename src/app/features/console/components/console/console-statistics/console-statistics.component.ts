@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'opena3xx-console-statistics',
-  templateUrl: './console-statistics.component.html',
-  styleUrls: ['./console-statistics.component.scss']
+    selector: 'opena3xx-console-statistics',
+    templateUrl: './console-statistics.component.html',
+    styleUrls: ['./console-statistics.component.scss'],
+    standalone: false
 })
 export class ConsoleStatisticsComponent {
   @Input() totalEvents: number = 0;

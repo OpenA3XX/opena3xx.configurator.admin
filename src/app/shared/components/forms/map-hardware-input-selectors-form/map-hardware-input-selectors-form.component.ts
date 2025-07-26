@@ -12,9 +12,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HardwareBoardDto } from 'src/app/shared/models/models';
 import { firstValueFrom } from 'rxjs';
 @Component({
-  selector: 'opena3xx-map-hardware-input-selectors-form',
-  templateUrl: './map-hardware-input-selectors-form.component.html',
-  styleUrls: ['./map-hardware-input-selectors-form.component.scss'],
+    selector: 'opena3xx-map-hardware-input-selectors-form',
+    templateUrl: './map-hardware-input-selectors-form.component.html',
+    styleUrls: ['./map-hardware-input-selectors-form.component.scss'],
+    standalone: false
 })
 export class MapHardwareInputSelectorsFormComponent implements OnInit {
   public hardwareBoardId: number;

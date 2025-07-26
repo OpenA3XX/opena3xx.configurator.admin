@@ -9,9 +9,10 @@ import { AircraftModelDto } from 'src/app/shared/models/models';
 import { AircraftModelService } from '../../services/aircraft-model.service';
 
 @Component({
-  selector: 'opena3xx-manage-aircraft-models',
-  templateUrl: './manage-aircraft-models.component.html',
-  styleUrls: ['./manage-aircraft-models.component.scss']
+    selector: 'opena3xx-manage-aircraft-models',
+    templateUrl: './manage-aircraft-models.component.html',
+    styleUrls: ['./manage-aircraft-models.component.scss'],
+    standalone: false
 })
 export class ManageAircraftModelsComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = [

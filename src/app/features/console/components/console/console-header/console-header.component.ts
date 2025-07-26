@@ -2,9 +2,10 @@ import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/co
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'opena3xx-console-header',
-  templateUrl: './console-header.component.html',
-  styleUrls: ['./console-header.component.scss']
+    selector: 'opena3xx-console-header',
+    templateUrl: './console-header.component.html',
+    styleUrls: ['./console-header.component.scss'],
+    standalone: false
 })
 export class ConsoleHeaderComponent {
   @Input() isConnected: boolean = false;

@@ -5,9 +5,10 @@ import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NotificationFilters } from '../../services/notification.service';
 
 @Component({
-  selector: 'app-notification-filters',
-  templateUrl: './notification-filters.component.html',
-  styleUrls: ['./notification-filters.component.scss']
+    selector: 'app-notification-filters',
+    templateUrl: './notification-filters.component.html',
+    styleUrls: ['./notification-filters.component.scss'],
+    standalone: false
 })
 export class NotificationFiltersComponent implements OnInit, OnDestroy {
   filtersForm: FormGroup;

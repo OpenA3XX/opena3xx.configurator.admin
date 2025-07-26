@@ -9,9 +9,10 @@ import { DataService } from 'src/app/core/services/data.service';
 import { DynamicFormComponent } from 'src/app/shared/components/ui/dynamic-form/dynamic-form.component';
 
 @Component({
-  selector: 'opena3xx-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+    selector: 'opena3xx-settings',
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.scss'],
+    standalone: false
 })
 
 export class SettingsComponent{

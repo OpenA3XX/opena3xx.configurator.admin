@@ -6,9 +6,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HardwareInputTypeDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-add-hardware-input-type',
-  templateUrl: './add-hardware-input-type.component.html',
-  styleUrls: ['./add-hardware-input-type.component.scss'],
+    selector: 'opena3xx-add-hardware-input-type',
+    templateUrl: './add-hardware-input-type.component.html',
+    styleUrls: ['./add-hardware-input-type.component.scss'],
+    standalone: false
 })
 export class AddHardwareInputTypeComponent {
   public hardwareInputTypeName: string = '';

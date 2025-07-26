@@ -5,9 +5,10 @@ import { DataService } from 'src/app/core/services/data.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'opena3xx-console-filters',
-  templateUrl: './console-filters.component.html',
-  styleUrls: ['./console-filters.component.scss']
+    selector: 'opena3xx-console-filters',
+    templateUrl: './console-filters.component.html',
+    styleUrls: ['./console-filters.component.scss'],
+    standalone: false
 })
 export class ConsoleFiltersComponent implements OnInit, OnDestroy {
   @Input() hardwareBoards: HardwareBoardDto[] = [];

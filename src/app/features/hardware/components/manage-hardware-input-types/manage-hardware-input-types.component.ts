@@ -8,9 +8,10 @@ import { DataService } from 'src/app/core/services/data.service';
 import { HardwareInputTypeDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-manage-hardware-input-types',
-  templateUrl: './manage-hardware-input-types.component.html',
-  styleUrls: ['./manage-hardware-input-types.component.scss'],
+    selector: 'opena3xx-manage-hardware-input-types',
+    templateUrl: './manage-hardware-input-types.component.html',
+    styleUrls: ['./manage-hardware-input-types.component.scss'],
+    standalone: false
 })
 export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit, OnDestroy {
   public displayedColumns: string[] = ['id', 'name', 'details'];

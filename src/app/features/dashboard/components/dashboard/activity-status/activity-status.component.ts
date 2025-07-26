@@ -1,9 +1,10 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'opena3xx-activity-status',
-  templateUrl: './activity-status.component.html',
-  styleUrls: ['./activity-status.component.scss']
+    selector: 'opena3xx-activity-status',
+    templateUrl: './activity-status.component.html',
+    styleUrls: ['./activity-status.component.scss'],
+    standalone: false
 })
 export class ActivityStatusComponent {
   @Input() recentActivities: any[] = [];

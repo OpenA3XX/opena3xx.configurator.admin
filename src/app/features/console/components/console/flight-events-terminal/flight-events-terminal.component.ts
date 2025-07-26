@@ -2,9 +2,10 @@ import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/co
 import { FlightEvent } from 'src/app/core/services/realtime.service';
 
 @Component({
-  selector: 'opena3xx-flight-events-terminal',
-  templateUrl: './flight-events-terminal.component.html',
-  styleUrls: ['./flight-events-terminal.component.scss']
+    selector: 'opena3xx-flight-events-terminal',
+    templateUrl: './flight-events-terminal.component.html',
+    styleUrls: ['./flight-events-terminal.component.scss'],
+    standalone: false
 })
 export class FlightEventsTerminalComponent {
   @Input() events: FlightEvent[] = [];

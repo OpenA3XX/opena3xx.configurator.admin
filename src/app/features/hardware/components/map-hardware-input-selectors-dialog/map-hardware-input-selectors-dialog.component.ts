@@ -8,9 +8,10 @@ import { HardwareInputDto } from 'src/app/shared/models/models';
 
 
 @Component({
-  selector: 'opena3xx-map-hardware-input-selectors-dialog',
-  templateUrl: './map-hardware-input-selectors-dialog.component.html',
-  styleUrls: ['./map-hardware-input-selectors-dialog.component.scss'],
+    selector: 'opena3xx-map-hardware-input-selectors-dialog',
+    templateUrl: './map-hardware-input-selectors-dialog.component.html',
+    styleUrls: ['./map-hardware-input-selectors-dialog.component.scss'],
+    standalone: false
 })
 export class MapHardwareInputSelectorsDialogComponent {
   public hardwareInputSelector: any;

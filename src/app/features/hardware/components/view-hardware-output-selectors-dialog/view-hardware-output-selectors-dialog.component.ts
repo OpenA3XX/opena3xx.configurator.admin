@@ -4,9 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HardwareOutputDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-view-hardware-output-selectors-dialog',
-  templateUrl: './view-hardware-output-selectors-dialog.component.html',
-  styleUrls: ['./view-hardware-output-selectors-dialog.component.scss'],
+    selector: 'opena3xx-view-hardware-output-selectors-dialog',
+    templateUrl: './view-hardware-output-selectors-dialog.component.html',
+    styleUrls: ['./view-hardware-output-selectors-dialog.component.scss'],
+    standalone: false
 })
 export class ViewHardwareOutputSelectorsDialogComponent {
   public displayedOutputColumns: string[] = ['id', 'name'];

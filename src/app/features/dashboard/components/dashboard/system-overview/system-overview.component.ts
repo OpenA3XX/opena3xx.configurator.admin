@@ -1,9 +1,10 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'opena3xx-system-overview',
-  templateUrl: './system-overview.component.html',
-  styleUrls: ['./system-overview.component.scss']
+    selector: 'opena3xx-system-overview',
+    templateUrl: './system-overview.component.html',
+    styleUrls: ['./system-overview.component.scss'],
+    standalone: false
 })
 export class SystemOverviewComponent {
   @Input() systemHealth: any = {

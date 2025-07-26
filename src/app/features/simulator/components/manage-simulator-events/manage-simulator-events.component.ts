@@ -9,9 +9,10 @@ import { SimulatorEventDto } from 'src/app/shared/models/models';
 import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
-  selector: 'opena3xx-manage-simulator-events',
-  templateUrl: './manage-simulator-events.component.html',
-  styleUrls: ['./manage-simulator-events.component.scss'],
+    selector: 'opena3xx-manage-simulator-events',
+    templateUrl: './manage-simulator-events.component.html',
+    styleUrls: ['./manage-simulator-events.component.scss'],
+    standalone: false
 })
 export class ManageSimulatorEventsComponent implements OnInit, AfterViewInit, OnDestroy {
   public displayedColumns: string[] = [

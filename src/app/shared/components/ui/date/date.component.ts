@@ -4,8 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
 
 @Component({
-  selector: 'opena3xx-date',
-  template: `
+    selector: 'opena3xx-date',
+    template: `
     <mat-form-field appearance="outline" class="full-width margin-top" [formGroup]="group">
       <mat-label>{{field?.label}}</mat-label>
       <input matInput [matDatepicker]="picker" [formControlName]="field?.name" [placeholder]="field?.label" [disabled]="field?.disabled">
@@ -17,14 +17,15 @@ import { FieldConfig } from 'src/app/shared/models/field.interface';
       </ng-container>
     </mat-form-field>
   `,
-  styles: [`
+    styles: [`
     .full-width {
       width: 100%;
     }
     .margin-top {
       margin-top: 16px;
     }
-  `]
+  `],
+    standalone: false
 })
 export class DateComponent implements OnInit {
   @Input() field!: FieldConfig;  // ✅ Added missing @Input()

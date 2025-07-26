@@ -6,9 +6,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HardwareOutputTypeDto } from 'src/app/shared/models/models';
 
 @Component({
-  selector: 'opena3xx-add-hardware-output-type',
-  templateUrl: './add-hardware-output-type.component.html',
-  styleUrls: ['./add-hardware-output-type.component.scss'],
+    selector: 'opena3xx-add-hardware-output-type',
+    templateUrl: './add-hardware-output-type.component.html',
+    styleUrls: ['./add-hardware-output-type.component.scss'],
+    standalone: false
 })
 export class AddHardwareOutputTypeComponent {
   public hardwareOutputTypeName: string = '';

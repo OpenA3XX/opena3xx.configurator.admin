@@ -1,9 +1,10 @@
 import { Component, Output, EventEmitter, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'opena3xx-quick-access',
-  templateUrl: './quick-access.component.html',
-  styleUrls: ['./quick-access.component.scss']
+    selector: 'opena3xx-quick-access',
+    templateUrl: './quick-access.component.html',
+    styleUrls: ['./quick-access.component.scss'],
+    standalone: false
 })
 export class QuickAccessComponent {
   @Input() isDarkMode: boolean = false;

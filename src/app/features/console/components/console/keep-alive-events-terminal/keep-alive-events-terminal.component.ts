@@ -2,9 +2,10 @@ import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/co
 import { KeepAliveEvent } from 'src/app/core/services/realtime.service';
 
 @Component({
-  selector: 'opena3xx-keep-alive-events-terminal',
-  templateUrl: './keep-alive-events-terminal.component.html',
-  styleUrls: ['./keep-alive-events-terminal.component.scss']
+    selector: 'opena3xx-keep-alive-events-terminal',
+    templateUrl: './keep-alive-events-terminal.component.html',
+    styleUrls: ['./keep-alive-events-terminal.component.scss'],
+    standalone: false
 })
 export class KeepAliveEventsTerminalComponent {
   @Input() events: KeepAliveEvent[] = [];
