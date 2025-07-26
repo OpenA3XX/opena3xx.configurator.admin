@@ -77,7 +77,7 @@ export class EditAircraftModelComponent implements OnInit {
       };
 
       this.aircraftModelService.updateAircraftModel(this.aircraftModelId, updateData).subscribe({
-        next: (result) => {
+        next: () => {
           this.loading = false;
           this.snackBar.open('Aircraft model updated successfully', 'Close', {
             duration: 3000

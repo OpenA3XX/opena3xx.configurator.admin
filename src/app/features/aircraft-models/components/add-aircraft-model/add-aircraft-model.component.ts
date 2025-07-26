@@ -38,7 +38,7 @@ export class AddAircraftModelComponent implements OnInit {
       const aircraftModel: AddAircraftModelDto = this.aircraftModelForm.value;
 
       this.aircraftModelService.addAircraftModel(aircraftModel).subscribe({
-        next: (result) => {
+        next: () => {
           this.loading = false;
           this.snackBar.open('Aircraft model added successfully', 'Close', {
             duration: 3000

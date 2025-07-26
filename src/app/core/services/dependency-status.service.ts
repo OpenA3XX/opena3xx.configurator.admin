@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, throwError, timer, of } from 'rxjs';
-import { catchError, switchMap, share, map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, timer, of } from 'rxjs';
+import { catchError, switchMap, share } from 'rxjs/operators';
 import { ConfigurationService } from './configuration.service';
 
 export interface BackendDependencyInfo {

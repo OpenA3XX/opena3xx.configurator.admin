@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CodeModel } from '@ngstack/code-editor';
 import { RealTimeService, FlightEvent, KeepAliveEvent } from 'src/app/core/services/realtime.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +8,6 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { DataService } from 'src/app/core/services/data.service';
 import { HardwareBoardDto } from 'src/app/shared/models/models';
-import { firstValueFrom } from 'rxjs';
 
 @Component({
     selector: 'opena3xx-console',

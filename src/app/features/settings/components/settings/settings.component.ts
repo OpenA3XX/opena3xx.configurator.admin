@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { map} from 'rxjs/operators';
-import { firstValueFrom } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { FieldConfig, FormConfiguration } from 'src/app/shared/models/field.interface';
 import { MatSnackBar} from '@angular/material/snack-bar';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest, Subject } from 'rxjs';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { DependencyStatusService, DependencyStatusResponse } from '../../../core/services/dependency-status.service';
 import { AppStateService } from '../../../core/services/app-state.service';
 
