@@ -16,11 +16,11 @@ export class SelectComponent implements OnInit, OnChanges {
   @Input() group!: FormGroup;
 
   ngOnInit(): void {
-    // Component initialized
+    // Component initialized - no additional setup required
   }
 
   ngOnChanges(): void {
-    // Field configuration changed
+    // Field configuration changed - no additional processing required
   }
 
   onSelectComponentChange(event: {value: string}) {

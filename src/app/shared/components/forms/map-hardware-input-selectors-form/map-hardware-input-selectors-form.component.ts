@@ -198,7 +198,7 @@ export class MapHardwareInputSelectorsFormComponent implements OnInit {
     }
   }
 
-  async onIoExtenderBitSelectChange(selectChangeEvent: any): Promise<void> {
+  async onIoExtenderBitSelectChange(): Promise<void> {
     try {
       // Add any additional logic needed when the bit is selected
       // For example, you might want to validate the selection or update other form fields

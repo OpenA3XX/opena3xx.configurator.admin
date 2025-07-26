@@ -53,7 +53,7 @@ export class ConsoleFiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Component cleanup handled automatically
+    // Component cleanup handled automatically by Angular
   }
 
   private async loadHardwareBoards(): Promise<void> {

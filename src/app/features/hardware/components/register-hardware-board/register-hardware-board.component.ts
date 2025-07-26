@@ -56,7 +56,7 @@ export class RegisterHardwareBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Initialize component
+    // Initialize component - no additional setup required
   }
 
   onSubmit = (event?: Event) => {
