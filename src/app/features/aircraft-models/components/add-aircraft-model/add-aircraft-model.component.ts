@@ -30,7 +30,9 @@ export class AddAircraftModelComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Component initialized - no additional setup required
+  }
 
   onSubmit(): void {
     if (this.aircraftModelForm.valid) {

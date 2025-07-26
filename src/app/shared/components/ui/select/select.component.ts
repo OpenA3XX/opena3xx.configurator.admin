@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
+
 @Component({
     selector: 'opena3xx-forms-select',
     templateUrl: './select.component.html',
@@ -18,7 +19,7 @@ export class SelectComponent implements OnInit, OnChanges {
     // Component initialized
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     // Field configuration changed
   }
 

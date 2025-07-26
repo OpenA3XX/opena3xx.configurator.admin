@@ -55,7 +55,7 @@ export class RegisterHardwareBoardComponent implements OnInit {
     this.totalDiscreteInputOutput = 16; // Default
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Initialize component
   }
 
@@ -95,7 +95,7 @@ export class RegisterHardwareBoardComponent implements OnInit {
     this.router.navigateByUrl('/manage/hardware-boards');
   }
 
-  onSliderValueChange(event: any) {
+  onSliderValueChange(event: Event): void {
     const value = parseInt((event.target as HTMLInputElement).value, 10);
     this.totalDiscreteInputOutput = value * 16;
   }
