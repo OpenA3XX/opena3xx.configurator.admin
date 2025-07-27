@@ -1,0 +1,65 @@
+<div class="connectivity-container">
+  <!-- Header Section -->
+  <div class="connectivity-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon>wifi</mat-icon>
+        <h1>Cockpit Connectivity</h1>
+      </div>
+      <div class="header-subtitle">
+        <p>Monitor and manage communication between hardware panels and the Central Coordinator</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button mat-raised-button color="primary" class="action-button">
+        <mat-icon>refresh</mat-icon>
+        Refresh Status
+      </button>
+      <button mat-raised-button color="accent" class="action-button">
+        <mat-icon>build</mat-icon>
+        Run Diagnostics
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content Grid -->
+  <div class="connectivity-content">
+    <!-- Top Row - System Overview -->
+    <div class="content-row">
+      <div class="content-column full-width">
+        <opena3xx-system-health-overview></opena3xx-system-health-overview>
+      </div>
+    </div>
+
+    <!-- Second Row - Dashboard and Matrix -->
+    <div class="content-row">
+      <div class="content-column">
+        <opena3xx-connection-status-dashboard></opena3xx-connection-status-dashboard>
+      </div>
+      <div class="content-column">
+        <opena3xx-hardware-panel-matrix></opena3xx-hardware-panel-matrix>
+      </div>
+    </div>
+
+    <!-- Third Row - Network Topology and Logs -->
+    <div class="content-row">
+      <div class="content-column">
+        <opena3xx-network-topology-map></opena3xx-network-topology-map>
+      </div>
+      <div class="content-column">
+        <opena3xx-connection-logs></opena3xx-connection-logs>
+      </div>
+    </div>
+
+    <!-- Fourth Row - Diagnostics and Validation -->
+    <div class="content-row">
+      <div class="content-column">
+        <opena3xx-diagnostic-tools></opena3xx-diagnostic-tools>
+      </div>
+      <div class="content-column">
+        <opena3xx-configuration-validation></opena3xx-configuration-validation>
+      </div>
+    </div>
+  </div>
+</div>

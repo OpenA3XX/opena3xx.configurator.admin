@@ -1,0 +1,144 @@
+<mat-card class="system-health-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>monitoring</mat-icon>
+      System Health Overview
+    </mat-card-title>
+    <mat-card-subtitle>
+      Overall cockpit connectivity status and performance metrics
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Overall Status -->
+    <div class="overall-status">
+      <div class="status-indicator connected">
+        <mat-icon>check_circle</mat-icon>
+        <span>All Systems Operational</span>
+      </div>
+      <div class="last-updated">
+        Last updated: <span class="timestamp">2 minutes ago</span>
+      </div>
+    </div>
+
+    <!-- Status Grid -->
+    <div class="status-grid">
+      <!-- Central Coordinator -->
+      <div class="status-card connected">
+        <div class="status-header">
+          <mat-icon>hub</mat-icon>
+          <span class="component-name">Central Coordinator</span>
+          <div class="status-badge connected">Online</div>
+        </div>
+        <div class="status-details">
+          <div class="metric">
+            <span class="label">Uptime:</span>
+            <span class="value">24h 32m</span>
+          </div>
+          <div class="metric">
+            <span class="label">Response Time:</span>
+            <span class="value">12ms</span>
+          </div>
+          <div class="metric">
+            <span class="label">Active Connections:</span>
+            <span class="value">8/8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hardware Panels -->
+      <div class="status-card connected">
+        <div class="status-header">
+          <mat-icon>memory</mat-icon>
+          <span class="component-name">Hardware Panels</span>
+          <div class="status-badge connected">8/8 Connected</div>
+        </div>
+        <div class="status-details">
+          <div class="metric">
+            <span class="label">Connected:</span>
+            <span class="value">8 panels</span>
+          </div>
+          <div class="metric">
+            <span class="label">Data Throughput:</span>
+            <span class="value">2.4 MB/s</span>
+          </div>
+          <div class="metric">
+            <span class="label">Error Rate:</span>
+            <span class="value">0.02%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Network -->
+      <div class="status-card connected">
+        <div class="status-header">
+          <mat-icon>wifi</mat-icon>
+          <span class="component-name">Network</span>
+          <div class="status-badge connected">Stable</div>
+        </div>
+        <div class="status-details">
+          <div class="metric">
+            <span class="label">Latency:</span>
+            <span class="value">8ms avg</span>
+          </div>
+          <div class="metric">
+            <span class="label">Packet Loss:</span>
+            <span class="value">0.01%</span>
+          </div>
+          <div class="metric">
+            <span class="label">Bandwidth:</span>
+            <span class="value">100 Mbps</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulator Integration -->
+      <div class="status-card connected">
+        <div class="status-header">
+          <mat-icon>flight</mat-icon>
+          <span class="component-name">Simulator Integration</span>
+          <div class="status-badge connected">Active</div>
+        </div>
+        <div class="status-details">
+          <div class="metric">
+            <span class="label">MSFS2020:</span>
+            <span class="value">Connected</span>
+          </div>
+          <div class="metric">
+            <span class="label">Events/sec:</span>
+            <span class="value">156</span>
+          </div>
+          <div class="metric">
+            <span class="label">Last Sync:</span>
+            <span class="value">1s ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Chart Placeholder -->
+    <div class="performance-chart">
+      <div class="chart-header">
+        <h4>Connection Performance (Last 24 Hours)</h4>
+        <div class="chart-legend">
+          <div class="legend-item">
+            <div class="legend-color connected"></div>
+            <span>Connected</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color warning"></div>
+            <span>Degraded</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color disconnected"></div>
+            <span>Disconnected</span>
+          </div>
+        </div>
+      </div>
+      <div class="chart-placeholder">
+        <mat-icon>show_chart</mat-icon>
+        <p>Performance chart will be displayed here</p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

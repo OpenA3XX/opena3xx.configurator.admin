@@ -107,7 +107,10 @@ const routes: Routes = [
     path: 'manage/aircraft-models',
     component: ManageAircraftModelsComponent,
   },
-
+  {
+    path: 'connectivity',
+    loadChildren: () => import('./features/connectivity/connectivity.module').then(m => m.ConnectivityModule),
+  },
   {
     path: 'notifications',
     loadChildren: () => import('./features/notifications/notifications.module').then(m => m.NotificationsModule),

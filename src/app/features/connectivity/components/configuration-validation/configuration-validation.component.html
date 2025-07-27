@@ -1,0 +1,269 @@
+<mat-card class="configuration-validation-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>verified</mat-icon>
+      Configuration Validation
+    </mat-card-title>
+    <mat-card-subtitle>
+      Validate panel configurations and event mappings
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Validation Summary -->
+    <div class="validation-summary">
+      <div class="summary-item valid">
+        <div class="summary-icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <div class="summary-content">
+          <div class="summary-value">8/8</div>
+          <div class="summary-label">Panels Valid</div>
+        </div>
+      </div>
+
+      <div class="summary-item valid">
+        <div class="summary-icon">
+          <mat-icon>link</mat-icon>
+        </div>
+        <div class="summary-content">
+          <div class="summary-value">156/156</div>
+          <div class="summary-label">Events Mapped</div>
+        </div>
+      </div>
+
+      <div class="summary-item valid">
+        <div class="summary-icon">
+          <mat-icon>settings</mat-icon>
+        </div>
+        <div class="summary-content">
+          <div class="summary-value">0</div>
+          <div class="summary-label">Conflicts</div>
+        </div>
+      </div>
+
+      <div class="summary-item valid">
+        <div class="summary-icon">
+          <mat-icon>flight</mat-icon>
+        </div>
+        <div class="summary-content">
+          <div class="summary-value">Active</div>
+          <div class="summary-label">Simulator</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Validation Checks -->
+    <div class="validation-checks">
+      <h4>Validation Checks</h4>
+
+      <div class="check-sections">
+        <div class="check-section">
+          <h5>Panel Configuration</h5>
+          <div class="check-list">
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Overhead Panel</div>
+                <div class="check-details">24 inputs, 12 outputs configured</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">MCP Panel</div>
+                <div class="check-details">18 inputs, 8 outputs configured</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">EFIS Panel</div>
+                <div class="check-details">16 inputs, 6 outputs configured</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Radio Panel</div>
+                <div class="check-details">12 inputs, 4 outputs configured</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Throttle Panel</div>
+                <div class="check-details">20 inputs, 10 outputs configured</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Glareshield Panel</div>
+                <div class="check-details">14 inputs, 6 outputs configured</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Pedestal Panel</div>
+                <div class="check-details">22 inputs, 8 outputs configured</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Aft Overhead Panel</div>
+                <div class="check-details">16 inputs, 4 outputs configured</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="check-section">
+          <h5>Event Mapping</h5>
+          <div class="check-list">
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Input Events</div>
+                <div class="check-details">142 events mapped to hardware inputs</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Output Events</div>
+                <div class="check-details">64 events mapped to hardware outputs</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Selector Mappings</div>
+                <div class="check-details">All selectors properly configured</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Simulator Events</div>
+                <div class="check-details">MSFS2020 events synchronized</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="check-section">
+          <h5>System Integration</h5>
+          <div class="check-list">
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Central Coordinator</div>
+                <div class="check-details">All panels registered and connected</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">SignalR Hub</div>
+                <div class="check-details">Real-time communication active</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">Database</div>
+                <div class="check-details">Configuration data synchronized</div>
+              </div>
+            </div>
+
+            <div class="check-item valid">
+              <div class="check-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+              <div class="check-content">
+                <div class="check-name">File System</div>
+                <div class="check-details">Configuration files accessible</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Configuration Issues -->
+    <div class="configuration-issues">
+      <h4>Configuration Issues</h4>
+
+      <div class="issues-container">
+        <div class="no-issues">
+          <mat-icon>check_circle</mat-icon>
+          <div class="no-issues-text">
+            <div class="no-issues-title">No Configuration Issues Found</div>
+            <div class="no-issues-description">All panels and mappings are properly configured</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Validation Actions -->
+    <div class="validation-actions">
+      <button mat-raised-button color="primary" class="action-btn">
+        <mat-icon>refresh</mat-icon>
+        Revalidate All
+      </button>
+      <button mat-stroked-button color="accent" class="action-btn">
+        <mat-icon>download</mat-icon>
+        Export Configuration
+      </button>
+      <button mat-stroked-button color="warn" class="action-btn">
+        <mat-icon>restore</mat-icon>
+        Reset to Defaults
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,208 @@
+<mat-card class="connection-logs-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>list_alt</mat-icon>
+      Connection Logs
+    </mat-card-title>
+    <mat-card-subtitle>
+      Real-time connection events and communication logs
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Log Controls -->
+    <div class="log-controls">
+      <div class="control-group">
+        <button mat-stroked-button color="primary" class="control-btn">
+          <mat-icon>refresh</mat-icon>
+          Refresh
+        </button>
+        <button mat-stroked-button color="accent" class="control-btn">
+          <mat-icon>clear</mat-icon>
+          Clear
+        </button>
+        <button mat-stroked-button color="warn" class="control-btn">
+          <mat-icon>download</mat-icon>
+          Export
+        </button>
+      </div>
+
+      <div class="filter-group">
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Filter by Level</mat-label>
+          <mat-select value="all">
+            <mat-option value="all">All Levels</mat-option>
+            <mat-option value="info">Info</mat-option>
+            <mat-option value="warning">Warning</mat-option>
+            <mat-option value="error">Error</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Filter by Component</mat-label>
+          <mat-select value="all">
+            <mat-option value="all">All Components</mat-option>
+            <mat-option value="central">Central Coordinator</mat-option>
+            <mat-option value="panels">Hardware Panels</mat-option>
+            <mat-option value="network">Network</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Log Entries -->
+    <div class="log-container">
+      <div class="log-entry info">
+        <div class="log-timestamp">14:32:15</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Central Coordinator</div>
+        <div class="log-message">All hardware panels connected successfully</div>
+        <div class="log-details">
+          <span class="detail-item">8 panels connected</span>
+          <span class="detail-item">Avg latency: 11ms</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:32:10</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">SignalR Hub</div>
+        <div class="log-message">WebSocket connection established</div>
+        <div class="log-details">
+          <span class="detail-item">ws://localhost:5000/signalr</span>
+          <span class="detail-item">Connection ID: abc123</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:45</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Overhead Panel</div>
+        <div class="log-message">Panel connected via USB 3.0</div>
+        <div class="log-details">
+          <span class="detail-item">Device ID: USB-001</span>
+          <span class="detail-item">Data rate: 2.1 MB/s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:42</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">MCP Panel</div>
+        <div class="log-message">Panel connected via USB 3.0</div>
+        <div class="log-details">
+          <span class="detail-item">Device ID: USB-002</span>
+          <span class="detail-item">Data rate: 1.8 MB/s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:38</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">EFIS Panel</div>
+        <div class="log-message">Panel connected via USB 3.0</div>
+        <div class="log-details">
+          <span class="detail-item">Device ID: USB-003</span>
+          <span class="detail-item">Data rate: 2.3 MB/s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:35</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Radio Panel</div>
+        <div class="log-message">Panel connected via USB 3.0</div>
+        <div class="log-details">
+          <span class="detail-item">Device ID: USB-004</span>
+          <span class="detail-item">Data rate: 1.9 MB/s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:30</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Throttle Panel</div>
+        <div class="log-message">Panel connected via USB 3.0</div>
+        <div class="log-details">
+          <span class="detail-item">Device ID: USB-005</span>
+          <span class="detail-item">Data rate: 2.0 MB/s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:25</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Glareshield Panel</div>
+        <div class="log-message">Panel connected via USB 3.0</div>
+        <div class="log-details">
+          <span class="detail-item">Device ID: USB-006</span>
+          <span class="detail-item">Data rate: 1.7 MB/s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:20</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Pedestal Panel</div>
+        <div class="log-message">Panel connected via USB 3.0</div>
+        <div class="log-details">
+          <span class="detail-item">Device ID: USB-007</span>
+          <span class="detail-item">Data rate: 2.2 MB/s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:15</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Aft Overhead Panel</div>
+        <div class="log-message">Panel connected via USB 3.0</div>
+        <div class="log-details">
+          <span class="detail-item">Device ID: USB-008</span>
+          <span class="detail-item">Data rate: 2.1 MB/s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:10</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Central Coordinator</div>
+        <div class="log-message">Starting hardware panel discovery</div>
+        <div class="log-details">
+          <span class="detail-item">Scanning USB ports</span>
+          <span class="detail-item">Timeout: 30s</span>
+        </div>
+      </div>
+
+      <div class="log-entry info">
+        <div class="log-timestamp">14:31:05</div>
+        <div class="log-level info">INFO</div>
+        <div class="log-component">Central Coordinator</div>
+        <div class="log-message">Central Coordinator started successfully</div>
+        <div class="log-details">
+          <span class="detail-item">Version: 1.0.0</span>
+          <span class="detail-item">Port: 5000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Log Statistics -->
+    <div class="log-statistics">
+      <div class="stat-item">
+        <div class="stat-label">Total Entries</div>
+        <div class="stat-value">12</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Info</div>
+        <div class="stat-value">12</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Warnings</div>
+        <div class="stat-value">0</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Errors</div>
+        <div class="stat-value">0</div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

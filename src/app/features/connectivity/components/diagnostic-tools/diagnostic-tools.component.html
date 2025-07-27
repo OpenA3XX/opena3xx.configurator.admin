@@ -1,0 +1,231 @@
+<mat-card class="diagnostic-tools-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>build</mat-icon>
+      Diagnostic Tools
+    </mat-card-title>
+    <mat-card-subtitle>
+      Connection testing and troubleshooting utilities
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Quick Tests -->
+    <div class="quick-tests">
+      <h4>Quick Tests</h4>
+
+      <div class="test-grid">
+        <div class="test-item">
+          <div class="test-icon">
+            <mat-icon>wifi</mat-icon>
+          </div>
+          <div class="test-content">
+            <div class="test-name">Ping Test</div>
+            <div class="test-description">Test network connectivity</div>
+          </div>
+          <button mat-stroked-button color="primary" class="test-btn">
+            Run Test
+          </button>
+        </div>
+
+        <div class="test-item">
+          <div class="test-icon">
+            <mat-icon>memory</mat-icon>
+          </div>
+          <div class="test-content">
+            <div class="test-name">Panel Discovery</div>
+            <div class="test-description">Scan for hardware panels</div>
+          </div>
+          <button mat-stroked-button color="primary" class="test-btn">
+            Run Test
+          </button>
+        </div>
+
+        <div class="test-item">
+          <div class="test-icon">
+            <mat-icon>hub</mat-icon>
+          </div>
+          <div class="test-content">
+            <div class="test-name">Hub Connection</div>
+            <div class="test-description">Test SignalR hub connection</div>
+          </div>
+          <button mat-stroked-button color="primary" class="test-btn">
+            Run Test
+          </button>
+        </div>
+
+        <div class="test-item">
+          <div class="test-icon">
+            <mat-icon>speed</mat-icon>
+          </div>
+          <div class="test-content">
+            <div class="test-name">Bandwidth Test</div>
+            <div class="test-description">Measure data throughput</div>
+          </div>
+          <button mat-stroked-button color="primary" class="test-btn">
+            Run Test
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advanced Diagnostics -->
+    <div class="advanced-diagnostics">
+      <h4>Advanced Diagnostics</h4>
+
+      <div class="diagnostic-sections">
+        <div class="diagnostic-section">
+          <h5>Connection Diagnostics</h5>
+          <div class="diagnostic-options">
+            <mat-checkbox>Test USB connections</mat-checkbox>
+            <mat-checkbox>Test Ethernet connections</mat-checkbox>
+            <mat-checkbox>Test wireless connections</mat-checkbox>
+            <mat-checkbox>Validate protocols</mat-checkbox>
+          </div>
+          <button mat-raised-button color="accent" class="diagnostic-btn">
+            <mat-icon>play_arrow</mat-icon>
+            Run Diagnostics
+          </button>
+        </div>
+
+        <div class="diagnostic-section">
+          <h5>Performance Analysis</h5>
+          <div class="diagnostic-options">
+            <mat-checkbox>Measure latency</mat-checkbox>
+            <mat-checkbox>Test packet loss</mat-checkbox>
+            <mat-checkbox>Analyze bandwidth usage</mat-checkbox>
+            <mat-checkbox>Check error rates</mat-checkbox>
+          </div>
+          <button mat-raised-button color="accent" class="diagnostic-btn">
+            <mat-icon>play_arrow</mat-icon>
+            Run Analysis
+          </button>
+        </div>
+
+        <div class="diagnostic-section">
+          <h5>Configuration Validation</h5>
+          <div class="diagnostic-options">
+            <mat-checkbox>Validate panel configurations</mat-checkbox>
+            <mat-checkbox>Check event mappings</mat-checkbox>
+            <mat-checkbox>Verify selector mappings</mat-checkbox>
+            <mat-checkbox>Test simulator integration</mat-checkbox>
+          </div>
+          <button mat-raised-button color="accent" class="diagnostic-btn">
+            <mat-icon>play_arrow</mat-icon>
+            Run Validation
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Troubleshooting Tools -->
+    <div class="troubleshooting-tools">
+      <h4>Troubleshooting Tools</h4>
+
+      <div class="tool-grid">
+        <div class="tool-item">
+          <div class="tool-header">
+            <mat-icon>restart_alt</mat-icon>
+            <span>Reset Connections</span>
+          </div>
+          <div class="tool-description">
+            Restart all hardware panel connections
+          </div>
+          <button mat-stroked-button color="warn" class="tool-btn">
+            Reset All
+          </button>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-header">
+            <mat-icon>refresh</mat-icon>
+            <span>Reconnect Panels</span>
+          </div>
+          <div class="tool-description">
+            Attempt to reconnect disconnected panels
+          </div>
+          <button mat-stroked-button color="primary" class="tool-btn">
+            Reconnect
+          </button>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-header">
+            <mat-icon>settings_backup_restore</mat-icon>
+            <span>Restore Defaults</span>
+          </div>
+          <div class="tool-description">
+            Reset to default connection settings
+          </div>
+          <button mat-stroked-button color="warn" class="tool-btn">
+            Restore
+          </button>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-header">
+            <mat-icon>bug_report</mat-icon>
+            <span>Generate Report</span>
+          </div>
+          <div class="tool-description">
+            Create diagnostic report for support
+          </div>
+          <button mat-stroked-button color="accent" class="tool-btn">
+            Generate
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Results -->
+    <div class="test-results">
+      <h4>Recent Test Results</h4>
+
+      <div class="results-list">
+        <div class="result-item success">
+          <div class="result-icon">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+          <div class="result-content">
+            <div class="result-title">Ping Test - Passed</div>
+            <div class="result-details">All panels responding (avg: 8ms)</div>
+            <div class="result-time">2 minutes ago</div>
+          </div>
+        </div>
+
+        <div class="result-item success">
+          <div class="result-icon">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+          <div class="result-content">
+            <div class="result-title">Panel Discovery - Passed</div>
+            <div class="result-details">8 panels found and connected</div>
+            <div class="result-time">5 minutes ago</div>
+          </div>
+        </div>
+
+        <div class="result-item success">
+          <div class="result-icon">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+          <div class="result-content">
+            <div class="result-title">Hub Connection - Passed</div>
+            <div class="result-details">SignalR hub connection stable</div>
+            <div class="result-time">10 minutes ago</div>
+          </div>
+        </div>
+
+        <div class="result-item success">
+          <div class="result-icon">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+          <div class="result-content">
+            <div class="result-title">Bandwidth Test - Passed</div>
+            <div class="result-details">2.4 MB/s average throughput</div>
+            <div class="result-time">15 minutes ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

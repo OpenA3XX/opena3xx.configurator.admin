@@ -1,0 +1,350 @@
+.diagnostic-tools-card {
+  height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  mat-card-header {
+    padding: 24px 24px 16px 24px;
+
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-color, #333);
+
+      mat-icon {
+        color: var(--primary-color, #1976d2);
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    mat-card-subtitle {
+      color: var(--text-secondary, #666);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+  }
+
+  mat-card-content {
+    padding: 0 24px 24px 24px;
+
+    h4 {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-color, #333);
+    }
+
+    .quick-tests {
+      margin-bottom: 24px;
+
+      .test-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+
+        .test-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px;
+          background: var(--card-background, #fafafa);
+          border-radius: 8px;
+          border: 2px solid transparent;
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-color: var(--primary-color, #1976d2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          .test-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color, #1976d2);
+            flex-shrink: 0;
+
+            mat-icon {
+              color: white;
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          .test-content {
+            flex: 1;
+
+            .test-name {
+              font-size: 14px;
+              font-weight: 600;
+              color: var(--text-color, #333);
+              margin-bottom: 4px;
+            }
+
+            .test-description {
+              font-size: 12px;
+              color: var(--text-secondary, #666);
+            }
+          }
+
+          .test-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+
+            &:hover {
+              transform: translateY(-1px);
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+    }
+
+    .advanced-diagnostics {
+      margin-bottom: 24px;
+
+      .diagnostic-sections {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+
+        .diagnostic-section {
+          padding: 16px;
+          background: var(--card-background, #fafafa);
+          border-radius: 8px;
+          border: 1px solid var(--border-color, #ddd);
+
+          h5 {
+            margin: 0 0 12px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-color, #333);
+          }
+
+          .diagnostic-options {
+            margin-bottom: 16px;
+
+            mat-checkbox {
+              display: block;
+              margin-bottom: 8px;
+              font-size: 12px;
+              color: var(--text-color, #333);
+            }
+          }
+
+          .diagnostic-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+
+            mat-icon {
+              font-size: 16px;
+              width: 16px;
+              height: 16px;
+            }
+
+            &:hover {
+              transform: translateY(-1px);
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+    }
+
+    .troubleshooting-tools {
+      margin-bottom: 24px;
+
+      .tool-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+
+        .tool-item {
+          padding: 16px;
+          background: var(--card-background, #fafafa);
+          border-radius: 8px;
+          border: 1px solid var(--border-color, #ddd);
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+
+            mat-icon {
+              color: var(--primary-color, #1976d2);
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+            }
+
+            span {
+              font-size: 14px;
+              font-weight: 600;
+              color: var(--text-color, #333);
+            }
+          }
+
+          .tool-description {
+            font-size: 12px;
+            color: var(--text-secondary, #666);
+            margin-bottom: 12px;
+            line-height: 1.4;
+          }
+
+          .tool-btn {
+            width: 100%;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+
+            &:hover {
+              transform: translateY(-1px);
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+    }
+
+    .test-results {
+      .results-list {
+        .result-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          margin-bottom: 16px;
+          padding: 12px;
+          background: var(--card-background, #fafafa);
+          border-radius: 8px;
+          border-left: 4px solid transparent;
+          transition: all 0.3s ease;
+
+          &.success {
+            border-left-color: #4caf50;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(102, 187, 106, 0.05));
+          }
+
+          &.warning {
+            border-left-color: #ff9800;
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.05), rgba(255, 183, 77, 0.05));
+          }
+
+          &.error {
+            border-left-color: #f44336;
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.05), rgba(239, 83, 80, 0.05));
+          }
+
+          .result-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-color, #1976d2);
+            flex-shrink: 0;
+
+            &.success {
+              background: #4caf50;
+            }
+
+            &.warning {
+              background: #ff9800;
+            }
+
+            &.error {
+              background: #f44336;
+            }
+
+            mat-icon {
+              color: white;
+              font-size: 14px;
+              width: 14px;
+              height: 14px;
+            }
+          }
+
+          .result-content {
+            flex: 1;
+
+            .result-title {
+              font-size: 14px;
+              font-weight: 600;
+              color: var(--text-color, #333);
+              margin-bottom: 4px;
+            }
+
+            .result-details {
+              font-size: 12px;
+              color: var(--text-secondary, #666);
+              margin-bottom: 4px;
+            }
+
+            .result-time {
+              font-size: 11px;
+              color: var(--text-secondary, #999);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .diagnostic-tools-card {
+    mat-card-content {
+      .quick-tests {
+        .test-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .advanced-diagnostics {
+        .diagnostic-sections {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .troubleshooting-tools {
+        .tool-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}

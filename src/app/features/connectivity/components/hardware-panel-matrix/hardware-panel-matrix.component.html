@@ -1,0 +1,248 @@
+<mat-card class="panel-matrix-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>grid_view</mat-icon>
+      Hardware Panel Matrix
+    </mat-card-title>
+    <mat-card-subtitle>
+      Visual connection status of all hardware panels
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Matrix Header -->
+    <div class="matrix-header">
+      <div class="matrix-stats">
+        <div class="stat-item">
+          <span class="stat-value">8</span>
+          <span class="stat-label">Total Panels</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">8</span>
+          <span class="stat-label">Connected</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">0</span>
+          <span class="stat-label">Disconnected</span>
+        </div>
+      </div>
+
+      <div class="matrix-legend">
+        <div class="legend-item">
+          <div class="legend-dot connected"></div>
+          <span>Connected</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot warning"></div>
+          <span>Degraded</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot disconnected"></div>
+          <span>Disconnected</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel Matrix Grid -->
+    <div class="panel-matrix">
+      <!-- Row 1 -->
+      <div class="panel-item connected" title="Overhead Panel - Connected">
+        <div class="panel-icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="panel-info">
+          <div class="panel-name">Overhead Panel</div>
+          <div class="panel-status">Connected</div>
+          <div class="panel-metrics">
+            <span>12ms</span>
+            <span>•</span>
+            <span>2.1 MB/s</span>
+          </div>
+        </div>
+        <div class="connection-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+
+      <div class="panel-item connected" title="MCP Panel - Connected">
+        <div class="panel-icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="panel-info">
+          <div class="panel-name">MCP Panel</div>
+          <div class="panel-status">Connected</div>
+          <div class="panel-metrics">
+            <span>8ms</span>
+            <span>•</span>
+            <span>1.8 MB/s</span>
+          </div>
+        </div>
+        <div class="connection-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+
+      <div class="panel-item connected" title="EFIS Panel - Connected">
+        <div class="panel-icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="panel-info">
+          <div class="panel-name">EFIS Panel</div>
+          <div class="panel-status">Connected</div>
+          <div class="panel-metrics">
+            <span>15ms</span>
+            <span>•</span>
+            <span>2.3 MB/s</span>
+          </div>
+        </div>
+        <div class="connection-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+
+      <div class="panel-item connected" title="Radio Panel - Connected">
+        <div class="panel-icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="panel-info">
+          <div class="panel-name">Radio Panel</div>
+          <div class="panel-status">Connected</div>
+          <div class="panel-metrics">
+            <span>10ms</span>
+            <span>•</span>
+            <span>1.9 MB/s</span>
+          </div>
+        </div>
+        <div class="connection-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="panel-item connected" title="Throttle Panel - Connected">
+        <div class="panel-icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="panel-info">
+          <div class="panel-name">Throttle Panel</div>
+          <div class="panel-status">Connected</div>
+          <div class="panel-metrics">
+            <span>11ms</span>
+            <span>•</span>
+            <span>2.0 MB/s</span>
+          </div>
+        </div>
+        <div class="connection-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+
+      <div class="panel-item connected" title="Glareshield Panel - Connected">
+        <div class="panel-icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="panel-info">
+          <div class="panel-name">Glareshield Panel</div>
+          <div class="panel-status">Connected</div>
+          <div class="panel-metrics">
+            <span>9ms</span>
+            <span>•</span>
+            <span>1.7 MB/s</span>
+          </div>
+        </div>
+        <div class="connection-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+
+      <div class="panel-item connected" title="Pedestal Panel - Connected">
+        <div class="panel-icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="panel-info">
+          <div class="panel-name">Pedestal Panel</div>
+          <div class="panel-status">Connected</div>
+          <div class="panel-metrics">
+            <span>13ms</span>
+            <span>•</span>
+            <span>2.2 MB/s</span>
+          </div>
+        </div>
+        <div class="connection-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+
+      <div class="panel-item connected" title="Aft Overhead Panel - Connected">
+        <div class="panel-icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="panel-info">
+          <div class="panel-name">Aft Overhead Panel</div>
+          <div class="panel-status">Connected</div>
+          <div class="panel-metrics">
+            <span>14ms</span>
+            <span>•</span>
+            <span>2.1 MB/s</span>
+          </div>
+        </div>
+        <div class="connection-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connection Details -->
+    <div class="connection-details">
+      <h4>Connection Details</h4>
+
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Protocol</div>
+          <div class="detail-value">USB 3.0</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Data Rate</div>
+          <div class="detail-value">2.4 MB/s avg</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Latency</div>
+          <div class="detail-value">11ms avg</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Error Rate</div>
+          <div class="detail-value">0.02%</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Last Sync</div>
+          <div class="detail-value">2s ago</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Heartbeat</div>
+          <div class="detail-value">Active</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <button mat-stroked-button color="primary" class="action-btn">
+        <mat-icon>refresh</mat-icon>
+        Refresh All
+      </button>
+      <button mat-stroked-button color="accent" class="action-btn">
+        <mat-icon>build</mat-icon>
+        Test Connections
+      </button>
+      <button mat-stroked-button color="warn" class="action-btn">
+        <mat-icon>restart_alt</mat-icon>
+        Restart All
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -192,6 +192,10 @@ export class AppComponent implements OnInit, OnDestroy
     this.router.navigateByUrl(`/console`);
   }
 
+  clickConnectivity() {
+    this.router.navigateByUrl(`/connectivity`);
+  }
+
   // Dependency Status Helper Methods
   getStatusIcon(dependencyName: string): string {
     return this.dependencyStatusService.getStatusIcon(dependencyName);

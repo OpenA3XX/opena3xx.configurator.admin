@@ -1,0 +1,221 @@
+<mat-card class="connection-dashboard-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>dashboard</mat-icon>
+      Connection Status Dashboard
+    </mat-card-title>
+    <mat-card-subtitle>
+      Real-time connection metrics and performance indicators
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Connection Summary -->
+    <div class="connection-summary">
+      <div class="summary-item">
+        <div class="summary-icon connected">
+          <mat-icon>wifi</mat-icon>
+        </div>
+        <div class="summary-content">
+          <div class="summary-value">8</div>
+          <div class="summary-label">Active Connections</div>
+        </div>
+      </div>
+
+      <div class="summary-item">
+        <div class="summary-icon connected">
+          <mat-icon>speed</mat-icon>
+        </div>
+        <div class="summary-content">
+          <div class="summary-value">12ms</div>
+          <div class="summary-label">Avg Response</div>
+        </div>
+      </div>
+
+      <div class="summary-item">
+        <div class="summary-icon connected">
+          <mat-icon>trending_up</mat-icon>
+        </div>
+        <div class="summary-content">
+          <div class="summary-value">2.4 MB/s</div>
+          <div class="summary-label">Data Throughput</div>
+        </div>
+      </div>
+
+      <div class="summary-item">
+        <div class="summary-icon connected">
+          <mat-icon>error_outline</mat-icon>
+        </div>
+        <div class="summary-content">
+          <div class="summary-value">0.02%</div>
+          <div class="summary-label">Error Rate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connection Details -->
+    <div class="connection-details">
+      <h4>Connection Details</h4>
+
+      <div class="detail-item">
+        <div class="detail-header">
+          <span class="detail-label">Central Coordinator</span>
+          <div class="detail-status connected">
+            <div class="status-dot"></div>
+            <span>Online</span>
+          </div>
+        </div>
+        <div class="detail-metrics">
+          <div class="metric">
+            <span>Uptime:</span>
+            <span>24h 32m</span>
+          </div>
+          <div class="metric">
+            <span>Last Heartbeat:</span>
+            <span>2s ago</span>
+          </div>
+          <div class="metric">
+            <span>Connection Type:</span>
+            <span>WebSocket</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-header">
+          <span class="detail-label">SignalR Hub</span>
+          <div class="detail-status connected">
+            <div class="status-dot"></div>
+            <span>Connected</span>
+          </div>
+        </div>
+        <div class="detail-metrics">
+          <div class="metric">
+            <span>Hub URL:</span>
+            <span>ws://localhost:5000/signalr</span>
+          </div>
+          <div class="metric">
+            <span>Connection State:</span>
+            <span>Connected</span>
+          </div>
+          <div class="metric">
+            <span>Reconnection Attempts:</span>
+            <span>0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-header">
+          <span class="detail-label">Network Interface</span>
+          <div class="detail-status connected">
+            <div class="status-dot"></div>
+            <span>Stable</span>
+          </div>
+        </div>
+        <div class="detail-metrics">
+          <div class="metric">
+            <span>Interface:</span>
+            <span>Ethernet (192.168.1.100)</span>
+          </div>
+          <div class="metric">
+            <span>Bandwidth:</span>
+            <span>100 Mbps</span>
+          </div>
+          <div class="metric">
+            <span>Packet Loss:</span>
+            <span>0.01%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Real-time Indicators -->
+    <div class="realtime-indicators">
+      <h4>Real-time Indicators</h4>
+
+      <div class="indicator-grid">
+        <div class="indicator connected">
+          <div class="indicator-icon">
+            <mat-icon>memory</mat-icon>
+          </div>
+          <div class="indicator-content">
+            <div class="indicator-label">Hardware Panels</div>
+            <div class="indicator-value">8/8 Connected</div>
+            <div class="indicator-pulse"></div>
+          </div>
+        </div>
+
+        <div class="indicator connected">
+          <div class="indicator-icon">
+            <mat-icon>hub</mat-icon>
+          </div>
+          <div class="indicator-content">
+            <div class="indicator-label">Central Coordinator</div>
+            <div class="indicator-value">Online</div>
+            <div class="indicator-pulse"></div>
+          </div>
+        </div>
+
+        <div class="indicator connected">
+          <div class="indicator-icon">
+            <mat-icon>flight</mat-icon>
+          </div>
+          <div class="indicator-content">
+            <div class="indicator-label">Simulator</div>
+            <div class="indicator-value">MSFS2020 Active</div>
+            <div class="indicator-pulse"></div>
+          </div>
+        </div>
+
+        <div class="indicator connected">
+          <div class="indicator-icon">
+            <mat-icon>wifi</mat-icon>
+          </div>
+          <div class="indicator-content">
+            <div class="indicator-label">Network</div>
+            <div class="indicator-value">Stable</div>
+            <div class="indicator-pulse"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connection Timeline -->
+    <div class="connection-timeline">
+      <h4>Recent Connection Events</h4>
+
+      <div class="timeline">
+        <div class="timeline-item connected">
+          <div class="timeline-icon">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-title">All panels connected successfully</div>
+            <div class="timeline-time">2 minutes ago</div>
+          </div>
+        </div>
+
+        <div class="timeline-item connected">
+          <div class="timeline-icon">
+            <mat-icon>wifi</mat-icon>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-title">Network connection established</div>
+            <div class="timeline-time">5 minutes ago</div>
+          </div>
+        </div>
+
+        <div class="timeline-item connected">
+          <div class="timeline-icon">
+            <mat-icon>hub</mat-icon>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-title">Central Coordinator started</div>
+            <div class="timeline-time">24 hours ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

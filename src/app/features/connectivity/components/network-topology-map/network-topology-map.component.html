@@ -1,0 +1,236 @@
+<mat-card class="topology-map-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>account_tree</mat-icon>
+      Network Topology Map
+    </mat-card-title>
+    <mat-card-subtitle>
+      Visual representation of cockpit communication network
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Topology Overview -->
+    <div class="topology-overview">
+      <div class="overview-stats">
+        <div class="stat-item">
+          <div class="stat-icon connected">
+            <mat-icon>hub</mat-icon>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">1</div>
+            <div class="stat-label">Central Hub</div>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-icon connected">
+            <mat-icon>memory</mat-icon>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Hardware Nodes</div>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-icon connected">
+            <mat-icon>wifi</mat-icon>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Active Links</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Network Diagram -->
+    <div class="network-diagram">
+      <div class="diagram-container">
+        <!-- Central Coordinator -->
+        <div class="node central-node connected">
+          <div class="node-icon">
+            <mat-icon>hub</mat-icon>
+          </div>
+          <div class="node-label">Central Coordinator</div>
+          <div class="node-status">Online</div>
+          <div class="connection-pulse"></div>
+        </div>
+
+        <!-- Connection Lines -->
+        <svg class="connection-lines" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+          <!-- Connection lines will be drawn here -->
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7"
+                    refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#4caf50" />
+            </marker>
+          </defs>
+
+          <!-- Connection lines to panels -->
+          <line x1="400" y1="300" x2="200" y2="150" stroke="#4caf50" stroke-width="2" marker-end="url(#arrowhead)" />
+          <line x1="400" y1="300" x2="600" y2="150" stroke="#4caf50" stroke-width="2" marker-end="url(#arrowhead)" />
+          <line x1="400" y1="300" x2="150" y2="300" stroke="#4caf50" stroke-width="2" marker-end="url(#arrowhead)" />
+          <line x1="400" y1="300" x2="650" y2="300" stroke="#4caf50" stroke-width="2" marker-end="url(#arrowhead)" />
+          <line x1="400" y1="300" x2="200" y2="450" stroke="#4caf50" stroke-width="2" marker-end="url(#arrowhead)" />
+          <line x1="400" y1="300" x2="600" y2="450" stroke="#4caf50" stroke-width="2" marker-end="url(#arrowhead)" />
+          <line x1="400" y1="300" x2="150" y2="500" stroke="#4caf50" stroke-width="2" marker-end="url(#arrowhead)" />
+          <line x1="400" y1="300" x2="650" y2="500" stroke="#4caf50" stroke-width="2" marker-end="url(#arrowhead)" />
+        </svg>
+
+        <!-- Hardware Panel Nodes -->
+        <div class="panel-nodes">
+          <!-- Overhead Panel -->
+          <div class="node panel-node connected" style="top: 150px; left: 200px;">
+            <div class="node-icon">
+              <mat-icon>memory</mat-icon>
+            </div>
+            <div class="node-label">Overhead</div>
+            <div class="node-status">Connected</div>
+          </div>
+
+          <!-- MCP Panel -->
+          <div class="node panel-node connected" style="top: 150px; right: 200px;">
+            <div class="node-icon">
+              <mat-icon>memory</mat-icon>
+            </div>
+            <div class="node-label">MCP</div>
+            <div class="node-status">Connected</div>
+          </div>
+
+          <!-- EFIS Panel -->
+          <div class="node panel-node connected" style="top: 300px; left: 150px;">
+            <div class="node-icon">
+              <mat-icon>memory</mat-icon>
+            </div>
+            <div class="node-label">EFIS</div>
+            <div class="node-status">Connected</div>
+          </div>
+
+          <!-- Radio Panel -->
+          <div class="node panel-node connected" style="top: 300px; right: 150px;">
+            <div class="node-icon">
+              <mat-icon>memory</mat-icon>
+            </div>
+            <div class="node-label">Radio</div>
+            <div class="node-status">Connected</div>
+          </div>
+
+          <!-- Throttle Panel -->
+          <div class="node panel-node connected" style="bottom: 200px; left: 200px;">
+            <div class="node-icon">
+              <mat-icon>memory</mat-icon>
+            </div>
+            <div class="node-label">Throttle</div>
+            <div class="node-status">Connected</div>
+          </div>
+
+          <!-- Glareshield Panel -->
+          <div class="node panel-node connected" style="bottom: 200px; right: 200px;">
+            <div class="node-icon">
+              <mat-icon>memory</mat-icon>
+            </div>
+            <div class="node-label">Glareshield</div>
+            <div class="node-status">Connected</div>
+          </div>
+
+          <!-- Pedestal Panel -->
+          <div class="node panel-node connected" style="bottom: 100px; left: 150px;">
+            <div class="node-icon">
+              <mat-icon>memory</mat-icon>
+            </div>
+            <div class="node-label">Pedestal</div>
+            <div class="node-status">Connected</div>
+          </div>
+
+          <!-- Aft Overhead Panel -->
+          <div class="node panel-node connected" style="bottom: 100px; right: 150px;">
+            <div class="node-icon">
+              <mat-icon>memory</mat-icon>
+            </div>
+            <div class="node-label">Aft Overhead</div>
+            <div class="node-status">Connected</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Network Details -->
+    <div class="network-details">
+      <h4>Network Details</h4>
+
+      <div class="detail-sections">
+        <div class="detail-section">
+          <h5>Connection Types</h5>
+          <div class="detail-list">
+            <div class="detail-item">
+              <span class="detail-label">USB 3.0:</span>
+              <span class="detail-value">6 connections</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Ethernet:</span>
+              <span class="detail-value">2 connections</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Wireless:</span>
+              <span class="detail-value">0 connections</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h5>Performance Metrics</h5>
+          <div class="detail-list">
+            <div class="detail-item">
+              <span class="detail-label">Total Bandwidth:</span>
+              <span class="detail-value">2.4 MB/s</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Avg Latency:</span>
+              <span class="detail-value">11ms</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Packet Loss:</span>
+              <span class="detail-value">0.01%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h5>Protocols</h5>
+          <div class="detail-list">
+            <div class="detail-item">
+              <span class="detail-label">SignalR:</span>
+              <span class="detail-value">Active</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">WebSocket:</span>
+              <span class="detail-value">Connected</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">HTTP/2:</span>
+              <span class="detail-value">Enabled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Network Actions -->
+    <div class="network-actions">
+      <button mat-stroked-button color="primary" class="action-btn">
+        <mat-icon>refresh</mat-icon>
+        Refresh Map
+      </button>
+      <button mat-stroked-button color="accent" class="action-btn">
+        <mat-icon>tune</mat-icon>
+        Optimize Network
+      </button>
+      <button mat-stroked-button color="warn" class="action-btn">
+        <mat-icon>warning</mat-icon>
+        Show Issues
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
