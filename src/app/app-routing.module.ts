@@ -32,9 +32,6 @@ import { ManageSimulatorEventsComponent } from './features/simulator/components/
 
 // Aircraft Models Components
 import { ManageAircraftModelsComponent } from './features/aircraft-models/components/manage-aircraft-models/manage-aircraft-models.component';
-import { AddAircraftModelComponent } from './features/aircraft-models/components/add-aircraft-model/add-aircraft-model.component';
-import { EditAircraftModelComponent } from './features/aircraft-models/components/edit-aircraft-model/edit-aircraft-model.component';
-import { ViewAircraftModelDetailsComponent } from './features/aircraft-models/components/view-aircraft-model-details/view-aircraft-model-details.component';
 
 const routes: Routes = [
   {
@@ -110,18 +107,7 @@ const routes: Routes = [
     path: 'manage/aircraft-models',
     component: ManageAircraftModelsComponent,
   },
-  {
-    path: 'add/aircraft-model',
-    component: AddAircraftModelComponent,
-  },
-  {
-    path: 'edit/aircraft-model',
-    component: EditAircraftModelComponent,
-  },
-  {
-    path: 'view/aircraft-model-details',
-    component: ViewAircraftModelDetailsComponent,
-  },
+
   {
     path: 'notifications',
     loadChildren: () => import('./features/notifications/notifications.module').then(m => m.NotificationsModule),

@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AircraftModelDto } from 'src/app/shared/models/models';
 import { AircraftModelService } from '../../services/aircraft-model.service';
+import { ViewAircraftModelDialogComponent } from '../view-aircraft-model-dialog/view-aircraft-model-dialog.component';
+import { EditAircraftModelDialogComponent } from '../edit-aircraft-model-dialog/edit-aircraft-model-dialog.component';
+import { AddAircraftModelDialogComponent } from '../add-aircraft-model-dialog/add-aircraft-model-dialog.component';
 
 @Component({
     selector: 'opena3xx-manage-aircraft-models',
@@ -82,15 +85,81 @@ export class ManageAircraftModelsComponent implements OnInit, AfterViewInit, OnD
   }
 
   onAddAircraftModel(): void {
-    this.router.navigateByUrl('/add/aircraft-model');
+    try {
+      console.log('Opening add aircraft model dialog');
+      const dialogRef = this.dialog.open(AddAircraftModelDialogComponent, {
+        width: '600px',
+        maxHeight: '80vh',
+        disableClose: false
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result && result.action === 'added') {
+          this.loadAircraftModels();
+          this.snackBar.open('Aircraft model added successfully', 'Close', {
+            duration: 2000
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error opening add aircraft model dialog:', error);
+      this.snackBar.open('Error opening aircraft model form', 'Close', {
+        duration: 3000
+      });
+    }
   }
 
   onEditAircraftModel(id: number): void {
-    this.router.navigateByUrl(`/edit/aircraft-model?id=${id}`);
+    try {
+      console.log('Opening edit dialog for aircraft model ID:', id);
+      const dialogRef = this.dialog.open(EditAircraftModelDialogComponent, {
+        data: { id: id },
+        width: '600px',
+        maxHeight: '80vh',
+        disableClose: false
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result && result.action === 'updated') {
+          this.loadAircraftModels();
+          this.snackBar.open('Aircraft model updated successfully', 'Close', {
+            duration: 2000
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error opening edit dialog:', error);
+      this.snackBar.open('Error opening aircraft model editor', 'Close', {
+        duration: 3000
+      });
+    }
   }
 
   onViewAircraftModel(id: number): void {
-    this.router.navigateByUrl(`/view/aircraft-model-details?id=${id}`);
+    try {
+      console.log('Opening view dialog for aircraft model ID:', id);
+      const dialogRef = this.dialog.open(ViewAircraftModelDialogComponent, {
+        data: { id: id },
+        width: '600px',
+        maxHeight: '80vh',
+        disableClose: false
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          if (result.action === 'edit') {
+            this.onEditAircraftModel(result.id);
+          } else if (result.action === 'delete') {
+            this.onDeleteAircraftModel(result.id);
+          }
+        }
+      });
+    } catch (error) {
+      console.error('Error opening view dialog:', error);
+      this.snackBar.open('Error opening aircraft model details', 'Close', {
+        duration: 3000
+      });
+    }
   }
 
   onDeleteAircraftModel(id: number): void {

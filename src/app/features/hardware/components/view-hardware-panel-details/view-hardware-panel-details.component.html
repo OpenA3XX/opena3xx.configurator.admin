@@ -161,7 +161,7 @@
           <div class="action-buttons">
             <button
               (click)="showInputSelectorDetails(input)"
-              mat-stroked-button
+              mat-raised-button
               color="primary"
               class="action-button"
               matTooltip="View {{ input.hardwareInputSelectors.length }} Input(s)"
@@ -172,7 +172,7 @@
             <button
               (click)="mapInputSelector(input)"
               *ngIf="input.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware === false"
-              mat-flat-button
+              mat-raised-button
               color="primary"
               class="action-button">
               <mat-icon>link</mat-icon>
@@ -181,8 +181,8 @@
             <button
               (click)="mapInputSelector(input)"
               *ngIf="input.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware === true"
-              mat-flat-button
-              color="warn"
+              mat-raised-button
+              color="accent"
               class="action-button">
               <mat-icon>link</mat-icon>
               Edit Map
@@ -190,8 +190,8 @@
             <button
               (click)="linkInputSelector(input)"
               *ngIf="input.hardwareInputSelectors[0].simulatorEventDto !== null"
-              mat-flat-button
-              color="warn"
+              mat-raised-button
+              color="accent"
               class="action-button">
               <mat-icon>laptop</mat-icon>
               Edit Link
@@ -199,7 +199,7 @@
             <button
               (click)="linkInputSelector(input)"
               *ngIf="input.hardwareInputSelectors[0].simulatorEventDto === null"
-              mat-flat-button
+              mat-raised-button
               color="primary"
               class="action-button">
               <mat-icon>laptop</mat-icon>
@@ -207,7 +207,7 @@
             </button>
             <button
               (click)="deleteHardwareInput(input)"
-              mat-stroked-button
+              mat-raised-button
               color="warn"
               class="action-button"
               matTooltip="Delete Hardware Input"
@@ -268,7 +268,7 @@
           <div class="action-buttons">
             <button
               (click)="showOutputSelectorDetails(output)"
-              mat-stroked-button
+              mat-raised-button
               color="primary"
               class="action-button"
               matTooltip="View {{ output.hardwareOutputSelectors.length }} Output(s)"
@@ -278,7 +278,7 @@
             </button>
             <button
               (click)="mapOutputSelector(output)"
-              mat-flat-button
+              mat-raised-button
               color="primary"
               class="action-button">
               <mat-icon>link</mat-icon>
@@ -286,7 +286,7 @@
             </button>
             <button
               (click)="mapOutputSelector(output)"
-              mat-flat-button
+              mat-raised-button
               color="primary"
               class="action-button">
               <mat-icon>laptop</mat-icon>

@@ -60,9 +60,6 @@
           <ng-container matColumnDef="isActive">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
             <td mat-cell *matCellDef="let aircraftModel">
-              <mat-icon [color]="getStatusColor(aircraftModel.isActive)">
-                {{getStatusIcon(aircraftModel.isActive)}}
-              </mat-icon>
               <span class="status-text">{{aircraftModel.isActive ? 'Active' : 'Inactive'}}</span>
             </td>
           </ng-container>
@@ -71,14 +68,17 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let aircraftModel">
-              <button mat-icon-button color="primary" (click)="onViewAircraftModel(aircraftModel.id)" matTooltip="View Details">
+              <button mat-raised-button color="primary" (click)="onViewAircraftModel(aircraftModel.id)" matTooltip="View Details">
                 <mat-icon>visibility</mat-icon>
+                View Details
               </button>
-              <button mat-icon-button color="accent" (click)="onEditAircraftModel(aircraftModel.id)" matTooltip="Edit">
+              <button mat-raised-button color="accent" (click)="onEditAircraftModel(aircraftModel.id)" matTooltip="Edit">
                 <mat-icon>edit</mat-icon>
+                Edit
               </button>
-              <button mat-icon-button color="warn" (click)="onDeleteAircraftModel(aircraftModel.id)" matTooltip="Delete">
+              <button mat-raised-button color="warn" (click)="onDeleteAircraftModel(aircraftModel.id)" matTooltip="Delete">
                 <mat-icon>delete</mat-icon>
+                Delete
               </button>
             </td>
           </ng-container>

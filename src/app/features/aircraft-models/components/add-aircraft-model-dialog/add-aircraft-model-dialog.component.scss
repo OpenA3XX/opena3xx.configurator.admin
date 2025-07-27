@@ -1,0 +1,204 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+h1 {
+  padding: 16px 24px;
+  margin: 0 0 24px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1976d2;
+  border-bottom: 2px solid #e3f2fd;
+  padding-bottom: 12px;
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+
+  p {
+    margin: 16px 0 0 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+  }
+
+  button {
+    margin-top: 16px;
+  }
+}
+
+.error-container {
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+}
+
+.add-form {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  mat-expansion-panel {
+    margin-bottom: 24px;
+    padding: 16px 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    ::ng-deep .mat-expansion-panel-body {
+      padding: 24px;
+    }
+
+    ::ng-deep .mat-expansion-panel-content {
+      overflow: visible;
+    }
+  }
+
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .form-field {
+      width: 100%;
+    }
+
+    .toggle-field {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+
+      .toggle-description {
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 0.875rem;
+        line-height: 1.4;
+      }
+
+      // Ensure proper slide toggle styling
+      .mat-mdc-slide-toggle {
+        .mdc-switch {
+          border-radius: 12px !important;
+
+          .mdc-switch__track {
+            border-radius: 12px !important;
+          }
+
+          .mdc-switch__handle-track {
+            border-radius: 12px !important;
+          }
+
+          .mdc-switch__handle {
+            border-radius: 50% !important;
+          }
+        }
+      }
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+    button {
+      min-width: 120px;
+
+      mat-spinner {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Dark theme support
+:host.dark-theme {
+  h1 {
+    color: #90caf9;
+    border-bottom-color: #1e3a5f;
+  }
+
+  .loading-container,
+  .error-container {
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .add-form {
+    .form-fields {
+      .toggle-field {
+        .toggle-description {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+
+    .dialog-actions {
+      border-top-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .add-form {
+    .form-fields {
+      gap: 16px;
+    }
+
+    .dialog-actions {
+      flex-direction: column;
+      gap: 8px;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .add-form {
+    padding-right: 4px;
+
+    mat-expansion-panel {
+      ::ng-deep .mat-expansion-panel-body {
+        padding: 16px;
+      }
+    }
+
+    .form-fields {
+      gap: 12px;
+    }
+  }
+}

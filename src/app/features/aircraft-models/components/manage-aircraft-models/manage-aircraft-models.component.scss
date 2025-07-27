@@ -97,16 +97,31 @@
   width: 100%;
 
   .mat-column-id {
-    width: 80px;
+    width: 5%;
   }
 
-  .mat-column-isActive {
-    width: 120px;
+  .mat-column-name {
+    width: 15%;
+    max-width: 100px;
+  }
+
+  .mat-column-manufacturer {
+    width: 15%;
+    max-width: 100px;
+  }
+
+  .mat-column-type {
+    width: 15%;
+    max-width: 100px;
   }
 
   .mat-column-actions {
-    width: 150px;
+    width: 200px;
     text-align: center;
+  }
+
+  .mat-column-isActive {
+    width: 5%;
   }
 
   .status-text {

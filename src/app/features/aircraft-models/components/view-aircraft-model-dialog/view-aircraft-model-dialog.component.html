@@ -1,0 +1,115 @@
+<h1>Aircraft Model Details - {{ aircraftModel?.name }}</h1>
+
+<div *ngIf="loading" class="loading-container">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>Loading aircraft model details...</p>
+</div>
+
+<div *ngIf="error" class="error-container">
+  <mat-icon color="warn">error</mat-icon>
+  <p>Error loading aircraft model details</p>
+  <button mat-raised-button color="primary" (click)="loadAircraftModel()">
+    <mat-icon>refresh</mat-icon>
+    Retry
+  </button>
+</div>
+
+<div *ngIf="!loading && !error && aircraftModel" class="details-content">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>flight</mat-icon>
+        Basic Information
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <div class="detail-label">
+          <mat-icon>label</mat-icon>
+          Name
+        </div>
+        <div class="detail-value">{{ aircraftModel.name }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">
+          <mat-icon>business</mat-icon>
+          Manufacturer
+        </div>
+        <div class="detail-value">{{ aircraftModel.manufacturer }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">
+          <mat-icon>category</mat-icon>
+          Type
+        </div>
+        <div class="detail-value">{{ aircraftModel.type }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">
+          <mat-icon>info</mat-icon>
+          Status
+        </div>
+        <div class="detail-value">
+          <mat-icon [color]="getStatusColor(aircraftModel.isActive)">
+            {{ getStatusIcon(aircraftModel.isActive) }}
+          </mat-icon>
+          <span class="status-text">{{ getStatusText(aircraftModel.isActive) }}</span>
+        </div>
+      </div>
+
+      <div class="detail-item" *ngIf="aircraftModel.description">
+        <div class="detail-label">
+          <mat-icon>description</mat-icon>
+          Description
+        </div>
+        <div class="detail-value">{{ aircraftModel.description }}</div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>schedule</mat-icon>
+        Timestamps
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <div class="detail-label">
+          <mat-icon>schedule</mat-icon>
+          Created
+        </div>
+        <div class="detail-value">{{ aircraftModel.createdAt | formatDate }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">
+          <mat-icon>update</mat-icon>
+          Last Updated
+        </div>
+        <div class="detail-value">{{ aircraftModel.updatedAt | formatDate }}</div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <div class="dialog-actions">
+    <button mat-raised-button color="primary" (click)="onEdit()">
+      <mat-icon>edit</mat-icon>
+      Edit
+    </button>
+    <button mat-raised-button color="warn" (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+    <button mat-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+      Close
+    </button>
+  </div>
+</div>

@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AircraftModelService } from '../../services/aircraft-model.service';
 import { AddAircraftModelDto } from 'src/app/shared/models/models';
 
 @Component({
-    selector: 'opena3xx-add-aircraft-model',
-    templateUrl: './add-aircraft-model.component.html',
-    styleUrls: ['./add-aircraft-model.component.scss'],
-    standalone: false
+  selector: 'opena3xx-add-aircraft-model-dialog',
+  templateUrl: './add-aircraft-model-dialog.component.html',
+  styleUrls: ['./add-aircraft-model-dialog.component.scss'],
+  standalone: false
 })
-export class AddAircraftModelComponent implements OnInit {
+export class AddAircraftModelDialogComponent implements OnInit {
   aircraftModelForm: FormGroup;
   loading = false;
+  error = false;
 
   constructor(
-    private fb: FormBuilder,
     private aircraftModelService: AircraftModelService,
-    private router: Router,
+    private dialogRef: MatDialogRef<AddAircraftModelDialogComponent>,
+    private formBuilder: FormBuilder,
     private snackBar: MatSnackBar
   ) {
-    this.aircraftModelForm = this.fb.group({
+    this.aircraftModelForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       manufacturer: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -37,18 +38,20 @@ export class AddAircraftModelComponent implements OnInit {
   onSubmit(): void {
     if (this.aircraftModelForm.valid) {
       this.loading = true;
+      this.error = false;
       const aircraftModel: AddAircraftModelDto = this.aircraftModelForm.value;
 
       this.aircraftModelService.addAircraftModel(aircraftModel).subscribe({
-        next: () => {
+        next: (result) => {
           this.loading = false;
           this.snackBar.open('Aircraft model added successfully', 'Close', {
             duration: 3000
           });
-          this.router.navigateByUrl('/manage/aircraft-models');
+          this.dialogRef.close({ action: 'added', aircraftModel: result });
         },
         error: (error) => {
           this.loading = false;
+          this.error = true;
           console.error('Error adding aircraft model:', error);
           this.snackBar.open('Error adding aircraft model', 'Close', {
             duration: 3000
@@ -56,15 +59,15 @@ export class AddAircraftModelComponent implements OnInit {
         }
       });
     } else {
-      this.markFormGroupTouched();
+      this.validateAllFormFields();
     }
   }
 
   onCancel(): void {
-    this.router.navigateByUrl('/manage/aircraft-models');
+    this.dialogRef.close();
   }
 
-  private markFormGroupTouched(): void {
+  private validateAllFormFields(): void {
     Object.keys(this.aircraftModelForm.controls).forEach(key => {
       const control = this.aircraftModelForm.get(key);
       control?.markAsTouched();

@@ -143,17 +143,19 @@
         <td mat-cell *matCellDef="let notification">
           <div class="actions-cell">
             <button
-              mat-flat-button
+              mat-raised-button
               color="primary"
               (click)="markAsRead(notification)"
               *ngIf="!notification.isRead">
+              <mat-icon>done</mat-icon>
               Mark Read
             </button>
 
             <button
-              mat-flat-button
+              mat-raised-button
               color="warn"
               (click)="deleteNotification(notification)">
+              <mat-icon>delete</mat-icon>
               Delete
             </button>
           </div>

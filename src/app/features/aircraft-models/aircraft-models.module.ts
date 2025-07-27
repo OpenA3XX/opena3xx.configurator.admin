@@ -10,17 +10,21 @@ import { AircraftModelService } from './services/aircraft-model.service';
 
 // Aircraft Models Components
 import { ManageAircraftModelsComponent } from './components/manage-aircraft-models/manage-aircraft-models.component';
-import { AddAircraftModelComponent } from './components/add-aircraft-model/add-aircraft-model.component';
-import { EditAircraftModelComponent } from './components/edit-aircraft-model/edit-aircraft-model.component';
-import { ViewAircraftModelDetailsComponent } from './components/view-aircraft-model-details/view-aircraft-model-details.component';
+
+// Aircraft Models Dialog Components
+import { ViewAircraftModelDialogComponent } from './components/view-aircraft-model-dialog/view-aircraft-model-dialog.component';
+import { EditAircraftModelDialogComponent } from './components/edit-aircraft-model-dialog/edit-aircraft-model-dialog.component';
+import { AddAircraftModelDialogComponent } from './components/add-aircraft-model-dialog/add-aircraft-model-dialog.component';
 
 @NgModule({
   declarations: [
     // Aircraft Models Components
     ManageAircraftModelsComponent,
-    AddAircraftModelComponent,
-    EditAircraftModelComponent,
-    ViewAircraftModelDetailsComponent
+
+    // Aircraft Models Dialog Components
+    ViewAircraftModelDialogComponent,
+    EditAircraftModelDialogComponent,
+    AddAircraftModelDialogComponent
   ],
   imports: [
     CommonModule,
@@ -32,9 +36,11 @@ import { ViewAircraftModelDetailsComponent } from './components/view-aircraft-mo
   ],
   exports: [
     ManageAircraftModelsComponent,
-    AddAircraftModelComponent,
-    EditAircraftModelComponent,
-    ViewAircraftModelDetailsComponent
+
+    // Aircraft Models Dialog Components
+    ViewAircraftModelDialogComponent,
+    EditAircraftModelDialogComponent,
+    AddAircraftModelDialogComponent
   ],
   providers: [
     AircraftModelService

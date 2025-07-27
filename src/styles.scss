@@ -616,6 +616,25 @@ textarea:not(:placeholder-shown)::placeholder {
   }
 }
 
+// Enhanced slide toggle styles
+.mat-mdc-slide-toggle {
+  .mdc-switch {
+    border-radius: 20px !important;
+
+    .mdc-switch__track {
+      border-radius: 20px !important;
+    }
+
+    .mdc-switch__handle-track {
+      border-radius: 20px !important;
+    }
+
+    .mdc-switch__handle {
+      border-radius: 50% !important;
+    }
+  }
+}
+
 // Enhanced card styles
 .mat-mdc-card {
   border-radius: var(--border-radius-md) !important;

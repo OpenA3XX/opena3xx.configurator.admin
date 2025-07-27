@@ -100,8 +100,18 @@
     width: 80px;
   }
 
+  .mat-column-name {
+    width: 25%; // Half the size as requested
+    max-width: 100px; // Prevent it from getting too wide
+  }
+
+  .mat-column-aircraftModel {
+    width: 25%; // Half the size as requested
+    max-width: 100px; // Prevent it from getting too wide
+  }
+
   .mat-column-details {
-    width: 180px;
+    width: 50%; // Take the remaining width
     text-align: center;
   }
 
