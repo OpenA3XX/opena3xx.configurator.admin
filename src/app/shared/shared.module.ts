@@ -17,6 +17,7 @@ import { SelectComponent } from './components/ui/select/select.component';
 import { SlideToggleComponent } from './components/ui/slide-toggle/slide-toggle.component';
 import { SliderComponent } from './components/ui/slider/slider.component';
 import { LoadingComponent } from './components/ui/loading/loading.component';
+import { FloatingBackButtonComponent } from './components/ui/floating-back-button/floating-back-button.component';
 
 // Form Components
 import { LinkHardwareInputSelectorsFormComponent } from './components/forms/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
@@ -46,6 +47,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SlideToggleComponent,
     SliderComponent,
     LoadingComponent,
+    FloatingBackButtonComponent,
 
     // Form Components
     LinkHardwareInputSelectorsFormComponent,
@@ -80,6 +82,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SlideToggleComponent,
     SliderComponent,
     LoadingComponent,
+    FloatingBackButtonComponent,
 
     // Form Components
     LinkHardwareInputSelectorsFormComponent,

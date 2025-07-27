@@ -212,6 +212,9 @@ export class AppComponent implements OnInit, OnDestroy
 
   getServiceDescription(serviceName: string): string {
     const descriptions: { [key: string]: string } = {
+      'MSFS 2020/2024': 'Microsoft Flight Simulator 2020/2024 integration and event handling service',
+      'RabbitMQ': 'Message broker for real-time communication and event distribution',
+      'SEQ': 'Structured event querying and logging service for system monitoring',
       'Backend API': 'Core backend API service for data management and business logic',
       'Database': 'Database connection and data persistence service',
       'File System': 'File system access and storage management service',

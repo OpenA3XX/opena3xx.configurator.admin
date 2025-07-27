@@ -1,0 +1,106 @@
+.floating-back-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #1976d2;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  z-index: 9999;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  border: none;
+  outline: none;
+
+  // Hover effects
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    background-color: #1565c0;
+  }
+
+  // Active state
+  &:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+
+  // Focus styles for accessibility
+  &:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+  }
+
+  // Icon styling
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    transition: transform 0.2s ease;
+  }
+
+  // Animation for entrance
+  animation: slideInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1), pulse 2s ease-in-out 0.5s;
+
+  // Dark theme adjustments
+  .dark-theme & {
+    background-color: var(--mat-sys-primary, #90caf9);
+    color: var(--mat-sys-on-primary, #000);
+
+    &:hover {
+      background-color: var(--mat-sys-primary-container, #64b5f6);
+    }
+
+    &:focus {
+      outline-color: var(--mat-sys-primary, #90caf9);
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+
+  // Animation keyframes
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  // Pulse animation for attention
+  @keyframes pulse {
+    0% {
+      box-shadow: var(--shadow-lg);
+    }
+    50% {
+      box-shadow: var(--shadow-lg), 0 0 0 4px rgba(25, 118, 210, 0.3);
+    }
+    100% {
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+}

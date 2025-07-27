@@ -255,37 +255,37 @@
           </span>
         </mat-list-item>
 
-        <!-- Database Status -->
+        <!-- MSFS2024 Status -->
         <mat-list-item
           class="parent dependency-status-item"
-          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.database)"
+          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.msfs)"
           matTooltipPosition="left">
 
           <mat-icon
             matListItemIcon
-            [class]="getStatusClass(dependencyStatus?.dependencies?.database?.status || 'unknown')"
-            class="dependency-icon database-icon">
-            {{ getStatusIcon(dependencyStatus?.dependencies?.database?.name || 'Database') }}
+            [class]="getStatusClass(dependencyStatus?.dependencies?.msfs?.status || 'unknown')"
+            class="dependency-icon msfs-icon">
+            {{ getStatusIcon(dependencyStatus?.dependencies?.msfs?.name || 'MSFS2024') }}
           </mat-icon>
           <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width dependency-name">
-            {{ dependencyStatus?.dependencies?.database?.name || 'Database' }}
+            {{ dependencyStatus?.dependencies?.msfs?.name || 'MSFS2024' }}
           </span>
         </mat-list-item>
 
-        <!-- Real-time Service Status -->
+        <!-- RabbitMQ Status -->
         <mat-list-item
           class="parent dependency-status-item"
-          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.realtime)"
+          [matTooltip]="getDependencyTooltip(dependencyStatus?.dependencies?.rabbitmq)"
           matTooltipPosition="left">
 
           <mat-icon
             matListItemIcon
-            [class]="getStatusClass(dependencyStatus?.dependencies?.realtime?.status || 'unknown')"
-            class="dependency-icon realtime-icon">
-            {{ getStatusIcon(dependencyStatus?.dependencies?.realtime?.name || 'Real-time') }}
+            [class]="getStatusClass(dependencyStatus?.dependencies?.rabbitmq?.status || 'unknown')"
+            class="dependency-icon rabbitmq-icon">
+            {{ getStatusIcon(dependencyStatus?.dependencies?.rabbitmq?.name || 'RabbitMQ') }}
           </mat-icon>
           <span *ngIf="isRightMenuExpanded || isRightMenuShowing" class="full-width dependency-name">
-            {{ dependencyStatus?.dependencies?.realtime?.name || 'Real-time' }}
+            {{ dependencyStatus?.dependencies?.rabbitmq?.name || 'RabbitMQ' }}
           </span>
         </mat-list-item>
 
@@ -317,4 +317,7 @@
       </mat-nav-list>
     </mat-sidenav>
   </mat-sidenav-container>
+
+  <!-- Floating Back Button -->
+  <opena3xx-floating-back-button></opena3xx-floating-back-button>
 </div>

@@ -1,0 +1,104 @@
+{
+  "name": "OpenA3XX Flight Deck",
+  "short_name": "OpenA3XX",
+  "description": "OpenA3XX Hardware Panel Flight Deck - Configuration and Management Interface",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "orientation": "landscape-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "assets/app-icons/icons/png/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/app-icons/icons/png/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/app-icons/icons/png/72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/app-icons/icons/png/96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/app-icons/icons/png/128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/app-icons/icons/png/144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/app-icons/icons/png/152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/app-icons/icons/png/384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View system overview and quick access",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "assets/app-icons/icons/png/96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Hardware Management",
+      "short_name": "Hardware",
+      "description": "Manage hardware boards and panels",
+      "url": "/hardware",
+      "icons": [
+        {
+          "src": "assets/app-icons/icons/png/96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Console",
+      "short_name": "Console",
+      "description": "Real-time monitoring and events",
+      "url": "/console",
+      "icons": [
+        {
+          "src": "assets/app-icons/icons/png/96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/app.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "OpenA3XX Flight Deck Dashboard"
+    }
+  ]
+}

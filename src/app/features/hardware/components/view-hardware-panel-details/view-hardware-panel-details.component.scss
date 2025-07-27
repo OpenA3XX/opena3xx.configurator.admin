@@ -1,209 +1,796 @@
-mat-toolbar {
-  margin-bottom: 15px;
-}
+// Modern Page Header Styling
+.page-header {
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  color: white;
 
-mat-toolbar.hardware-inputs,
-mat-toolbar.hardware-outputs {
-  margin-top: 15px;
-}
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
 
-table {
-  width: 100%;
-  table-layout: fixed; // Ensures columns respect width settings
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
 
-  button {
-    margin-left: 5px;
-    margin-right: 2px;
-  }
-  button.view-button {
-    width: 45px;
-    // min-width: 45px;
-  }
-  button.small {
-    width: 45px;
-    // min-width: 45px;
-  }
-  button.small:hover {
-    background-color: var(--mat-sys-primary-container, rgba(0, 97, 237, 0.12));
-    color: var(--mat-sys-on-primary-container, #1976d2);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-fast);
+      .header-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+        color: white;
+      }
 
-    .dark-theme & {
-      background-color: var(--mat-sys-primary-container, rgba(100, 181, 246, 0.24));
-      color: var(--mat-sys-on-primary-container, #90caf9);
+      .header-text {
+        .header-title {
+          font-size: 1.75rem;
+          font-weight: 700;
+          margin: 0 0 4px 0;
+          color: white;
+          line-height: 1.2;
+        }
+
+        .header-subtitle {
+          font-size: 0.875rem;
+          margin: 0;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 400;
+        }
+      }
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      .action-button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+          transform: translateY(-1px);
+        }
+
+        mat-icon {
+          margin-right: 6px;
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
     }
   }
-
-  // Optimized column widths
-  .mat-column-id {
-    width: 80px;
-    min-width: 80px;
-  }
-  .mat-column-name {
-    width: 250px;
-    min-width: 250px;
-  }
-    .mat-column-hardwareOutputType,
-  .mat-column-hardwareInputType {
-    width: 200px;
-    min-width: 200px;
-  }
-
-  // Action column needs the most space
-  .mat-column-action {
-    width: calc(100% - 530px); // Takes remaining space
-    min-width: 500px;
-  }
-
-  // Ensure cells don't wrap content
-  .mat-cell {
-    padding: 8px 4px;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-
-  // Handle text overflow for specific columns
-  .mat-column-hardwareInputType .mat-cell,
-  .mat-column-hardwareOutputType .mat-cell {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 0; // Forces text-overflow to work with table-layout: fixed
-  }
 }
 
-mat-grid-list {
-  .mat-grid-tile {
-    height: 16px;
+// Dark theme support for header
+:host.dark-theme .page-header {
+  background: linear-gradient(135deg, #1565c0, #1976d2);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
+}
 
-    .data-wrapper {
-      border: 1px solid var(--mat-sys-outline-variant, #d0d0d0);
-      padding: 5px;
-      position: relative;
-      background-color: var(--mat-sys-surface, #ffffff);
-      width: 88%;
-      height: 88%;
-      border-radius: var(--border-radius-md, 5px);
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition-fast);
+// Responsive design for header
+@media (max-width: 768px) {
+  .page-header {
+    padding: 20px;
 
-      .dark-theme & {
-        border-color: var(--mat-sys-outline-variant, #404040);
-        background-color: var(--mat-sys-surface-container, #1e1e1e);
-      }
+    .header-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
 
-      .title {
-        position: absolute;
-        top: 20px;
-        width: 97%;
-        text-align: center;
-        color: var(--opena3xx-primary, #0061ed);
-        font-weight: bold;
-        font-size: 12px;
-        transition: color var(--transition-fast);
-
-        .dark-theme & {
-          color: var(--opena3xx-primary-light, #64b5f6);
-        }
-      }
-
-      .value {
-        position: absolute;
-        width: 97%;
-        top: 64px;
-        font-size: 20px;
-        text-align: center;
-        font-weight: bold;
-        line-height: 33px;
-        color: var(--mat-sys-on-surface, #1f1f1f);
-        transition: color var(--transition-fast);
-
-        .dark-theme & {
-          color: var(--mat-sys-on-surface, #ffffff);
+      .header-left {
+        .header-icon {
+          font-size: 28px;
+          width: 28px;
+          height: 28px;
         }
 
-        &.small {
-          font-size: 20px;
-        }
-      }
-
-      &:hover {
-        background-color: var(--mat-sys-surface-variant, #efefef);
-        transform: translateY(-1px);
-        box-shadow: var(--shadow-md);
-        cursor: pointer;
-
-        .dark-theme & {
-          background-color: var(--mat-sys-surface-variant, #2a2a2a);
-        }
-
-        .title {
-          color: var(--opena3xx-primary-dark, #1976d2);
-
-          .dark-theme & {
-            color: var(--opena3xx-primary-light, #90caf9);
+        .header-text {
+          .header-title {
+            font-size: 1.5rem;
           }
         }
       }
 
-      // Enhanced focus states for accessibility
-      &:focus-within {
-        outline: 2px solid var(--opena3xx-primary, #0061ed);
-        outline-offset: 2px;
+      .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .action-button {
+          padding: 6px 12px;
+          font-size: 0.875rem;
+
+          mat-icon {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+          }
+        }
       }
     }
   }
 }
 
-.sub-menu-navigation {
-  button {
-    margin-right: 10px;
+@media (max-width: 480px) {
+  .page-header {
+    padding: 16px;
+
+    .header-content {
+      .header-left {
+        .header-text {
+          .header-title {
+            font-size: 1.25rem;
+          }
+
+          .header-subtitle {
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      .header-actions {
+        .action-button {
+          padding: 4px 8px;
+          font-size: 0.8rem;
+
+          mat-icon {
+            font-size: 14px;
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+    }
   }
 }
 
-
-
-// Button styling for action columns
-.action-button {
-  min-width: 120px !important;
-  margin: 2px !important;
-  text-align: center;
-  font-size: 12px;
-}
-
-.action-button-small {
-  min-width: 100px !important;
-  margin: 2px !important;
-  font-size: 12px;
-}
-
-.action-button-large {
-  min-width: 140px !important;
-  margin: 2px !important;
-  font-size: 12px;
-}
-
-// Flexible button container for action columns
-.action-buttons-container {
+// Section Titles (matching dashboard style)
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  color: #333;
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
   align-items: center;
+  gap: 12px;
+  transition: color 0.3s ease;
 
-  .mat-mdc-button {
-    flex-shrink: 0;
-    white-space: nowrap;
+  &::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, #1976d2, #42a5f5);
+    border-radius: 2px;
   }
 }
 
-// Action column styles moved to table section above
+// Dark theme for section title
+:host.dark-theme .section-title {
+  color: #e0e0e0;
+}
 
-// Responsive table
-.mat-mdc-table {
-  width: 100%;
+// Panel Overview Section
+.panel-overview-section {
+  margin-bottom: 32px;
 
-  .mat-mdc-cell {
-    padding: 8px;
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .overview-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: white;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    mat-card-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        color: #1976d2;
+      }
+
+      .card-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #666;
+        margin: 0;
+        transition: color 0.3s ease;
+      }
+    }
+
+    .card-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1976d2;
+      transition: color 0.3s ease;
+      line-height: 1;
+    }
+
+    .card-subtitle {
+      font-size: 0.875rem;
+      color: #666;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+
+    // Card-specific styling
+    &.panel-info-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.panel-id-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.manufacturer-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.aircraft-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.cockpit-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.owner-card {
+      .card-value {
+        color: #1976d2;
+      }
+    }
+
+    &.inputs-card {
+      .card-value {
+        color: #4caf50;
+      }
+    }
+
+    &.outputs-card {
+      .card-value {
+        color: #ff9800;
+      }
+    }
+  }
+}
+
+// DataGrid Styling
+.table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 24px;
+  overflow-x: auto; // Allow horizontal scrolling if needed
+
+  .data-table {
+    width: 100%;
+    min-width: 800px; // Ensure minimum width for content
+    border-collapse: collapse;
+    table-layout: auto; // Change to auto for better responsiveness
+
+    th.mat-header-cell {
+      background: #f5f5f5;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 16px 12px;
+      border-bottom: 2px solid #e0e0e0;
+      text-align: left;
+      transition: background-color 0.3s ease;
+      white-space: nowrap; // Prevent header text wrapping
+
+      &.mat-sort-header {
+        cursor: pointer;
+
+        &:hover {
+          background: #e8e8e8;
+        }
+      }
+
+      // Column width specifications
+      &:nth-child(1) { // ID column
+        width: 50px;
+        min-width: 50px;
+      }
+
+      &:nth-child(2) { // Name column
+        width: 80px;
+        min-width: 80px;
+      }
+
+      &:nth-child(3) { // Type column
+        width: 150px;
+        min-width: 150px;
+      }
+
+      &:nth-child(4) { // Actions column
+        width: auto; // Let it take remaining space
+        min-width: 500px; // Much more space for buttons
+      }
+    }
+
+    td.mat-cell {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+      color: #333;
+      font-size: 0.875rem;
+      vertical-align: middle;
+      word-wrap: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; // Prevent text wrapping in cells
+
+      // Column width specifications (matching headers)
+      &:nth-child(1) { // ID column
+        width: 50px;
+        min-width: 50px;
+      }
+
+      &:nth-child(2) { // Name column
+        width: 80px;
+        min-width: 80px;
+      }
+
+      &:nth-child(3) { // Type column
+        width: 150px;
+        min-width: 150px;
+      }
+
+      &:nth-child(4) { // Actions column
+        width: auto; // Let it take remaining space
+        min-width: 500px; // Much more space for buttons
+      }
+    }
+
+    tr.mat-row {
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background: #f8f9fa;
+      }
+
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      justify-content: flex-start;
+
+      .action-button {
+        min-width: 70px;
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        height: 28px;
+        line-height: 1;
+        white-space: nowrap; // Prevent button text wrapping
+
+        mat-icon {
+          font-size: 14px;
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+}
+
+// Hardware Inputs Section
+.hardware-inputs-section {
+  margin-bottom: 32px;
+
+  .inputs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .input-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: white;
+    min-height: 200px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    mat-card-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        color: #4caf50;
+      }
+
+      .card-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+      }
+    }
+
+    .card-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #4caf50;
+      line-height: 1;
+    }
+
+    .card-subtitle {
+      font-size: 0.875rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+
+      .action-button {
+        min-width: 80px;
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        height: 32px;
+        line-height: 1;
+
+        mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+
+// Hardware Outputs Section
+.hardware-outputs-section {
+  margin-bottom: 32px;
+
+  .outputs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .output-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: white;
+    min-height: 200px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    mat-card-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        color: #ff9800;
+      }
+
+      .card-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+      }
+    }
+
+    .card-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #ff9800;
+      line-height: 1;
+    }
+
+    .card-subtitle {
+      font-size: 0.875rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+
+      .action-button {
+        min-width: 80px;
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        height: 32px;
+        line-height: 1;
+
+        mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+
+// Empty State Styling
+.empty-state {
+  .empty-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .empty-content {
+      text-align: center;
+      padding: 40px;
+
+      mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        color: #ccc;
+        margin-bottom: 16px;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #666;
+        margin: 0 0 8px 0;
+      }
+
+      p {
+        font-size: 0.875rem;
+        color: #999;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Dark theme styles
+:host.dark-theme {
+  .overview-card,
+  .input-card,
+  .output-card,
+  .empty-card {
+    background: #1e1e1e !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-title {
+      color: #b0b0b0 !important;
+    }
+
+    .card-subtitle {
+      color: #b0b0b0 !important;
+    }
+  }
+
+  .table-container {
+    background: #1e1e1e !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    .data-table {
+      th.mat-header-cell {
+        background: #2d2d2d;
+        color: #e0e0e0;
+        border-bottom-color: #404040;
+
+        &:hover {
+          background: #404040;
+        }
+      }
+
+      td.mat-cell {
+        color: #e0e0e0;
+        border-bottom-color: #404040;
+      }
+
+      tr.mat-row:hover {
+        background: #2d2d2d;
+      }
+    }
+  }
+
+  .empty-card .empty-content {
+    mat-icon {
+      color: #666;
+    }
+
+    h3 {
+      color: #b0b0b0;
+    }
+
+    p {
+      color: #888;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 1200px) {
+  .panel-overview-section .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .panel-overview-section .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .inputs-grid,
+  .outputs-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .table-container {
+    .data-table {
+      th.mat-header-cell,
+      td.mat-cell {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        gap: 4px;
+
+        .action-button {
+          min-width: 60px;
+          font-size: 0.7rem;
+          padding: 2px 6px;
+          height: 24px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .overview-card,
+  .input-card,
+  .output-card {
+    mat-card-content {
+      padding: 16px;
+    }
+
+    .card-value {
+      font-size: 2rem;
+    }
+  }
+
+  .table-container {
+    .data-table {
+      th.mat-header-cell,
+      td.mat-cell {
+        padding: 6px 4px;
+        font-size: 0.75rem;
+      }
+
+      .action-buttons {
+        .action-button {
+          min-width: 50px;
+          font-size: 0.65rem;
+          padding: 1px 4px;
+          height: 20px;
+
+          mat-icon {
+            font-size: 12px;
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+    }
   }
 }
