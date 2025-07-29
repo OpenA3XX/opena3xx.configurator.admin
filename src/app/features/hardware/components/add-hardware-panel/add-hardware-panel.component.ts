@@ -1,183 +1,196 @@
 
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DataService } from 'src/app/core/services/data.service';
-import { FieldConfig } from 'src/app/shared/models/field.interface';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { PageLayoutComponent, ActionButton } from '../../../../shared/components/layout/page-layout.component';
+import { LoadingWrapperComponent } from '../../../../shared/components/ui/loading-wrapper/loading-wrapper.component';
+import { AddHardwarePanelDto } from '../../../../shared/models/models';
+import { HardwareService } from '../../services/hardware.service';
 
 @Component({
-    selector: 'opena3xx-add-hardware-panel',
-    templateUrl: './add-hardware-panel.component.html',
-    styleUrls: ['./add-hardware-panel.component.scss'],
-    standalone: false
+  selector: 'opena3xx-add-hardware-panel',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatToolbarModule,
+    PageLayoutComponent,
+    LoadingWrapperComponent
+  ],
+  templateUrl: './add-hardware-panel.component.html',
+  styleUrls: ['./add-hardware-panel.component.scss']
 })
-export class AddHardwarePanelComponent {
+export class AddHardwarePanelComponent implements OnInit {
+  // Signals for reactive state management
+  loading = signal(false);
+  error = signal(false);
+  submitting = signal(false);
+
+  // Form
   addHardwarePanelForm: FormGroup;
 
-  // Your field configs remain the same
-  public hardwarePanelNameFieldConfig: FieldConfig = {
-    type: 'input',
-    label: 'Hardware Panel Name',
-    name: 'hardwarePanelName',
-    inputType: 'text',
-    hint: 'Enter the Hardware Panel Name',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Hardware Panel Name is Required',
-      },
-    ],
-  };
+  // Page actions
+  pageActions: ActionButton[] = [
+    {
+      label: 'Back',
+      icon: 'arrow_back',
+      action: 'back',
+      color: 'accent'
+    },
+    {
+      label: 'Save',
+      icon: 'save',
+      action: 'save',
+      color: 'primary'
+    }
+  ];
 
-  public aircraftModelFieldConfig: FieldConfig = {
-    type: 'select',
-    label: 'Aircraft Model',
-    name: 'aircraftModel',
-    inputType: 'text',
-    options: [
-      {
-        key: '1',
-        value: 'A320-NEO',
-      },
-    ],
-    hint: 'Select Aircraft Model for the panel to be assigned to',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Aircraft Model is Required',
-      },
-    ],
-  };
+  // Aircraft model options (this would come from a service in a real app)
+  aircraftModelOptions = [
+    { key: '1', value: 'A320-NEO' },
+    { key: '2', value: 'A321-NEO' },
+    { key: '3', value: 'A350-900' },
+    { key: '4', value: 'A380-800' }
+  ];
 
-  public cockpitAreaFieldConfig: FieldConfig = {
-    type: 'select',
-    label: 'Cockpit Area',
-    name: 'cockpitArea',
-    inputType: 'text',
-    options: [
-      {
-        key: '0',
-        value: 'Glareshield',
-      },
-      {
-        key: '1',
-        value: 'Pedestal',
-      },
-      {
-        key: '2',
-        value: 'Overhead',
-      },
-    ],
-    hint: 'Select Cockpit Area for the panel to be assigned to',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Cockpit Area is Required',
-      },
-    ],
-  };
+  // Cockpit area options
+  cockpitAreaOptions = [
+    { key: '0', value: 'Glareshield' },
+    { key: '1', value: 'Pedestal' },
+    { key: '2', value: 'Overhead' }
+  ];
 
-  public hardwarePanelOwnerFieldConfig: FieldConfig = {
-    type: 'select',
-    label: 'Hardware Panel Owner',
-    name: 'hardwarePanelOwner',
-    inputType: 'text',
-    options: [
-      {
-        key: '0',
-        value: 'Pilot',
-      },
-      {
-        key: '1',
-        value: 'Co-Pilot',
-      },
-      {
-        key: '2',
-        value: 'Shared',
-      },
-    ],
-    hint: 'Select Hardware Panel Owner for the panel to be assigned to',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Hardware Panel Owner is Required',
-      },
-    ],
-  };
+  // Owner options
+  ownerOptions = [
+    { key: '0', value: 'Pilot' },
+    { key: '1', value: 'Co-Pilot' },
+    { key: '2', value: 'Shared' }
+  ];
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private dataService: DataService,
+    private hardwareService: HardwareService
   ) {
-    // ✅ Correct way to define FormControls in Angular 17
-    this.addHardwarePanelForm = this.formBuilder.group({
-      hardwarePanelName: ['', [Validators.required]],
-      aircraftModel: ['', [Validators.required]],
-      cockpitArea: ['', [Validators.required]],
-      hardwarePanelOwner: ['', [Validators.required]],
-    });
-
-    // Alternative syntax if you need updateOn strategy:
-    // this.addHardwarePanelForm = this.formBuilder.group({
-    //   hardwarePanelName: this.formBuilder.control('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    //   aircraftModel: this.formBuilder.control('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    //   cockpitArea: this.formBuilder.control('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    //   hardwarePanelOwner: this.formBuilder.control('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    // });
+    this.initializeForm();
   }
 
-  back() {
+  ngOnInit(): void {
+    // Component initialization
+  }
+
+  private initializeForm(): void {
+    this.addHardwarePanelForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      aircraftModel: ['', [Validators.required]],
+      cockpitArea: ['', [Validators.required]],
+      owner: ['', [Validators.required]]
+    });
+  }
+
+  onPageAction(action: string): void {
+    switch (action) {
+      case 'back':
+        this.back();
+        break;
+      case 'save':
+        this.onSubmit();
+        break;
+    }
+  }
+
+  onRetry(): void {
+    this.error.set(false);
+    this.loading.set(false);
+  }
+
+  private back(): void {
     this.router.navigateByUrl('/manage/hardware-panels');
   }
 
-  onSave() {}
-
-  onSubmit() {
+  onSubmit(): void {
     if (this.addHardwarePanelForm.valid) {
-              firstValueFrom(this.dataService
-          .addHardwarePanel(this.addHardwarePanelForm.value))
-          .then(() => {
-          this.snackBar.open('Hardware Panel Added Successfully', 'Ok', {
+      this.submitting.set(true);
+      this.error.set(false);
+
+      const panelData: AddHardwarePanelDto = {
+        name: this.addHardwarePanelForm.get('name')?.value,
+        aircraftModel: parseInt(this.addHardwarePanelForm.get('aircraftModel')?.value),
+        cockpitArea: parseInt(this.addHardwarePanelForm.get('cockpitArea')?.value),
+        owner: parseInt(this.addHardwarePanelForm.get('owner')?.value)
+      };
+
+      this.hardwareService.addPanel(panelData).subscribe({
+        next: () => {
+          this.submitting.set(false);
+          this.snackBar.open('Hardware Panel Added Successfully', 'OK', {
             duration: 3000,
           });
-          // Navigate back after successful save
           this.back();
-        })
-        .catch((error) => {
+        },
+        error: (error) => {
           console.error('Error adding hardware panel:', error);
-          this.snackBar.open('Error has occurred when adding Hardware Panel', 'Ok', {
+          this.submitting.set(false);
+          this.error.set(true);
+          this.snackBar.open('Error occurred when adding Hardware Panel', 'OK', {
             duration: 3000,
           });
-        });
+        }
+      });
     } else {
       this.validateAllFormFields(this.addHardwarePanelForm);
     }
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  private validateAllFormFields(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
       control?.markAsTouched({ onlySelf: true });
     });
+  }
+
+  // Helper methods for template
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.addHardwarePanelForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const field = this.addHardwarePanelForm.get(fieldName);
+    if (field?.errors) {
+      if (field.errors['required']) {
+        return `${this.getFieldLabel(fieldName)} is required`;
+      }
+      if (field.errors['minlength']) {
+        return `${this.getFieldLabel(fieldName)} must be at least ${field.errors['minlength'].requiredLength} characters`;
+      }
+    }
+    return '';
+  }
+
+  private getFieldLabel(fieldName: string): string {
+    const labels: { [key: string]: string } = {
+      name: 'Panel Name',
+      aircraftModel: 'Aircraft Model',
+      cockpitArea: 'Cockpit Area',
+      owner: 'Owner'
+    };
+    return labels[fieldName] || fieldName;
   }
 }

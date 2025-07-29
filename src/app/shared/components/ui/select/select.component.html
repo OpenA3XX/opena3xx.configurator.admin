@@ -1,18 +1,21 @@
-<mat-form-field class="full-width margin-top" [formGroup]="group">
+<mat-form-field class="full-width margin-top">
+  <mat-label>{{ label }}</mat-label>
   <mat-select
-    [disabled]="field.disabled"
-    [placeholder]="field.label"
-    [formControlName]="field.name"
-    (selectionChange)="onSelectComponentChange($event)"
-  >
-    <mat-option *ngFor="let item of field.options" [value]="item.key">{{
-      item.value
-    }}</mat-option>
+    [formControl]="control"
+    [disabled]="disabled"
+    [multiple]="multiple"
+    [placeholder]="placeholder"
+    (selectionChange)="onSelectionChange.emit($event.value)"
+    (valueChange)="onValueChange.emit($event)">
+
+    <mat-option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </mat-option>
   </mat-select>
-  <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
-    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{
-      validation.message
-    }}</mat-error>
-  </ng-container>
-  <mat-hint>{{ field.hint }}</mat-hint>
+
+  <mat-error *ngIf="showError && errorMessage">
+    {{ errorMessage }}
+  </mat-error>
+
+  <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
 </mat-form-field>

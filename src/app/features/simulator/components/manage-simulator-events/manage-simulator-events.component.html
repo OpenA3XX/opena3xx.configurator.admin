@@ -31,7 +31,7 @@
       </div>
 
       <div class="table-container mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort class="simulator-events-table">
+        <table mat-table [dataSource]="dataSourceData" matSort class="simulator-events-table">
           <!-- ID Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -116,13 +116,13 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of simulator events"></mat-paginator>
 
         <!-- Loading indicator -->
-        <div *ngIf="!data_loaded" class="loading-container">
+        <div *ngIf="!data_loaded()" class="loading-container">
           <mat-spinner diameter="50"></mat-spinner>
           <p>Loading simulator events...</p>
         </div>
 
         <!-- No data message -->
-        <div *ngIf="data_loaded && dataSource.data.length === 0" class="no-data-container">
+        <div *ngIf="data_loaded() && dataSourceData.length === 0" class="no-data-container">
           <mat-icon>laptop_off</mat-icon>
           <p>No simulator events found</p>
           <button mat-raised-button color="primary">

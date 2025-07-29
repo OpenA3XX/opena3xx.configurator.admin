@@ -1,7 +1,16 @@
-<div class="full-width margin-top" [formGroup]="group">
-<label class="radio-label-padding">{{field.label}}:</label>
-<mat-radio-group [formControlName]="field.name" [disabled]="field.disabled">
-<mat-radio-button *ngFor="let item of field.options" [value]="item.key">{{item.value}}</mat-radio-button>
+<mat-radio-group
+  [formControl]="control"
+  [disabled]="disabled"
+  (change)="onChange.emit($event.value)"
+  (valueChange)="onValueChange.emit($event)">
+
+  <mat-radio-button *ngFor="let option of options" [value]="option.value">
+    {{ option.label }}
+  </mat-radio-button>
 </mat-radio-group>
-</div>
-<mat-hint>{{field.hint}}</mat-hint>
+
+<mat-error *ngIf="showError && errorMessage">
+  {{ errorMessage }}
+</mat-error>
+
+<mat-hint *ngIf="hint">{{ hint }}</mat-hint>

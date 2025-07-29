@@ -1,24 +1,51 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
-import { HardwareOutputDto } from 'src/app/shared/models/models';
+import { Component, Inject, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { HardwareOutputDto } from '../../../../shared/models/models';
 
 @Component({
-    selector: 'opena3xx-view-hardware-output-selectors-dialog',
-    templateUrl: './view-hardware-output-selectors-dialog.component.html',
-    styleUrls: ['./view-hardware-output-selectors-dialog.component.scss'],
-    standalone: false
+  selector: 'opena3xx-view-hardware-output-selectors-dialog',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatDividerModule,
+    MatChipsModule
+  ],
+  templateUrl: './view-hardware-output-selectors-dialog.component.html',
+  styleUrls: ['./view-hardware-output-selectors-dialog.component.scss']
 })
 export class ViewHardwareOutputSelectorsDialogComponent {
-  public displayedOutputColumns: string[] = ['id', 'name'];
-  outputSelectorsDataSource = new MatTableDataSource<HardwareOutputDto>();
+  // Signals for reactive state management
+  loading = signal(false);
+  hardwareOutputSelector = signal<HardwareOutputDto | null>(null);
 
-  public hardwareOutputSelector: any;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { data: HardwareOutputDto }) {
-    this.hardwareOutputSelector = data;
-    console.log('Dialog Component', data);
-    this.outputSelectorsDataSource = new MatTableDataSource<HardwareOutputDto>(
-      this.hardwareOutputSelector.hardwareOutputSelectors
-    );
+  // Dialog configuration
+  dialogConfig = computed(() => ({
+    title: 'View Hardware Output Selector',
+    subtitle: `Details for: ${this.hardwareOutputSelector()?.name || 'Unknown'}`
+  }));
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { data: HardwareOutputDto },
+    private dialogRef: MatDialogRef<ViewHardwareOutputSelectorsDialogComponent>
+  ) {
+    this.hardwareOutputSelector.set(data.data);
+  }
+
+  onClose(): void {
+    this.dialogRef.close();
+  }
+
+  // Getters for template
+  get selector(): HardwareOutputDto | null {
+    return this.hardwareOutputSelector();
   }
 }

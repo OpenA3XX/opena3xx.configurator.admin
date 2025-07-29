@@ -5,11 +5,9 @@ import { MaterialModule } from 'src/app/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 // Settings Components
-import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
-    SettingsComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +17,6 @@ import { SettingsComponent } from './components/settings/settings.component';
     SharedModule
   ],
   exports: [
-    SettingsComponent
   ]
 })
 export class SettingsModule { }

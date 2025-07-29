@@ -1,42 +1,157 @@
 <!-- Dashboard Header -->
-<opena3xx-dashboard-header
-  [totalBoards]="totalBoards"
-  [totalPanels]="totalPanels"
-  [connectedSystems]="connectedSystems"
-  [lastUpdated]="lastUpdated"
-  [isDarkMode]="isDarkMode">
-</opena3xx-dashboard-header>
+<mat-card class="dashboard-header-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>dashboard</mat-icon>
+      Dashboard Overview
+    </mat-card-title>
+    <mat-card-subtitle>
+      Last updated: {{ lastUpdated | date:'medium' }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="dashboard-stats">
+      <div class="stat-item">
+        <mat-icon>memory</mat-icon>
+        <span class="stat-value">{{ totalBoards }}</span>
+        <span class="stat-label">Total Boards</span>
+      </div>
+      <div class="stat-item">
+        <mat-icon>grid_on</mat-icon>
+        <span class="stat-value">{{ totalPanels }}</span>
+        <span class="stat-label">Total Panels</span>
+      </div>
+      <div class="stat-item">
+        <mat-icon>link</mat-icon>
+        <span class="stat-value">{{ connectedSystems }}</span>
+        <span class="stat-label">Connected Systems</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
 
 <!-- Main Content Section -->
 <div class="dashboard-content" [class.dark-theme]="isDarkMode">
 
   <!-- System Overview -->
-  <opena3xx-system-overview
-    [systemHealth]="systemHealth"
-    [activeBoards]="activeBoards"
-    [totalBoards]="totalBoards"
-    [totalPanels]="totalPanels"
-    [configuredPanels]="configuredPanels"
-    [recentEvents]="recentEvents"
-    [isDarkMode]="isDarkMode">
-  </opena3xx-system-overview>
+  <mat-card class="system-overview-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>monitor_heart</mat-icon>
+        System Overview
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="system-stats">
+        <div class="stat-row">
+          <span class="stat-label">System Health:</span>
+          <mat-chip [color]="systemHealth.status === 'healthy' ? 'primary' : 'warn'" selected>
+            {{ systemHealth.status }}
+          </mat-chip>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Active Boards:</span>
+          <span class="stat-value">{{ activeBoards }} / {{ totalBoards }}</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Configured Panels:</span>
+          <span class="stat-value">{{ configuredPanels }} / {{ totalPanels }}</span>
+        </div>
+      </div>
+
+      <div class="recent-events" *ngIf="recentEvents.length > 0">
+        <h4>Recent Events</h4>
+        <mat-list>
+          <mat-list-item *ngFor="let event of recentEvents">
+            <mat-icon matListItemIcon>event</mat-icon>
+            <div matListItemTitle>{{ event.title }}</div>
+            <div matListItemLine>{{ event.timestamp | date:'short' }}</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
   <!-- Quick Access -->
-  <opena3xx-quick-access
-    (navigateToHardwareEvent)="navigateToHardware()"
-    (navigateToPanelsEvent)="navigateToPanels()"
-    (navigateToConsoleEvent)="navigateToConsole()"
-    (navigateToSettingsEvent)="navigateToSettings()"
-    [isDarkMode]="isDarkMode">
-  </opena3xx-quick-access>
+  <mat-card class="quick-access-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>flash_on</mat-icon>
+        Quick Access
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="quick-access-buttons">
+        <button mat-raised-button color="primary" (click)="navigateToHardware()">
+          <mat-icon>memory</mat-icon>
+          Hardware
+        </button>
+        <button mat-raised-button color="accent" (click)="navigateToPanels()">
+          <mat-icon>grid_on</mat-icon>
+          Panels
+        </button>
+        <button mat-raised-button color="warn" (click)="navigateToConsole()">
+          <mat-icon>terminal</mat-icon>
+          Console
+        </button>
+        <button mat-raised-button (click)="navigateToSettings()">
+          <mat-icon>settings</mat-icon>
+          Settings
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
   <!-- Activity & Status -->
-  <opena3xx-activity-status
-    [recentActivities]="recentActivities"
-    [apiStatus]="apiStatus"
-    [databaseStatus]="databaseStatus"
-    [realtimeStatus]="realtimeStatus"
-    [systemStatus]="systemStatus"
-    [isDarkMode]="isDarkMode">
-  </opena3xx-activity-status>
+  <mat-card class="activity-status-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>activity</mat-icon>
+        Activity & Status
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="status-grid">
+        <div class="status-item">
+          <mat-icon [color]="apiStatus === 'online' ? 'primary' : 'warn'">api</mat-icon>
+          <span class="status-label">API Status</span>
+          <mat-chip [color]="apiStatus === 'online' ? 'primary' : 'warn'" selected>
+            {{ apiStatus }}
+          </mat-chip>
+        </div>
+        <div class="status-item">
+          <mat-icon [color]="databaseStatus === 'online' ? 'primary' : 'warn'">storage</mat-icon>
+          <span class="status-label">Database</span>
+          <mat-chip [color]="databaseStatus === 'online' ? 'primary' : 'warn'" selected>
+            {{ databaseStatus }}
+          </mat-chip>
+        </div>
+        <div class="status-item">
+          <mat-icon [color]="realtimeStatus === 'online' ? 'primary' : 'warn'">sync</mat-icon>
+          <span class="status-label">Real-time</span>
+          <mat-chip [color]="realtimeStatus === 'online' ? 'primary' : 'warn'" selected>
+            {{ realtimeStatus }}
+          </mat-chip>
+        </div>
+        <div class="status-item">
+          <mat-icon [color]="systemStatus === 'online' ? 'primary' : 'warn'">computer</mat-icon>
+          <span class="status-label">System</span>
+          <mat-chip [color]="systemStatus === 'online' ? 'primary' : 'warn'" selected>
+            {{ systemStatus }}
+          </mat-chip>
+        </div>
+      </div>
+
+      <div class="recent-activities" *ngIf="recentActivities.length > 0">
+        <h4>Recent Activities</h4>
+        <mat-list>
+          <mat-list-item *ngFor="let activity of recentActivities">
+            <mat-icon matListItemIcon>info</mat-icon>
+            <div matListItemTitle>{{ activity.message }}</div>
+            <div matListItemLine>{{ activity.timestamp | date:'short' }}</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

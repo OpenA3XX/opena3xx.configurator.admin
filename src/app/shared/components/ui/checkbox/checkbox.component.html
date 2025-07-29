@@ -1,4 +1,14 @@
-<div class="full-width margin-top" [formGroup]="group" >
-<mat-checkbox [formControlName]="field.name" [disabled]="field.disabled">{{field.label}}</mat-checkbox>
-</div>
-<mat-hint>{{field.hint}}</mat-hint>
+<mat-checkbox
+  [formControl]="control"
+  [disabled]="disabled"
+  [indeterminate]="indeterminate"
+  (change)="onChange.emit($event.checked)"
+  (valueChange)="onValueChange.emit($event)">
+  {{ label }}
+</mat-checkbox>
+
+<mat-error *ngIf="showError && errorMessage">
+  {{ errorMessage }}
+</mat-error>
+
+<mat-hint *ngIf="hint">{{ hint }}</mat-hint>

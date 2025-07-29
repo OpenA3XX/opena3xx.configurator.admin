@@ -1,22 +1,67 @@
-<!-- Settings Header -->
-<div class="settings-header">
-  <div class="header-content">
-    <div class="header-title">
-      <mat-icon>settings</mat-icon>
-      <h1>System Settings</h1>
-    </div>
-    <div class="header-subtitle">
-      <p>View OpenA3XX Flight Deck preferences and other dependencies</p>
-    </div>
-  </div>
-</div>
+<opena3xx-page-layout
+  title="Settings"
+  subtitle="Configure application settings and preferences"
+  icon="settings"
+  [actions]="pageActions"
+  (actionClick)="onPageAction($event)">
 
-<!-- Settings Content -->
-<div class="settings-content">
-  <opena3xx-dynamic-form
-    *ngIf="dataLoaded"
-    [fields]="settingsConfig"
-    [readonly]="true"
-    (formSubmit)="onFormSubmit($event)">
-  </opena3xx-dynamic-form>
-</div>
+  <opena3xx-loading-wrapper
+    [loading]="loading()"
+    [error]="error()"
+    [config]="{ showRetry: true, retryMessage: 'Try Again' }"
+    (retry)="onRetry()">
+
+    <div class="settings-container">
+      <form [formGroup]="settingsForm" (ngSubmit)="saveSettings()" *ngIf="!loading() && !error() && formReady()">
+
+        <mat-card class="settings-card">
+          <mat-card-header>
+            <mat-card-title>Configuration Settings</mat-card-title>
+            <mat-card-subtitle>Update application configuration values</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="settings-list" *ngIf="configEntries.length > 0">
+              <div *ngFor="let setting of configEntries" class="setting-item">
+                <mat-form-field appearance="outline" class="setting-field">
+                  <mat-label>{{ formatSettingLabel(setting.key) }}</mat-label>
+                  <input
+                    matInput
+                    [formControlName]="setting.key"
+                    [placeholder]="'Enter ' + formatSettingLabel(setting.key)"
+                  />
+                  <mat-hint>{{ setting.key }}</mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div *ngIf="configEntries.length === 0 && !loading()" class="no-settings">
+              <p>No configuration settings available.</p>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions align="end">
+            <button
+              mat-button
+              type="button"
+              (click)="resetForm()"
+              [disabled]="saving() || !settingsForm.dirty">
+              Reset
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="saving() || !settingsForm.valid || !settingsForm.dirty">
+              <mat-icon *ngIf="saving()">hourglass_empty</mat-icon>
+              <mat-icon *ngIf="!saving()">save</mat-icon>
+              {{ saving() ? 'Saving...' : 'Save Settings' }}
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+      </form>
+    </div>
+
+  </opena3xx-loading-wrapper>
+</opena3xx-page-layout>

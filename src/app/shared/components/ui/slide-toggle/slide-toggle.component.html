@@ -1,6 +1,14 @@
-<div class="full-width margin-top" [formGroup]="group">
-  <mat-slide-toggle [formControlName]="field.name" [disabled]="field.disabled">
-    {{field.label}}
-  </mat-slide-toggle>
-</div>
-<mat-hint>{{field.hint}}</mat-hint>
+<mat-slide-toggle
+  [formControl]="control"
+  [disabled]="disabled"
+  [color]="color"
+  (change)="onChange.emit($event.checked)"
+  (valueChange)="onValueChange.emit($event)">
+  {{ label }}
+</mat-slide-toggle>
+
+<mat-error *ngIf="showError && errorMessage">
+  {{ errorMessage }}
+</mat-error>
+
+<mat-hint *ngIf="hint">{{ hint }}</mat-hint>

@@ -8,12 +8,9 @@ import { SharedModule } from '../../shared/shared.module';
 // Simulator Services
 import { SimulatorEventService } from './services/simulator-event.service';
 
-// Simulator Components
-import { ManageSimulatorEventsComponent } from './components/manage-simulator-events/manage-simulator-events.component';
-
 @NgModule({
   declarations: [
-    ManageSimulatorEventsComponent
+    // All components are now standalone
   ],
   imports: [
     CommonModule,
@@ -24,7 +21,7 @@ import { ManageSimulatorEventsComponent } from './components/manage-simulator-ev
     SharedModule
   ],
   exports: [
-    ManageSimulatorEventsComponent
+    // All components are now standalone
   ],
   providers: [
     SimulatorEventService

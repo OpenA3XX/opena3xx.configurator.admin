@@ -1,11 +1,11 @@
-<h1>Edit Aircraft Model - {{ aircraftModel?.name }}</h1>
+<h1>Edit Aircraft Model - {{ data?.aircraftModel?.name }}</h1>
 
-<div *ngIf="loading && !aircraftModel" class="loading-container">
+<div *ngIf="loading()" class="loading-container">
   <mat-spinner diameter="50"></mat-spinner>
   <p>Loading aircraft model...</p>
 </div>
 
-<div *ngIf="error" class="error-container">
+<div *ngIf="error()" class="error-container">
   <mat-icon color="warn">error</mat-icon>
   <p>Error loading aircraft model details</p>
   <button mat-raised-button color="primary" (click)="loadAircraftModel()">
@@ -14,7 +14,7 @@
   </button>
 </div>
 
-<form *ngIf="!loading && !error && aircraftModel" [formGroup]="aircraftModelForm" (ngSubmit)="onSubmit()" class="edit-form">
+<form *ngIf="!loading() && !error() && data?.aircraftModel" [formGroup]="aircraftModelForm" (ngSubmit)="onSubmit()" class="edit-form">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -27,24 +27,24 @@
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Name *</mat-label>
         <input matInput formControlName="name" placeholder="e.g., Boeing 737-800">
-        <mat-error *ngIf="isFieldInvalid('name')">
-          {{ getErrorMessage('name') }}
+        <mat-error *ngIf="aircraftModelForm.get('name')?.invalid && aircraftModelForm.get('name')?.touched">
+          Name is required
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Manufacturer *</mat-label>
         <input matInput formControlName="manufacturer" placeholder="e.g., Boeing">
-        <mat-error *ngIf="isFieldInvalid('manufacturer')">
-          {{ getErrorMessage('manufacturer') }}
+        <mat-error *ngIf="aircraftModelForm.get('manufacturer')?.invalid && aircraftModelForm.get('manufacturer')?.touched">
+          Manufacturer is required
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Type *</mat-label>
         <input matInput formControlName="type" placeholder="e.g., Commercial Airliner">
-        <mat-error *ngIf="isFieldInvalid('type')">
-          {{ getErrorMessage('type') }}
+        <mat-error *ngIf="aircraftModelForm.get('type')?.invalid && aircraftModelForm.get('type')?.touched">
+          Type is required
         </mat-error>
       </mat-form-field>
 
@@ -52,9 +52,6 @@
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description" rows="3"
                   placeholder="Optional description of the aircraft model"></textarea>
-        <mat-error *ngIf="isFieldInvalid('description')">
-          {{ getErrorMessage('description') }}
-        </mat-error>
       </mat-form-field>
 
       <div class="toggle-field">
@@ -69,14 +66,14 @@
   </mat-expansion-panel>
 
   <div class="dialog-actions">
-    <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
+    <button mat-button type="button" (click)="onCancel()" [disabled]="loading()">
       <mat-icon>close</mat-icon>
       Cancel
     </button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="loading || aircraftModelForm.invalid">
-      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
-      <mat-icon *ngIf="!loading">check</mat-icon>
-      <span *ngIf="!loading">Update Aircraft Model</span>
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading() || aircraftModelForm.invalid">
+      <mat-spinner diameter="20" *ngIf="loading()"></mat-spinner>
+      <mat-icon *ngIf="!loading()">check</mat-icon>
+      <span *ngIf="!loading()">Update Aircraft Model</span>
     </button>
   </div>
 </form>

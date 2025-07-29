@@ -1,134 +1,196 @@
 
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  OnChanges,
-  SimpleChanges
-} from "@angular/core";
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  ValidatorFn
-} from "@angular/forms";
-import { FieldConfig, Validator, FormConfiguration } from "src/app/shared/models/field.interface";
+import { Component, Input, Output, EventEmitter, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+
+export interface DynamicFormField {
+  key: string;
+  label: string;
+  type: 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'toggle' | 'date' | 'radio';
+  required?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
+  hint?: string;
+  options?: { value: string | number; label: string; disabled?: boolean }[];
+  validation?: {
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    min?: number;
+    max?: number;
+    pattern?: string;
+    email?: boolean;
+  };
+  [key: string]: any;
+}
+
+export interface DynamicFormConfig {
+  title?: string;
+  subtitle?: string;
+  fields: DynamicFormField[];
+  layout?: 'single' | 'two-column' | 'three-column';
+  submitText?: string;
+  cancelText?: string;
+  showCancel?: boolean;
+  loading?: boolean;
+}
 
 @Component({
-    exportAs: "dynamicForm",
-    selector: 'opena3xx-dynamic-form',
-    template: `
-    <form class="dynamic-form" [formGroup]="form" (submit)="onSubmit($event)">
-      <ng-container *ngFor="let field of fields;" opena3xxDynamicField [field]="field" [group]="form">
-      </ng-container>
-    </form>
-  `,
-    styleUrls: ['./dynamic-form.component.scss'],
-    standalone: false
+  selector: 'opena3xx-dynamic-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatDividerModule
+  ],
+  templateUrl: './dynamic-form.component.html',
+  styleUrls: ['./dynamic-form.component.scss']
 })
-export class DynamicFormComponent implements OnInit, OnChanges {
-  @Input() fields: FieldConfig[] = [];
-  @Input() identifier!: number;
-  @Input() readonly: boolean = false;
-  @Output() formSubmit: EventEmitter<FormConfiguration> = new EventEmitter<FormConfiguration>();
+export class DynamicFormComponent {
+  @Input() config!: DynamicFormConfig;
+  @Input() initialData: any = {};
+  @Output() formSubmit = new EventEmitter<any>();
+  @Output() formCancel = new EventEmitter<void>();
+  @Output() formChange = new EventEmitter<any>();
 
-  form: FormGroup;
+  // Form
+  form: FormGroup = new FormGroup({});
 
-  get value() {
-    return this.form.value;
-  }
-
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({});
-  }
-
-  ngOnInit() {
-    this.form = this.createControl();
-    this.updateFormReadonlyState();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['readonly'] && this.form) {
-      this.updateFormReadonlyState();
+  // Computed properties
+  formClass = computed(() => {
+    const classes = ['opena3xx-dynamic-form'];
+    if (this.config?.layout) {
+      classes.push(`opena3xx-dynamic-form--${this.config.layout}`);
     }
+    return classes.join(' ');
+  });
+
+  isSubmitting = computed(() => this.config?.loading || false);
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.buildForm();
+    this.setInitialValues();
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    if (this.readonly) {
-      return; // Prevent form submission when readonly
-    }
-    if (this.form.valid) {
-      if (this.identifier !== undefined) {
-        this.form.value.identifier = this.identifier;
+  private buildForm(): void {
+    const group: any = {};
+
+    this.config.fields.forEach(field => {
+      const validators = this.buildValidators(field);
+      group[field.key] = ['', validators];
+    });
+
+    this.form = this.formBuilder.group(group);
+  }
+
+  private buildValidators(field: DynamicFormField): any[] {
+    const validators = [];
+
+    if (field.validation) {
+      if (field.validation.required) {
+        validators.push(Validators.required);
       }
+      if (field.validation.minLength) {
+        validators.push(Validators.minLength(field.validation.minLength));
+      }
+      if (field.validation.maxLength) {
+        validators.push(Validators.maxLength(field.validation.maxLength));
+      }
+      if (field.validation.min) {
+        validators.push(Validators.min(field.validation.min));
+      }
+      if (field.validation.max) {
+        validators.push(Validators.max(field.validation.max));
+      }
+      if (field.validation.pattern) {
+        validators.push(Validators.pattern(field.validation.pattern));
+      }
+      if (field.validation.email) {
+        validators.push(Validators.email);
+      }
+    }
+
+    return validators;
+  }
+
+  private setInitialValues(): void {
+    if (this.initialData) {
+      this.form.patchValue(this.initialData);
+    }
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
       this.formSubmit.emit(this.form.value);
     } else {
-      this.validateAllFormFields(this.form);
+      this.markFormGroupTouched();
     }
   }
 
-  createControl() {
-    const group = this.fb.group({});
-    this.fields.forEach(field => {
-      if (field.type === "button" || field.type === "heading") return;
-
-      // Handle boolean values
-      if (field.value === "true") {
-        field.value = true;
-      } else if (field.value === "false") {
-        field.value = false;
-      }
-
-      // ✅ Correct way to create FormControl with validators
-      const validators = this.bindValidations(field.validations || []);
-      const control = this.fb.control(field.value || '', validators);
-
-      // Disable the control if the field is disabled or form is readonly
-      if (field.disabled || this.readonly) {
-        control.disable();
-      }
-
-      group.addControl(field.name, control);
-    });
-    return group;
+  onCancel(): void {
+    this.formCancel.emit();
   }
 
-  bindValidations(validations: Validator[]): ValidatorFn[] | null {
-    if (validations && validations.length > 0) {
-      const validList: ValidatorFn[] = [];
-      validations.forEach(valid => {
-        if (valid.name === "required") {
-          validList.push(Validators.required);
-        } else if (valid.name === "pattern" && valid.pattern) {
-          validList.push(Validators.pattern(valid.pattern));
-        } else if (valid.validator) {
-          validList.push(valid.validator);
-        }
-      });
-      return validList.length > 0 ? validList : null;
-    }
-    return null;
+  onFieldChange(): void {
+    this.formChange.emit(this.form.value);
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      control?.markAsTouched({ onlySelf: true });
+  private markFormGroupTouched(): void {
+    Object.keys(this.form.controls).forEach(key => {
+      const control = this.form.get(key);
+      control?.markAsTouched();
     });
   }
 
-  private updateFormReadonlyState() {
-    if (this.readonly) {
-      Object.keys(this.form.controls).forEach(fieldName => {
-        const control = this.form.get(fieldName);
-        if (control) {
-          control.disable();
-        }
-      });
-    }
+  // Getters for template
+  get formClasses(): string {
+    return this.formClass();
+  }
+
+  get submitting(): boolean {
+    return this.isSubmitting();
+  }
+
+  get hasTitle(): boolean {
+    return !!this.config?.title;
+  }
+
+  get hasSubtitle(): boolean {
+    return !!this.config?.subtitle;
+  }
+
+  get showCancelButton(): boolean {
+    return this.config?.showCancel || false;
+  }
+
+  get submitButtonText(): string {
+    return this.config?.submitText || 'Submit';
+  }
+
+  get cancelButtonText(): string {
+    return this.config?.cancelText || 'Cancel';
   }
 }

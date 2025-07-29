@@ -1,0 +1,24 @@
+<mat-form-field class="full-width margin-top">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput
+    [matDatepicker]="picker"
+    [placeholder]="placeholder || label"
+    [formControl]="control"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [min]="min"
+    [max]="max"
+    [required]="required"
+    (focus)="onFocus.emit($event)"
+    (blur)="onBlur.emit($event)"
+    (dateChange)="onDateChange.emit($event.value)">
+
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+
+  <mat-error *ngIf="showError && errorMessage">
+    {{ errorMessage }}
+  </mat-error>
+
+  <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+</mat-form-field>

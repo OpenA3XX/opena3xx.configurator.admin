@@ -1,3 +1,12 @@
-<div class="full-width margin-top" [formGroup]="group">
-<button type="submit" mat-flat-button color="primary">{{field.label}}</button>
-</div>
+<button
+  mat-raised-button
+  [color]="color"
+  [disabled]="disabled || loading"
+  [type]="type"
+  [class.full-width]="fullWidth"
+  (click)="onClicked.emit($event)">
+
+  <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+  <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
+  {{ label }}
+</button>

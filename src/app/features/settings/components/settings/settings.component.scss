@@ -52,111 +52,155 @@ mat-toolbar {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-// Settings content styling - using more generous padding
-.settings-content {
-  width: 100% !important;
-  max-width: none !important;
+.settings-container {
+  margin: 0 auto;
+}
+
+.settings-card {
+  margin-bottom: 20px;
+}
+
+.settings-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.setting-item {
+  width: 100%;
+}
+
+.setting-field {
+  width: 100%;
+}
+
+// Form styling
+form {
+  width: 100%;
+}
+
+// Card styling
+mat-card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+mat-card-header {
+  margin-bottom: 16px;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--mat-sys-on-surface, #1f1f1f);
+}
+
+mat-card-subtitle {
+  font-size: 0.875rem;
+  color: var(--mat-sys-on-surface-variant, #49454f);
+  margin-top: 4px;
+}
+
+mat-card-content {
+  padding-top: 0;
+}
+
+mat-card-actions {
+  padding-top: 16px;
+  border-top: 1px solid var(--mat-sys-outline-variant, #cac4d0);
+}
+
+// Form field styling
+mat-form-field {
+  font-size: 14px;
+
+  .mat-mdc-form-field-label {
+    font-weight: 500;
+  }
+
+  .mat-mdc-form-field-hint {
+    font-size: 12px;
+    color: var(--mat-sys-on-surface-variant, #49454f);
+    font-family: monospace;
+  }
+}
+
+// Button styling
+button {
+  margin-left: 8px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+// Loading and error states
+.loading-container {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md, 16px);
-  margin: 0;
-  // padding: var(--spacing-xl, 32px);
-  box-sizing: border-box !important;
+  align-items: center;
+  padding: 40px;
 
-  .mat-mdc-form-field {
-    width: 100% !important;
-    display: block !important;
-    max-width: none !important;
-
-    &:not(:last-child) {
-      margin-bottom: var(--spacing-md, 16px);
-    }
-
-    .mat-mdc-form-field-flex {
-      width: 100% !important;
-    }
-
-    .mat-mdc-form-field-infix {
-      width: 100% !important;
-    }
-  }
-
-  // Dynamic form styling
-  opena3xx-dynamic-form, dynamic-form {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: var(--spacing-md, 16px);
+  mat-spinner {
+    margin-bottom: 16px;
   }
 }
 
-// Responsive Design for header
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    color: var(--mat-sys-error, #ba1a1a);
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--mat-sys-on-surface-variant, #49454f);
+  }
+}
+
+// Responsive design
 @media (max-width: 768px) {
-  .settings-header {
-    padding: 24px;
-    margin-bottom: 24px;
+  .settings-container {
+    padding: 16px;
+    max-width: 100%;
+  }
 
-    .header-content {
-      .header-title {
-        h1 {
-          font-size: 2rem;
-        }
-      }
+  .settings-list {
+    gap: 12px;
+  }
 
-      .header-subtitle {
-        p {
-          font-size: 1rem;
-        }
-      }
+  mat-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+
+    button {
+      margin: 4px 0;
+      margin-left: 0;
     }
   }
-
-  .settings-content {
-    padding: var(--spacing-lg, 24px);
-  }
 }
 
-@media (max-width: 480px) {
-  .settings-header {
-    padding: 20px;
-    margin-bottom: 20px;
-
-    .header-content {
-      .header-title {
-        h1 {
-          font-size: 1.75rem;
-        }
-
-        mat-icon {
-          font-size: 28px;
-          width: 28px;
-          height: 28px;
-        }
-      }
-    }
+// Dark theme support
+:host-context(.dark-theme) {
+  .setting-item {
+    background: var(--mat-card-background-color, #424242);
+    border-color: var(--mat-divider-color, rgba(255, 255, 255, 0.12));
   }
 
-  .settings-content {
-    padding: var(--spacing-md, 16px);
+  .category-header {
+    border-bottom-color: var(--mat-divider-color, rgba(255, 255, 255, 0.12));
   }
-}
 
-button {
-  margin-top: var(--spacing-xl, 40px);
-  align-self: flex-end;
-  clear: both;
-}
-
-// Global enforcement for this component
-::ng-deep opena3xx-settings {
-  width: 100% !important;
-
-  .settings-content, .mat-mdc-form-field, form, .form-group, .field-wrapper {
-    width: 100% !important;
-    max-width: none !important;
-    display: block !important;
-    box-sizing: border-box !important;
-    flex: none !important;
-    flex-direction: column !important;
+  .form-actions {
+    border-top-color: var(--mat-divider-color, rgba(255, 255, 255, 0.12));
   }
 }

@@ -1,238 +1,249 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatListModule } from '@angular/material/list';
 import { DashboardService } from '../../services/dashboard.service';
-import { DataService } from 'src/app/core/services/data.service';
-import { RealTimeService } from 'src/app/core/services/realtime.service';
-import { ThemeService } from 'src/app/core/services/theme.service';
-import { firstValueFrom, Subscription } from 'rxjs';
-import { HardwareBoardDto, HardwarePanelOverviewDto } from 'src/app/shared/models/models';
-
-interface ActivityItem {
-  icon: string;
-  description: string;
-  timestamp: Date;
-}
 
 @Component({
-    selector: 'opena3xx-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss'],
-    standalone: false
+  selector: 'opena3xx-dashboard',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatDividerModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatListModule
+  ],
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-  // Quick stats
-  totalBoards: number = 0;
-  totalPanels: number = 0;
-  connectedSystems: number = 0;
-  lastUpdated: Date = new Date();
+export class DashboardComponent implements OnInit {
+  // Signals for reactive state management
+  loading = signal(false);
+  error = signal(false);
+  dashboardData = signal<any>(null);
+  isEmpty = computed(() => !this.dashboardData() && !this.loading() && !this.error());
 
-  // System overview
-  activeBoards: number = 0;
-  configuredPanels: number = 0;
-  recentEvents: number = 0;
+  // Dashboard widgets configuration
+  widgets = signal([
+    {
+      id: 'system-status',
+      title: 'System Status',
+      type: 'status',
+      data: { status: 'online', uptime: '24h 30m', lastUpdate: new Date() },
+      size: 'medium',
+      refreshInterval: 30000
+    },
+    {
+      id: 'hardware-overview',
+      title: 'Hardware Overview',
+      type: 'metric',
+      data: { total: 15, active: 12, inactive: 3 },
+      size: 'small',
+      refreshInterval: 60000
+    },
+    {
+      id: 'recent-activity',
+      title: 'Recent Activity',
+      type: 'list',
+      data: [
+        { id: 1, message: 'Hardware panel connected', time: '2 min ago', type: 'info' },
+        { id: 2, message: 'Configuration updated', time: '5 min ago', type: 'success' },
+        { id: 3, message: 'New device detected', time: '10 min ago', type: 'warning' }
+      ],
+      size: 'large',
+      refreshInterval: 45000
+    },
+    {
+      id: 'performance-metrics',
+      title: 'Performance Metrics',
+      type: 'chart',
+      data: { cpu: 45, memory: 62, network: 28 },
+      size: 'medium',
+      refreshInterval: 15000
+    }
+  ]);
 
-  // System health
-  systemHealth = {
-    status: 'healthy',
-    icon: 'check_circle',
-    message: 'All systems operational'
-  };
+  // Page actions
+  pageActions = signal<any[]>([
+    {
+      label: 'Refresh',
+      icon: 'refresh',
+      action: 'refresh',
+      color: 'primary'
+    },
+    {
+      label: 'Settings',
+      icon: 'settings',
+      action: 'settings',
+      color: 'accent'
+    }
+  ]);
 
-  // Recent activities
-  recentActivities: ActivityItem[] = [];
-
-  // System status
-  apiStatus = {
-    status: 'online',
-    icon: 'wifi'
-  };
-
-  databaseStatus = {
-    status: 'online',
-    icon: 'storage'
-  };
-
-  realtimeStatus = {
-    status: 'online',
-    icon: 'sync'
-  };
-
-  systemStatus = {
-    status: 'online',
-    icon: 'memory'
-  };
-
-  // Theme support
-  isDarkMode: boolean = false;
-  private themeSubscription: Subscription = new Subscription();
-
-  constructor(
-    private router: Router,
-    private dashboardService: DashboardService,
-    private dataService: DataService,
-    public realtimeService: RealTimeService,
-    private themeService: ThemeService
-  ) {}
-
-  @HostBinding('class.dark-theme') get darkThemeClass() {
-    return this.isDarkMode;
-  }
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
+    this.loadDashboardData();
+  }
+
+  async loadDashboardData(): Promise<void> {
+    this.loading.set(true);
+    this.error.set(false);
+
     try {
-      this.loadDashboardData();
-      this.updateLastUpdated();
-
-      // Subscribe to theme changes
-      if (this.themeService) {
-        this.themeSubscription = this.themeService.isDarkMode$.subscribe(isDark => {
-          this.isDarkMode = isDark;
-        });
-      }
-
-      // Update every 30 seconds
-      setInterval(() => {
-        this.updateLastUpdated();
-      }, 30000);
-    } catch (error) {
-      console.error('Error in dashboard ngOnInit:', error);
+      const data = await this.dashboardService.getDashboardData();
+      this.dashboardData.set(data);
+    } catch (err) {
+      console.error('Error loading dashboard data:', err);
+      this.error.set(true);
+    } finally {
+      this.loading.set(false);
     }
   }
 
-  ngOnDestroy(): void {
-    try {
-      if (this.themeSubscription) {
-        this.themeSubscription.unsubscribe();
-      }
-    } catch (error) {
-      console.error('Error in dashboard ngOnDestroy:', error);
+  openSettings(): void {
+    // Navigate to settings or open settings dialog
+    console.log('Opening settings...');
+  }
+
+  onWidgetAction(widgetId: string, action: string): void {
+    console.log(`Widget ${widgetId} action: ${action}`);
+    // Handle widget-specific actions
+  }
+
+  onPageAction(action: string): void {
+    switch (action) {
+      case 'refresh':
+        this.loadDashboardData();
+        break;
+      case 'settings':
+        this.openSettings();
+        break;
+      default:
+        console.log(`Unknown action: ${action}`);
     }
   }
 
-  private async loadDashboardData(): Promise<void> {
-    try {
-      // Load hardware boards
-      const boards = await firstValueFrom(this.dataService.getAllHardwareBoards()) as HardwareBoardDto[];
-      this.totalBoards = boards.length;
-      // Since HardwareBoardDto doesn't have isActive, we'll assume all boards are active for now
-      this.activeBoards = boards.length;
-
-      // Load hardware panels - now as an array
-      try {
-        const panelOverviews = await firstValueFrom(this.dataService.getAllHardwarePanelOverviewDetails()) as HardwarePanelOverviewDto[];
-        this.totalPanels = panelOverviews.length;
-        this.configuredPanels = panelOverviews.length; // If you have a property to filter configured, use it here
-      } catch (panelError) {
-        console.warn('Panel overview not available:', panelError);
-        this.totalPanels = 0;
-        this.configuredPanels = 0;
-      }
-
-      // Update connected systems
-      this.connectedSystems = this.realtimeService && this.realtimeService.isConnected ? 1 : 0;
-
-      // Update real-time status
-      this.realtimeStatus.status = this.realtimeService && this.realtimeService.isConnected ? 'online' : 'offline';
-      this.realtimeStatus.icon = this.realtimeService && this.realtimeService.isConnected ? 'sync' : 'sync_disabled';
-
-      // Load recent activities (mock data for now)
-      this.loadRecentActivities();
-
-      // Update system health
-      this.updateSystemHealth();
-
-    } catch (error) {
-      console.error('Error loading dashboard data:', error);
-      this.systemHealth = {
-        status: 'error',
-        icon: 'error',
-        message: 'Unable to load system data'
-      };
-    }
+  // Getters for template
+  get dashboardWidgets(): any[] {
+    return this.widgets();
   }
 
-  private loadRecentActivities(): void {
-    // Mock recent activities - replace with real data from service
-    this.recentActivities = [
-      {
-        icon: 'hardware',
-        description: 'Hardware board "MCDU Co Pilot" registered',
-        timestamp: new Date(Date.now() - 300000) // 5 minutes ago
-      },
-      {
-        icon: 'dashboard',
-        description: 'Panel "Main Flight Deck" configured',
-        timestamp: new Date(Date.now() - 900000) // 15 minutes ago
-      },
-      {
-        icon: 'settings',
-        description: 'System settings updated',
-        timestamp: new Date(Date.now() - 1800000) // 30 minutes ago
-      }
-    ];
+  get pageActionButtons(): any[] {
+    return this.pageActions();
   }
 
-  private updateSystemHealth(): void {
-    const allOnline = this.apiStatus.status === 'online' &&
-                     this.databaseStatus.status === 'online' &&
-                     this.realtimeStatus.status === 'online' &&
-                     this.systemStatus.status === 'online';
-
-    if (allOnline) {
-      this.systemHealth = {
-        status: 'healthy',
-        icon: 'check_circle',
-        message: 'All systems operational'
-      };
-    } else if (this.apiStatus.status === 'offline' || this.databaseStatus.status === 'offline') {
-      this.systemHealth = {
-        status: 'error',
-        icon: 'error',
-        message: 'Critical systems offline'
-      };
-    } else {
-      this.systemHealth = {
-        status: 'warning',
-        icon: 'warning',
-        message: 'Some systems may be offline'
-      };
-    }
+  get isLoading(): boolean {
+    return this.loading();
   }
 
-  private updateLastUpdated(): void {
-    this.lastUpdated = new Date();
+  get hasError(): boolean {
+    return this.error();
+  }
+
+  get isEmptyState(): boolean {
+    return this.isEmpty();
+  }
+
+  get hasData(): boolean {
+    return !!this.dashboardData();
+  }
+
+  // Dashboard data properties
+  get totalBoards(): number {
+    return this.dashboardData()?.totalBoards || 0;
+  }
+
+  get totalPanels(): number {
+    return this.dashboardData()?.totalPanels || 0;
+  }
+
+  get connectedSystems(): number {
+    return this.dashboardData()?.connectedSystems || 0;
+  }
+
+  get lastUpdated(): Date {
+    return this.dashboardData()?.lastUpdated || new Date();
+  }
+
+  get isDarkMode(): boolean {
+    return false; // TODO: Implement dark mode detection
+  }
+
+  get systemHealth(): any {
+    return this.dashboardData()?.systemHealth || { status: 'unknown' };
+  }
+
+  get activeBoards(): number {
+    return this.dashboardData()?.activeBoards || 0;
+  }
+
+  get configuredPanels(): number {
+    return this.dashboardData()?.configuredPanels || 0;
+  }
+
+  get recentEvents(): any[] {
+    return this.dashboardData()?.recentEvents || [];
+  }
+
+  get recentActivities(): any[] {
+    return this.dashboardData()?.recentActivities || [];
+  }
+
+  get apiStatus(): string {
+    return this.dashboardData()?.apiStatus || 'unknown';
+  }
+
+  get databaseStatus(): string {
+    return this.dashboardData()?.databaseStatus || 'unknown';
+  }
+
+  get realtimeStatus(): string {
+    return this.dashboardData()?.realtimeStatus || 'unknown';
+  }
+
+  get systemStatus(): string {
+    return this.dashboardData()?.systemStatus || 'unknown';
   }
 
   // Navigation methods
   navigateToHardware(): void {
-    try {
-      this.router.navigateByUrl('/manage/hardware-boards');
-    } catch (error) {
-      console.error('Error navigating to hardware:', error);
-    }
+    // TODO: Implement navigation
+    console.log('Navigate to hardware');
   }
 
   navigateToPanels(): void {
-    try {
-      this.router.navigateByUrl('/manage/hardware-panels');
-    } catch (error) {
-      console.error('Error navigating to panels:', error);
-    }
+    // TODO: Implement navigation
+    console.log('Navigate to panels');
   }
 
   navigateToConsole(): void {
-    try {
-      this.router.navigateByUrl('/console');
-    } catch (error) {
-      console.error('Error navigating to console:', error);
-    }
+    // TODO: Implement navigation
+    console.log('Navigate to console');
   }
 
   navigateToSettings(): void {
-    try {
-      this.router.navigateByUrl('/settings');
-    } catch (error) {
-      console.error('Error navigating to settings:', error);
-    }
+    // TODO: Implement navigation
+    console.log('Navigate to settings');
   }
 }

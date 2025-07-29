@@ -117,6 +117,8 @@ const routes: Routes = [
   },
 ];
 
+export { routes as appRoutes };
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

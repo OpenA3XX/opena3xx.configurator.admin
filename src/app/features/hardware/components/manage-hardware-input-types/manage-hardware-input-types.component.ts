@@ -1,79 +1,189 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { Component, OnInit, OnDestroy, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { filter, map, tap } from 'rxjs/operators';
-import { MatPaginator } from '@angular/material/paginator';
-import { DataService } from 'src/app/core/services/data.service';
-import { HardwareInputTypeDto } from 'src/app/shared/models/models';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { PageLayoutComponent, ActionButton } from '../../../../shared/components/layout/page-layout.component';
+import { DataTableComponent, TableColumn, TableAction, TableConfig } from '../../../../shared/components/ui/data-table/data-table.component';
+import { LoadingWrapperComponent } from '../../../../shared/components/ui/loading-wrapper/loading-wrapper.component';
+import { HardwareInputTypeDto } from '../../../../shared/models/models';
+import { HardwareService } from '../../services/hardware.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-    selector: 'opena3xx-manage-hardware-input-types',
-    templateUrl: './manage-hardware-input-types.component.html',
-    styleUrls: ['./manage-hardware-input-types.component.scss'],
-    standalone: false
+  selector: 'opena3xx-manage-hardware-input-types',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageLayoutComponent,
+    DataTableComponent,
+    LoadingWrapperComponent
+  ],
+  templateUrl: './manage-hardware-input-types.component.html',
+  styleUrls: ['./manage-hardware-input-types.component.scss']
 })
-export class ManageHardwareInputTypesComponent implements OnInit, AfterViewInit, OnDestroy {
-  public displayedColumns: string[] = ['id', 'name', 'details'];
-  dataSource = new MatTableDataSource<HardwareInputTypeDto>();
-  public data: HardwareInputTypeDto[] = [];
-  dataLoaded = false;
+export class ManageHardwareInputTypesComponent implements OnInit, OnDestroy {
+  // Signals for reactive state management
+  inputTypes = signal<HardwareInputTypeDto[]>([]);
+  loading = signal(false);
+  error = signal(false);
+  selectedInputType = signal<HardwareInputTypeDto | null>(null);
 
-  constructor(private dataService: DataService, public router: Router) {}
+  // Computed values
+  isEmpty = computed(() => this.inputTypes().length === 0 && !this.loading() && !this.error());
 
-  onEditClick(id: number) {
-    this.router.navigateByUrl(`/edit/hardware-input-type?id=${id}`);
-  }
+  // Table configuration
+  columns: TableColumn[] = [
+    { key: 'id', label: 'ID', type: 'number', width: '80px', align: 'center' },
+    { key: 'name', label: 'Name', type: 'text', sortable: true },
+    { key: 'details', label: 'Details', type: 'text', sortable: true },
+    { key: 'actions', label: 'Actions', type: 'action', width: '120px', align: 'center' }
+  ];
+
+  actions: TableAction[] = [
+    {
+      label: 'View Details',
+      icon: 'visibility',
+      action: 'view',
+      color: 'primary'
+    },
+    {
+      label: 'Edit',
+      icon: 'edit',
+      action: 'edit',
+      color: 'accent'
+    },
+    {
+      label: 'Delete',
+      icon: 'delete',
+      action: 'delete',
+      color: 'warn'
+    }
+  ];
+
+  tableConfig: TableConfig = {
+    showSearch: true,
+    showPagination: true,
+    showSorting: true,
+    showActions: true,
+    pageSizeOptions: [5, 10, 25, 50, 100],
+    defaultPageSize: 10,
+    searchPlaceholder: 'Search input types...',
+    emptyMessage: 'No hardware input types found',
+    loadingMessage: 'Loading hardware input types...'
+  };
+
+  pageActions: ActionButton[] = [
+    {
+      label: 'Add Input Type',
+      icon: 'add',
+      action: 'add',
+      color: 'primary'
+    }
+  ];
+
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private hardwareService: HardwareService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.dataService
-      .getAllHardwareInputTypes()
-      .pipe(
-        tap((data) => console.log('Data received', data)),
-        filter((x) => !!x),
-        map((data_received) => {
-          this.data = data_received as unknown as HardwareInputTypeDto[];
-          this.dataSource = new MatTableDataSource<HardwareInputTypeDto>(this.data);
-          this.dataLoaded = true;
-
-          // Connect paginator and sort after data is loaded
-          this.connectDataSourceFeatures();
-        })
-      )
-      .subscribe();
+    this.loadInputTypes();
   }
 
   ngOnDestroy(): void {
-    // Clean up ViewChild references
-    if (this.dataSource) {
-      this.dataSource.disconnect();
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private loadInputTypes(): void {
+    this.loading.set(true);
+    this.error.set(false);
+
+    this.hardwareService.getAllInputTypes().pipe(takeUntil(this.destroy$)).subscribe({
+      next: (inputTypes) => {
+        this.inputTypes.set(inputTypes);
+        this.loading.set(false);
+        this.snackBar.open('Hardware input types loaded successfully', 'Close', {
+          duration: 2000
+        });
+      },
+      error: (error) => {
+        console.error('Error loading hardware input types:', error);
+        this.error.set(true);
+        this.loading.set(false);
+        this.snackBar.open('Error loading hardware input types', 'Close', {
+          duration: 3000
+        });
+      }
+    });
+  }
+
+  onPageAction(action: string): void {
+    switch (action) {
+      case 'add':
+        this.addHardwareInputType();
+        break;
     }
   }
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  onTableAction(event: { action: string, row: HardwareInputTypeDto }): void {
+    const { action, row } = event;
 
-  ngAfterViewInit() {
-    this.connectDataSourceFeatures();
-  }
-
-  private connectDataSourceFeatures() {
-    if (this.dataSource) {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    switch (action) {
+      case 'view':
+        this.onViewInputType(row.id);
+        break;
+      case 'edit':
+        this.onEditInputType(row.id);
+        break;
+      case 'delete':
+        this.onDeleteInputType(row.id);
+        break;
     }
   }
 
-  addHardwareInputType() {
-    this.router.navigateByUrl(`/add/hardware-input-type`);
+  onRowClick(inputType: HardwareInputTypeDto): void {
+    this.selectedInputType.set(inputType);
+    this.onViewInputType(inputType.id);
   }
 
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  onRetry(): void {
+    this.loadInputTypes();
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  private addHardwareInputType(): void {
+    this.router.navigateByUrl('/add/hardware-input-type');
+  }
+
+  private onViewInputType(id: number): void {
+    // TODO: Implement view dialog or navigation
+    console.log('View input type:', id);
+  }
+
+  private onEditInputType(id: number): void {
+    this.router.navigateByUrl(`/edit/hardware-input-type?id=${id}`);
+  }
+
+  private onDeleteInputType(id: number): void {
+    // TODO: Add confirmation dialog
+    this.hardwareService.deleteInputType(id).pipe(takeUntil(this.destroy$)).subscribe({
+      next: () => {
+        this.snackBar.open('Hardware input type deleted successfully', 'Close', {
+          duration: 2000
+        });
+        this.loadInputTypes();
+      },
+      error: (error) => {
+        console.error('Error deleting hardware input type:', error);
+        this.snackBar.open('Error deleting hardware input type', 'Close', {
+          duration: 3000
+        });
+      }
+    });
   }
 }

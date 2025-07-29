@@ -1,0 +1,127 @@
+<div class="dynamic-form">
+  <div class="dynamic-form__header" *ngIf="config.title || config.subtitle">
+    <h2 *ngIf="config.title" class="dynamic-form__title">{{ config.title }}</h2>
+    <p *ngIf="config.subtitle" class="dynamic-form__subtitle">{{ config.subtitle }}</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="dynamic-form__content">
+    <div class="dynamic-form__fields">
+      <div *ngFor="let field of config.fields" class="dynamic-form__field">
+        <ng-container [ngSwitch]="field.type">
+          <opena3xx-input *ngSwitchCase="'text'"
+            [label]="field.label"
+            [placeholder]="field.placeholder"
+            [hint]="field.hint"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [readonly]="field.readonly"
+            [maxLength]="field.maxLength"
+            [minLength]="field.minLength"
+            [pattern]="field.pattern"
+            [formControlName]="field.key">
+          </opena3xx-input>
+
+          <opena3xx-textarea *ngSwitchCase="'textarea'"
+            [label]="field.label"
+            [placeholder]="field.placeholder"
+            [hint]="field.hint"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [readonly]="field.readonly"
+            [maxLength]="field.maxLength"
+            [rows]="field.rows"
+            [formControlName]="field.key">
+          </opena3xx-textarea>
+
+          <opena3xx-select *ngSwitchCase="'select'"
+            [label]="field.label"
+            [placeholder]="field.placeholder"
+            [hint]="field.hint"
+            [options]="field.options"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [multiple]="field.multiple"
+            [formControlName]="field.key">
+          </opena3xx-select>
+
+          <opena3xx-checkbox *ngSwitchCase="'checkbox'"
+            [label]="field.label"
+            [hint]="field.hint"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [formControlName]="field.key">
+          </opena3xx-checkbox>
+
+          <opena3xx-slider *ngSwitchCase="'slider'"
+            [label]="field.label"
+            [hint]="field.hint"
+            [min]="field.min"
+            [max]="field.max"
+            [step]="field.step"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [showInput]="field.showInput"
+            [formControlName]="field.key">
+          </opena3xx-slider>
+
+          <opena3xx-date *ngSwitchCase="'date'"
+            [label]="field.label"
+            [placeholder]="field.placeholder"
+            [hint]="field.hint"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [readonly]="field.readonly"
+            [min]="field.min"
+            [max]="field.max"
+            [formControlName]="field.key">
+          </opena3xx-date>
+
+          <opena3xx-slide-toggle *ngSwitchCase="'toggle'"
+            [label]="field.label"
+            [hint]="field.hint"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [color]="field.color"
+            [formControlName]="field.key">
+          </opena3xx-slide-toggle>
+
+          <opena3xx-autocomplete *ngSwitchCase="'autocomplete'"
+            [label]="field.label"
+            [placeholder]="field.placeholder"
+            [hint]="field.hint"
+            [options]="field.options"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [icon]="field.icon"
+            [formControlName]="field.key">
+          </opena3xx-autocomplete>
+
+          <opena3xx-radio-button *ngSwitchCase="'radio'"
+            [label]="field.label"
+            [hint]="field.hint"
+            [options]="field.options"
+            [required]="field.required"
+            [disabled]="field.disabled || config.loading"
+            [formControlName]="field.key">
+          </opena3xx-radio-button>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="dynamic-form__actions" *ngIf="config.showActions !== false">
+      <button type="button"
+        mat-button
+        (click)="onCancel()"
+        [disabled]="config.loading">
+        {{ config.cancelText || 'Cancel' }}
+      </button>
+      <button type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid || config.loading">
+        <mat-spinner *ngIf="config.loading" diameter="20"></mat-spinner>
+        {{ config.submitText || 'Submit' }}
+      </button>
+    </div>
+  </form>
+</div>

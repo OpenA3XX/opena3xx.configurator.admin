@@ -1,70 +1,88 @@
-<mat-toolbar>
-  <mat-icon>add_box</mat-icon>&nbsp;
-  <span>Add Hardware Panel</span>
-</mat-toolbar>
-<mat-toolbar>
-  <button mat-flat-button color="primary" (click)="back()">Back</button>
-</mat-toolbar>
+<opena3xx-page-layout
+  title="Add Hardware Panel"
+  subtitle="Create a new hardware panel configuration"
+  icon="add_box"
+  [actions]="pageActions"
+  (actionClick)="onPageAction($event)">
 
-<div class="container">
-  <form [formGroup]="addHardwarePanelForm" (ngSubmit)="onSubmit()">
+  <opena3xx-loading-wrapper
+    [loading]="loading()"
+    [error]="error()"
+    [config]="{ showRetry: true, retryMessage: 'Try Again' }"
+    (retry)="onRetry()">
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>{{hardwarePanelNameFieldConfig.label}}</mat-label>
-      <input matInput
-             [type]="hardwarePanelNameFieldConfig.inputType"
-             formControlName="hardwarePanelName"
-             [placeholder]="hardwarePanelNameFieldConfig.label">
-      <mat-hint>{{hardwarePanelNameFieldConfig.hint}}</mat-hint>
-      <mat-error *ngIf="addHardwarePanelForm.get('hardwarePanelName')?.hasError('required')">
-        Hardware Panel Name is Required
-      </mat-error>
-    </mat-form-field>
+    <div class="form-container">
+      <form [formGroup]="addHardwarePanelForm" (ngSubmit)="onSubmit()">
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>{{aircraftModelFieldConfig.label}}</mat-label>
-      <mat-select formControlName="aircraftModel">
-        <mat-option *ngFor="let option of aircraftModelFieldConfig.options" [value]="option.value">
-          {{option.value}}
-        </mat-option>
-      </mat-select>
-      <mat-hint>{{aircraftModelFieldConfig.hint}}</mat-hint>
-      <mat-error *ngIf="addHardwarePanelForm.get('aircraftModel')?.hasError('required')">
-        Aircraft Model is Required
-      </mat-error>
-    </mat-form-field>
+        <!-- Panel Name -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Panel Name *</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Enter panel name"
+            [disabled]="submitting()">
+          <mat-error *ngIf="isFieldInvalid('name')">
+            {{ getErrorMessage('name') }}
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>{{cockpitAreaFieldConfig.label}}</mat-label>
-      <mat-select formControlName="cockpitArea">
-        <mat-option *ngFor="let option of cockpitAreaFieldConfig.options" [value]="option.value">
-          {{option.value}}
-        </mat-option>
-      </mat-select>
-      <mat-hint>{{cockpitAreaFieldConfig.hint}}</mat-hint>
-      <mat-error *ngIf="addHardwarePanelForm.get('cockpitArea')?.hasError('required')">
-        Cockpit Area is Required
-      </mat-error>
-    </mat-form-field>
+        <!-- Aircraft Model -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Aircraft Model *</mat-label>
+          <mat-select formControlName="aircraftModel" [disabled]="submitting()">
+            <mat-option *ngFor="let option of aircraftModelOptions" [value]="option.key">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isFieldInvalid('aircraftModel')">
+            {{ getErrorMessage('aircraftModel') }}
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>{{hardwarePanelOwnerFieldConfig.label}}</mat-label>
-      <mat-select formControlName="hardwarePanelOwner">
-        <mat-option *ngFor="let option of hardwarePanelOwnerFieldConfig.options" [value]="option.value">
-          {{option.value}}
-        </mat-option>
-      </mat-select>
-      <mat-hint>{{hardwarePanelOwnerFieldConfig.hint}}</mat-hint>
-      <mat-error *ngIf="addHardwarePanelForm.get('hardwarePanelOwner')?.hasError('required')">
-        Hardware Panel Owner is Required
-      </mat-error>
-    </mat-form-field>
+        <!-- Cockpit Area -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Cockpit Area *</mat-label>
+          <mat-select formControlName="cockpitArea" [disabled]="submitting()">
+            <mat-option *ngFor="let option of cockpitAreaOptions" [value]="option.key">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isFieldInvalid('cockpitArea')">
+            {{ getErrorMessage('cockpitArea') }}
+          </mat-error>
+        </mat-form-field>
 
-    <div class="button-container">
-      <button type="submit" mat-flat-button color="primary">
-        <mat-icon>save</mat-icon>
-        Save
-      </button>
+        <!-- Owner -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Owner *</mat-label>
+          <mat-select formControlName="owner" [disabled]="submitting()">
+            <mat-option *ngFor="let option of ownerOptions" [value]="option.key">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isFieldInvalid('owner')">
+            {{ getErrorMessage('owner') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="addHardwarePanelForm.invalid || submitting()"
+            class="submit-button">
+            <mat-icon *ngIf="!submitting()">save</mat-icon>
+            <mat-spinner *ngIf="submitting()" diameter="20"></mat-spinner>
+            {{ submitting() ? 'Saving...' : 'Save Panel' }}
+          </button>
+        </div>
+
+      </form>
     </div>
-  </form>
-</div>
+
+  </opena3xx-loading-wrapper>
+
+</opena3xx-page-layout>

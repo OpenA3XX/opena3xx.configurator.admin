@@ -1,212 +1,207 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
-import { NotificationService, Notification, NotificationFilters } from '../../services/notification.service';
+import { Component, OnInit, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { PageLayoutComponent, ActionButton } from '../../../../shared/components/layout/page-layout.component';
+import { LoadingWrapperComponent } from '../../../../shared/components/ui/loading-wrapper/loading-wrapper.component';
+import { NotificationItemComponent } from '../notification-item/notification-item.component';
+import { NotificationFiltersComponent } from '../notification-filters/notification-filters.component';
+import { NotificationService } from '../../services/notification.service';
+
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  type: 'info' | 'success' | 'warning' | 'error';
+  timestamp: Date;
+  read: boolean;
+  priority: 'low' | 'medium' | 'high';
+  category?: string;
+  actions?: { label: string; action: string }[];
+}
 
 @Component({
-    selector: 'app-notification-center',
-    templateUrl: './notification-center.component.html',
-    styleUrls: ['./notification-center.component.scss'],
-    standalone: false
+  selector: 'opena3xx-notification-center',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatDividerModule,
+    PageLayoutComponent,
+    LoadingWrapperComponent,
+    NotificationItemComponent,
+    NotificationFiltersComponent
+  ],
+  templateUrl: './notification-center.component.html',
+  styleUrls: ['./notification-center.component.scss']
 })
-export class NotificationCenterComponent implements OnInit, OnDestroy {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+export class NotificationCenterComponent implements OnInit {
+  // Signals for reactive state management
+  loading = signal(false);
+  error = signal(false);
+  notifications = signal<Notification[]>([]);
+  filters = signal({
+    type: 'all',
+    priority: 'all',
+    category: 'all',
+    read: 'all'
+  });
 
-  displayedColumns: string[] = [
-    'severity',
-    'title',
-    'service',
-    'timestamp',
-    'status',
-    'actions'
-  ];
+  // Computed properties
+  filteredNotifications = computed(() => {
+    let filtered = this.notifications();
 
-  dataSource = new MatTableDataSource<Notification>([]);
-  loading = false;
-  totalNotifications = 0;
-  unreadCount = 0;
+    if (this.filters().type !== 'all') {
+      filtered = filtered.filter(n => n.type === this.filters().type);
+    }
 
-  private subscriptions = new Subscription();
+    if (this.filters().priority !== 'all') {
+      filtered = filtered.filter(n => n.priority === this.filters().priority);
+    }
 
-  constructor(
-    private notificationService: NotificationService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
-  ) {}
+    if (this.filters().category !== 'all') {
+      filtered = filtered.filter(n => n.category === this.filters().category);
+    }
+
+    if (this.filters().read !== 'all') {
+      const read = this.filters().read === 'read';
+      filtered = filtered.filter(n => n.read === read);
+    }
+
+    return filtered.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+  });
+
+  isEmpty = computed(() => this.filteredNotifications().length === 0 && !this.loading() && !this.error());
+
+  // Page actions
+  pageActions = signal<ActionButton[]>([
+    {
+      label: 'Mark All Read',
+      icon: 'mark_email_read',
+      action: () => this.markAllAsRead(),
+      type: 'secondary'
+    },
+    {
+      label: 'Clear All',
+      icon: 'clear_all',
+      action: () => this.clearAllNotifications(),
+      type: 'secondary'
+    }
+  ]);
+
+  constructor(private notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.loadNotifications();
-    this.setupSubscriptions();
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
-    // Clean up ViewChild references
-    if (this.dataSource) {
-      this.dataSource.disconnect();
+  async loadNotifications(): Promise<void> {
+    this.loading.set(true);
+    this.error.set(false);
+
+    try {
+      const notifications = await this.notificationService.getNotifications();
+      this.notifications.set(notifications);
+    } catch (err) {
+      console.error('Error loading notifications:', err);
+      this.error.set(true);
+    } finally {
+      this.loading.set(false);
     }
   }
 
-  ngAfterViewInit(): void {
-    // Add safety checks for table components
-    setTimeout(() => {
-      if (this.paginator) {
-        this.dataSource.paginator = this.paginator;
-      }
-      if (this.sort) {
-        this.dataSource.sort = this.sort;
-      }
-    }, 0);
+  onFiltersChange(filters: any): void {
+    this.filters.set(filters);
   }
 
-  private setupSubscriptions(): void {
-    // Subscribe to filtered notifications
-    this.subscriptions.add(
-      this.notificationService.filteredNotifications$.subscribe(notifications => {
-        if (this.dataSource) {
-          this.dataSource.data = notifications;
-        }
-        this.totalNotifications = notifications.length;
-      })
+  onNotificationAction(notification: Notification, action: string): void {
+    switch (action) {
+      case 'read':
+        this.markAsRead(notification.id);
+        break;
+      case 'delete':
+        this.deleteNotification(notification.id);
+        break;
+      default:
+        console.log(`Unknown action: ${action} for notification: ${notification.id}`);
+    }
+  }
+
+  markAsRead(notificationId: string): void {
+    this.notificationService.markAsRead(notificationId);
+    this.notifications.update(notifications =>
+      notifications.map(n => n.id === notificationId ? { ...n, read: true } : n)
     );
-
-    // Subscribe to unread count
-    this.subscriptions.add(
-      this.notificationService.unreadCount$.subscribe(count => {
-        this.unreadCount = count;
-      })
-    );
-  }
-
-  private loadNotifications(): void {
-    this.loading = true;
-    // The service handles the loading automatically through observables
-    this.loading = false;
-  }
-
-  applyFilter(event: Event): void {
-    if (!event || !event.target) return;
-
-    const filterValue = (event.target as HTMLInputElement).value;
-    if (this.dataSource) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
-
-    if (this.dataSource && this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  markAsRead(notification: Notification): void {
-    this.notificationService.markNotificationAsRead(notification.id);
-    this.showSnackBar('Notification marked as read');
   }
 
   markAllAsRead(): void {
     this.notificationService.markAllAsRead();
-    this.showSnackBar('All notifications marked as read');
+    this.notifications.update(notifications =>
+      notifications.map(n => ({ ...n, read: true }))
+    );
   }
 
-  deleteNotification(notification: Notification): void {
-    this.notificationService.deleteNotification(notification.id);
-    this.showSnackBar('Notification deleted');
+  deleteNotification(notificationId: string): void {
+    this.notificationService.deleteNotification(notificationId);
+    this.notifications.update(notifications =>
+      notifications.filter(n => n.id !== notificationId)
+    );
   }
 
   clearAllNotifications(): void {
     this.notificationService.clearAllNotifications();
-    // Force update the app component's unread count
-    const currentUnreadCount = this.notificationService.getUnreadCount();
-    console.log('Notification center - current unread count after clearing:', currentUnreadCount);
-    this.showSnackBar('All notifications cleared');
+    this.notifications.set([]);
   }
 
-
-
-  updateFilters(filters: Partial<NotificationFilters>): void {
-    this.notificationService.updateFilters(filters);
-  }
-
-  clearFilters(): void {
-    this.notificationService.clearFilters();
-  }
-
-  getSeverityIcon(severity: string): string {
-    switch (severity) {
-      case 'error':
-        return 'error';
-      case 'warning':
-        return 'warning';
-      case 'success':
-        return 'check_circle';
-      case 'info':
+  onPageAction(action: string): void {
+    switch (action) {
+      case 'mark-all-read':
+        this.markAllAsRead();
+        break;
+      case 'clear-all':
+        this.clearAllNotifications();
+        break;
       default:
-        return 'info';
+        console.log(`Unknown action: ${action}`);
     }
   }
 
-  getSeverityColor(severity: string): string {
-    switch (severity) {
-      case 'error':
-        return 'error';
-      case 'warning':
-        return 'warning';
-      case 'success':
-        return 'success';
-      case 'info':
-      default:
-        return 'primary';
-    }
+  // Getters for template
+  get notificationList(): Notification[] {
+    return this.filteredNotifications();
   }
 
-  getServiceIcon(service?: string): string {
-    if (!service) return 'help';
-
-    const serviceLower = service.toLowerCase();
-    if (serviceLower.includes('msfs') || serviceLower.includes('flight')) {
-      return 'flight';
-    }
-    if (serviceLower.includes('rabbitmq')) {
-      return 'compare_arrows';
-    }
-    if (serviceLower.includes('seq')) {
-      return 'list_alt';
-    }
-    if (serviceLower.includes('coordinator') || serviceLower.includes('api')) {
-      return 'hub';
-    }
-    return 'settings';
+  get pageActionButtons(): ActionButton[] {
+    return this.pageActions();
   }
 
-  formatTimestamp(timestamp: Date): string {
-    const now = new Date();
-    const diff = now.getTime() - timestamp.getTime();
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    if (minutes < 1) {
-      return 'Just now';
-    } else if (minutes < 60) {
-      return `${minutes}m ago`;
-    } else if (hours < 24) {
-      return `${hours}h ago`;
-    } else if (days < 7) {
-      return `${days}d ago`;
-    } else {
-      return timestamp.toLocaleDateString();
-    }
+  get isLoading(): boolean {
+    return this.loading();
   }
 
-  private showSnackBar(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      horizontalPosition: 'end',
-      verticalPosition: 'top'
-    });
+  get hasError(): boolean {
+    return this.error();
+  }
+
+  get isEmptyState(): boolean {
+    return this.isEmpty();
+  }
+
+  get unreadCount(): number {
+    return this.notifications().filter(n => !n.read).length;
+  }
+
+  get totalCount(): number {
+    return this.notifications().length;
   }
 }

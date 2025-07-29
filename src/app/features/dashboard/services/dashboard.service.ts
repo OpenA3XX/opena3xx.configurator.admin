@@ -74,4 +74,11 @@ export class DashboardService {
   getSystemHealthStatus(): Observable<SystemHealth> {
     return this.http.get<SystemHealth>(`${this.BASE_URL}/dashboard/system-health`);
   }
+
+  /**
+   * Get all dashboard data
+   */
+  getDashboardData(): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/dashboard/data`);
+  }
 }

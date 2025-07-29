@@ -1,70 +1,103 @@
-<!-- Console Content Wrapper -->
-<div class="console-content">
+<opena3xx-page-layout
+  title="Console"
+  subtitle="Real-time system monitoring and event management"
+  icon="terminal"
+  [actions]="pageActions"
+  (actionClick)="onPageAction($event)">
 
-  <!-- Console Header -->
-  <opena3xx-console-header
-    [isConnected]="realtimeService.isConnected"
-    [isDarkMode]="isDarkMode"
-    (connect)="onConnect()"
-    (disconnect)="onDisconnect()">
-  </opena3xx-console-header>
+  <opena3xx-loading-wrapper
+    [loading]="loading()"
+    [error]="error()"
+    [isEmpty]="isEmpty()"
+    (retry)="onRetry()">
 
-  <!-- Console Statistics -->
-  <opena3xx-console-statistics
-    [totalEvents]="getTotalEvents()"
-    [eventsPerMinute]="getEventsPerMinute()"
-    [connectedBoards]="getConnectedBoards()"
-    [activeSelectors]="getActiveSelectors()"
-    [showCharts]="showCharts"
-    [isDarkMode]="isDarkMode"
-    (toggleCharts)="onToggleCharts()"
-    (openSettings)="onOpenSettingsDialog()"
-    (openEventHistory)="onOpenEventHistoryDialog()"
-    (openPerformance)="onOpenPerformanceDialog()">
-  </opena3xx-console-statistics>
+    <div class="console-container">
+      <!-- Connection Status -->
+      <div class="connection-status" [class.connected]="isConnected()">
+        <mat-icon>{{ isConnected() ? 'wifi' : 'wifi_off' }}</mat-icon>
+        <span>{{ isConnected() ? 'Connected' : 'Disconnected' }}</span>
+      </div>
 
-  <!-- Console Filters -->
-  <opena3xx-console-filters
-    [isDarkMode]="isDarkMode"
-    (filterChange)="onFilterChange($event)"
-    (searchChange)="onSearchChange($event)"
-    (clearFilters)="onClearFilters()">
-  </opena3xx-console-filters>
+      <!-- Statistics Cards -->
+      <div class="stats-grid">
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <div class="stat-value">{{ getTotalEvents() }}</div>
+            <div class="stat-label">Total Events</div>
+          </mat-card-content>
+        </mat-card>
 
-  <!-- Console Actions -->
-  <opena3xx-console-actions
-    [isDarkMode]="isDarkMode"
-    (clearEvents)="onClearEvents()"
-    (exportEvents)="onExportEvents()"
-    (openSettings)="onOpenSettingsDialog()"
-    (openEventHistory)="onOpenEventHistoryDialog()"
-    (openPerformance)="onOpenPerformanceDialog()">
-  </opena3xx-console-actions>
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <div class="stat-value">{{ getEventsPerMinute() }}</div>
+            <div class="stat-label">Events/Min</div>
+          </mat-card-content>
+        </mat-card>
 
-  <!-- Console Charts -->
-  <opena3xx-console-charts
-    [chartData]="getChartData()"
-    [boardActivity]="getBoardActivity()"
-    [showCharts]="showCharts"
-    [isDarkMode]="isDarkMode">
-  </opena3xx-console-charts>
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <div class="stat-value">{{ getConnectedBoards() }}</div>
+            <div class="stat-label">Connected Boards</div>
+          </mat-card-content>
+        </mat-card>
 
-  <!-- Flight Events Terminal -->
-  <opena3xx-flight-events-terminal
-    [events]="getFilteredFlightEvents()"
-    [isConnected]="realtimeService.isConnected"
-    [isDarkMode]="isDarkMode"
-    (copyEvent)="onCopyEvent($event)"
-    (exportEvent)="onExportSingleEvent($event)">
-  </opena3xx-flight-events-terminal>
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <div class="stat-value">{{ getActiveSelectors() }}</div>
+            <div class="stat-label">Active Selectors</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-  <!-- Keep Alive Events Terminal -->
-  <opena3xx-keep-alive-events-terminal
-    [events]="getFilteredKeepAliveEvents()"
-    [isConnected]="realtimeService.isConnected"
-    [isDarkMode]="isDarkMode"
-    (copyEvent)="onCopyEvent($event)"
-    (exportEvent)="onExportSingleEvent($event)">
-  </opena3xx-keep-alive-events-terminal>
+      <!-- Console Messages -->
+      <div class="console-messages">
+        <div class="messages-header">
+          <h3>Console Messages</h3>
+          <div class="message-actions">
+            <button mat-icon-button (click)="onClearEvents()" matTooltip="Clear Messages">
+              <mat-icon>clear_all</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onExportEvents()" matTooltip="Export Messages">
+              <mat-icon>download</mat-icon>
+            </button>
+          </div>
+        </div>
 
-</div>
+        <div class="messages-container">
+          <div *ngFor="let message of messages()" class="message-item" [class]="'level-' + message.level">
+            <div class="message-header">
+              <span class="message-timestamp">{{ message.timestamp | date:'HH:mm:ss' }}</span>
+              <span class="message-level">{{ message.level }}</span>
+              <span class="message-source">{{ message.source }}</span>
+              <button mat-icon-button (click)="onCopyEvent(message)" matTooltip="Copy Message">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+            <div class="message-content">{{ message.message }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section (when enabled) -->
+      <div *ngIf="showCharts()" class="charts-section">
+        <h3>Performance Charts</h3>
+        <div class="charts-grid">
+          <!-- Chart placeholders -->
+          <mat-card class="chart-card">
+            <mat-card-content>
+              <div class="chart-placeholder">Events per Minute Chart</div>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="chart-card">
+            <mat-card-content>
+              <div class="chart-placeholder">Board Activity Chart</div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+  </opena3xx-loading-wrapper>
+
+</opena3xx-page-layout>

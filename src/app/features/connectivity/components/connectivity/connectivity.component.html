@@ -1,65 +1,139 @@
-<div class="connectivity-container">
-  <!-- Header Section -->
-  <div class="connectivity-header">
-    <div class="header-content">
-      <div class="header-title">
-        <mat-icon>wifi</mat-icon>
-        <h1>Cockpit Connectivity</h1>
+<opena3xx-page-layout
+  title="Connectivity"
+  subtitle="Network connectivity monitoring and diagnostics"
+  icon="network_check"
+  [actions]="pageActions"
+  (actionClick)="onPageAction($event)">
+
+  <opena3xx-loading-wrapper
+    [loading]="loading()"
+    [error]="error()"
+    [isEmpty]="isEmpty()"
+    (retry)="onRetry()">
+
+    <div class="connectivity-container">
+      <!-- Connection Status Overview -->
+      <div class="status-overview">
+        <div class="status-card">
+          <div class="status-icon">
+            <mat-icon>router</mat-icon>
+          </div>
+          <div class="status-content">
+            <div class="status-value">{{ getTotalConnections() }}</div>
+            <div class="status-label">Total Connections</div>
+          </div>
+        </div>
+
+        <div class="status-card connected">
+          <div class="status-icon">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+          <div class="status-content">
+            <div class="status-value">{{ getConnectedConnections() }}</div>
+            <div class="status-label">Connected</div>
+          </div>
+        </div>
+
+        <div class="status-card disconnected">
+          <div class="status-icon">
+            <mat-icon>cancel</mat-icon>
+          </div>
+          <div class="status-content">
+            <div class="status-value">{{ getDisconnectedConnections() }}</div>
+            <div class="status-label">Disconnected</div>
+          </div>
+        </div>
+
+        <div class="status-card error">
+          <div class="status-icon">
+            <mat-icon>error</mat-icon>
+          </div>
+          <div class="status-content">
+            <div class="status-value">{{ getErrorConnections() }}</div>
+            <div class="status-label">Errors</div>
+          </div>
+        </div>
       </div>
-      <div class="header-subtitle">
-        <p>Monitor and manage communication between hardware panels and the Central Coordinator</p>
+
+      <!-- System Health -->
+      <div *ngIf="getSystemHealth()" class="system-health">
+        <h3>System Health</h3>
+        <div class="health-grid">
+          <div class="health-item">
+            <div class="health-label">CPU Usage</div>
+            <div class="health-value">{{ getSystemHealth()?.cpu }}%</div>
+            <div class="health-bar">
+              <div class="health-fill" [style.width.%]="getSystemHealth()?.cpu"></div>
+            </div>
+          </div>
+
+          <div class="health-item">
+            <div class="health-label">Memory Usage</div>
+            <div class="health-value">{{ getSystemHealth()?.memory }}%</div>
+            <div class="health-bar">
+              <div class="health-fill" [style.width.%]="getSystemHealth()?.memory"></div>
+            </div>
+          </div>
+
+          <div class="health-item">
+            <div class="health-label">Disk Usage</div>
+            <div class="health-value">{{ getSystemHealth()?.disk }}%</div>
+            <div class="health-bar">
+              <div class="health-fill" [style.width.%]="getSystemHealth()?.disk"></div>
+            </div>
+          </div>
+
+          <div class="health-item">
+            <div class="health-label">Network</div>
+            <div class="health-value">{{ getSystemHealth()?.network }}%</div>
+            <div class="health-bar">
+              <div class="health-fill" [style.width.%]="getSystemHealth()?.network"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connection List -->
+      <div class="connections-section">
+        <h3>Active Connections</h3>
+        <div class="connections-list">
+          <div *ngFor="let connection of connections()" class="connection-item" [class]="getConnectionStatusClass(connection.status)">
+            <div class="connection-header">
+              <div class="connection-info">
+                <div class="connection-name">{{ connection.name }}</div>
+                <div class="connection-ip">{{ connection.ipAddress }}</div>
+              </div>
+              <div class="connection-status">
+                <span class="status-badge">{{ connection.status }}</span>
+                <div class="connection-actions">
+                  <button mat-icon-button (click)="onTestConnection(connection.id)" matTooltip="Test Connection">
+                    <mat-icon>play_arrow</mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="onReconnect(connection.id)" matTooltip="Reconnect">
+                    <mat-icon>refresh</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="connection-details">
+              <div class="detail-item">
+                <span class="detail-label">Type:</span>
+                <span class="detail-value">{{ connection.connectionType }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Latency:</span>
+                <span class="detail-value">{{ connection.latency }}ms</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Last Seen:</span>
+                <span class="detail-value">{{ connection.lastSeen | date:'HH:mm:ss' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="header-actions">
-      <button mat-raised-button color="primary" class="action-button">
-        <mat-icon>refresh</mat-icon>
-        Refresh Status
-      </button>
-      <button mat-raised-button color="accent" class="action-button">
-        <mat-icon>build</mat-icon>
-        Run Diagnostics
-      </button>
-    </div>
-  </div>
+  </opena3xx-loading-wrapper>
 
-  <!-- Main Content Grid -->
-  <div class="connectivity-content">
-    <!-- Top Row - System Overview -->
-    <div class="content-row">
-      <div class="content-column full-width">
-        <opena3xx-system-health-overview></opena3xx-system-health-overview>
-      </div>
-    </div>
-
-    <!-- Second Row - Dashboard and Matrix -->
-    <div class="content-row">
-      <div class="content-column">
-        <opena3xx-connection-status-dashboard></opena3xx-connection-status-dashboard>
-      </div>
-      <div class="content-column">
-        <opena3xx-hardware-panel-matrix></opena3xx-hardware-panel-matrix>
-      </div>
-    </div>
-
-    <!-- Third Row - Network Topology and Logs -->
-    <div class="content-row">
-      <div class="content-column">
-        <opena3xx-network-topology-map></opena3xx-network-topology-map>
-      </div>
-      <div class="content-column">
-        <opena3xx-connection-logs></opena3xx-connection-logs>
-      </div>
-    </div>
-
-    <!-- Fourth Row - Diagnostics and Validation -->
-    <div class="content-row">
-      <div class="content-column">
-        <opena3xx-diagnostic-tools></opena3xx-diagnostic-tools>
-      </div>
-      <div class="content-column">
-        <opena3xx-configuration-validation></opena3xx-configuration-validation>
-      </div>
-    </div>
-  </div>
-</div>
+</opena3xx-page-layout>

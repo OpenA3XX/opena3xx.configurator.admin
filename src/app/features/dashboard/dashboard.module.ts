@@ -1,31 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from 'src/app/material.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../../material.module';
+import { SharedModule } from '../../shared/shared.module';
 
-// Dashboard Components
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DashboardHeaderComponent } from './components/dashboard/dashboard-header/dashboard-header.component';
-import { SystemOverviewComponent } from './components/dashboard/system-overview/system-overview.component';
-import { QuickAccessComponent } from './components/dashboard/quick-access/quick-access.component';
-import { ActivityStatusComponent } from './components/dashboard/activity-status/activity-status.component';
+// Dashboard Services
+import { DashboardService } from './services/dashboard.service';
 
 @NgModule({
   declarations: [
-    // Dashboard Components
-    DashboardComponent,
-    DashboardHeaderComponent,
-    SystemOverviewComponent,
-    QuickAccessComponent,
-    ActivityStatusComponent
+    // All components are now standalone
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule,
     MaterialModule,
     SharedModule
   ],
   exports: [
-    DashboardComponent
+    // All components are now standalone
+  ],
+  providers: [
+    DashboardService
   ]
 })
 export class DashboardModule { }

@@ -1,158 +1,206 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
-import { LinkHardwareInputSelectorsDialogComponent } from '../link-hardware-input-selectors-dialog/link-hardware-input-selectors-dialog.component';
-import { MapHardwareInputSelectorsDialogComponent } from '../map-hardware-input-selectors-dialog/map-hardware-input-selectors-dialog.component';
-import { MapHardwareOutputSelectorsDialogComponent } from '../map-hardware-output-selectors-dialog/map-hardware-output-selectors-dialog.component';
-import { ViewHardwareInputSelectorsDialogComponent } from '../view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
-import { ViewHardwareOutputSelectorsDialogComponent } from '../view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
-import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/shared/models/models';
-import { DataService } from 'src/app/core/services/data.service';
-import { DeleteHardwareInputDialogComponent } from '../delete-hardware-input-dialog/delete-hardware-input-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatListModule } from '@angular/material/list';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from '../../../../shared/models/models';
+import { HardwareService } from '../../services/hardware.service';
+import { ConfirmationDialogService } from '../../../../shared/services/confirmation-dialog.service';
 
 @Component({
-    selector: 'opena3xx-view-hardware-panel-details',
-    templateUrl: './view-hardware-panel-details.component.html',
-    styleUrls: ['./view-hardware-panel-details.component.scss'],
-    standalone: false
+  selector: 'opena3xx-view-hardware-panel-details',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatListModule
+  ],
+  templateUrl: './view-hardware-panel-details.component.html',
+  styleUrls: ['./view-hardware-panel-details.component.scss']
 })
-export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
-  idParam!: number;
-  public hardwarePanelDto: HardwarePanelDto;
-  public displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType', 'action'];
-  public displayedOutputColumns: string[] = ['id', 'name', 'hardwareOutputType', 'action'];
-  inputsDataSource = new MatTableDataSource<HardwareInputDto>();
-  outputsDataSource = new MatTableDataSource<HardwareOutputDto>();
+export class ViewHardwarePanelDetailsComponent implements OnInit {
+  // Signals for reactive state management
+  loading = signal(false);
+  error = signal(false);
+  hardwarePanel = signal<HardwarePanelDto | null>(null);
+  hardwarePanelDto = signal<HardwarePanelDto | null>(null);
+  showHardwareInputs = signal(true);
+  showHardwareOutputs = signal(true);
+  isEmpty = computed(() => !this.hardwarePanel() && !this.loading() && !this.error());
 
-  showHardwareInputs: boolean = false;
-  showHardwareOutputs: boolean = false;
+  // Table data
+  displayedInputColumns: string[] = ['id', 'name', 'hardwareInputType', 'action'];
+  displayedOutputColumns: string[] = ['id', 'name', 'hardwareOutputType', 'action'];
 
-  @ViewChild('inputSort') inputSort: MatSort;
-  @ViewChild('outputSort') outputSort: MatSort;
+  // Page actions
+  pageActions = signal<any[]>([
+    {
+      label: 'Edit',
+      icon: 'edit',
+      action: 'edit',
+      color: 'primary'
+    },
+    {
+      label: 'Delete',
+      icon: 'delete',
+      action: 'delete',
+      color: 'warn'
+    }
+  ]);
 
   constructor(
-    private dataService: DataService,
     private router: Router,
-    public viewHardwareInputOutputSelectorsDialog: MatDialog,
-    public dialog: MatDialog
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private hardwareService: HardwareService,
+    private confirmationDialog: ConfirmationDialogService
   ) {}
 
-  ngOnDestroy(): void {
-    // Clean up ViewChild references
-    if (this.inputsDataSource) {
-      this.inputsDataSource.disconnect();
-    }
-    if (this.outputsDataSource) {
-      this.outputsDataSource.disconnect();
-    }
-  }
-
   ngOnInit(): void {
-    this.router.routerState.root.queryParams.subscribe((params) => {
-      console.log('Received Query Params', params);
-      this.idParam = params['id'];
+    this.loadHardwarePanel();
+  }
+
+  onPageAction(action: string): void {
+    switch (action) {
+      case 'back':
+        this.back();
+        break;
+      case 'edit':
+        this.editHardwarePanel();
+        break;
+    }
+  }
+
+  private loadHardwarePanel(): void {
+    this.loading.set(true);
+
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.hardwareService.getPanelById(id).subscribe({
+          next: (data) => {
+            this.hardwarePanel.set(data);
+            this.loading.set(false);
+          },
+          error: (error) => {
+            console.error('Error loading hardware panel:', error);
+            this.error.set(true);
+            this.loading.set(false);
+          }
+        });
+      } else {
+        this.error.set(true);
+        this.loading.set(false);
+      }
     });
-    this.fetchData();
-  }
-
-  ngAfterViewInit() {
-    this.connectSortToDataSources();
-  }
-
-  private connectSortToDataSources() {
-    if (this.inputSort && this.inputsDataSource) {
-      this.inputsDataSource.sort = this.inputSort;
-    }
-    if (this.outputSort && this.outputsDataSource) {
-      this.outputsDataSource.sort = this.outputSort;
-    }
-  }
-
-  fetchData() {
-    this.dataService
-      .getAllHardwarePanelDetails(this.idParam)
-      .pipe(
-        filter((x) => !!x),
-        map((data_received: HardwarePanelDto) => {
-          this.hardwarePanelDto = data_received;
-          this.inputsDataSource = new MatTableDataSource<HardwareInputDto>(
-            this.hardwarePanelDto.hardwareInputs
-          );
-          this.outputsDataSource = new MatTableDataSource<HardwareOutputDto>(
-            this.hardwarePanelDto.hardwareOutputs
-          );
-
-          // Connect sorting after data is loaded
-          this.connectSortToDataSources();
-
-          if (this.hardwarePanelDto.hardwareInputs.length > 0) {
-            this.showHardwareInputs = true;
-          }
-          if (this.hardwarePanelDto.hardwareOutputs.length > 0) {
-            this.showHardwareOutputs = true;
-          }
-        })
-      )
-      .subscribe();
-    return;
-  }
-
-  onEditHardwareDetails() {
-    this.router.navigateByUrl(`/edit/hardware-panel?id=${this.hardwarePanelDto.id}`);
   }
 
   showInputSelectorDetails(data: HardwareInputDto): void {
-    this.viewHardwareInputOutputSelectorsDialog.open(ViewHardwareInputSelectorsDialogComponent, {
-      data: data,
-      width: '600px',
-    });
+    // Implementation for showing input selector details
+    console.log('Show input selector details:', data);
   }
 
   mapInputSelector(data: HardwareInputDto): void {
-    const dialogRef = this.viewHardwareInputOutputSelectorsDialog.open(
-      MapHardwareInputSelectorsDialogComponent,
-      {
-        data: data,
-        width: '900px',
+    // Implementation for mapping input selector
+    console.log('Map input selector:', data);
+  }
+
+  linkInputSelector(data: HardwareInputDto): void {
+    // Implementation for linking input selector
+    console.log('Link input selector:', data);
+  }
+
+  showOutputSelectorDetails(data: HardwareOutputDto): void {
+    // Implementation for showing output selector details
+    console.log('Show output selector details:', data);
+  }
+
+  mapOutputSelector(data: HardwareOutputDto): void {
+    // Implementation for mapping output selector
+    console.log('Map output selector:', data);
+  }
+
+  deleteHardwareInput(hardwareInput: HardwareInputDto): void {
+    this.confirmationDialog.confirmDelete(
+      hardwareInput.name,
+      'hardware input'
+    ).subscribe(confirmed => {
+      if (confirmed) {
+        // Implementation for deleting hardware input
+        console.log('Delete hardware input:', hardwareInput);
       }
-    );
-    dialogRef.afterClosed().subscribe(() => {
-      this.fetchData();
     });
   }
 
-  linkInputSelector(data: HardwareInputDto) {
-    const dialogRef = this.viewHardwareInputOutputSelectorsDialog.open(
-      LinkHardwareInputSelectorsDialogComponent,
-      {
-        data: data,
-        width: '900px',
+  deleteHardwareOutput(hardwareOutput: HardwareOutputDto): void {
+    this.confirmationDialog.confirmDelete(
+      hardwareOutput.name,
+      'hardware output'
+    ).subscribe(confirmed => {
+      if (confirmed) {
+        // Implementation for deleting hardware output
+        console.log('Delete hardware output:', hardwareOutput);
       }
-    );
-    dialogRef.afterClosed().subscribe(() => {
-      this.fetchData();
     });
   }
 
-  showOutputSelectorDetails(data: HardwareInputDto) {
-    this.viewHardwareInputOutputSelectorsDialog.open(ViewHardwareOutputSelectorsDialogComponent, {
-      data: data,
-      width: '600px',
-    });
+  private back(): void {
+    this.router.navigateByUrl('/manage/hardware-panels');
   }
 
-  mapOutputSelector(data: HardwareInputDto) {
-    this.viewHardwareInputOutputSelectorsDialog.open(MapHardwareOutputSelectorsDialogComponent, {
-      data: data,
-      width: '900px',
-    });
+  private editHardwarePanel(): void {
+    const panel = this.hardwarePanel();
+    if (panel) {
+      this.router.navigate(['/edit/hardware-panel'], { queryParams: { id: panel.id } });
+    }
   }
 
-  deleteHardwareInput(hardwareInput: HardwareInputDto) {
-    const dialogRef = this.dialog.open(DeleteHardwareInputDialogComponent);
-    dialogRef.componentInstance.hardwareInput = hardwareInput;
+  onEditHardwareDetails(): void {
+    const panel = this.hardwarePanel();
+    if (panel) {
+      this.router.navigate(['/edit/hardware-panel'], { queryParams: { id: panel.id } });
+    }
+  }
+
+  // Getters for template
+  get panel(): HardwarePanelDto | null {
+    return this.hardwarePanel();
+  }
+
+  get inputs(): HardwareInputDto[] {
+    return this.panel?.hardwareInputs || [];
+  }
+
+  get outputs(): HardwareOutputDto[] {
+    return this.panel?.hardwareOutputs || [];
+  }
+
+  get hasInputs(): boolean {
+    return this.inputs.length > 0;
+  }
+
+  get hasOutputs(): boolean {
+    return this.outputs.length > 0;
   }
 }

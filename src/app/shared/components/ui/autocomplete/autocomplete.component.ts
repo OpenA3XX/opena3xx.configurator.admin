@@ -1,54 +1,145 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { FieldConfig, OptionList } from 'src/app/shared/models/field.interface';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Component, Input, Output, EventEmitter, signal, computed, forwardRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
+import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-//  <mat-autocomplete
-//         [disabled]="field.disabled"
-//         [placeholder]="field.label"
-//         [formControlName]="field.name"
-//       >
-//         <mat-option *ngFor="let item of field.options" [value]="item.key">{{
-//           item.value
-//         }}</mat-option>
-//       </mat-autocomplete>
-// <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
-//         <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{
-//           validation.message
-//         }}</mat-error>
-//       </ng-container>
+export interface AutocompleteOption {
+  value: string | number;
+  label: string;
+  disabled?: boolean;
+}
+
 @Component({
-    selector: 'opena3xx-forms-autocomplete',
-    templateUrl: './autocomplete.component.html',
-    styleUrls: ['./autocomplete.component.scss'],
-    standalone: false
+  selector: 'opena3xx-autocomplete',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatIconModule
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AutocompleteComponent),
+      multi: true
+    }
+  ],
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss']
 })
-export class AutocompleteComponent implements OnInit {
-  @Input() field!: FieldConfig;
+export class AutocompleteComponent implements ControlValueAccessor {
+  @Input() label = '';
+  @Input() placeholder = '';
+  @Input() hint = '';
+  @Input() options: AutocompleteOption[] = [];
+  @Input() required = false;
+  @Input() disabled = false;
+  @Input() errorMessage = '';
+  @Input() showError = false;
+  @Input() icon = '';
+  @Output() valueChange = new EventEmitter<string>();
+  @Output() selectionChange = new EventEmitter<AutocompleteOption>();
 
-  @Input() group!: FormGroup;
+  // Internal value
+  private _value = signal('');
+  private _touched = signal(false);
 
-  @Output() AutoCompleteValue: EventEmitter<string> = new EventEmitter<string>();
+  // Computed properties
+  hasError = computed(() => this.showError && !!this.errorMessage);
+  autocompleteClass = computed(() => {
+    const classes = ['opena3xx-autocomplete'];
+    if (this.hasError()) classes.push('opena3xx-autocomplete--error');
+    if (this.disabled) classes.push('opena3xx-autocomplete--disabled');
+    return classes.join(' ');
+  });
 
-  myControl = new FormControl();
+  // Filtered options
+  filteredOptions: Observable<AutocompleteOption[]> = of([]);
 
-  filteredOptions: Observable<OptionList[]>;
+  // ControlValueAccessor implementation
+  onChange = (value: string) => {};
+  onTouched = () => {};
 
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value))
-    );
-
-    this.group.addControl(this.field.name, this.myControl);
+  writeValue(value: string): void {
+    this._value.set(value || '');
   }
 
-  private _filter(value: string): OptionList[] {
-    console.log('_filter', value);
-    this.AutoCompleteValue.emit(value);
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  // Event handlers
+  onInputChange(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this._value.set(value);
+    this.onChange(value);
+    this.valueChange.emit(value);
+    this.updateFilteredOptions(value);
+  }
+
+  onOptionSelected(option: AutocompleteOption): void {
+    this._value.set(option.label);
+    this.onChange(option.value.toString());
+    this.valueChange.emit(option.value.toString());
+    this.selectionChange.emit(option);
+  }
+
+  onBlur(): void {
+    this._touched.set(true);
+    this.onTouched();
+  }
+
+  private updateFilteredOptions(value: string): void {
+    this.filteredOptions = of(this.options).pipe(
+      map(options => this.filterOptions(options, value))
+    );
+  }
+
+  private filterOptions(options: AutocompleteOption[], value: string): AutocompleteOption[] {
     const filterValue = value.toLowerCase();
-    return this.field.options.filter((option) => option.value.toLowerCase().includes(filterValue));
+    return options.filter(option =>
+      option.label.toLowerCase().includes(filterValue) && !option.disabled
+    );
+  }
+
+  // Getters for template
+  get value(): string {
+    return this._value();
+  }
+
+  get isTouched(): boolean {
+    return this._touched();
+  }
+
+  get autocompleteClasses(): string {
+    return this.autocompleteClass();
+  }
+
+  get showErrorMessage(): boolean {
+    return this.hasError();
+  }
+
+  get hasIcon(): boolean {
+    return !!this.icon;
+  }
+
+  get hasOptions(): boolean {
+    return this.options.length > 0;
   }
 }

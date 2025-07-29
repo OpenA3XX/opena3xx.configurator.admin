@@ -1,1 +1,9 @@
-<h5 *ngIf="field?.label">{{ field.label }}</h5>
+<{{ tagName }}
+  [class]="headingClasses"
+  [class.text-center]="align === 'center'"
+  [class.text-left]="align === 'left'"
+  [class.text-right]="align === 'right'">
+
+  <mat-icon *ngIf="icon" class="heading-icon">{{ icon }}</mat-icon>
+  {{ text }}
+</{{ tagName }}>

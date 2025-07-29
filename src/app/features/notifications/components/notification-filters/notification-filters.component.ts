@@ -1,170 +1,151 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { NotificationFilters } from '../../services/notification.service';
+import { Component, Input, Output, EventEmitter, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
+
+export interface NotificationFilters {
+  type: 'all' | 'info' | 'success' | 'warning' | 'error';
+  priority: 'all' | 'low' | 'medium' | 'high';
+  category: 'all' | string;
+  read: 'all' | 'read' | 'unread';
+  dateRange?: { start: Date; end: Date };
+}
 
 @Component({
-    selector: 'app-notification-filters',
-    templateUrl: './notification-filters.component.html',
-    styleUrls: ['./notification-filters.component.scss'],
-    standalone: false
+  selector: 'opena3xx-notification-filters',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatChipsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    ReactiveFormsModule
+  ],
+  templateUrl: './notification-filters.component.html',
+  styleUrls: ['./notification-filters.component.scss']
 })
-export class NotificationFiltersComponent implements OnInit, OnDestroy {
-  filtersForm: FormGroup;
-  expanded = false;
+export class NotificationFiltersComponent {
+  @Input() filters: NotificationFilters = {
+    type: 'all',
+    priority: 'all',
+    category: 'all',
+    read: 'all'
+  };
+  @Input() categories: string[] = [];
+  @Input() showAdvanced = false;
+  @Output() filtersChange = new EventEmitter<NotificationFilters>();
+  @Output() clearFilters = new EventEmitter<void>();
 
-  severityOptions = [
-    { value: 'error', label: 'Error', icon: 'error', color: 'error' },
-    { value: 'warning', label: 'Warning', icon: 'warning', color: 'warning' },
-    { value: 'success', label: 'Success', icon: 'check_circle', color: 'success' },
-    { value: 'info', label: 'Info', icon: 'info', color: 'primary' }
-  ];
+  // Computed properties
+  hasActiveFilters = computed(() => {
+    return this.filters.type !== 'all' ||
+           this.filters.priority !== 'all' ||
+           this.filters.category !== 'all' ||
+           this.filters.read !== 'all' ||
+           !!this.filters.dateRange;
+  });
 
-  serviceOptions = [
-    { value: 'MSFS 2020/2024', label: 'MSFS 2020/2024', icon: 'flight' },
-    { value: 'RabbitMQ', label: 'RabbitMQ', icon: 'compare_arrows' },
-    { value: 'SEQ', label: 'SEQ', icon: 'list_alt' },
-    { value: 'OpenA3XX Coordinator', label: 'OpenA3XX Coordinator', icon: 'hub' }
-  ];
+  filterClass = computed(() => {
+    const classes = ['opena3xx-notification-filters'];
+    if (this.hasActiveFilters()) classes.push('opena3xx-notification-filters--active');
+    return classes.join(' ');
+  });
 
-  statusOptions = [
-    { value: false, label: 'Unread', icon: 'fiber_manual_record' },
-    { value: true, label: 'Read', icon: 'done' }
-  ];
-
-  @Output() filtersChanged = new EventEmitter<NotificationFilters>();
-  @Output() filtersCleared = new EventEmitter<void>();
-
-  private destroy$ = new Subject<void>();
-
-    constructor(private fb: FormBuilder) {
-    // Get all service values for default selection
-    const allServiceValues = this.serviceOptions.map(option => option.value);
-
-    this.filtersForm = this.fb.group({
-      severity: [[]],
-      service: [allServiceValues], // Default to all services selected
-      isRead: [null],
-      startDate: [null],
-      endDate: [null]
-    });
-
-    // Ensure form is properly initialized
-    setTimeout(() => {
-      if (this.filtersForm) {
-        this.filtersForm.updateValueAndValidity();
-      }
-    }, 50);
+  onTypeChange(type: string): void {
+    this.filters = { ...this.filters, type: type as any };
+    this.filtersChange.emit(this.filters);
   }
 
-  ngOnInit(): void {
-    // Ensure form controls are properly initialized with a longer delay
-    setTimeout(() => {
-      this.setupFormSubscriptions();
-    }, 100);
+  onPriorityChange(priority: string): void {
+    this.filters = { ...this.filters, priority: priority as any };
+    this.filtersChange.emit(this.filters);
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  onCategoryChange(category: string): void {
+    this.filters = { ...this.filters, category };
+    this.filtersChange.emit(this.filters);
   }
 
-  private setupFormSubscriptions(): void {
-    if (this.filtersForm) {
-      this.filtersForm.valueChanges
-        .pipe(
-          takeUntil(this.destroy$),
-          debounceTime(300),
-          distinctUntilChanged()
-        )
-        .subscribe(filters => {
-          this.emitFilters(filters);
-        });
-    }
+  onReadStatusChange(read: string): void {
+    this.filters = { ...this.filters, read: read as any };
+    this.filtersChange.emit(this.filters);
   }
 
-  private emitFilters(filters: any): void {
-    if (!filters) return;
-
-    const cleanFilters: NotificationFilters = {};
-
-    if (filters.severity && filters.severity.length > 0) {
-      cleanFilters.severity = filters.severity;
-    }
-
-    if (filters.service && filters.service.length > 0) {
-      cleanFilters.service = filters.service;
-    }
-
-    if (filters.isRead !== null && filters.isRead !== undefined) {
-      cleanFilters.isRead = filters.isRead;
-    }
-
-    if (filters.startDate && filters.endDate) {
-      cleanFilters.dateRange = {
-        start: new Date(filters.startDate),
-        end: new Date(filters.endDate)
-      };
-    }
-
-    this.filtersChanged.emit(cleanFilters);
+  onDateRangeChange(dateRange: { start: Date; end: Date }): void {
+    this.filters = { ...this.filters, dateRange };
+    this.filtersChange.emit(this.filters);
   }
 
-  toggleExpanded(): void {
-    this.expanded = !this.expanded;
+  onClearFilters(): void {
+    this.filters = {
+      type: 'all',
+      priority: 'all',
+      category: 'all',
+      read: 'all'
+    };
+    this.clearFilters.emit();
   }
 
-  clearFilters(): void {
-    if (this.filtersForm) {
-      this.filtersForm.reset({
-        severity: [],
-        service: [],
-        isRead: null,
-        startDate: null,
-        endDate: null
-      });
-    }
-    this.filtersCleared.emit();
+  // Getters for template
+  get filterClasses(): string {
+    return this.filterClass();
   }
 
-  getActiveFiltersCount(): number {
-    if (!this.filtersForm) return 0;
+  get hasActiveFilterState(): boolean {
+    return this.hasActiveFilters();
+  }
 
-    const formValue = this.filtersForm.value;
+  get typeOptions(): { value: string; label: string }[] {
+    return [
+      { value: 'all', label: 'All Types' },
+      { value: 'info', label: 'Info' },
+      { value: 'success', label: 'Success' },
+      { value: 'warning', label: 'Warning' },
+      { value: 'error', label: 'Error' }
+    ];
+  }
+
+  get priorityOptions(): { value: string; label: string }[] {
+    return [
+      { value: 'all', label: 'All Priorities' },
+      { value: 'low', label: 'Low' },
+      { value: 'medium', label: 'Medium' },
+      { value: 'high', label: 'High' }
+    ];
+  }
+
+  get readOptions(): { value: string; label: string }[] {
+    return [
+      { value: 'all', label: 'All' },
+      { value: 'read', label: 'Read' },
+      { value: 'unread', label: 'Unread' }
+    ];
+  }
+
+  get categoryOptions(): { value: string; label: string }[] {
+    return [
+      { value: 'all', label: 'All Categories' },
+      ...this.categories.map(cat => ({ value: cat, label: cat }))
+    ];
+  }
+
+  get activeFilterCount(): number {
     let count = 0;
-
-    if (formValue.severity && formValue.severity.length > 0) count++;
-    if (formValue.service && formValue.service.length > 0) count++;
-    if (formValue.isRead !== null && formValue.isRead !== undefined) count++;
-    if (formValue.startDate && formValue.endDate && formValue.startDate !== '' && formValue.endDate !== '') count++;
-
+    if (this.filters.type !== 'all') count++;
+    if (this.filters.priority !== 'all') count++;
+    if (this.filters.category !== 'all') count++;
+    if (this.filters.read !== 'all') count++;
+    if (this.filters.dateRange) count++;
     return count;
   }
-
-  getSeverityIcon(severity: string): string {
-    const option = this.severityOptions.find(opt => opt.value === severity);
-    return option ? option.icon : 'help';
-  }
-
-  getSeverityColor(severity: string): string {
-    const option = this.severityOptions.find(opt => opt.value === severity);
-    return option ? option.color : 'primary';
-  }
-
-  getServiceIcon(service: string): string {
-    const option = this.serviceOptions.find(opt => opt.value === service);
-    return option ? option.icon : 'settings';
-  }
-
-  getStatusIcon(status: boolean): string {
-    const option = this.statusOptions.find(opt => opt.value === status);
-    return option ? option.icon : 'help';
-  }
-
-  selectAllServices(): void {
-    const allServiceValues = this.serviceOptions.map(option => option.value);
-    this.filtersForm.patchValue({ service: allServiceValues });
-  }
-
 }

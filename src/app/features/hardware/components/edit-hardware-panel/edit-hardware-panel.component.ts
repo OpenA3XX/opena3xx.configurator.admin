@@ -1,160 +1,252 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { FieldConfig } from 'src/app/shared/models/field.interface';
-import { DataService } from 'src/app/core/services/data.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { PageLayoutComponent, ActionButton } from '../../../../shared/components/layout/page-layout.component';
+import { LoadingWrapperComponent } from '../../../../shared/components/ui/loading-wrapper/loading-wrapper.component';
+import { DynamicFormComponent, DynamicFormConfig } from '../../../../shared/components/forms/dynamic-form.component';
+import { FormFieldConfig } from '../../../../shared/components/forms/form-field.component';
+import { HardwarePanelDto } from '../../../../shared/models/models';
+import { HardwareService } from '../../services/hardware.service';
 
 @Component({
-    selector: 'opena3xx-edit-hardware-panel',
-    templateUrl: './edit-hardware-panel.component.html',
-    styleUrls: ['./edit-hardware-panel.component.scss'],
-    standalone: false
+  selector: 'opena3xx-edit-hardware-panel',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatToolbarModule,
+    PageLayoutComponent,
+    LoadingWrapperComponent,
+    DynamicFormComponent
+  ],
+  templateUrl: './edit-hardware-panel.component.html',
+  styleUrls: ['./edit-hardware-panel.component.scss']
 })
-export class EditHardwarePanelComponent {
-  addHardwarePanelForm: FormGroup;
+export class EditHardwarePanelComponent implements OnInit {
+  // Signals for reactive state management
+  loading = signal(false);
+  error = signal(false);
+  submitting = signal(false);
+  hardwarePanel = signal<HardwarePanelDto | null>(null);
 
-  public hardwarePanelNameFieldConfig: FieldConfig = {
-    type: 'input',
-    label: 'Hardware Panel Name',
-    name: 'hardwarePanelName',
-    inputType: 'text',
-    hint: 'Enter the Hardware Panel Name',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Hardware Panel Name is Required',
-      },
-    ],
-  };
+  // Computed values
+  isEmpty = computed(() => !this.hardwarePanel() && !this.loading() && !this.error());
 
-  public aircraftModelFieldConfig: FieldConfig = {
-    type: 'select',
-    label: 'Aircraft Model',
-    name: 'aircraftModel',
-    disabled: true,
-    inputType: 'text',
-    options: [
+  // Form configuration
+  formConfig = computed((): DynamicFormConfig => ({
+    title: 'Edit Hardware Panel',
+    subtitle: 'Update hardware panel configuration',
+    loading: this.submitting(),
+    fields: [
       {
-        key: '1',
-        value: 'A320-NEO',
+        key: 'name',
+        label: 'Hardware Panel Name',
+        type: 'text',
+        required: true,
+        minLength: 3,
+        maxLength: 100,
+        placeholder: 'Enter hardware panel name',
+        hint: 'Enter a descriptive name for the hardware panel',
+        validation: {
+          required: true,
+          minLength: 3,
+          maxLength: 100
+        }
       },
-    ],
-    hint: 'Select Aircraft Model for the panel to be assigned to',
-    validations: [
       {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Aircraft Model is  Required',
+        key: 'aircraftModel',
+        label: 'Aircraft Model',
+        type: 'select',
+        required: true,
+        disabled: true,
+        options: [
+          { value: '1', label: 'A320-NEO' },
+          { value: '2', label: 'A321-NEO' },
+          { value: '3', label: 'A350-900' },
+          { value: '4', label: 'A380-800' }
+        ],
+        hint: 'Select the aircraft model for this panel',
+        validation: {
+          required: true
+        }
       },
+      {
+        key: 'cockpitArea',
+        label: 'Cockpit Area',
+        type: 'select',
+        required: true,
+        options: [
+          { value: '0', label: 'Glareshield' },
+          { value: '1', label: 'Pedestal' },
+          { value: '2', label: 'Overhead' }
+        ],
+        hint: 'Select the cockpit area for this panel',
+        validation: {
+          required: true
+        }
+      },
+      {
+        key: 'owner',
+        label: 'Hardware Panel Owner',
+        type: 'select',
+        required: true,
+        options: [
+          { value: '0', label: 'Pilot' },
+          { value: '1', label: 'Co-Pilot' },
+          { value: '2', label: 'Shared' }
+        ],
+        hint: 'Select the owner of this panel',
+        validation: {
+          required: true
+        }
+      },
+      {
+        key: 'description',
+        label: 'Description',
+        type: 'textarea',
+        required: false,
+        maxLength: 500,
+        rows: 3,
+        placeholder: 'Enter panel description',
+        hint: 'Optional description of the hardware panel',
+        validation: {
+          maxLength: 500
+        }
+      }
     ],
-  };
+    layout: 'single',
+    submitText: 'Update Panel',
+    cancelText: 'Cancel',
+    showCancel: true
+  }));
 
-  public cockpitAreaFieldConfig: FieldConfig = {
-    type: 'select',
-    label: 'Cockpit Area',
-    name: 'cockpitArea',
-    inputType: 'text',
-    options: [
-      {
-        key: '0',
-        value: 'Glareshield',
-      },
-      {
-        key: '1',
-        value: 'Pedestal',
-      },
-      {
-        key: '2',
-        value: 'Overhead',
-      },
-    ],
-    hint: 'Select Cockpit Area for the panel to be assigned to',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Cockpit Area is  Required',
-      },
-    ],
-  };
-
-  public hardwarePanelOwnerFieldConfig: FieldConfig = {
-    type: 'select',
-    label: 'Hardware Panel Owner',
-    name: 'hardwarePanelOwner',
-    inputType: 'text',
-    options: [
-      {
-        key: '0',
-        value: 'Pilot',
-      },
-      {
-        key: '1',
-        value: 'Co-Pilot',
-      },
-      {
-        key: '2',
-        value: 'Shared',
-      },
-    ],
-    hint: 'Select Hardware Panel Owner for the panel to be assigned to',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Hardware Panel Owner is is Required',
-      },
-    ],
-  };
+  // Page actions
+  pageActions: ActionButton[] = [
+    {
+      label: 'Back',
+      icon: 'arrow_back',
+      action: 'back',
+      color: 'accent'
+    }
+  ];
 
   constructor(
     private router: Router,
-    formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private dataService: DataService
-  ) {
-    this.addHardwarePanelForm = formBuilder.group({
-      hardwarePanelName: [null, { validators: [Validators.required], updateOn: 'change' }],
-      aircraftModel: [null, { validators: [Validators.required], updateOn: 'change' }],
-      cockpitArea: [null, { validators: [Validators.required], updateOn: 'change' }],
-      hardwarePanelOwner: [null, { validators: [Validators.required], updateOn: 'change' }],
+    private hardwareService: HardwareService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadHardwarePanel();
+  }
+
+  private loadHardwarePanel(): void {
+    this.loading.set(true);
+    this.error.set(false);
+
+    const panelId = this.route.snapshot.queryParams['id'];
+    if (!panelId) {
+      this.error.set(true);
+      this.loading.set(false);
+      this.snackBar.open('No hardware panel ID provided', 'Close', { duration: 3000 });
+      return;
+    }
+
+    this.hardwareService.getPanelById(parseInt(panelId)).subscribe({
+      next: (panel) => {
+        this.hardwarePanel.set(panel);
+        this.loading.set(false);
+      },
+      error: (error) => {
+        console.error('Error loading hardware panel:', error);
+        this.error.set(true);
+        this.loading.set(false);
+        this.snackBar.open('Error loading hardware panel', 'Close', { duration: 3000 });
+      }
     });
   }
-  back() {
+
+  onPageAction(action: string): void {
+    switch (action) {
+      case 'back':
+        this.back();
+        break;
+    }
+  }
+
+  onRetry(): void {
+    this.loadHardwarePanel();
+  }
+
+  onFormSubmit(formData: any): void {
+    this.submitting.set(true);
+
+    const panel = this.hardwarePanel();
+    if (!panel) {
+      this.snackBar.open('No hardware panel data available', 'Close', { duration: 3000 });
+      this.submitting.set(false);
+      return;
+    }
+
+    const updatedPanel = {
+      ...panel,
+      ...formData
+    };
+
+    this.hardwareService.updatePanel(panel.id, updatedPanel).subscribe({
+      next: () => {
+        this.snackBar.open('Hardware panel updated successfully', 'Close', { duration: 2000 });
+        this.submitting.set(false);
+        this.back();
+      },
+      error: (error) => {
+        console.error('Error updating hardware panel:', error);
+        this.snackBar.open('Error updating hardware panel', 'Close', { duration: 3000 });
+        this.submitting.set(false);
+      }
+    });
+  }
+
+  onFormCancel(): void {
+    this.back();
+  }
+
+  private back(): void {
     this.router.navigateByUrl('/manage/hardware-panels');
   }
 
-  onSave() {}
+  // Getters for template
+  get initialData(): any {
+    const panel = this.hardwarePanel();
+    if (!panel) return {};
 
-  onSubmit(event?: Event) {
-    if (event) {
-      event.preventDefault();
-    }
-    if (this.addHardwarePanelForm.valid) {
-      this.dataService
-        .addHardwarePanel(this.addHardwarePanelForm.value)
-        .toPromise()
-        .then(() => {
-          this.snackBar.open('Hardware Panel Added Successfully', 'Ok', {
-            duration: 3000,
-          });
-        })
-        .catch(() => {
-          this.snackBar.open('Error has occured when adding Hardware Panel', 'Ok', {
-            duration: 3000,
-          });
-        });
-    } else {
-      this.validateAllFormFields(this.addHardwarePanelForm);
-    }
+    return {
+      name: panel.name,
+      aircraftModel: panel.aircraftModel?.toString() || '1',
+      cockpitArea: panel.cockpitArea?.toString() || '0',
+      owner: panel.owner?.toString() || '0',
+      description: (panel as any).description || ''
+    };
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach((field) => {
-      const control = formGroup.get(field);
-      control!.markAsTouched({ onlySelf: true });
-    });
+  get isSubmitting(): boolean {
+    return this.submitting();
   }
 }

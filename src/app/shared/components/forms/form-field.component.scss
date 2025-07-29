@@ -1,0 +1,199 @@
+.form-field-container {
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+
+  &.field-checkbox,
+  &.field-toggle {
+    margin-bottom: 8px;
+  }
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 8px 0;
+}
+
+// Field type specific styles
+.field-text,
+.field-email,
+.field-password,
+.field-url {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.field-number {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.field-textarea {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.field-select {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.field-date {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.field-time {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.field-checkbox {
+  mat-checkbox {
+    width: 100%;
+
+    ::ng-deep .mdc-checkbox {
+      margin-right: 8px;
+    }
+  }
+}
+
+.field-toggle {
+  mat-slide-toggle {
+    width: 100%;
+
+    ::ng-deep .mdc-switch {
+      margin-right: 8px;
+    }
+  }
+}
+
+// Error state styling
+.form-field-container {
+  &.ng-invalid.ng-touched {
+    mat-form-field {
+      ::ng-deep .mat-mdc-form-field-focus-overlay {
+        background-color: rgba(244, 67, 54, 0.1);
+      }
+    }
+  }
+}
+
+// Disabled state styling
+.form-field-container {
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .form-field-container {
+    margin-bottom: 12px;
+  }
+
+  .toggle-container {
+    min-height: 40px;
+    padding: 4px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-field-container {
+    margin-bottom: 8px;
+  }
+
+  .field-checkbox,
+  .field-toggle {
+    margin-bottom: 4px;
+  }
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .form-field-container {
+    mat-form-field {
+      ::ng-deep .mat-mdc-form-field-focus-overlay {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+
+  .field-checkbox,
+  .field-toggle {
+    ::ng-deep .mdc-form-field {
+      color: var(--mat-card-title-text-color, rgba(255, 255, 255, 0.87));
+    }
+  }
+}
+
+// Animation for conditional fields
+.form-field-container {
+  &.ng-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  &.ng-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+  }
+
+  &.ng-leave {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.ng-leave-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+}
+
+// Focus states
+.form-field-container {
+  mat-form-field {
+    ::ng-deep .mat-mdc-form-field-focus-overlay {
+      transition: background-color 0.2s ease;
+    }
+  }
+
+  &:focus-within {
+    mat-form-field {
+      ::ng-deep .mat-mdc-form-field-focus-overlay {
+        background-color: rgba(25, 118, 210, 0.1);
+      }
+    }
+  }
+}
+
+// Loading state
+.form-field-container {
+  &.loading {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+  }
+}

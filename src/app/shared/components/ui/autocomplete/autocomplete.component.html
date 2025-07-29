@@ -1,18 +1,23 @@
-<mat-form-field class="full-width margin-top" [formGroup]="group">
-  <input
-    [name]="field.name"
-    type="text"
-    [placeholder]="field.label"
+<mat-form-field class="full-width margin-top">
+  <mat-label>{{ label }}</mat-label>
+  <input type="text"
     matInput
-    [formControl]="myControl"
-    [formControlName]="field.name"
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
     [matAutocomplete]="auto"
-  />
-  <mat-autocomplete #auto="matAutocomplete">
+    (focus)="onFocus.emit($event)"
+    (blur)="onBlur.emit($event)">
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChange.emit($event.option.value)">
     <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
-      {{ option.value }}
+      {{ option.label }}
     </mat-option>
   </mat-autocomplete>
 
-  <mat-hint>{{ field.hint }}</mat-hint>
+  <mat-error *ngIf="showError && errorMessage">
+    {{ errorMessage }}
+  </mat-error>
+
+  <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
 </mat-form-field>

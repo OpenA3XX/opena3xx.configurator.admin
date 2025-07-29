@@ -1,105 +1,124 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AircraftModelDto, AddAircraftModelDto } from '../../../../shared/models/models';
 import { AircraftModelService } from '../../services/aircraft-model.service';
-import { AddAircraftModelDto } from 'src/app/shared/models/models';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Inject } from '@angular/core';
+
+export interface AircraftModel {
+  id: number;
+  name: string;
+  manufacturer: string;
+  type: string;
+  description?: string;
+  isActive: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 @Component({
   selector: 'opena3xx-add-aircraft-model-dialog',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatDividerModule
+  ],
   templateUrl: './add-aircraft-model-dialog.component.html',
-  styleUrls: ['./add-aircraft-model-dialog.component.scss'],
-  standalone: false
+  styleUrls: ['./add-aircraft-model-dialog.component.scss']
 })
 export class AddAircraftModelDialogComponent implements OnInit {
-  aircraftModelForm: FormGroup;
-  loading = false;
-  error = false;
+  // Form
+  aircraftModelForm = this.fb.group({
+    name: ['', Validators.required],
+    manufacturer: ['', Validators.required],
+    type: ['', Validators.required],
+    description: [''],
+    isActive: [true]
+  });
+
+  // Signals for reactive state management
+  loading = signal(false);
+  error = signal(false);
 
   constructor(
-    private aircraftModelService: AircraftModelService,
+    private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddAircraftModelDialogComponent>,
-    private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private aircraftModelService: AircraftModelService,
     private snackBar: MatSnackBar
-  ) {
-    this.aircraftModelForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      manufacturer: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      description: ['', [Validators.maxLength(500)]],
-      isActive: [true]
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    // Component initialized - no additional setup required
+    // Initialize form if editing
+    if (this.data?.aircraftModel) {
+      this.aircraftModelForm.patchValue(this.data.aircraftModel);
+    }
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.aircraftModelForm.valid) {
-      this.loading = true;
-      this.error = false;
-      const aircraftModel: AddAircraftModelDto = this.aircraftModelForm.value;
+      this.loading.set(true);
+      this.error.set(false);
 
-      this.aircraftModelService.addAircraftModel(aircraftModel).subscribe({
-        next: (result) => {
-          this.loading = false;
-          this.snackBar.open('Aircraft model added successfully', 'Close', {
-            duration: 3000
-          });
-          this.dialogRef.close({ action: 'added', aircraftModel: result });
-        },
-        error: (error) => {
-          this.loading = false;
-          this.error = true;
-          console.error('Error adding aircraft model:', error);
-          this.snackBar.open('Error adding aircraft model', 'Close', {
-            duration: 3000
-          });
+      try {
+        const formValue = this.aircraftModelForm.value;
+        const aircraftModelData: AddAircraftModelDto = {
+          name: formValue.name!,
+          manufacturer: formValue.manufacturer!,
+          type: formValue.type!,
+          description: formValue.description || '',
+          isActive: formValue.isActive!
+        };
+
+        if (this.data?.aircraftModel) {
+          // Update existing aircraft model
+          await this.aircraftModelService.updateAircraftModel(
+            this.data.aircraftModel.id,
+            {
+              id: this.data.aircraftModel.id,
+              ...aircraftModelData
+            }
+          ).toPromise();
+          this.snackBar.open('Aircraft model updated successfully', 'Close', { duration: 3000 });
+        } else {
+          // Create new aircraft model
+          await this.aircraftModelService.addAircraftModel(aircraftModelData).toPromise();
+          this.snackBar.open('Aircraft model created successfully', 'Close', { duration: 3000 });
         }
-      });
-    } else {
-      this.validateAllFormFields();
+
+        this.dialogRef.close(true);
+      } catch (err) {
+        console.error('Error saving aircraft model:', err);
+        this.error.set(true);
+        this.snackBar.open('Error saving aircraft model', 'Close', { duration: 3000 });
+      } finally {
+        this.loading.set(false);
+      }
     }
   }
 
   onCancel(): void {
     this.dialogRef.close();
-  }
-
-  private validateAllFormFields(): void {
-    Object.keys(this.aircraftModelForm.controls).forEach(key => {
-      const control = this.aircraftModelForm.get(key);
-      control?.markAsTouched();
-    });
-  }
-
-  getErrorMessage(controlName: string): string {
-    const control = this.aircraftModelForm.get(controlName);
-    if (control?.hasError('required')) {
-      return `${this.getFieldDisplayName(controlName)} is required`;
-    }
-    if (control?.hasError('minlength')) {
-      return `${this.getFieldDisplayName(controlName)} must be at least ${control.errors?.['minlength'].requiredLength} characters`;
-    }
-    if (control?.hasError('maxlength')) {
-      return `${this.getFieldDisplayName(controlName)} must be no more than ${control.errors?.['maxlength'].requiredLength} characters`;
-    }
-    return '';
-  }
-
-  private getFieldDisplayName(fieldName: string): string {
-    const displayNames: { [key: string]: string } = {
-      name: 'Name',
-      manufacturer: 'Manufacturer',
-      type: 'Type',
-      description: 'Description'
-    };
-    return displayNames[fieldName] || fieldName;
-  }
-
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.aircraftModelForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched));
   }
 }

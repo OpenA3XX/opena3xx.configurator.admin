@@ -1,14 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { RealTimeService, FlightEvent, KeepAliveEvent } from 'src/app/core/services/realtime.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { ThemeService } from 'src/app/core/services/theme.service';
-import { DataService } from 'src/app/core/services/data.service';
-import { HardwareBoardDto } from 'src/app/shared/models/models';
-import { Subscription } from 'rxjs';
+import { PageLayoutComponent, ActionButton } from '../../../../shared/components/layout/page-layout.component';
+import { LoadingWrapperComponent } from '../../../../shared/components/ui/loading-wrapper/loading-wrapper.component';
+import { ConsoleStore } from '../../stores/console.store';
+import { ConsoleMessage, ConsoleCommand } from '../../services/console.service';
+import { Subscription, interval } from 'rxjs';
 
 interface ConsoleEvent {
   id: string;
@@ -35,38 +40,71 @@ interface BoardActivityData {
 }
 
 @Component({
-    selector: 'opena3xx-console',
-    templateUrl: './console.component.html',
-    styleUrls: ['./console.component.scss'],
-    standalone: false
+  selector: 'opena3xx-console',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    PageLayoutComponent,
+    LoadingWrapperComponent,
+    MatIconModule,
+    MatCardModule,
+    MatButtonModule,
+    MatTooltipModule
+  ],
+  templateUrl: './console.component.html',
+  styleUrls: ['./console.component.scss']
 })
 export class ConsoleComponent implements OnInit, OnDestroy {
-  private filterValue: string = '';
-  private eventsPerMinute: number = 0;
-  private lastMinuteEvents: ConsoleEvent[] = [];
-  private activeFilters: ConsoleFilters = {
-    boardIdFilter: '',
-    eventTypeFilter: '',
-    timeRangeFilter: ''
-  };
-  private chartData: ChartDataPoint[] = [];
-  private boardActivity: BoardActivityData[] = [];
-  private themeSubscription: Subscription = new Subscription();
+  // Signals for reactive state management
+  messages = signal<ConsoleMessage[]>([]);
+  commands = signal<ConsoleCommand[]>([]);
+  loading = signal(false);
+  error = signal(false);
+  isConnected = signal(false);
+  showCharts = signal(false);
+
+  // Computed values
+  isEmpty = computed(() => this.messages().length === 0 && !this.loading() && !this.error());
+  stats = computed(() => this.consoleStore.stats());
 
   // Form for advanced filtering
   filterForm: FormGroup;
-  showCharts: boolean = false;
-  isDarkMode: boolean = false;
+  private eventsPerMinute: number = 0;
+  private lastMinuteEvents: ConsoleEvent[] = [];
+  private chartData: ChartDataPoint[] = [];
+  private boardActivity: BoardActivityData[] = [];
+  private subscription = new Subscription();
+
+  // Page actions
+  pageActions: ActionButton[] = [
+    {
+      label: 'Clear Events',
+      icon: 'clear_all',
+      action: 'clear',
+      color: 'warn'
+    },
+    {
+      label: 'Export Events',
+      icon: 'download',
+      action: 'export',
+      color: 'accent'
+    },
+    {
+      label: 'Toggle Charts',
+      icon: 'show_chart',
+      action: 'charts',
+      color: 'primary'
+    }
+  ];
 
   constructor(
-    public realtimeService: RealTimeService,
-    public router: Router,
+    private consoleStore: ConsoleStore,
+    private router: Router,
     private snackBar: MatSnackBar,
     private clipboard: Clipboard,
     private fb: FormBuilder,
-    private dialog: MatDialog,
-    private themeService: ThemeService,
-    private dataService: DataService
+    private dialog: MatDialog
   ) {
     this.filterForm = this.fb.group({
       boardIdFilter: [''],
@@ -75,88 +113,115 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    try {
-      if (this.realtimeService) {
-        this.realtimeService.disconnect();
-      }
-      if (this.themeSubscription) {
-        this.themeSubscription.unsubscribe();
-      }
-    } catch (error) {
-      console.error('Error in ngOnDestroy:', error);
-    }
-  }
-
   ngOnInit(): void {
-    try {
-      if (this.realtimeService) {
-        this.realtimeService.connect();
-      }
-      this.startEventsPerMinuteTracking();
-      this.initializeChartData();
-      // Removed fetchHardwareBoards() - now handled by console-filters component
+    this.initializeConsole();
+    this.startEventsPerMinuteTracking();
+    this.initializeChartData();
+  }
 
-      // Subscribe to theme changes
-      if (this.themeService) {
-        this.themeSubscription = this.themeService.isDarkMode$.subscribe(isDark => {
-          this.isDarkMode = isDark;
-        });
-      }
-    } catch (error) {
-      console.error('Error in ngOnInit:', error);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private initializeConsole(): void {
+    this.loading.set(true);
+    this.error.set(false);
+
+    // Load initial data
+    this.consoleStore.loadMessages(100);
+    this.consoleStore.loadCommands(50);
+    this.consoleStore.loadSessions();
+    this.consoleStore.loadConfig();
+
+    // Use computed values to sync with store
+    this.subscription.add(
+      interval(1000).subscribe(() => {
+        this.messages.set(this.consoleStore.messages());
+        this.commands.set(this.consoleStore.commands());
+        this.isConnected.set(this.consoleStore.isConnected());
+        this.loading.set(this.consoleStore.loading());
+
+        const error = this.consoleStore.error();
+        this.error.set(!!error);
+        if (error) {
+          this.snackBar.open(error, 'Close', { duration: 3000 });
+        }
+      })
+    );
+  }
+
+  onPageAction(action: string): void {
+    switch (action) {
+      case 'clear':
+        this.onClearEvents();
+        break;
+      case 'export':
+        this.onExportEvents();
+        break;
+      case 'charts':
+        this.onToggleCharts();
+        break;
     }
   }
 
-  // Hardware Boards API Integration
-  private async fetchHardwareBoards(): Promise<void> {
-    try {
-      // This method is no longer needed as hardware boards are loaded by console-filters
-      // Keeping it for now to avoid breaking existing calls, but it will be removed later.
-      // const hardwareBoards = await firstValueFrom(this.dataService.getAllHardwareBoards()) as HardwareBoardDto[];
-      // console.log('Hardware Boards loaded:', hardwareBoards);
-    } catch (error: unknown) {
-      console.error('Error fetching hardware boards:', error);
-      this.showSnackBar('Error loading hardware boards');
-    }
+  onRetry(): void {
+    this.consoleStore.refreshData();
   }
 
-  // Connection Management
-  onConnect(): void {
-    try {
-      if (this.realtimeService) {
-        this.realtimeService.connect();
-        this.showSnackBar('Connecting to real-time service...');
+  onToggleCharts(): void {
+    this.showCharts.update(show => !show);
+  }
+
+  onClearEvents(): void {
+    this.consoleStore.clearMessages();
+    this.snackBar.open('Events cleared successfully', 'Close', { duration: 2000 });
+  }
+
+  onExportEvents(): void {
+    const format = 'json';
+    this.consoleStore.exportMessages(format).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `console-events-${new Date().toISOString()}.${format}`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        this.snackBar.open('Events exported successfully', 'Close', { duration: 2000 });
+      },
+      error: (error) => {
+        console.error('Error exporting events:', error);
+        this.snackBar.open('Error exporting events', 'Close', { duration: 3000 });
       }
-    } catch (error) {
-      console.error('Error connecting to real-time service:', error);
-      this.showSnackBar('Error connecting to real-time service');
-    }
+    });
   }
 
-  onDisconnect(): void {
-    try {
-      if (this.realtimeService) {
-        this.realtimeService.disconnect();
-        this.showSnackBar('Disconnected from real-time service');
-      }
-    } catch (error) {
-      console.error('Error disconnecting from real-time service:', error);
-      this.showSnackBar('Error disconnecting from real-time service');
-    }
+  onCopyEvent(event: ConsoleMessage | ConsoleCommand): void {
+    const eventText = JSON.stringify(event, null, 2);
+    this.clipboard.copy(eventText);
+    this.snackBar.open('Event copied to clipboard', 'Close', { duration: 2000 });
   }
 
-  // Statistics Methods
+  onSearchChange(searchValue: string): void {
+    this.consoleStore.setFilters({ searchTerm: searchValue });
+  }
+
+  onFilterChange(filters: ConsoleFilters): void {
+    // Update form and store filters
+    this.filterForm.patchValue(filters);
+    this.consoleStore.setFilters({
+      searchTerm: filters.boardIdFilter || filters.eventTypeFilter || ''
+    });
+  }
+
+  onClearFilters(): void {
+    this.filterForm.reset();
+    this.consoleStore.clearFilters();
+  }
+
+  // Statistics methods
   getTotalEvents(): number {
-    try {
-      if (this.realtimeService) {
-        return this.realtimeService.flightEvents.length + this.realtimeService.keepAliveEvents.length;
-      }
-      return 0;
-    } catch (error) {
-      console.error('Error getting total events:', error);
-      return 0;
-    }
+    return this.stats().totalMessages;
   }
 
   getEventsPerMinute(): number {
@@ -164,19 +229,11 @@ export class ConsoleComponent implements OnInit, OnDestroy {
   }
 
   getConnectedBoards(): number {
-    const flightBoardIds = new Set(this.realtimeService.flightEvents.map(e => e.hardware_board_id));
-    const keepAliveBoardIds = new Set(this.realtimeService.keepAliveEvents.map(e => e.hardware_board_id));
-    return new Set([...flightBoardIds, ...keepAliveBoardIds]).size;
+    return this.stats().activeSessions;
   }
 
   getActiveSelectors(): number {
-    const selectorIds = new Set(this.realtimeService.flightEvents.map(e => e.input_selector_id));
-    return selectorIds.size;
-  }
-
-  // Chart and Performance Methods
-  onToggleCharts(): void {
-    this.showCharts = !this.showCharts;
+    return this.stats().totalCommands;
   }
 
   getChartData(): ChartDataPoint[] {
@@ -187,281 +244,76 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     return this.boardActivity;
   }
 
-  private initializeChartData(): void {
-    // Initialize chart data with 10 data points
-    this.chartData = Array.from({ length: 10 }, (_, i) => ({
-      time: i,
-      value: Math.floor(Math.random() * 20) + 5 // Random values between 5-25
-    }));
+  // Private methods
+  private startEventsPerMinuteTracking(): void {
+    this.subscription.add(
+      interval(60000).subscribe(() => {
+        const now = new Date();
+        const oneMinuteAgo = new Date(now.getTime() - 60000);
 
-    // Update chart data every 10 seconds
-    setInterval(() => {
-      this.updateChartData();
-      this.updateBoardActivity();
-    }, 10000);
+        this.lastMinuteEvents = this.lastMinuteEvents.filter(event =>
+          new Date(event.timestamp) > oneMinuteAgo
+        );
+
+        this.eventsPerMinute = this.lastMinuteEvents.length;
+        this.updateChartData();
+      })
+    );
+  }
+
+  private initializeChartData(): void {
+    this.chartData = [];
+    this.boardActivity = [];
+
+    // Initialize with some sample data
+    for (let i = 0; i < 10; i++) {
+      this.chartData.push({
+        time: Date.now() - (10 - i) * 60000,
+        value: Math.floor(Math.random() * 100)
+      });
+    }
   }
 
   private updateChartData(): void {
-    // Shift data and add new value
-    this.chartData.shift();
+    const now = Date.now();
     this.chartData.push({
-      time: Date.now(),
+      time: now,
       value: this.eventsPerMinute
     });
+
+    // Keep only last 60 data points
+    if (this.chartData.length > 60) {
+      this.chartData = this.chartData.slice(-60);
+    }
   }
 
   private updateBoardActivity(): void {
-    const boardIds = this.getUniqueBoardIds();
-    this.boardActivity = boardIds.map(id => {
-      const flightEvents = this.realtimeService.flightEvents.filter(e => e.hardware_board_id === id);
-      const keepAliveEvents = this.realtimeService.keepAliveEvents.filter(e => e.hardware_board_id === id);
-      const totalEvents = flightEvents.length + keepAliveEvents.length;
+    // Update board activity based on current messages
+    const messages = this.messages();
+    const boardMap = new Map<number, number>();
 
-      // Check if board has been active in the last minute
-      const oneMinuteAgo = new Date(Date.now() - 60000);
-      const recentEvents = [...flightEvents, ...keepAliveEvents].filter(e =>
-        new Date(e.timestamp) > oneMinuteAgo
-      );
-
-      return {
-        id: id,
-        events: totalEvents,
-        isActive: recentEvents.length > 0
-      };
+    messages.forEach(message => {
+      // Extract board ID from message source if available
+      const boardId = this.extractBoardId(message.source);
+      if (boardId) {
+        boardMap.set(boardId, (boardMap.get(boardId) || 0) + 1);
+      }
     });
+
+    this.boardActivity = Array.from(boardMap.entries()).map(([id, events]) => ({
+      id,
+      events,
+      isActive: events > 0
+    }));
   }
 
-  // Dialog Methods
-  onOpenSettingsDialog(): void {
-    this.showSnackBar('Settings dialog would open here');
-    // TODO: Implement settings dialog
+  private extractBoardId(source: string): number | null {
+    // Extract board ID from source string
+    const match = source.match(/board[_-]?(\d+)/i);
+    return match ? parseInt(match[1]) : null;
   }
 
-  onOpenEventHistoryDialog(): void {
-    this.showSnackBar('Event history dialog would open here');
-    // TODO: Implement event history dialog
-  }
-
-  onOpenPerformanceDialog(): void {
-    this.showSnackBar('Performance metrics dialog would open here');
-    // TODO: Implement performance dialog
-  }
-
-  // Enhanced Filtering Methods
-  onSearchChange(searchValue: string): void {
-    this.filterValue = searchValue;
-  }
-
-  onFilterChange(filters: ConsoleFilters): void {
-    this.activeFilters = filters;
-  }
-
-  onClearFilters(): void {
-    this.filterValue = '';
-    this.activeFilters = {
-      boardIdFilter: '',
-      eventTypeFilter: '',
-      timeRangeFilter: ''
-    };
-    this.showSnackBar('Filters cleared');
-  }
-
-  getUniqueBoardIds(): number[] {
-    const flightBoardIds = this.realtimeService.flightEvents.map(e => e.hardware_board_id);
-    const keepAliveBoardIds = this.realtimeService.keepAliveEvents.map(e => e.hardware_board_id);
-    return [...new Set([...flightBoardIds, ...keepAliveBoardIds])].sort((a, b) => a - b);
-  }
-
-  // Get hardware boards for dropdown
-  getHardwareBoards(): HardwareBoardDto[] {
-    // This method is no longer needed as hardware boards are loaded by console-filters
-    // Keeping it for now to avoid breaking existing calls, but it will be removed later.
-    return [];
-  }
-
-  private filterByTimeRange(events: any[]): any[] {
-    if (!this.activeFilters.timeRangeFilter) return events;
-
-    const now = new Date();
-    let cutoffTime: Date;
-
-    switch (this.activeFilters.timeRangeFilter) {
-      case '1min':
-        cutoffTime = new Date(now.getTime() - 60000);
-        break;
-      case '5min':
-        cutoffTime = new Date(now.getTime() - 300000);
-        break;
-      case '15min':
-        cutoffTime = new Date(now.getTime() - 900000);
-        break;
-      case '1hour':
-        cutoffTime = new Date(now.getTime() - 3600000);
-        break;
-      default:
-        return events;
-    }
-
-    return events.filter(event => new Date(event.timestamp) > cutoffTime);
-  }
-
-  private filterByBoardId(events: any[]): any[] {
-    if (!this.activeFilters.boardIdFilter) return events;
-    return events.filter(event => event.hardware_board_id.toString() === this.activeFilters.boardIdFilter);
-  }
-
-  getFilteredFlightEvents(): FlightEvent[] {
-    try {
-      if (!this.realtimeService) {
-        return [];
-      }
-
-      let events = this.realtimeService.flightEvents || [];
-
-      // Apply time range filter
-      events = this.filterByTimeRange(events);
-
-      // Apply board ID filter
-      events = this.filterByBoardId(events);
-
-      // Apply search filter
-      if (this.filterValue) {
-        events = events.filter(event =>
-          event.hardware_board_id.toString().includes(this.filterValue) ||
-          event.extender_bus_name.toLowerCase().includes(this.filterValue) ||
-          event.extender_bit_name.toLowerCase().includes(this.filterValue) ||
-          event.input_selector_name.toLowerCase().includes(this.filterValue) ||
-          event.input_selector_id.toLowerCase().includes(this.filterValue)
-        );
-      }
-
-      return events;
-    } catch (error) {
-      console.error('Error getting filtered flight events:', error);
-      return [];
-    }
-  }
-
-  getFilteredKeepAliveEvents(): KeepAliveEvent[] {
-    try {
-      if (!this.realtimeService) {
-        return [];
-      }
-
-      let events = this.realtimeService.keepAliveEvents || [];
-
-      // Apply time range filter
-      events = this.filterByTimeRange(events);
-
-      // Apply board ID filter
-      events = this.filterByBoardId(events);
-
-      // Apply search filter
-      if (this.filterValue) {
-        events = events.filter(event =>
-          event.hardware_board_id.toString().includes(this.filterValue) ||
-          event.message.toLowerCase().includes(this.filterValue)
-        );
-      }
-
-      return events;
-    } catch (error) {
-      console.error('Error getting filtered keep-alive events:', error);
-      return [];
-    }
-  }
-
-  // Event Management
-  onClearEvents(): void {
-    try {
-      if (this.realtimeService) {
-        this.realtimeService.flightEvents = [];
-        this.realtimeService.keepAliveEvents = [];
-        this.showSnackBar('All events cleared');
-      }
-    } catch (error) {
-      console.error('Error clearing events:', error);
-      this.showSnackBar('Error clearing events');
-    }
-  }
-
-  onExportEvents(): void {
-    try {
-      if (!this.realtimeService) {
-        this.showSnackBar('Real-time service not available');
-        return;
-      }
-
-      const allEvents = {
-        flightEvents: this.realtimeService.flightEvents || [],
-        keepAliveEvents: this.realtimeService.keepAliveEvents || [],
-        exportTime: new Date().toISOString()
-      };
-
-      const dataStr = JSON.stringify(allEvents, null, 2);
-      const dataBlob = new Blob([dataStr], { type: 'application/json' });
-      const url = URL.createObjectURL(dataBlob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `opena3xx-events-${new Date().toISOString().split('T')[0]}.json`;
-      link.click();
-      URL.revokeObjectURL(url);
-      this.showSnackBar('Events exported successfully');
-    } catch (error) {
-      console.error('Error exporting events:', error);
-      this.showSnackBar('Error exporting events');
-    }
-  }
-
-  // Event Actions
-  onCopyEvent(event: FlightEvent | KeepAliveEvent): void {
-    const eventDetails = JSON.stringify(event, null, 2);
-    this.clipboard.copy(eventDetails);
-    this.showSnackBar('Event details copied to clipboard');
-  }
-
-  onExportSingleEvent(event: FlightEvent | KeepAliveEvent): void {
-    const dataStr = JSON.stringify(event, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `event-${event.timestamp.split('T')[0]}-${Date.now()}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-
-    this.showSnackBar('Event exported successfully');
-  }
-
-  // Events Per Minute Tracking
-  private startEventsPerMinuteTracking(): void {
-    setInterval(() => {
-      const now = new Date();
-      const oneMinuteAgo = new Date(now.getTime() - 60000);
-
-      const recentFlightEvents = this.realtimeService.flightEvents.filter(event =>
-        new Date(event.timestamp) > oneMinuteAgo
-      );
-
-      const recentKeepAliveEvents = this.realtimeService.keepAliveEvents.filter(event =>
-        new Date(event.timestamp) > oneMinuteAgo
-      );
-
-      this.eventsPerMinute = recentFlightEvents.length + recentKeepAliveEvents.length;
-    }, 10000); // Update every 10 seconds
-  }
-
-  // Utility Methods
-  private showSnackBar(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      horizontalPosition: 'end',
-      verticalPosition: 'top'
-    });
-  }
-
-  // Legacy methods (keeping for compatibility)
-  goBack() {
-    this.router.navigateByUrl('/');
+  goBack(): void {
+    this.router.navigateByUrl('/dashboard');
   }
 }

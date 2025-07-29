@@ -1,0 +1,23 @@
+<mat-form-field class="full-width margin-top">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput
+    [name]="name"
+    [type]="type || 'text'"
+    [placeholder]="placeholder || label"
+    [formControl]="control"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [maxlength]="maxLength"
+    [minlength]="minLength"
+    [pattern]="pattern"
+    [required]="required"
+    (focus)="onFocus.emit($event)"
+    (blur)="onBlur.emit($event)"
+    (input)="onValueChange.emit($event.target.value)">
+
+  <mat-error *ngIf="showError && errorMessage">
+    {{ errorMessage }}
+  </mat-error>
+
+  <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+</mat-form-field>

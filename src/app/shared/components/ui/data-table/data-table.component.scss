@@ -1,0 +1,191 @@
+.data-table-card {
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.search-container {
+  padding: 16px 24px 0;
+  border-bottom: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));
+
+  .search-field {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+
+  p {
+    margin: 0;
+    color: var(--mat-card-subtitle-text-color, rgba(0, 0, 0, 0.6));
+    font-size: 14px;
+  }
+}
+
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+
+  .empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: var(--mat-card-subtitle-text-color, rgba(0, 0, 0, 0.4));
+  }
+
+  p {
+    margin: 0;
+    color: var(--mat-card-subtitle-text-color, rgba(0, 0, 0, 0.6));
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  min-width: 600px;
+
+  .mat-mdc-header-cell {
+    background-color: var(--mat-card-background-color, #fafafa);
+    font-weight: 600;
+    color: var(--mat-card-title-text-color, rgba(0, 0, 0, 0.87));
+    border-bottom: 2px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));
+    padding: 16px 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .mat-mdc-cell {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.08));
+    font-size: 14px;
+    color: var(--mat-card-text-color, rgba(0, 0, 0, 0.87));
+  }
+
+  .mat-mdc-row {
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--mat-hover-color, rgba(0, 0, 0, 0.04));
+    }
+
+    &.selected-row {
+      background-color: var(--mat-primary-color, #1976d2);
+      color: white;
+
+      .mat-mdc-cell {
+        color: white;
+      }
+    }
+  }
+
+  .action-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// Pagination styles
+mat-paginator {
+  border-top: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));
+  background-color: var(--mat-card-background-color, #fafafa);
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .search-container {
+    padding: 12px 16px 0;
+
+    .search-field {
+      max-width: 100%;
+    }
+  }
+
+  .data-table {
+    min-width: 400px;
+    font-size: 12px;
+
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
+      padding: 8px 4px;
+      font-size: 12px;
+    }
+  }
+
+  .loading-container,
+  .empty-container {
+    padding: 32px 16px;
+  }
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .data-table-card {
+    background-color: var(--mat-card-background-color, #424242);
+  }
+
+  .data-table {
+    .mat-mdc-header-cell {
+      background-color: var(--mat-card-background-color, #424242);
+      color: var(--mat-card-title-text-color, rgba(255, 255, 255, 0.87));
+      border-bottom-color: var(--mat-divider-color, rgba(255, 255, 255, 0.12));
+    }
+
+    .mat-mdc-cell {
+      color: var(--mat-card-text-color, rgba(255, 255, 255, 0.87));
+      border-bottom-color: var(--mat-divider-color, rgba(255, 255, 255, 0.08));
+    }
+
+    .mat-mdc-row {
+      &:hover {
+        background-color: var(--mat-hover-color, rgba(255, 255, 255, 0.04));
+      }
+
+      &.selected-row {
+        background-color: var(--mat-primary-color, #1976d2);
+      }
+    }
+  }
+
+  mat-paginator {
+    background-color: var(--mat-card-background-color, #424242);
+    border-top-color: var(--mat-divider-color, rgba(255, 255, 255, 0.12));
+  }
+
+  .loading-container p,
+  .empty-container p {
+    color: var(--mat-card-subtitle-text-color, rgba(255, 255, 255, 0.6));
+  }
+
+  .empty-container .empty-icon {
+    color: var(--mat-card-subtitle-text-color, rgba(255, 255, 255, 0.4));
+  }
+}

@@ -1,0 +1,112 @@
+.loading-wrapper {
+  position: relative;
+  min-height: 200px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+
+  .loading-message {
+    margin: 0;
+    color: var(--mat-card-subtitle-text-color, rgba(0, 0, 0, 0.6));
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+
+  .error-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: var(--mat-warn-color, #f44336);
+  }
+
+  .error-message {
+    margin: 0;
+    color: var(--mat-card-subtitle-text-color, rgba(0, 0, 0, 0.6));
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .retry-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+}
+
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+
+  .empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: var(--mat-card-subtitle-text-color, rgba(0, 0, 0, 0.4));
+  }
+
+  .empty-message {
+    margin: 0;
+    color: var(--mat-card-subtitle-text-color, rgba(0, 0, 0, 0.6));
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+.content-container {
+  width: 100%;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .loading-container,
+  .error-container,
+  .empty-container {
+    padding: 32px 16px;
+  }
+
+  .loading-container .loading-message,
+  .error-container .error-message,
+  .empty-container .empty-message {
+    font-size: 14px;
+  }
+
+  .error-container .error-icon,
+  .empty-container .empty-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .loading-container .loading-message,
+  .error-container .error-message,
+  .empty-container .empty-message {
+    color: var(--mat-card-subtitle-text-color, rgba(255, 255, 255, 0.6));
+  }
+
+  .empty-container .empty-icon {
+    color: var(--mat-card-subtitle-text-color, rgba(255, 255, 255, 0.4));
+  }
+}

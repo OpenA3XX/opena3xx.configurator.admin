@@ -57,4 +57,18 @@ export class SimulatorEventService {
       eventCode
     });
   }
+
+  /**
+   * Get all events (alias for getAllSimulatorEvents)
+   */
+  getEvents(): Observable<SimulatorEventItemDto[]> {
+    return this.getAllSimulatorEvents();
+  }
+
+  /**
+   * Update event status
+   */
+  updateEventStatus(eventId: string, status: string): Observable<any> {
+    return this.http.patch(`${this.BASE_URL}/simulator-event/${eventId}/status`, { status });
+  }
 }

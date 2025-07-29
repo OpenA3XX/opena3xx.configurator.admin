@@ -1,106 +1,27 @@
-<!-- Hardware Panels Content Wrapper -->
-<div class="hardware-panels-content">
+<opena3xx-page-layout
+  title="Hardware Panels"
+  subtitle="Manage hardware panel configurations and assignments"
+  icon="dashboard"
+  [actions]="pageActions"
+  (actionClick)="onPageAction($event)">
 
-  <div class="hardware-panels-header">
-    <div class="header-content">
-      <div class="header-title">
-        <mat-icon>dashboard</mat-icon>
-        <h1>Hardware Panels</h1>
-      </div>
-      <div class="header-subtitle">
-        <p>Manage hardware panel configurations and assignments</p>
-      </div>
-    </div>
+  <opena3xx-loading-wrapper
+    [loading]="loading()"
+    [error]="error()"
+    [isEmpty]="isEmpty()"
+    (retry)="onRetry()">
 
-    <div class="header-actions">
-      <button mat-raised-button color="primary" (click)="addHardwarePanel()" class="action-button">
-        <mat-icon>add</mat-icon>
-        Add Hardware Panel
-      </button>
-    </div>
-  </div>
+    <opena3xx-data-table
+      [data]="panels()"
+      [columns]="columns"
+      [actions]="actions"
+      [config]="tableConfig"
+      [loading]="loading()"
+      [selectedRow]="selectedPanel()"
+      (rowClick)="onRowClick($event)"
+      (actionClick)="onTableAction($event)">
+    </opena3xx-data-table>
 
-  <mat-card>
-    <mat-card-content>
-      <div class="search-container">
-        <mat-form-field appearance="outline" class="search-field">
-          <mat-label>Search hardware panels</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, cockpit area, aircraft model..." #input>
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-      </div>
+  </opena3xx-loading-wrapper>
 
-      <div class="table-container mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort class="hardware-panels-table">
-          <!-- ID Column -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
-
-          <!-- Cockpit Area Column -->
-          <ng-container matColumnDef="cockpitArea">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cockpit Area </th>
-            <td mat-cell *matCellDef="let element"> {{element.cockpitArea}} </td>
-          </ng-container>
-
-          <!-- Aircraft Model Column -->
-          <ng-container matColumnDef="aircraftModel">
-            <th mat-header-cell *matHeaderCellDef> Aircraft Model </th>
-            <td mat-cell *matCellDef="let element"> {{element.aircraftModel}} </td>
-          </ng-container>
-
-          <!-- Manufacturer Column -->
-          <ng-container matColumnDef="manufacturer">
-            <th mat-header-cell *matHeaderCellDef> Manufacturer </th>
-            <td mat-cell *matCellDef="let element"> {{element.manufacturer}} </td>
-          </ng-container>
-
-          <!-- Owner Column -->
-          <ng-container matColumnDef="owner">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cockpit Owner </th>
-            <td mat-cell *matCellDef="let element"> {{element.owner}} </td>
-          </ng-container>
-
-          <!-- Actions Column -->
-          <ng-container matColumnDef="details">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let element">
-              <button mat-raised-button color="primary" (click)="onViewDetailsClick(element.id)" matTooltip="View Details">
-                <mat-icon>visibility</mat-icon>
-                Manage Details
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of hardware panels"></mat-paginator>
-
-        <!-- Loading indicator -->
-        <div *ngIf="dataLoaded === false" class="loading-container">
-          <mat-spinner diameter="50"></mat-spinner>
-          <p>Loading hardware panels...</p>
-        </div>
-
-        <!-- No data message -->
-        <div *ngIf="dataLoaded && dataSource.data.length === 0" class="no-data-container">
-          <mat-icon>dashboard_off</mat-icon>
-          <p>No hardware panels found</p>
-          <button mat-raised-button color="primary" (click)="addHardwarePanel()">
-            Add First Hardware Panel
-          </button>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-</div>
+</opena3xx-page-layout>

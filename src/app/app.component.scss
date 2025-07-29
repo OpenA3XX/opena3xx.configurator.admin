@@ -125,7 +125,105 @@
   transition: width var(--transition-normal) ease, box-shadow var(--transition-fast);
   box-shadow: var(--shadow-sm);
   background: var(--mat-sys-surface-container, #f5f5f5);
-  width: 250px !important; // Default expanded width
+  width: 56px; // Default collapsed width
+
+  &.expanded {
+    width: 250px; // Expanded width
+  }
+
+  &.collapsed {
+    width: 56px; // Collapsed width
+
+    mat-nav-list {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    mat-list-item {
+      justify-content: center !important;
+      padding: 0 !important;
+      margin: var(--spacing-xs) 0 !important;
+      width: 100%;
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      place-items: center !important;
+
+      mat-icon {
+        margin: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-column: 1 !important;
+        justify-self: center !important;
+      }
+
+      // Override any Material Design default styles
+      &.mat-mdc-list-item,
+      &.mat-list-item {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      // Target Material Design's internal structure
+      .mat-mdc-list-item-content,
+      .mat-list-item-content {
+        justify-content: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        place-items: center !important;
+      }
+    }
+  }
+
+  // Direct targeting of collapsed items
+  mat-list-item.collapsed-item {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: var(--spacing-xs) 0 !important;
+    text-align: center !important;
+
+    mat-icon {
+      margin: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6)) !important; // Lighter color like before
+    }
+
+    // Override any Material Design internal structure
+    .mat-mdc-list-item-content,
+    .mat-list-item-content {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      text-align: center !important;
+    }
+
+    // Fallback: Use transform to center if flexbox doesn't work
+    &:not(:has(mat-icon)) {
+      position: relative;
+
+      mat-icon {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
 
   // Logo styling - simplified without dark mode filters
   .opena3xx-logo {
@@ -150,15 +248,6 @@
     }
   }
 
-  &.collapsed {
-    width: 56px !important; // Material Design standard for collapsed nav
-
-    .nav-label {
-      opacity: 0;
-      transform: translateX(-10px);
-    }
-  }
-
   mat-nav-list {
     padding: var(--spacing-sm) 0;
   }
@@ -171,6 +260,11 @@
     transition: var(--transition-fast);
     position: relative;
     overflow: hidden;
+
+    // Override margin for collapsed items
+    &.collapsed-item {
+      margin: var(--spacing-xs) 0 !important;
+    }
 
     &::before {
       content: '';
@@ -205,6 +299,7 @@
     mat-icon {
       margin-right: var(--spacing-md);
       transition: var(--transition-fast);
+      color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6)); // Lighter color like before
     }
 
     .nav-label {
@@ -212,6 +307,11 @@
       overflow: hidden;
       text-overflow: ellipsis;
       transition: opacity var(--transition-normal), transform var(--transition-normal);
+    }
+
+    // Ensure proper alignment for the full-width span
+    .full-width {
+      line-height: 1;
     }
 
     // Disabled state styling
@@ -241,14 +341,43 @@
 }
 
 .opena3xx-sidenav-right {
-  width: 250px !important; // Default expanded width
+  width: 56px; // Default collapsed width
   box-shadow: var(--shadow-sm);
   background: var(--mat-sys-surface-container, #f5f5f5);
   transition: width var(--transition-normal) ease;
   border-left: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
 
+  &.expanded {
+    width: 250px; // Expanded width
+  }
+
   &.collapsed {
-    width: 56px !important;
+    width: 56px; // Collapsed width
+
+    mat-nav-list {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    mat-list-item {
+      justify-content: center;
+      padding: 0;
+      margin: var(--spacing-xs) 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      mat-icon {
+        margin-right: 0;
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
   }
 
   mat-list-item {

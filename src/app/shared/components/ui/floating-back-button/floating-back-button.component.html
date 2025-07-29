@@ -1,13 +1,8 @@
-<div
-  *ngIf="showButton"
+<button
+  *ngIf="shouldShow"
   class="floating-back-button"
-  (click)="goBack()"
-  matTooltip="Go Back"
-  matTooltipPosition="left"
-  role="button"
-  tabindex="0"
-  (keydown.enter)="goBack()"
-  (keydown.space)="goBack()"
-  aria-label="Go back to previous page">
-  <mat-icon>arrow_back</mat-icon>
-</div>
+  [matTooltip]="tooltip"
+  [disabled]="disabled"
+  (click)="onClick()">
+  <mat-icon>{{ icon }}</mat-icon>
+</button>
