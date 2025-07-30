@@ -18,6 +18,8 @@ import { SlideToggleComponent } from './components/ui/slide-toggle/slide-toggle.
 import { SliderComponent } from './components/ui/slider/slider.component';
 import { LoadingComponent } from './components/ui/loading/loading.component';
 import { FloatingBackButtonComponent } from './components/ui/floating-back-button/floating-back-button.component';
+import { DataTableComponent } from './components/ui/data-table/data-table.component';
+import { PageHeaderComponent } from './components/ui/page-header/page-header.component';
 
 // Pipes
 import { FormatDatePipe } from './pipes/format-date.pipe';
@@ -43,6 +45,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SliderComponent,
     LoadingComponent,
     FloatingBackButtonComponent,
+    DataTableComponent,
+    PageHeaderComponent,
 
     // Pipes
     FormatDatePipe,
@@ -73,6 +77,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SliderComponent,
     LoadingComponent,
     FloatingBackButtonComponent,
+    DataTableComponent,
+    PageHeaderComponent,
 
     // Pipes
     FormatDatePipe,

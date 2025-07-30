@@ -103,7 +103,8 @@ import { DataService } from 'src/app/core/services/data.service';
     // Hardware Form Components
     LinkHardwareInputSelectorsFormComponent,
     MapHardwareInputSelectorsFormComponent,
-    MapHardwareOutputSelectorsFormComponent
+    MapHardwareOutputSelectorsFormComponent,
+
   ],
   providers: [
     HardwarePanelService,

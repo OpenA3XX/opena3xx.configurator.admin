@@ -1,27 +1,11 @@
 <div class="connectivity-container">
-  <!-- Header Section -->
-  <div class="connectivity-header">
-    <div class="header-content">
-      <div class="header-title">
-        <mat-icon>wifi</mat-icon>
-        <h1>Cockpit Connectivity</h1>
-      </div>
-      <div class="header-subtitle">
-        <p>Monitor and manage communication between hardware panels and the Central Coordinator</p>
-      </div>
-    </div>
-
-    <div class="header-actions">
-      <button mat-raised-button color="primary" class="action-button">
-        <mat-icon>refresh</mat-icon>
-        Refresh Status
-      </button>
-      <button mat-raised-button color="accent" class="action-button">
-        <mat-icon>build</mat-icon>
-        Run Diagnostics
-      </button>
-    </div>
-  </div>
+  <!-- Page Header Component -->
+  <opena3xx-page-header
+    title="Cockpit Connectivity"
+    subtitle="Monitor and manage communication between hardware panels and the Central Coordinator"
+    icon="wifi"
+    [actions]="headerActions">
+  </opena3xx-page-header>
 
   <!-- Main Content Grid -->
   <div class="connectivity-content">

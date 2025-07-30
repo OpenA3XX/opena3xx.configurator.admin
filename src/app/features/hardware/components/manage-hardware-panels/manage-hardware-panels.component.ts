@@ -1,16 +1,13 @@
 import {
-  AfterViewInit,
   Component,
-  ViewChild,
-  OnDestroy,
+  OnInit,
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/core/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HardwarePanelOverviewDto } from 'src/app/shared/models/models';
-import { MatSort } from '@angular/material/sort';
+import { DataTableConfig, TableColumnConfig, DataTableEvent } from 'src/app/shared/models/data-table.interface';
+import { PageHeaderAction } from 'src/app/shared/components/ui/page-header/page-header.component';
 
 @Component({
     selector: 'opena3xx-manage-hardware-panels',
@@ -18,22 +15,10 @@ import { MatSort } from '@angular/material/sort';
     styleUrls: ['./manage-hardware-panels.component.scss'],
     standalone: false
 })
-export class ManageHardwarePanelsComponent implements AfterViewInit, OnDestroy {
-  public displayedColumns: string[] = [
-    'id',
-    'name',
-    'aircraftModel',
-    'manufacturer',
-    'cockpitArea',
-    'owner',
-    'details',
-  ];
-  dataSource = new MatTableDataSource<HardwarePanelOverviewDto>();
-  public data: HardwarePanelOverviewDto[] = [];
+export class ManageHardwarePanelsComponent implements OnInit {
+  tableConfig: DataTableConfig;
   public dataLoaded: boolean = false;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  headerActions: PageHeaderAction[] = [];
 
   constructor(
     private dataService: DataService,
@@ -41,47 +26,124 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnDestroy {
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnDestroy(): void {
-    // Clean up ViewChild references
-    if (this.dataSource) {
-      this.dataSource.disconnect();
-    }
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  onViewDetailsClick(id: number) {
-    this.router.navigateByUrl(`/view/hardware-panel-details?id=${id}`);
-  }
-
-  ngAfterViewInit() {
-    this.connectDataSourceFeatures();
+  ngOnInit(): void {
+    this.initializeTableConfig();
+    this.initializeHeaderActions();
     this.loadData();
   }
 
-  private connectDataSourceFeatures() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  private initializeTableConfig(): void {
+    const columns: TableColumnConfig[] = [
+      {
+        key: 'id',
+        label: 'ID',
+        sortable: true,
+        width: '80px',
+        type: 'number'
+      },
+      {
+        key: 'name',
+        label: 'Name',
+        sortable: true,
+        width: '25%',
+        maxWidth: '100px',
+        type: 'text'
+      },
+      {
+        key: 'aircraftModel',
+        label: 'Aircraft Model',
+        sortable: false,
+        width: '25%',
+        maxWidth: '100px',
+        type: 'text'
+      },
+      {
+        key: 'manufacturer',
+        label: 'Manufacturer',
+        sortable: false,
+        width: '15%',
+        maxWidth: '100px',
+        type: 'text'
+      },
+      {
+        key: 'cockpitArea',
+        label: 'Cockpit Area',
+        sortable: true,
+        width: '15%',
+        maxWidth: '100px',
+        type: 'text'
+      },
+      {
+        key: 'owner',
+        label: 'Cockpit Owner',
+        sortable: true,
+        width: '15%',
+        maxWidth: '100px',
+        type: 'text'
+      },
+      {
+        key: 'actions',
+        label: 'Actions',
+        width: '200px',
+        type: 'actions',
+        actions: [
+          {
+            label: 'Manage Details',
+            icon: 'visibility',
+            color: 'primary',
+            tooltip: 'View Details',
+            action: (item) => this.onViewDetailsClick(item.id)
+          }
+        ]
+      }
+    ];
+
+    this.tableConfig = {
+      columns: columns,
+      data: [],
+      loading: !this.dataLoaded,
+      loadingMessage: 'Loading hardware panels...',
+      emptyMessage: 'No hardware panels found',
+      emptyIcon: 'dashboard_off',
+      emptyAction: {
+        label: 'Add First Hardware Panel',
+        action: () => this.addHardwarePanel()
+      },
+      searchPlaceholder: 'Search by name, cockpit area, aircraft model...',
+      searchEnabled: true,
+      paginationEnabled: true,
+      pageSizeOptions: [5, 10, 25, 100],
+      sortEnabled: true,
+      rowHover: true,
+      elevation: 8
+    };
+  }
+
+  private initializeHeaderActions() {
+    this.headerActions = [
+      {
+        label: 'Add Hardware Panel',
+        icon: 'add',
+        color: 'primary',
+        onClick: () => this.addHardwarePanel()
+      }
+    ];
   }
 
   private loadData() {
+    this.dataLoaded = false;
+    this.tableConfig = { ...this.tableConfig, loading: true };
+
     this.dataService
       .getAllHardwarePanelOverviewDetails()
       .toPromise()
       .then((data: HardwarePanelOverviewDto[]) => {
-        this.data = data;
-        this.dataSource = new MatTableDataSource<HardwarePanelOverviewDto>(this.data);
+        this.tableConfig = {
+          ...this.tableConfig,
+          data: data,
+          loading: false
+        };
         this.dataLoaded = true;
-
-        // Connect features to new data source
-        this.connectDataSourceFeatures();
 
         this._snackBar.open('Data Loading Completed', 'Ok', {
           duration: 1000,
@@ -89,7 +151,33 @@ export class ManageHardwarePanelsComponent implements AfterViewInit, OnDestroy {
       });
   }
 
+  onViewDetailsClick(id: number) {
+    this.router.navigateByUrl(`/view/hardware-panel-details?id=${id}`);
+  }
+
   addHardwarePanel() {
     this.router.navigateByUrl('/add/hardware-panel');
+  }
+
+  onTableEvent(event: DataTableEvent): void {
+    console.log('Table event:', event);
+
+    switch (event.type) {
+      case 'action':
+        console.log('Action clicked:', event.action?.label, 'for item:', event.data);
+        break;
+      case 'rowClick':
+        console.log('Row clicked:', event.data);
+        break;
+      case 'search':
+        console.log('Search performed:', event.data);
+        break;
+      case 'pageChange':
+        console.log('Page changed:', event.data);
+        break;
+      case 'sortChange':
+        console.log('Sort changed:', event.data);
+        break;
+    }
   }
 }

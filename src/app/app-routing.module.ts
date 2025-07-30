@@ -15,6 +15,7 @@ import { ManageHardwarePanelsComponent } from './features/hardware/components/ma
 import { RegisterHardwareBoardComponent } from './features/hardware/components/register-hardware-board/register-hardware-board.component';
 import { ViewHardwarePanelDetailsComponent } from './features/hardware/components/view-hardware-panel-details/view-hardware-panel-details.component';
 
+
 // Dashboard Components
 import { DashboardComponent } from './features/dashboard/components/dashboard/dashboard.component';
 
@@ -107,6 +108,7 @@ const routes: Routes = [
     path: 'manage/aircraft-models',
     component: ManageAircraftModelsComponent,
   },
+
   {
     path: 'connectivity',
     loadChildren: () => import('./features/connectivity/connectivity.module').then(m => m.ConnectivityModule),

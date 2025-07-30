@@ -1,19 +1,9 @@
 <h1 mat-dialog-title>{{ hardwareOutputSelector.name }}</h1>
 <div mat-dialog-content>
-  <table mat-table [dataSource]="outputSelectorsDataSource">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>Id</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedOutputColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedOutputColumns"></tr>
-  </table>
+  <opena3xx-data-table
+    [config]="tableConfig"
+    (event)="onTableEvent($event)">
+  </opena3xx-data-table>
 </div>
 
 <mat-dialog-actions align="end">

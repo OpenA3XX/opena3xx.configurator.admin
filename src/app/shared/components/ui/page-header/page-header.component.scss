@@ -1,0 +1,123 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px;
+  background: var(--mat-card-background-color, #fff);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .header-content {
+    flex: 1;
+    min-width: 0;
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+
+      .header-icon {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+        color: var(--mat-primary-color, #1976d2);
+      }
+
+      .header-title-text {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--mat-text-color, #333);
+        line-height: 1.2;
+      }
+    }
+
+    .header-subtitle {
+      margin: 0;
+
+      p {
+        margin: 0;
+        font-size: 16px;
+        color: var(--mat-secondary-text-color, #666);
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .action-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 120px;
+      height: 40px;
+      font-weight: 500;
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+
+    .header-content {
+      .header-title {
+        .header-title-text {
+          font-size: 24px;
+        }
+      }
+    }
+
+    .header-actions {
+      justify-content: flex-start;
+      margin-top: 8px;
+
+      .action-button {
+        flex: 1;
+        min-width: auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    .header-content {
+      .header-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+
+        .header-title-text {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .header-actions {
+      flex-direction: column;
+
+      .action-button {
+        width: 100%;
+      }
+    }
+  }
+}

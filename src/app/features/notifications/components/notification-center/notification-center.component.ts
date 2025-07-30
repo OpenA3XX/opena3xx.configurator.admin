@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { NotificationService, Notification, NotificationFilters } from '../../services/notification.service';
+import { DataTableConfig, TableColumnConfig, DataTableEvent } from 'src/app/shared/models/data-table.interface';
+import { PageHeaderAction } from 'src/app/shared/components/ui/page-header/page-header.component';
 
 @Component({
     selector: 'app-notification-center',
@@ -14,22 +13,11 @@ import { NotificationService, Notification, NotificationFilters } from '../../se
     standalone: false
 })
 export class NotificationCenterComponent implements OnInit, OnDestroy {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  displayedColumns: string[] = [
-    'severity',
-    'title',
-    'service',
-    'timestamp',
-    'status',
-    'actions'
-  ];
-
-  dataSource = new MatTableDataSource<Notification>([]);
+  tableConfig: DataTableConfig;
   loading = false;
   totalNotifications = 0;
   unreadCount = 0;
+  headerActions: PageHeaderAction[] = [];
 
   private subscriptions = new Subscription();
 
@@ -40,37 +28,123 @@ export class NotificationCenterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.initializeTableConfig();
+    this.initializeHeaderActions();
     this.loadNotifications();
     this.setupSubscriptions();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    // Clean up ViewChild references
-    if (this.dataSource) {
-      this.dataSource.disconnect();
-    }
   }
 
-  ngAfterViewInit(): void {
-    // Add safety checks for table components
-    setTimeout(() => {
-      if (this.paginator) {
-        this.dataSource.paginator = this.paginator;
+  private initializeTableConfig(): void {
+    const columns: TableColumnConfig[] = [
+      {
+        key: 'severity',
+        label: 'Severity',
+        sortable: true,
+        width: '120px',
+        type: 'text'
+      },
+      {
+        key: 'title',
+        label: 'Title',
+        sortable: true,
+        width: '30%',
+        type: 'text'
+      },
+      {
+        key: 'service',
+        label: 'Service',
+        sortable: true,
+        width: '15%',
+        type: 'text'
+      },
+      {
+        key: 'timestamp',
+        label: 'Time',
+        sortable: true,
+        width: '15%',
+        type: 'date'
+      },
+      {
+        key: 'status',
+        label: 'Status',
+        sortable: true,
+        width: '120px',
+        type: 'status'
+      },
+      {
+        key: 'actions',
+        label: 'Actions',
+        width: '200px',
+        type: 'actions',
+        actions: [
+          {
+            label: 'Mark Read',
+            icon: 'done',
+            color: 'primary',
+            tooltip: 'Mark as read',
+            action: (item) => this.markAsRead(item),
+            disabled: (item) => item.isRead
+          },
+          {
+            label: 'Delete',
+            icon: 'delete',
+            color: 'warn',
+            tooltip: 'Delete notification',
+            action: (item) => this.deleteNotification(item)
+          }
+        ]
       }
-      if (this.sort) {
-        this.dataSource.sort = this.sort;
+    ];
+
+    this.tableConfig = {
+      columns: columns,
+      data: [],
+      loading: this.loading,
+      loadingMessage: 'Loading notifications...',
+      emptyMessage: 'No notifications found',
+      emptyIcon: 'notifications_off',
+      searchPlaceholder: 'Search by title, message, or service...',
+      searchEnabled: true,
+      paginationEnabled: true,
+      pageSizeOptions: [10, 25, 50, 100],
+      sortEnabled: true,
+      rowHover: true,
+      elevation: 8
+    };
+  }
+
+  private initializeHeaderActions() {
+    this.headerActions = [
+      {
+        label: 'Mark All Read',
+        icon: 'done_all',
+        color: 'primary',
+        disabled: () => this.unreadCount === 0,
+        onClick: () => this.markAllAsRead()
+      },
+      {
+        label: 'Clear All',
+        icon: 'clear_all',
+        color: 'warn',
+        disabled: () => this.totalNotifications === 0,
+        onClick: () => this.clearAllNotifications()
       }
-    }, 0);
+    ];
   }
 
   private setupSubscriptions(): void {
     // Subscribe to filtered notifications
     this.subscriptions.add(
       this.notificationService.filteredNotifications$.subscribe(notifications => {
-        if (this.dataSource) {
-          this.dataSource.data = notifications;
-        }
+        this.tableConfig = {
+          ...this.tableConfig,
+          data: notifications,
+          loading: false
+        };
         this.totalNotifications = notifications.length;
       })
     );
@@ -89,16 +163,25 @@ export class NotificationCenterComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
-  applyFilter(event: Event): void {
-    if (!event || !event.target) return;
+  onTableEvent(event: DataTableEvent): void {
+    console.log('Table event:', event);
 
-    const filterValue = (event.target as HTMLInputElement).value;
-    if (this.dataSource) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
-
-    if (this.dataSource && this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    switch (event.type) {
+      case 'action':
+        console.log('Action clicked:', event.action?.label, 'for item:', event.data);
+        break;
+      case 'rowClick':
+        console.log('Row clicked:', event.data);
+        break;
+      case 'search':
+        console.log('Search performed:', event.data);
+        break;
+      case 'pageChange':
+        console.log('Page changed:', event.data);
+        break;
+      case 'sortChange':
+        console.log('Sort changed:', event.data);
+        break;
     }
   }
 

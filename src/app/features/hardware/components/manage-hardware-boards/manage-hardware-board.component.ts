@@ -1,10 +1,10 @@
-import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { HardwareBoardDto } from 'src/app/shared/models/models';
 import { DataService } from 'src/app/core/services/data.service';
+import { DataTableConfig, TableColumnConfig, DataTableEvent } from 'src/app/shared/models/data-table.interface';
+import { PageHeaderAction } from 'src/app/shared/components/ui/page-header/page-header.component';
 
 @Component({
     templateUrl: './manage-hardware-board.component.html',
@@ -12,67 +12,141 @@ import { DataService } from 'src/app/core/services/data.service';
     selector: 'opena3xx-manage-hardware-boards',
     standalone: false
 })
-export class ManageHardwareBoardsComponent implements AfterViewInit, OnDestroy {
-  public displayedColumns: string[] = [
-    'id',
-    'name',
-    'hardwareBusExtendersCount',
-    'totalInputOutputs',
-    'details',
-  ];
-  dataSource = new MatTableDataSource<HardwareBoardDto>();
-  public data: HardwareBoardDto[];
-  public data_loaded: boolean = false;
+export class ManageHardwareBoardsComponent implements OnInit {
+  tableConfig: DataTableConfig;
+  data_loaded: boolean = false;
+  headerActions: PageHeaderAction[] = [];
 
-  @ViewChild(MatSort) sort: MatSort;
+  constructor(private router: Router, private dataService: DataService) {}
 
-  constructor(private router: Router, private dataService: DataService) {
+  ngOnInit(): void {
+    this.initializeTableConfig();
+    this.initializeHeaderActions();
     this.loadData();
   }
 
-  ngAfterViewInit() {
-    console.log('Hardware Boards - ngAfterViewInit - Sort available:', !!this.sort);
-    this.dataSource.sort = this.sort;
-    if (this.sort) {
-      console.log('Hardware Boards - Sort connected successfully');
-    } else {
-      console.warn('Hardware Boards - Sort not available in ngAfterViewInit');
-    }
-  }
+  private initializeTableConfig(): void {
+    const columns: TableColumnConfig[] = [
+      {
+        key: 'id',
+        label: 'ID',
+        sortable: true,
+        width: '80px',
+        type: 'number'
+      },
+      {
+        key: 'name',
+        label: 'Name',
+        sortable: true,
+        width: '25%',
+        type: 'text'
+      },
+      {
+        key: 'hardwareBusExtendersCount',
+        label: 'Total Hardware Bus Extenders',
+        sortable: true,
+        width: '20%',
+        type: 'number'
+      },
+      {
+        key: 'totalInputOutputs',
+        label: 'Total I/O(s)',
+        sortable: true,
+        width: '15%',
+        type: 'number'
+      },
+      {
+        key: 'actions',
+        label: 'Actions',
+        width: '200px',
+        type: 'actions',
+        actions: [
+          {
+            label: 'View Details',
+            icon: 'visibility',
+            color: 'primary',
+            tooltip: 'View Details',
+            action: (item) => this.onViewDetailsClick(item.id)
+          }
+        ]
+      }
+    ];
 
-  ngOnDestroy(): void {
-    // Clean up ViewChild references
-    if (this.dataSource) {
-      this.dataSource.disconnect();
-    }
+    this.tableConfig = {
+      columns: columns,
+      data: [],
+      loading: !this.data_loaded,
+      loadingMessage: 'Loading hardware boards...',
+      emptyMessage: 'No hardware boards found',
+      emptyIcon: 'developer_board_off',
+      emptyAction: {
+        label: 'Register First Hardware Board',
+        action: () => this.registerHardwareBoard()
+      },
+      searchPlaceholder: 'Search by name...',
+      searchEnabled: true,
+      paginationEnabled: true,
+      pageSizeOptions: [5, 10, 25, 100],
+      sortEnabled: true,
+      rowHover: true,
+      elevation: 8
+    };
   }
 
   private loadData() {
+    this.data_loaded = false;
+    this.tableConfig = { ...this.tableConfig, loading: true };
+
     firstValueFrom(this.dataService.getAllHardwareBoards())
       .then((data) => {
-        this.data = data as HardwareBoardDto[];
-        this.dataSource = new MatTableDataSource<HardwareBoardDto>(this.data);
+        this.tableConfig = {
+          ...this.tableConfig,
+          data: data as HardwareBoardDto[],
+          loading: false
+        };
         this.data_loaded = true;
-
-        // Connect sort after view init if available
-        if (this.sort) {
-          this.dataSource.sort = this.sort;
-        }
       });
+  }
+
+  private initializeHeaderActions() {
+    this.headerActions = [
+      {
+        label: 'Register Hardware Board',
+        icon: 'add',
+        color: 'primary',
+        onClick: () => this.registerHardwareBoard()
+      }
+    ];
+  }
+
+  onViewDetailsClick(id: number) {
+    // TODO: Implement view details functionality
+    console.log('View details for hardware board:', id);
   }
 
   registerHardwareBoard() {
     this.router.navigateByUrl('/register/hardware-board');
   }
 
-  onEditClick() {}
+  onTableEvent(event: DataTableEvent): void {
+    console.log('Table event:', event);
 
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    switch (event.type) {
+      case 'action':
+        console.log('Action clicked:', event.action?.label, 'for item:', event.data);
+        break;
+      case 'rowClick':
+        console.log('Row clicked:', event.data);
+        break;
+      case 'search':
+        console.log('Search performed:', event.data);
+        break;
+      case 'pageChange':
+        console.log('Page changed:', event.data);
+        break;
+      case 'sortChange':
+        console.log('Sort changed:', event.data);
+        break;
     }
   }
 }

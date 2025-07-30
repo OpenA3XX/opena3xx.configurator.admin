@@ -1,0 +1,218 @@
+.search-container {
+  margin-bottom: 24px;
+
+  .search-field {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+.table-container {
+  position: relative;
+  min-height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.data-table {
+  width: 100%;
+
+  // Default column widths
+  .mat-column-id {
+    width: 80px;
+  }
+
+  .mat-column-name {
+    width: 25%;
+    max-width: 100px;
+  }
+
+  .mat-column-manufacturer {
+    width: 15%;
+    max-width: 100px;
+  }
+
+  .mat-column-type {
+    width: 15%;
+    max-width: 100px;
+  }
+
+  .mat-column-cockpitArea {
+    width: 15%;
+    max-width: 100px;
+  }
+
+  .mat-column-aircraftModel {
+    width: 25%;
+    max-width: 100px;
+  }
+
+  .mat-column-owner {
+    width: 15%;
+    max-width: 100px;
+  }
+
+  .mat-column-details,
+  .mat-column-actions {
+    width: 200px;
+    text-align: center;
+  }
+
+  .mat-column-isActive {
+    width: 5%;
+  }
+
+  .status-text {
+    margin-left: 8px;
+    font-size: 0.875rem;
+  }
+
+  .info-icon {
+    color: #404040;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #1976d2;
+    }
+  }
+
+  .mat-row:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &.table-hover {
+    .mat-row {
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .action-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+    padding: 4px 8px;
+    min-width: auto;
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: rgba(0, 0, 0, 0.6);
+
+  p {
+    margin-top: 16px;
+    font-size: 16px;
+  }
+}
+
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: rgba(0, 0, 0, 0.6);
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  p {
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+}
+
+// Dark theme support
+:host.dark-theme {
+  .data-table {
+    .mat-row:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .info-icon {
+      color: rgba(255, 255, 255, 0.7);
+
+      &:hover {
+        color: #42a5f5;
+      }
+    }
+  }
+
+  .loading-container,
+  .no-data-container {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .search-field {
+    max-width: 100% !important;
+  }
+
+  .data-table {
+    .mat-column-id,
+    .mat-column-cockpitArea,
+    .mat-column-type {
+      display: none;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+      gap: 4px;
+
+      .action-button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .table-container {
+    min-height: 300px;
+  }
+
+  .action-buttons {
+    .action-button {
+      font-size: 0.75rem;
+      padding: 2px 4px;
+
+      mat-icon {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}

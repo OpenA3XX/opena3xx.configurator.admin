@@ -1,0 +1,24 @@
+<div class="page-header">
+  <div class="header-content">
+    <div class="header-title">
+      <mat-icon *ngIf="icon" class="header-icon">{{ icon }}</mat-icon>
+      <h1 class="header-title-text">{{ title }}</h1>
+    </div>
+    <div class="header-subtitle" *ngIf="subtitle">
+      <p>{{ subtitle }}</p>
+    </div>
+  </div>
+
+  <div class="header-actions" *ngIf="actions && actions.length > 0">
+        <button
+      *ngFor="let action of actions"
+      mat-raised-button
+      [color]="getActionColor(action)"
+      [disabled]="getDisabledState(action)"
+      (click)="onActionClick(action)"
+      class="action-button">
+      <mat-icon *ngIf="getActionIcon(action)">{{ getActionIcon(action) }}</mat-icon>
+      {{ getActionLabel(action) }}
+    </button>
+  </div>
+</div>

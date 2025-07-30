@@ -12,6 +12,7 @@ import { ConfigurationValidationComponent } from './components/configuration-val
 import { SystemHealthOverviewComponent } from './components/system-health-overview/system-health-overview.component';
 import { NetworkTopologyMapComponent } from './components/network-topology-map/network-topology-map.component';
 import { ConnectionLogsComponent } from './components/connection-logs/connection-logs.component';
+import { SharedModule } from "src/app/shared/shared.module";
 
 const routes = [
   {
@@ -34,7 +35,8 @@ const routes = [
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+    SharedModule
+]
 })
 export class ConnectivityModule { }

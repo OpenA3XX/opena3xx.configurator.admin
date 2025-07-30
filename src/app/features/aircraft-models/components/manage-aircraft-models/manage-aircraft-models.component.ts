@@ -1,7 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -10,6 +7,8 @@ import { AircraftModelService } from '../../services/aircraft-model.service';
 import { ViewAircraftModelDialogComponent } from '../view-aircraft-model-dialog/view-aircraft-model-dialog.component';
 import { EditAircraftModelDialogComponent } from '../edit-aircraft-model-dialog/edit-aircraft-model-dialog.component';
 import { AddAircraftModelDialogComponent } from '../add-aircraft-model-dialog/add-aircraft-model-dialog.component';
+import { DataTableConfig, TableColumnConfig, TableAction, DataTableEvent } from 'src/app/shared/models/data-table.interface';
+import { PageHeaderAction } from 'src/app/shared/components/ui/page-header/page-header.component';
 
 @Component({
     selector: 'opena3xx-manage-aircraft-models',
@@ -17,21 +16,10 @@ import { AddAircraftModelDialogComponent } from '../add-aircraft-model-dialog/ad
     styleUrls: ['./manage-aircraft-models.component.scss'],
     standalone: false
 })
-export class ManageAircraftModelsComponent implements OnInit, AfterViewInit, OnDestroy {
-  displayedColumns: string[] = [
-    'id',
-    'name',
-    'manufacturer',
-    'type',
-    'isActive',
-    'actions'
-  ];
-
-  dataSource = new MatTableDataSource<AircraftModelDto>();
+export class ManageAircraftModelsComponent implements OnInit {
+  tableConfig: DataTableConfig;
   loading = false;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  headerActions: PageHeaderAction[] = [];
 
   constructor(
     private aircraftModelService: AircraftModelService,
@@ -41,25 +29,128 @@ export class ManageAircraftModelsComponent implements OnInit, AfterViewInit, OnD
   ) {}
 
   ngOnInit(): void {
+    this.initializeTableConfig();
+    this.initializeHeaderActions();
+    console.log('Initial tableConfig:', this.tableConfig);
     this.loadAircraftModels();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  private initializeTableConfig(): void {
+    const columns: TableColumnConfig[] = [
+      {
+        key: 'id',
+        label: 'ID',
+        sortable: true,
+        width: '5%',
+        type: 'number'
+      },
+      {
+        key: 'name',
+        label: 'Name',
+        sortable: true,
+        width: '15%',
+        maxWidth: '100px',
+        type: 'text'
+      },
+      {
+        key: 'manufacturer',
+        label: 'Manufacturer',
+        sortable: true,
+        width: '15%',
+        maxWidth: '100px',
+        type: 'text'
+      },
+      {
+        key: 'type',
+        label: 'Type',
+        sortable: true,
+        width: '15%',
+        maxWidth: '100px',
+        type: 'text'
+      },
+      {
+        key: 'isActive',
+        label: 'Status',
+        sortable: true,
+        width: '5%',
+        type: 'status'
+      },
+      {
+        key: 'actions',
+        label: 'Actions',
+        width: '200px',
+        type: 'actions',
+        actions: [
+          {
+            label: 'View Details',
+            icon: 'visibility',
+            color: 'primary',
+            tooltip: 'View Details',
+            action: (item) => this.onViewAircraftModel(item.id)
+          },
+          {
+            label: 'Edit',
+            icon: 'edit',
+            color: 'accent',
+            tooltip: 'Edit',
+            action: (item) => this.onEditAircraftModel(item.id)
+          },
+          {
+            label: 'Delete',
+            icon: 'delete',
+            color: 'warn',
+            tooltip: 'Delete',
+            action: (item) => this.onDeleteAircraftModel(item.id)
+          }
+        ]
+      }
+    ];
+
+    this.tableConfig = {
+      columns: columns,
+      data: [],
+      loading: this.loading,
+      loadingMessage: 'Loading aircraft models...',
+      emptyMessage: 'No aircraft models found',
+      emptyIcon: 'flight_off',
+      emptyAction: {
+        label: 'Add First Aircraft Model',
+        action: () => this.onAddAircraftModel()
+      },
+      searchPlaceholder: 'Search by name, manufacturer, or type...',
+      searchEnabled: true,
+      paginationEnabled: true,
+      pageSizeOptions: [5, 10, 25, 100],
+      sortEnabled: true,
+      rowHover: true,
+      elevation: 8
+    };
   }
 
-  ngOnDestroy(): void {
-    if (this.dataSource) {
-      this.dataSource.disconnect();
-    }
+  private initializeHeaderActions() {
+    this.headerActions = [
+      {
+        label: 'Add Aircraft Model',
+        icon: 'add',
+        color: 'primary',
+        onClick: () => this.onAddAircraftModel()
+      }
+    ];
   }
 
   loadAircraftModels(): void {
     this.loading = true;
+    this.tableConfig = { ...this.tableConfig, loading: true };
+
     this.aircraftModelService.getAllAircraftModels().subscribe({
       next: (aircraftModels) => {
-        this.dataSource.data = aircraftModels;
+        console.log('Loaded aircraft models:', aircraftModels);
+        this.tableConfig = {
+          ...this.tableConfig,
+          data: aircraftModels,
+          loading: false
+        };
+        console.log('Updated tableConfig:', this.tableConfig);
         this.loading = false;
         this.snackBar.open('Aircraft models loaded successfully', 'Close', {
           duration: 2000
@@ -67,6 +158,7 @@ export class ManageAircraftModelsComponent implements OnInit, AfterViewInit, OnD
       },
       error: (error) => {
         console.error('Error loading aircraft models:', error);
+        this.tableConfig = { ...this.tableConfig, loading: false };
         this.loading = false;
         this.snackBar.open('Error loading aircraft models', 'Close', {
           duration: 3000
@@ -75,14 +167,7 @@ export class ManageAircraftModelsComponent implements OnInit, AfterViewInit, OnD
     });
   }
 
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
 
   onAddAircraftModel(): void {
     try {
@@ -186,5 +271,27 @@ export class ManageAircraftModelsComponent implements OnInit, AfterViewInit, OnD
 
   getStatusColor(isActive: boolean): string {
     return isActive ? 'success' : 'warn';
+  }
+
+  onTableEvent(event: DataTableEvent): void {
+    console.log('Table event:', event);
+
+    switch (event.type) {
+      case 'action':
+        console.log('Action clicked:', event.action?.label, 'for item:', event.data);
+        break;
+      case 'rowClick':
+        console.log('Row clicked:', event.data);
+        break;
+      case 'search':
+        console.log('Search performed:', event.data);
+        break;
+      case 'pageChange':
+        console.log('Page changed:', event.data);
+        break;
+      case 'sortChange':
+        console.log('Sort changed:', event.data);
+        break;
+    }
   }
 }

@@ -77,182 +77,6 @@
   }
 }
 
-.simulator-events-container {
-  padding: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-mat-toolbar {
-  margin-bottom: 24px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #1976d2, #42a5f5);
-  color: white;
-
-  mat-icon {
-    margin-right: 12px;
-  }
-
-  .spacer {
-    flex: 1 1 auto;
-  }
-
-  button {
-    margin-left: 12px;
-  }
-}
-
-.search-container {
-  margin-bottom: 24px;
-
-  .search-field {
-    width: 100%;
-    max-width: 400px;
-  }
-}
-
-.table-container {
-  position: relative;
-  min-height: 400px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.simulator-events-table {
-  width: 100%;
-  table-layout: fixed; // Ensures columns respect width settings
-
-  .info-icon {
-    color: #404040;
-  }
-
-  // Optimized column widths for 8 columns
-  .mat-column-id {
-    width: 60px;
-    min-width: 60px;
-  }
-
-  .mat-column-friendlyName {
-    width: 180px;
-    min-width: 180px;
-  }
-
-  .mat-column-eventName {
-    width: 200px;
-    min-width: 200px;
-  }
-
-  .mat-column-simulatorEventTypeName {
-    width: 150px;
-    min-width: 150px;
-  }
-
-  .mat-column-simulatorSoftwareName {
-    width: 130px;
-    min-width: 130px;
-  }
-
-  .mat-column-simulatorEventSdkTypeName {
-    width: 150px;
-    min-width: 150px;
-  }
-
-  .mat-column-details {
-    width: 100px;
-    min-width: 100px;
-    text-align: center;
-  }
-
-  .mat-column-info {
-    width: 60px;
-    min-width: 60px;
-    text-align: center;
-  }
-
-  // Ensure cells don't wrap content
-  .mat-cell, .mat-header-cell {
-    padding: 8px 4px;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-
-  // Handle text overflow for long content columns
-  .mat-column-friendlyName .mat-cell,
-  .mat-column-eventName .mat-cell,
-  .mat-column-simulatorEventTypeName .mat-cell,
-  .mat-column-simulatorSoftwareName .mat-cell,
-  .mat-column-simulatorEventSdkTypeName .mat-cell {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 0; // Forces text-overflow to work with table-layout: fixed
-  }
-
-  // Button styling
-  button {
-    margin: 2px;
-    font-size: 12px;
-    min-width: 80px;
-  }
-
-  .mat-row:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-  }
-}
-
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 48px;
-  color: rgba(0, 0, 0, 0.6);
-
-  p {
-    margin-top: 16px;
-    font-size: 16px;
-  }
-}
-
-.no-data-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 48px;
-  color: rgba(0, 0, 0, 0.6);
-
-  mat-icon {
-    font-size: 64px;
-    width: 64px;
-    height: 64px;
-    margin-bottom: 16px;
-    opacity: 0.5;
-  }
-
-  p {
-    margin-bottom: 16px;
-    font-size: 18px;
-  }
-}
-
-// Dark theme support
-:host.dark-theme {
-  .simulator-events-table {
-    .mat-row:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .info-icon {
-      color: rgba(255, 255, 255, 0.7);
-    }
-  }
-
-  .loading-container,
-  .no-data-container {
-    color: rgba(255, 255, 255, 0.7);
-  }
-}
-
 // Responsive design
 @media (max-width: 1200px) {
   .simulator-events-content {
@@ -269,16 +93,7 @@ mat-toolbar {
     }
   }
 
-  .search-field {
-    max-width: 100% !important;
-  }
 
-  .simulator-events-table {
-    .mat-column-id,
-    .mat-column-simulatorEventSdkTypeName {
-      display: none;
-    }
-  }
 }
 
 @media (max-width: 768px) {
@@ -286,12 +101,7 @@ mat-toolbar {
     padding: var(--spacing-md, 16px);
   }
 
-  .simulator-events-table {
-    .mat-column-simulatorSoftwareName,
-    .mat-column-simulatorEventTypeName {
-      display: none;
-    }
-  }
+
 }
 
 @media (max-width: 480px) {
@@ -299,9 +109,5 @@ mat-toolbar {
     padding: var(--spacing-sm, 12px);
   }
 
-  .simulator-events-table {
-    .mat-column-eventName {
-      display: none;
-    }
-  }
+
 }
