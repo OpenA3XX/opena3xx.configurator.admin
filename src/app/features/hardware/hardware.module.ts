@@ -33,9 +33,13 @@ import { ViewHardwareInputSelectorsDialogComponent } from './components/view-har
 import { ViewHardwareOutputSelectorsDialogComponent } from './components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
 import { DeleteHardwareInputDialogComponent } from './components/delete-hardware-input-dialog/delete-hardware-input-dialog.component';
 
+// Hardware Form Components
+import { LinkHardwareInputSelectorsFormComponent } from './components/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
+import { MapHardwareInputSelectorsFormComponent } from './components/map-hardware-input-selectors-form/map-hardware-input-selectors-form.component';
+import { MapHardwareOutputSelectorsFormComponent } from './components/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component';
 
-
-
+// Core Services
+import { DataService } from 'src/app/core/services/data.service';
 
 @NgModule({
   declarations: [
@@ -60,6 +64,10 @@ import { DeleteHardwareInputDialogComponent } from './components/delete-hardware
     ViewHardwareOutputSelectorsDialogComponent,
     DeleteHardwareInputDialogComponent,
 
+    // Hardware Form Components
+    LinkHardwareInputSelectorsFormComponent,
+    MapHardwareInputSelectorsFormComponent,
+    MapHardwareOutputSelectorsFormComponent,
 
   ],
   imports: [
@@ -90,13 +98,19 @@ import { DeleteHardwareInputDialogComponent } from './components/delete-hardware
     MapHardwareOutputSelectorsDialogComponent,
     ViewHardwareInputSelectorsDialogComponent,
     ViewHardwareOutputSelectorsDialogComponent,
-    DeleteHardwareInputDialogComponent
+    DeleteHardwareInputDialogComponent,
+
+    // Hardware Form Components
+    LinkHardwareInputSelectorsFormComponent,
+    MapHardwareInputSelectorsFormComponent,
+    MapHardwareOutputSelectorsFormComponent
   ],
   providers: [
     HardwarePanelService,
     HardwareBoardService,
     HardwareInputService,
-    HardwareOutputService
+    HardwareOutputService,
+    DataService
   ]
 })
 export class HardwareModule { }

@@ -19,11 +19,6 @@ import { SliderComponent } from './components/ui/slider/slider.component';
 import { LoadingComponent } from './components/ui/loading/loading.component';
 import { FloatingBackButtonComponent } from './components/ui/floating-back-button/floating-back-button.component';
 
-// Form Components
-import { LinkHardwareInputSelectorsFormComponent } from './components/forms/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
-import { MapHardwareInputSelectorsFormComponent } from './components/forms/map-hardware-input-selectors-form/map-hardware-input-selectors-form.component';
-import { MapHardwareOutputSelectorsFormComponent } from './components/forms/map-hardware-output-selectors-form/map-hardware-output-selectors-form.component';
-
 // Pipes
 import { FormatDatePipe } from './pipes/format-date.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
@@ -48,11 +43,6 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SliderComponent,
     LoadingComponent,
     FloatingBackButtonComponent,
-
-    // Form Components
-    LinkHardwareInputSelectorsFormComponent,
-    MapHardwareInputSelectorsFormComponent,
-    MapHardwareOutputSelectorsFormComponent,
 
     // Pipes
     FormatDatePipe,
@@ -83,11 +73,6 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SliderComponent,
     LoadingComponent,
     FloatingBackButtonComponent,
-
-    // Form Components
-    LinkHardwareInputSelectorsFormComponent,
-    MapHardwareInputSelectorsFormComponent,
-    MapHardwareOutputSelectorsFormComponent,
 
     // Pipes
     FormatDatePipe,
