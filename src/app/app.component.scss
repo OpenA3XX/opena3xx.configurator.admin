@@ -251,10 +251,39 @@
     width: 56px !important;
   }
 
+  mat-nav-list {
+    padding: var(--spacing-sm) 0;
+  }
+
   mat-list-item {
     height: 48px;
-    // padding: var(--spacing-sm);
+    cursor: pointer;
+    border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
+    margin: var(--spacing-xs) var(--spacing-sm) var(--spacing-xs) 0;
     transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--opena3xx-primary);
+      transform: scaleY(0);
+      transition: var(--transition-fast);
+    }
+
+    &:hover {
+      background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.08));
+      transform: translateX(-2px);
+
+      &::before {
+        transform: scaleY(1);
+      }
+    }
 
     // Base status color classes
     .ok {
@@ -281,51 +310,61 @@
     &.system-status-header {
       border-bottom: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
       margin-bottom: var(--spacing-xs);
-      // padding: var(--spacing-sm) var(--spacing-md);
       display: flex;
       align-items: center;
       flex-direction: row;
 
       .system-status-title {
         font-weight: 600;
-        font-size: 14px;
-        //color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.87));
+        font-size: 14px; // Match left nav font size
+        color: var(--mat-sys-on-surface, rgba(0, 0, 0, 0.87));
         display: flex;
         align-items: center;
         flex: 1;
+        transition: color var(--transition-fast);
       }
 
       mat-icon {
-        font-size: 20px;
+        font-size: 20px; // Match left nav icon size
         width: 20px;
         height: 20px;
+        margin-right: var(--spacing-md); // Match left nav spacing
+        transition: var(--transition-fast);
       }
     }
 
     // Dependency status item styling
     &.dependency-status-item {
-      margin: var(--spacing-xs) 0;
-      border-radius: var(--border-radius-sm);
+      margin: var(--spacing-xs) var(--spacing-sm) var(--spacing-xs) 0;
+      border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
       transition: var(--transition-fast);
+      position: relative;
 
       &:hover {
         background-color: var(--mat-sys-surface-variant, rgba(0, 0, 0, 0.08));
+        transform: translateX(-2px);
+
+        &::before {
+          transform: scaleY(1);
+        }
       }
 
       .dependency-name {
-        font-size: 12px;
+        font-size: 14px; // Match left nav font size
         font-weight: 500;
         color: var(--mat-sys-on-surface, rgba(0, 0, 0, 0.87));
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        transition: color var(--transition-fast);
       }
 
       .dependency-icon {
-        font-size: 18px;
-        width: 18px;
-        height: 18px;
-        margin-right: var(--spacing-sm);
+        font-size: 20px; // Match left nav icon size
+        width: 20px;
+        height: 20px;
+        margin-right: var(--spacing-md); // Match left nav spacing
+        transition: var(--transition-fast);
       }
     }
 
@@ -333,12 +372,14 @@
     &.status-timestamp {
       margin-top: var(--spacing-sm);
       padding: var(--spacing-xs) var(--spacing-sm);
+      border-top: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
 
       .timestamp-text {
-        font-size: 10px;
-        color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6));
+        font-size: 12px; // Slightly smaller but still readable
+        // color: var(--mat-sys-on-surface-variant, rgba(0, 0, 0, 0.6));
         text-align: center;
         width: 100%;
+        transition: color var(--transition-fast);
       }
     }
   }
@@ -366,91 +407,95 @@
     50% { opacity: 0.7; }
   }
 
-        // Dark mode adjustments
+  // Dark mode adjustments
   .dark-theme & {
     background: var(--mat-sys-surface-container, #1e1e1e);
     border-left: 1px solid var(--mat-sys-outline-variant, rgba(255, 255, 255, 0.12));
 
-    .system-status-title {
-      color: var(--mat-sys-on-surface-variant, rgba(255, 255, 255, 0.87)) !important;
-      font-weight: 600;
-    }
-
-    .dependency-name {
-      color: var(--mat-sys-on-surface, rgba(255, 255, 255, 0.87)) !important;
-      font-weight: 500;
-    }
-
-    .timestamp-text {
-      color: var(--mat-sys-on-surface-variant, rgba(255, 255, 255, 0.6)) !important;
-      font-style: italic;
-    }
-
-    mat-list-item.dependency-status-item {
+    mat-list-item {
       &:hover {
         background-color: var(--mat-sys-surface-variant, rgba(255, 255, 255, 0.08));
-        border-radius: var(--border-radius-md);
       }
-
-      .dependency-icon {
-        &.ok {
-          color: var(--success-color, #4caf50);
-          filter: drop-shadow(0 0 4px rgba(76, 175, 80, 0.4));
-        }
-
-        &.error {
-          color: var(--error-color, #f44336);
-          filter: drop-shadow(0 0 4px rgba(244, 67, 54, 0.4));
-        }
-
-        &.warning {
-          color: var(--warning-color, #ff9800);
-          filter: drop-shadow(0 0 4px rgba(255, 152, 0, 0.4));
-        }
-
-        &.info {
-          color: var(--info-color, #2196f3);
-          filter: drop-shadow(0 0 4px rgba(33, 150, 243, 0.4));
-        }
-      }
-    }
-
-    mat-list-item.system-status-header {
-      border-bottom: 1px solid var(--mat-sys-outline-variant, rgba(255, 255, 255, 0.12));
 
       .system-status-title {
-        color: var(--mat-sys-on-surface-variant, rgba(255, 255, 255, 0.87)) !important;
+        color: var(--mat-sys-on-surface, rgba(255, 255, 255, 0.87)) !important;
+        font-weight: 600;
       }
 
-      mat-icon {
-        &.ok {
-          color: var(--success-color, #4caf50);
-          filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.5));
-        }
-
-        &.error {
-          color: var(--error-color, #f44336);
-          filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.5));
-        }
-
-        &.warning {
-          color: var(--warning-color, #ff9800);
-          filter: drop-shadow(0 0 6px rgba(255, 152, 0, 0.5));
-        }
+      .dependency-name {
+        color: var(--mat-sys-on-surface, rgba(255, 255, 255, 0.87)) !important;
+        font-weight: 500;
       }
-    }
-
-    mat-list-item.status-timestamp {
-      border-top: 1px solid var(--mat-sys-outline-variant, rgba(255, 255, 255, 0.12));
 
       .timestamp-text {
-        color: var(--mat-sys-on-surface-variant, rgba(255, 255, 255, 0.6)) !important;
+        color: rgba(255, 255, 255, 0.87) !important;
+        font-style: italic;
       }
-    }
-  }
 
-      // Enhanced dark theme animations
-  .dark-theme & {
+      &.dependency-status-item {
+        &:hover {
+          background-color: var(--mat-sys-surface-variant, rgba(255, 255, 255, 0.08));
+          border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
+        }
+
+        .dependency-icon {
+          &.ok {
+            color: var(--success-color, #4caf50);
+            filter: drop-shadow(0 0 4px rgba(76, 175, 80, 0.4));
+          }
+
+          &.error {
+            color: var(--error-color, #f44336);
+            filter: drop-shadow(0 0 4px rgba(244, 67, 54, 0.4));
+          }
+
+          &.warning {
+            color: var(--warning-color, #ff9800);
+            filter: drop-shadow(0 0 4px rgba(255, 152, 0, 0.4));
+          }
+
+          &.info {
+            color: var(--info-color, #2196f3);
+            filter: drop-shadow(0 0 4px rgba(33, 150, 243, 0.4));
+          }
+        }
+      }
+
+      &.system-status-header {
+        border-bottom: 1px solid var(--mat-sys-outline-variant, rgba(255, 255, 255, 0.12));
+
+        .system-status-title {
+          color: var(--mat-sys-on-surface, rgba(255, 255, 255, 0.87)) !important;
+        }
+
+        mat-icon {
+          &.ok {
+            color: var(--success-color, #4caf50);
+            filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.5));
+          }
+
+          &.error {
+            color: var(--error-color, #f44336);
+            filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.5));
+          }
+
+          &.warning {
+            color: var(--warning-color, #ff9800);
+            filter: drop-shadow(0 0 6px rgba(255, 152, 0, 0.5));
+          }
+        }
+      }
+
+             &.status-timestamp {
+         border-top: 1px solid var(--mat-sys-outline-variant, rgba(255, 255, 255, 0.12));
+
+         .timestamp-text {
+           color: rgba(255, 255, 255, 0.87) !important;
+         }
+       }
+    }
+
+    // Enhanced dark theme animations
     @keyframes pulse-success-dark {
       0%, 100% {
         opacity: 1;
@@ -506,6 +551,41 @@
       }
     }
   }
+
+  // Additional specific dark theme override for timestamp text
+  .dark-theme .opena3xx-sidenav-right .status-timestamp .timestamp-text {
+    color: rgba(255, 255, 255, 0.87) !important;
+  }
+
+  // Higher specificity override for Angular component encapsulation
+  .dark-theme .opena3xx-sidenav-right mat-list-item.status-timestamp .timestamp-text {
+    color: rgba(255, 255, 255, 0.87) !important;
+  }
+
+  // Even higher specificity to override Angular's _ngcontent selectors
+  .dark-theme .opena3xx-sidenav-right[_ngcontent-ng-c2485215946] mat-list-item.status-timestamp[_ngcontent-ng-c2485215946] .timestamp-text[_ngcontent-ng-c2485215946] {
+    color: rgba(255, 255, 255, 0.87) !important;
+  }
+
+  // Override the exact selector that's being applied
+  .dark-theme .opena3xx-sidenav-right[_ngcontent-ng-c2485215946] mat-list-item.status-timestamp[_ngcontent-ng-c2485215946] .timestamp-text[_ngcontent-ng-c2485215946] {
+    color: rgba(255, 255, 255, 0.87) !important;
+  }
+
+  // Global dark theme override for timestamp text
+  .dark-theme .timestamp-text {
+    color: rgba(255, 255, 255, 0.87) !important;
+  }
+
+  // Force override for the specific Angular selector in dark theme
+  .dark-theme .opena3xx-sidenav-right[_ngcontent-ng-c2485215946] mat-list-item.status-timestamp[_ngcontent-ng-c2485215946] .timestamp-text[_ngcontent-ng-c2485215946] {
+    color: rgba(255, 255, 255, 0.87) !important;
+  }
+}
+
+// Force dark theme override for timestamp text with highest specificity
+.dark-theme .opena3xx-sidenav-right[_ngcontent-ng-c2485215946] mat-list-item.status-timestamp[_ngcontent-ng-c2485215946] .timestamp-text[_ngcontent-ng-c2485215946] {
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 
 .opena3xx-sidenav-content {
