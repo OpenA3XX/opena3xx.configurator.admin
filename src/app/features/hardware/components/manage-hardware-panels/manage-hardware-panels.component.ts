@@ -88,10 +88,10 @@ export class ManageHardwarePanelsComponent implements OnInit {
         type: 'actions',
         actions: [
           {
-            label: 'Manage Details',
-            icon: 'visibility',
+            label: 'Manage',
+            icon: 'settings',
             color: 'primary',
-            tooltip: 'View Details',
+            tooltip: 'Manage',
             action: (item) => this.onViewDetailsClick(item.id)
           }
         ]
