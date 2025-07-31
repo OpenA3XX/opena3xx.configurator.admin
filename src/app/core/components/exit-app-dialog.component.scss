@@ -1,1 +1,13 @@
 // Exit app dialog component styles
+
+.content-area {
+  // Simple content area styling
+  // The dialog wrapper handles scrolling and layout
+}
+
+.confirmation-message {
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}

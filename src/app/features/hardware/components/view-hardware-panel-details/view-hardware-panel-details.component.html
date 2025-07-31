@@ -1,28 +1,9 @@
-<div class="page-header">
-  <div class="header-content">
-    <div class="header-left">
-      <mat-icon class="header-icon">dashboard</mat-icon>
-      <div class="header-text">
-        <h1 class="header-title">Hardware Panel Details</h1>
-        <p class="header-subtitle">View and manage hardware panel configurations</p>
-      </div>
-    </div>
-    <div class="header-actions">
-      <button mat-stroked-button class="action-button">
-        <mat-icon>add</mat-icon>
-        Add Hardware Input
-      </button>
-      <button mat-stroked-button class="action-button">
-        <mat-icon>add</mat-icon>
-        Add Hardware Output
-      </button>
-      <button mat-stroked-button class="action-button" (click)="onEditHardwareDetails()">
-        <mat-icon>edit</mat-icon>
-        Edit Hardware Panel Details
-      </button>
-    </div>
-  </div>
-</div>
+<opena3xx-page-header
+  title="Hardware Panel Details"
+  subtitle="View and manage hardware panel configurations"
+  icon="dashboard"
+  [actions]="headerActions">
+</opena3xx-page-header>
 
 <!-- Panel Information Cards -->
 <div class="panel-overview-section" *ngIf="hardwarePanelDto">

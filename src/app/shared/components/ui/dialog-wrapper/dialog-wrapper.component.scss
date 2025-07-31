@@ -1,0 +1,344 @@
+.dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 90vh; // Ensure dialog doesn't exceed viewport
+  background: white;
+  // border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+
+  // Size variants
+  &.dialog-small {
+    max-width: 400px;
+    max-height: 500px;
+  }
+
+  &.dialog-medium {
+    max-width: 600px;
+    max-height: 700px;
+  }
+
+  &.dialog-large {
+    max-width: 800px;
+    max-height: 900px;
+  }
+
+  &.dialog-fullscreen {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+
+  .dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fafafa;
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+
+      .header-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        color: #666;
+      }
+
+      .header-text {
+        .dialog-title {
+          margin: 0;
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: #333;
+        }
+
+        .dialog-subtitle {
+          margin: 4px 0 0;
+          font-size: 0.875rem;
+          color: #666;
+        }
+      }
+    }
+
+    .close-button {
+      color: #666;
+
+      &:hover {
+        background: #f0f0f0;
+        color: #303030;
+      }
+    }
+  }
+
+  .dialog-content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 0; // Important for flex child scrolling
+    max-height: calc(90vh - 120px); // Account for header and footer
+
+    // Custom scrollbar styling for better UX
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+
+      &:hover {
+        background: #a8a8a8;
+      }
+    }
+
+    &.content-loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    &.content-error {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+
+  .dialog-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #e0e0e0;
+    background: #fafafa;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .loading-overlay,
+  .error-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .loading-content,
+  .error-content {
+    text-align: center;
+
+    p {
+      margin: 16px 0 0;
+      color: #666;
+    }
+  }
+
+  .error-content {
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+
+    button {
+      margin-top: 16px;
+    }
+  }
+}
+
+// Dark theme support - using body dark-theme class
+body.dark-theme {
+  .dialog-wrapper {
+    background: #1e1e1e;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+    .dialog-header {
+      border-bottom-color: #404040;
+      background: #2d2d2d;
+
+      .header-content {
+        .header-icon {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .header-text {
+          .dialog-title {
+            color: rgba(255, 255, 255, 0.9);
+          }
+
+          .dialog-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+          }
+        }
+      }
+
+      .close-button {
+        color: rgba(255, 255, 255, 0.7);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    .dialog-content {
+      background: #1e1e1e;
+
+      // Dark theme scrollbar styling
+      &::-webkit-scrollbar-track {
+        background: #404040;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #666;
+
+        &:hover {
+          background: #888;
+        }
+      }
+    }
+
+    .dialog-footer {
+      border-top-color: #404040;
+      background: #2d2d2d;
+    }
+
+    .loading-overlay,
+    .error-overlay {
+      background: rgba(30, 30, 30, 0.9);
+    }
+
+    .loading-content,
+    .error-content {
+      p {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .error-content {
+      mat-icon {
+        color: #f44336;
+      }
+    }
+  }
+
+  // Dark theme support for content inside dialog wrapper
+  .dialog-content {
+    // Target common dialog content elements
+    h1, h2, h3, h4, h5, h6 {
+      color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .section-title {
+      color: rgba(255, 255, 255, 0.9) !important;
+      border-bottom-color: #404040 !important;
+
+      mat-icon {
+        color: rgba(255, 255, 255, 0.7) !important;
+      }
+    }
+
+    .detail-label {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    .detail-value {
+      color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .detail-item {
+      background: rgba(255, 255, 255, 0.02) !important;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.04) !important;
+      }
+    }
+
+    // Target specific elements that might not be caught by general selectors
+    .details-content {
+      .section .section-title {
+        color: rgba(255, 255, 255, 0.9) !important;
+        border-bottom-color: #404040 !important;
+
+        mat-icon {
+          color: rgba(255, 255, 255, 0.7) !important;
+        }
+      }
+
+      .details-grid .detail-item {
+        background: rgba(255, 255, 255, 0.02) !important;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        .detail-label {
+          color: rgba(255, 255, 255, 0.7) !important;
+        }
+
+        .detail-value {
+          color: rgba(255, 255, 255, 0.9) !important;
+        }
+      }
+    }
+  }
+}
+
+// Force dark background for dialog wrapper and Angular Material dialog container in dark mode
+::ng-deep body.dark-theme .mat-dialog-container {
+  background: #1e1e1e !important;
+}
+
+::ng-deep body.dark-theme .dialog-wrapper {
+  background: #1e1e1e !important;
+}
+
+::ng-deep body.dark-theme .dialog-wrapper .dialog-content {
+  background: #1e1e1e !important;
+}
+
+// Force dark theme for dialog header in dark mode
+::ng-deep body.dark-theme .dialog-wrapper .dialog-header {
+  background: #232323 !important;
+  border-bottom-color: #404040 !important;
+}
+
+::ng-deep body.dark-theme .dialog-wrapper .dialog-header .dialog-title,
+::ng-deep body.dark-theme .dialog-wrapper .dialog-header .dialog-subtitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+::ng-deep body.dark-theme .dialog-wrapper .dialog-header mat-icon,
+::ng-deep body.dark-theme .dialog-wrapper .dialog-header .close-button {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+// Force dark theme for dialog footer in dark mode
+::ng-deep body.dark-theme .dialog-wrapper .dialog-footer {
+  background: #2d2d2d !important;
+  border-top-color: #404040 !important;
+}
+
+::ng-deep body.dark-theme .dialog-wrapper .dialog-footer button {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+::ng-deep body.dark-theme .dialog-wrapper .dialog-footer mat-icon {
+  color: rgba(255, 255, 255, 0.7) !important;
+}

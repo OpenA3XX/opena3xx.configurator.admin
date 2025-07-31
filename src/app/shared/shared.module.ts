@@ -20,6 +20,7 @@ import { LoadingComponent } from './components/ui/loading/loading.component';
 import { FloatingBackButtonComponent } from './components/ui/floating-back-button/floating-back-button.component';
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
 import { PageHeaderComponent } from './components/ui/page-header/page-header.component';
+import { DialogWrapperComponent } from './components/ui/dialog-wrapper/dialog-wrapper.component';
 
 // Pipes
 import { FormatDatePipe } from './pipes/format-date.pipe';
@@ -47,6 +48,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     FloatingBackButtonComponent,
     DataTableComponent,
     PageHeaderComponent,
+    DialogWrapperComponent,
 
     // Pipes
     FormatDatePipe,
@@ -79,6 +81,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     FloatingBackButtonComponent,
     DataTableComponent,
     PageHeaderComponent,
+    DialogWrapperComponent,
 
     // Pipes
     FormatDatePipe,

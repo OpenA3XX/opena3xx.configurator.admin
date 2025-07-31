@@ -7,7 +7,22 @@ b {
   font-weight: bold;
 }
 
-.mat-dialog-content {
-  margin-bottom: 10px;
+.content-area {
+  // Simple content area styling
+  // The dialog wrapper handles scrolling and layout
+}
+
+.confirmation-message {
   text-align: center;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.warning-message {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+  color: #d32f2f;
+  line-height: 1.4;
 }

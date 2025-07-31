@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HardwareOutputDto } from 'src/app/shared/models/models';
 import { DataTableConfig, TableColumnConfig, DataTableEvent } from 'src/app/shared/models/data-table.interface';
+import { DialogWrapperConfig } from 'src/app/shared/components/ui/dialog-wrapper/dialog-wrapper.component';
 
 @Component({
     selector: 'opena3xx-view-hardware-output-selectors-dialog',
@@ -12,11 +13,36 @@ import { DataTableConfig, TableColumnConfig, DataTableEvent } from 'src/app/shar
 export class ViewHardwareOutputSelectorsDialogComponent {
   tableConfig: DataTableConfig;
   public hardwareOutputSelector: any;
+  wrapperConfig: DialogWrapperConfig;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { data: HardwareOutputDto }) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { data: HardwareOutputDto },
+    private dialogRef: MatDialogRef<ViewHardwareOutputSelectorsDialogComponent>
+  ) {
     this.hardwareOutputSelector = data;
     console.log('Dialog Component', data);
+    this.initializeWrapperConfig();
     this.initializeTableConfig();
+  }
+
+  private initializeWrapperConfig(): void {
+    this.wrapperConfig = {
+      title: 'Hardware Output Selectors',
+      subtitle: 'View output selectors for this hardware output',
+      icon: 'logout',
+      size: 'large',
+      showCloseButton: true,
+      showFooter: true
+    };
+  }
+
+  private updateWrapperConfig(): void {
+    if (this.hardwareOutputSelector) {
+      this.wrapperConfig = {
+        ...this.wrapperConfig,
+        title: `Output Selectors - ${this.hardwareOutputSelector.name}`
+      };
+    }
   }
 
   private initializeTableConfig(): void {
@@ -49,6 +75,8 @@ export class ViewHardwareOutputSelectorsDialogComponent {
       rowHover: true,
       elevation: 0
     };
+
+    this.updateWrapperConfig();
   }
 
   onTableEvent(event: DataTableEvent): void {
@@ -71,5 +99,9 @@ export class ViewHardwareOutputSelectorsDialogComponent {
         console.log('Sort changed:', event.data);
         break;
     }
+  }
+
+  onClose(): void {
+    this.dialogRef.close();
   }
 }

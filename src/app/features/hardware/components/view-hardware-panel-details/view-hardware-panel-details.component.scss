@@ -2,11 +2,18 @@
 :host ::ng-deep .data-table {
   table-layout: fixed !important;
 
-  th.mat-header-cell:nth-child(2),
-  td.mat-cell:nth-child(2) {
+  th.mat-header-cell:nth-child(1),
+  td.mat-cell:nth-child(1) {
     width: 5% !important;
     min-width: 5% !important;
     max-width: 5% !important;
+  }
+
+  th.mat-header-cell:nth-child(2),
+  td.mat-cell:nth-child(2) {
+    width: 10% !important;
+    min-width: 10% !important;
+    max-width: 10% !important;
   }
 
   th.mat-header-cell:nth-child(4),
@@ -17,166 +24,9 @@
   }
 }
 
-// Modern Page Header Styling
-.page-header {
-  background: linear-gradient(135deg, #1976d2, #42a5f5);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 32px;
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
-  color: white;
+// Removed old page header styling - now using reusable PageHeaderComponent
 
-  .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-
-      .header-icon {
-        font-size: 32px;
-        width: 32px;
-        height: 32px;
-        color: white;
-      }
-
-      .header-text {
-        .header-title {
-          font-size: 1.75rem;
-          font-weight: 700;
-          margin: 0 0 4px 0;
-          color: white;
-          line-height: 1.2;
-        }
-
-        .header-subtitle {
-          font-size: 0.875rem;
-          margin: 0;
-          color: rgba(255, 255, 255, 0.9);
-          font-weight: 400;
-        }
-      }
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-
-      .action-button {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: white;
-        border-radius: 8px;
-        // padding: 8px 16px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-
-        &:hover {
-          background: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.5);
-          transform: translateY(-1px);
-        }
-
-        mat-icon {
-          margin-right: 6px;
-          font-size: 18px;
-          width: 18px;
-          height: 18px;
-        }
-      }
-    }
-  }
-}
-
-// Dark theme support for header
-:host.dark-theme .page-header {
-  background: linear-gradient(135deg, #1565c0, #1976d2);
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
-}
-
-// Responsive design for header
-@media (max-width: 768px) {
-  .page-header {
-    padding: 20px;
-
-    .header-content {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-
-      .header-left {
-        .header-icon {
-          font-size: 28px;
-          width: 28px;
-          height: 28px;
-        }
-
-        .header-text {
-          .header-title {
-            font-size: 1.5rem;
-          }
-        }
-      }
-
-      .header-actions {
-        width: 100%;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 8px;
-
-        .action-button {
-          // padding: 6px 12px;
-          font-size: 0.875rem;
-
-          mat-icon {
-            font-size: 16px;
-            width: 16px;
-            height: 16px;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .page-header {
-    padding: 16px;
-
-    .header-content {
-      .header-left {
-        .header-text {
-          .header-title {
-            font-size: 1.25rem;
-          }
-
-          .header-subtitle {
-            font-size: 0.8rem;
-          }
-        }
-      }
-
-      .header-actions {
-        .action-button {
-          // padding: 4px 8px;
-          font-size: 0.8rem;
-
-          mat-icon {
-            font-size: 14px;
-            width: 14px;
-            height: 14px;
-          }
-        }
-      }
-    }
-  }
-}
+// Removed old responsive design for header - now handled by PageHeaderComponent
 
 // Section Titles (matching dashboard style)
 .section-title {
@@ -368,15 +218,15 @@
 
       // Column width specifications with !important to override Material styles
       &:nth-child(1) { // ID column
-        width: 10% !important;
-        min-width: 10% !important;
-        max-width: 10% !important;
-      }
-
-      &:nth-child(2) { // Name column
         width: 5% !important;
         min-width: 5% !important;
         max-width: 5% !important;
+      }
+
+      &:nth-child(2) { // Name column
+        width: 10% !important;
+        min-width: 10% !important;
+        max-width: 10% !important;
       }
 
       &:nth-child(3) { // Type column
@@ -405,15 +255,15 @@
 
       // Column width specifications with !important to override Material styles
       &:nth-child(1) { // ID column
-        width: 10% !important;
-        min-width: 10% !important;
-        max-width: 10% !important;
-      }
-
-      &:nth-child(2) { // Name column
         width: 5% !important;
         min-width: 5% !important;
         max-width: 5% !important;
+      }
+
+      &:nth-child(2) { // Name column
+        width: 10% !important;
+        min-width: 10% !important;
+        max-width: 10% !important;
       }
 
       &:nth-child(3) { // Type column
@@ -466,12 +316,21 @@
   }
 
   // Additional specific column width overrides
-  .data-table th.mat-header-cell:nth-child(2),
-  .data-table td.mat-cell:nth-child(2) {
+  .data-table th.mat-header-cell:nth-child(1),
+  .data-table td.mat-cell:nth-child(1) {
     width: 5% !important;
     min-width: 5% !important;
     max-width: 5% !important;
     flex: 0 0 5% !important;
+  }
+
+  // Additional specific column width overrides
+  .data-table th.mat-header-cell:nth-child(2),
+  .data-table td.mat-cell:nth-child(2) {
+    width: 10% !important;
+    min-width: 10% !important;
+    max-width: 10% !important;
+    flex: 0 0 10% !important;
   }
 
   .data-table th.mat-header-cell:nth-child(4),

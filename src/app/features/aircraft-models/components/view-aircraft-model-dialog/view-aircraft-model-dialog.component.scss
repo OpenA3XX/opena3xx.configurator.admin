@@ -6,80 +6,41 @@ mat-form-field {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-height: 80vh;
-  overflow: hidden;
+  // Removed max-height and overflow to let dialog wrapper handle scrolling
 
-  h1 {
-    padding: 16px 24px;
-    margin: 0;
-    font-size: 20px;
-    font-weight: 500;
-    color: #0360ec;
-    border-bottom: 1px solid var(--mat-sys-outline-variant, #e0e0e0);
-    flex-shrink: 0;
-  }
+  // Remove old header styling since wrapper handles it
+  // Remove old loading/error styling since wrapper handles it
 
-  > *:not(h1) {
-    flex: 1;
-    padding: 16px;
-  }
+      .details-content {
+      // Removed flex: 1 and overflow-y: auto to let dialog wrapper handle scrolling
+      padding: 16px;
 
-  .loading-container,
-  .error-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    text-align: center;
-    color: #666;
+      .section {
+        margin-bottom: 24px;
 
-    p {
-      margin: 16px 0;
-      font-size: 16px;
-    }
+        &:last-child {
+          margin-bottom: 0;
+        }
 
-    mat-icon {
-      font-size: 48px;
-      width: 48px;
-      height: 48px;
-      margin-bottom: 16px;
-    }
-  }
+        .section-title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 500;
+          font-size: 1.125rem;
+          color: #333;
+          margin: 0 0 16px 0;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #e0e0e0;
 
-  .details-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px;
-
-    mat-expansion-panel {
-      margin-bottom: 16px;
-
-      &:last-child {
-        margin-bottom: 0;
+          mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            color: #666;
+          }
+        }
       }
-
-      // Override global styles to remove individual scrolling
-      overflow: visible !important;
-
-      // Remove individual scrolling from expansion panels
-      ::ng-deep .mat-expansion-panel-body {
-        overflow: visible !important;
-        max-height: none !important;
-      }
-
-      // Ensure the expansion panel content doesn't scroll
-      ::ng-deep .mat-expansion-panel-content {
-        overflow: visible !important;
-      }
-
-      mat-panel-title {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 500;
-      }
-    }
 
     .details-grid {
       display: grid;
@@ -131,64 +92,47 @@ mat-form-field {
       }
     }
 
-    .dialog-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-      padding: 16px 0 0 0;
-      border-top: 1px solid var(--mat-sys-outline-variant, #e0e0e0);
-      margin-top: 16px;
-
-      button {
-        min-width: 100px;
-      }
-    }
+    // Remove dialog-actions styling since wrapper handles it
   }
 }
 
-// Dark theme support
-:host.dark-theme {
-  h1 {
-    color: #64b5f6;
-    border-bottom-color: #404040;
-  }
+// Dark theme support - using ::ng-deep to override view encapsulation
+::ng-deep body.dark-theme {
+  .dialog-wrapper {
+    .dialog-content {
+      .details-content {
+        .section .section-title {
+          color: rgba(255, 255, 255, 0.9) !important;
+          border-bottom-color: #404040 !important;
 
-  .details-content {
-    .details-grid .detail-item {
-      background: rgba(255, 255, 255, 0.02);
+          mat-icon {
+            color: rgba(255, 255, 255, 0.7) !important;
+          }
+        }
 
-      &:hover {
-        background: rgba(255, 255, 255, 0.04);
-      }
+        .details-grid .detail-item {
+          background: rgba(255, 255, 255, 0.02) !important;
 
-      .detail-label {
-        color: rgba(255, 255, 255, 0.7);
-      }
+          &:hover {
+            background: rgba(255, 255, 255, 0.04) !important;
+          }
 
-      .detail-value {
-        color: rgba(255, 255, 255, 0.9);
+          .detail-label {
+            color: rgba(255, 255, 255, 0.7) !important;
+          }
+
+          .detail-value {
+            color: rgba(255, 255, 255, 0.9) !important;
+          }
+        }
       }
     }
-
-    .dialog-actions {
-      border-top-color: #404040;
-    }
-  }
-
-  .loading-container,
-  .error-container {
-    color: rgba(255, 255, 255, 0.7);
   }
 }
 
 // Responsive design
 @media (max-width: 768px) {
   :host {
-    h1 {
-      font-size: 18px;
-      padding: 12px 16px;
-    }
-
     .details-content {
       padding: 12px;
 
@@ -203,15 +147,6 @@ mat-form-field {
           .detail-label {
             min-width: auto;
           }
-        }
-      }
-
-      .dialog-actions {
-        flex-direction: column;
-        gap: 8px;
-
-        button {
-          width: 100%;
         }
       }
     }

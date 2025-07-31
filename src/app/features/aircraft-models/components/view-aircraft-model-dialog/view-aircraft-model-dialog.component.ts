@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AircraftModelDto } from 'src/app/shared/models/models';
 import { AircraftModelService } from '../../services/aircraft-model.service';
+import { DialogWrapperConfig } from 'src/app/shared/components/ui/dialog-wrapper/dialog-wrapper.component';
 
 @Component({
   selector: 'opena3xx-view-aircraft-model-dialog',
@@ -14,6 +15,7 @@ export class ViewAircraftModelDialogComponent implements OnInit {
   aircraftModel: AircraftModelDto | null = null;
   loading = false;
   error = false;
+  wrapperConfig: DialogWrapperConfig;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { id: number },
@@ -29,10 +31,31 @@ export class ViewAircraftModelDialogComponent implements OnInit {
 
   ngOnInit(): void {
     try {
+      this.initializeWrapperConfig();
       this.loadAircraftModel();
     } catch (error) {
       console.error('Error in ngOnInit:', error);
       this.error = true;
+    }
+  }
+
+  initializeWrapperConfig(): void {
+    this.wrapperConfig = {
+      title: 'Aircraft Model Details',
+      subtitle: 'View detailed information about the aircraft model',
+      icon: 'flight',
+      size: 'large',
+      showCloseButton: true,
+      showFooter: true
+    };
+  }
+
+  updateWrapperConfig(): void {
+    if (this.aircraftModel) {
+      this.wrapperConfig = {
+        ...this.wrapperConfig,
+        title: `Aircraft Model Details - ${this.aircraftModel.name}`
+      };
     }
   }
 
@@ -43,6 +66,7 @@ export class ViewAircraftModelDialogComponent implements OnInit {
     this.aircraftModelService.getAircraftModelById(this.data.id).subscribe({
       next: (aircraftModel) => {
         this.aircraftModel = aircraftModel;
+        this.updateWrapperConfig();
         this.loading = false;
       },
       error: (error) => {

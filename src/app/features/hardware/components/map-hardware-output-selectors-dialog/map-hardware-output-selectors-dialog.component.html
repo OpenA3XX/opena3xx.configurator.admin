@@ -1,18 +1,30 @@
-<h1>Map {{ hardwareOutputSelector.name }} - {{ hardwareOutputSelector.hardwareOutputType }}</h1>
+<opena3xx-dialog-wrapper
+  [config]="wrapperConfig"
+  (close)="onClose()">
 
-<div class="expansion-panels-container">
-  <mat-expansion-panel
-    *ngFor="let a of hardwareOutputSelector.hardwareOutputSelectors; let index = index"
-  >
-    <mat-expansion-panel-header>
-      <mat-panel-title
-        >Hardware Output Selector mapping -
-        {{ hardwareOutputSelector.hardwareOutputSelectors[index].name }}</mat-panel-title
+  <div class="content-area">
+    <div class="expansion-panels-container">
+      <mat-expansion-panel
+        *ngFor="let a of hardwareOutputSelector.hardwareOutputSelectors; let index = index"
       >
-    </mat-expansion-panel-header>
-    <opena3xx-map-hardware-output-selectors-form
-      [hardwareOutputSelectorId]="hardwareOutputSelector.hardwareOutputSelectors[index].id"
-    >
-    </opena3xx-map-hardware-output-selectors-form>
-  </mat-expansion-panel>
-</div>
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            >Hardware Output Selector mapping -
+            {{ hardwareOutputSelector.hardwareOutputSelectors[index].name }}</mat-panel-title
+          >
+        </mat-expansion-panel-header>
+        <opena3xx-map-hardware-output-selectors-form
+          [hardwareOutputSelectorId]="hardwareOutputSelector.hardwareOutputSelectors[index].id"
+        >
+        </opena3xx-map-hardware-output-selectors-form>
+      </mat-expansion-panel>
+    </div>
+  </div>
+
+  <div dialog-actions>
+    <button mat-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+      Close
+    </button>
+  </div>
+</opena3xx-dialog-wrapper>

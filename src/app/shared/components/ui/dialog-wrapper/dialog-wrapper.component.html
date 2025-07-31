@@ -1,0 +1,52 @@
+<div class="dialog-wrapper"
+     [class]="'dialog-' + (config?.size || 'medium')"
+     [class]="config?.customClass">
+
+  <!-- Header -->
+  <div class="dialog-header" *ngIf="config?.title">
+    <div class="header-content">
+      <mat-icon *ngIf="config?.icon" class="header-icon">{{ config.icon }}</mat-icon>
+      <div class="header-text">
+        <h1 class="dialog-title">{{ config.title }}</h1>
+        <p *ngIf="config?.subtitle" class="dialog-subtitle">{{ config.subtitle }}</p>
+      </div>
+    </div>
+
+    <button *ngIf="config?.showCloseButton !== false"
+            mat-icon-button
+            class="close-button"
+            (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="showLoading" class="loading-overlay">
+    <div class="loading-content">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Loading...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="showError" class="error-overlay">
+    <div class="error-content">
+      <mat-icon color="warn">error</mat-icon>
+      <p>{{ errorMessage || 'An error occurred' }}</p>
+      <button mat-raised-button color="primary" (click)="onRetry()">
+        <mat-icon>refresh</mat-icon>
+        Retry
+      </button>
+    </div>
+  </div>
+
+  <!-- Content Area -->
+  <div class="dialog-content" [class.content-loading]="showLoading" [class.content-error]="showError">
+    <ng-content></ng-content>
+  </div>
+
+  <!-- Footer Actions (if provided) -->
+  <div class="dialog-footer" *ngIf="config?.showFooter">
+    <ng-content select="[dialog-actions]"></ng-content>
+  </div>
+</div>

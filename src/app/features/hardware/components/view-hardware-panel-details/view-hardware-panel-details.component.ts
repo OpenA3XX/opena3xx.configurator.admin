@@ -12,6 +12,7 @@ import { ViewHardwareOutputSelectorsDialogComponent } from '../view-hardware-out
 import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/shared/models/models';
 import { DataService } from 'src/app/core/services/data.service';
 import { DeleteHardwareInputDialogComponent } from '../delete-hardware-input-dialog/delete-hardware-input-dialog.component';
+import { PageHeaderAction } from 'src/app/shared/components/ui/page-header/page-header.component';
 
 @Component({
     selector: 'opena3xx-view-hardware-panel-details',
@@ -29,6 +30,7 @@ export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit,
 
   showHardwareInputs: boolean = false;
   showHardwareOutputs: boolean = false;
+  headerActions: PageHeaderAction[] = [];
 
   @ViewChild('inputSort') inputSort: MatSort;
   @ViewChild('outputSort') outputSort: MatSort;
@@ -55,7 +57,37 @@ export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit,
       console.log('Received Query Params', params);
       this.idParam = params['id'];
     });
+    this.initializeHeaderActions();
     this.fetchData();
+  }
+
+  private initializeHeaderActions(): void {
+    this.headerActions = [
+      {
+        label: 'Add Hardware Input',
+        icon: 'add',
+        color: 'primary',
+        onClick: () => {
+          // TODO: Implement add hardware input functionality
+          console.log('Add Hardware Input clicked');
+        }
+      },
+      {
+        label: 'Add Hardware Output',
+        icon: 'add',
+        color: 'primary',
+        onClick: () => {
+          // TODO: Implement add hardware output functionality
+          console.log('Add Hardware Output clicked');
+        }
+      },
+      {
+        label: 'Edit Hardware Panel Details',
+        icon: 'edit',
+        color: 'accent',
+        onClick: () => this.onEditHardwareDetails()
+      }
+    ];
   }
 
   ngAfterViewInit() {

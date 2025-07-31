@@ -1,11 +1,18 @@
-<h1 mat-dialog-title>{{ hardwareOutputSelector.name }}</h1>
-<div mat-dialog-content>
-  <opena3xx-data-table
-    [config]="tableConfig"
-    (event)="onTableEvent($event)">
-  </opena3xx-data-table>
-</div>
+<opena3xx-dialog-wrapper
+  [config]="wrapperConfig"
+  (close)="onClose()">
 
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
-</mat-dialog-actions>
+  <div class="content-area">
+    <opena3xx-data-table
+      [config]="tableConfig"
+      (event)="onTableEvent($event)">
+    </opena3xx-data-table>
+  </div>
+
+  <div dialog-actions>
+    <button mat-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+      Close
+    </button>
+  </div>
+</opena3xx-dialog-wrapper>

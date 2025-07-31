@@ -1,22 +1,34 @@
-<h1>Map {{ hardwareInputSelector.name }} - {{ hardwareInputSelector.hardwareInputType }}</h1>
+<opena3xx-dialog-wrapper
+  [config]="wrapperConfig"
+  (close)="onClose()">
 
-<div *ngIf="!hardwareInputSelector.hardwareInputSelectors || hardwareInputSelector.hardwareInputSelectors.length === 0" class="no-data">
-  <p>No hardware input selectors available for mapping.</p>
-</div>
+  <div class="content-area">
+    <div *ngIf="!hardwareInputSelector.hardwareInputSelectors || hardwareInputSelector.hardwareInputSelectors.length === 0" class="no-data">
+      <p>No hardware input selectors available for mapping.</p>
+    </div>
 
-<div class="expansion-panels-container">
-  <mat-expansion-panel
-    *ngFor="let a of hardwareInputSelector.hardwareInputSelectors; let index = index"
-  >
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Hardware Input Selector mapping -
-        {{ hardwareInputSelector.hardwareInputSelectors[index].name }}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <opena3xx-map-hardware-input-selectors-form
-      [hardwareInputSelectorId]="hardwareInputSelector.hardwareInputSelectors[index].id"
-    >
-    </opena3xx-map-hardware-input-selectors-form>
-  </mat-expansion-panel>
-</div>
+    <div class="expansion-panels-container">
+      <mat-expansion-panel
+        *ngFor="let a of hardwareInputSelector.hardwareInputSelectors; let index = index"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Hardware Input Selector mapping -
+            {{ hardwareInputSelector.hardwareInputSelectors[index].name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <opena3xx-map-hardware-input-selectors-form
+          [hardwareInputSelectorId]="hardwareInputSelector.hardwareInputSelectors[index].id"
+        >
+        </opena3xx-map-hardware-input-selectors-form>
+      </mat-expansion-panel>
+    </div>
+  </div>
+
+  <div dialog-actions>
+    <button mat-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+      Close
+    </button>
+  </div>
+</opena3xx-dialog-wrapper>

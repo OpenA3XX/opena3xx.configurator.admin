@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HardwareInputDto } from 'src/app/shared/models/models';
 import { DataTableConfig, TableColumnConfig, DataTableEvent } from 'src/app/shared/models/data-table.interface';
+import { DialogWrapperConfig } from 'src/app/shared/components/ui/dialog-wrapper/dialog-wrapper.component';
 
 @Component({
     selector: 'opena3xx-view-hardware-input-selectors-dialog',
@@ -12,11 +13,36 @@ import { DataTableConfig, TableColumnConfig, DataTableEvent } from 'src/app/shar
 export class ViewHardwareInputSelectorsDialogComponent {
   tableConfig: DataTableConfig;
   public hardwareInputSelector: any;
+  wrapperConfig: DialogWrapperConfig;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { data: HardwareInputDto }) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { data: HardwareInputDto },
+    private dialogRef: MatDialogRef<ViewHardwareInputSelectorsDialogComponent>
+  ) {
     this.hardwareInputSelector = data;
     console.log('Dialog Component', data);
+    this.initializeWrapperConfig();
     this.initializeTableConfig();
+  }
+
+  private initializeWrapperConfig(): void {
+    this.wrapperConfig = {
+      title: 'Hardware Input Selectors',
+      subtitle: 'View input selectors for this hardware input',
+      icon: 'input',
+      size: 'large',
+      showCloseButton: true,
+      showFooter: true
+    };
+  }
+
+  private updateWrapperConfig(): void {
+    if (this.hardwareInputSelector) {
+      this.wrapperConfig = {
+        ...this.wrapperConfig,
+        title: `Input Selectors - ${this.hardwareInputSelector.name}`
+      };
+    }
   }
 
   private initializeTableConfig(): void {
@@ -49,6 +75,8 @@ export class ViewHardwareInputSelectorsDialogComponent {
       rowHover: true,
       elevation: 0
     };
+
+    this.updateWrapperConfig();
   }
 
   onTableEvent(event: DataTableEvent): void {
@@ -71,5 +99,9 @@ export class ViewHardwareInputSelectorsDialogComponent {
         console.log('Sort changed:', event.data);
         break;
     }
+  }
+
+  onClose(): void {
+    this.dialogRef.close();
   }
 }

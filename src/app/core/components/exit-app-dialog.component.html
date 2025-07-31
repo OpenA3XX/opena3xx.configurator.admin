@@ -1,6 +1,21 @@
-<h1 mat-dialog-title>Confirmation</h1>
-<div mat-dialog-content>Are you sure you want to exit OpenA3XX Flight Deck App?</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="exit()">Yes</button>
-  <button mat-button mat-flat-button color="primary" mat-dialog-close>No</button>
-</div>
+<opena3xx-dialog-wrapper
+  [config]="wrapperConfig"
+  (close)="onCancel()">
+
+  <div class="content-area">
+    <div class="confirmation-message">
+      Are you sure you want to exit OpenA3XX Flight Deck App?
+    </div>
+  </div>
+
+  <div dialog-actions>
+    <button mat-button (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+      Cancel
+    </button>
+    <button mat-raised-button color="warn" (click)="exit()">
+      <mat-icon>exit_to_app</mat-icon>
+      Exit
+    </button>
+  </div>
+</opena3xx-dialog-wrapper>

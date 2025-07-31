@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as _ from 'lodash';
 import { DataService } from 'src/app/core/services/data.service';
 import { HardwareInputDto } from 'src/app/shared/models/models';
+import { DialogWrapperConfig } from 'src/app/shared/components/ui/dialog-wrapper/dialog-wrapper.component';
 
 interface FormData {
   identifier: number;
@@ -21,13 +22,36 @@ export class MapHardwareInputSelectorsDialogComponent {
   public hardwareInputSelector: any;
   public hardwareBoardSelectorFields: FieldConfig[] = [];
   dataLoaded: boolean = false;
+  wrapperConfig: DialogWrapperConfig;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { data: HardwareInputDto },
     private dataService: DataService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialogRef: MatDialogRef<MapHardwareInputSelectorsDialogComponent>
   ) {
     this.hardwareInputSelector = data;
+    this.initializeWrapperConfig();
+  }
+
+  private initializeWrapperConfig(): void {
+    this.wrapperConfig = {
+      title: 'Map Hardware Input Selectors',
+      subtitle: 'Configure mapping for hardware input selectors',
+      icon: 'link',
+      size: 'large',
+      showCloseButton: true,
+      showFooter: true
+    };
+  }
+
+  private updateWrapperConfig(): void {
+    if (this.hardwareInputSelector) {
+      this.wrapperConfig = {
+        ...this.wrapperConfig,
+        title: `Map ${this.hardwareInputSelector.name} - ${this.hardwareInputSelector.hardwareInputType}`
+      };
+    }
   }
 
   submit(formData: FormData) {
@@ -41,5 +65,9 @@ export class MapHardwareInputSelectorsDialogComponent {
         duration: 5000,
       }
     );
+  }
+
+  onClose(): void {
+    this.dialogRef.close();
   }
 }
