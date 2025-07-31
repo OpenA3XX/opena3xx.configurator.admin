@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../../material.module';
 import { SharedModule } from '../../shared/shared.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Hardware Services
 import { HardwarePanelService } from './services/hardware-panel.service';
@@ -14,7 +15,6 @@ import { HardwareOutputService } from './services/hardware-output.service';
 // Hardware Components
 import { AddHardwareInputTypeComponent } from './components/add-hardware-input-type/add-hardware-input-type.component';
 import { AddHardwareOutputTypeComponent } from './components/add-hardware-output-type/add-hardware-output-type.component';
-import { AddHardwarePanelComponent } from './components/add-hardware-panel/add-hardware-panel.component';
 import { EditHardwareInputTypeComponent } from './components/edit-hardware-input-type/edit-hardware-input-type.component';
 import { EditHardwareOutputTypeComponent } from './components/edit-hardware-output-type/edit-hardware-output-type.component';
 import { EditHardwarePanelComponent } from './components/edit-hardware-panel/edit-hardware-panel.component';
@@ -32,6 +32,7 @@ import { MapHardwareOutputSelectorsDialogComponent } from './components/map-hard
 import { ViewHardwareInputSelectorsDialogComponent } from './components/view-hardware-input-selectors-dialog/view-hardware-input-selectors-dialog.component';
 import { ViewHardwareOutputSelectorsDialogComponent } from './components/view-hardware-output-selectors-dialog/view-hardware-output-selectors-dialog.component';
 import { DeleteHardwareInputDialogComponent } from './components/delete-hardware-input-dialog/delete-hardware-input-dialog.component';
+import { AddHardwarePanelDialogComponent } from './components/add-hardware-panel-dialog/add-hardware-panel-dialog.component';
 
 // Hardware Form Components
 import { LinkHardwareInputSelectorsFormComponent } from './components/link-hardware-input-selectors-form/link-hardware-input-selectors-form.component';
@@ -45,7 +46,6 @@ import { DataService } from 'src/app/core/services/data.service';
   declarations: [
     AddHardwareInputTypeComponent,
     AddHardwareOutputTypeComponent,
-    AddHardwarePanelComponent,
     EditHardwareInputTypeComponent,
     EditHardwareOutputTypeComponent,
     EditHardwarePanelComponent,
@@ -63,6 +63,7 @@ import { DataService } from 'src/app/core/services/data.service';
     ViewHardwareInputSelectorsDialogComponent,
     ViewHardwareOutputSelectorsDialogComponent,
     DeleteHardwareInputDialogComponent,
+    AddHardwarePanelDialogComponent,
 
     // Hardware Form Components
     LinkHardwareInputSelectorsFormComponent,
@@ -76,12 +77,12 @@ import { DataService } from 'src/app/core/services/data.service';
     FormsModule,
     RouterModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule
   ],
   exports: [
     AddHardwareInputTypeComponent,
     AddHardwareOutputTypeComponent,
-    AddHardwarePanelComponent,
     EditHardwareInputTypeComponent,
     EditHardwareOutputTypeComponent,
     EditHardwarePanelComponent,
@@ -99,6 +100,7 @@ import { DataService } from 'src/app/core/services/data.service';
     ViewHardwareInputSelectorsDialogComponent,
     ViewHardwareOutputSelectorsDialogComponent,
     DeleteHardwareInputDialogComponent,
+    AddHardwarePanelDialogComponent,
 
     // Hardware Form Components
     LinkHardwareInputSelectorsFormComponent,

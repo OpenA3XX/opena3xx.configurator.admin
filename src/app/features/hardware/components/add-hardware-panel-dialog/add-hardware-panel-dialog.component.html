@@ -1,14 +1,5 @@
-<mat-toolbar>
-  <mat-icon>add_box</mat-icon>&nbsp;
-  <span>Add Hardware Panel</span>
-</mat-toolbar>
-<mat-toolbar>
-  <button mat-flat-button color="primary" (click)="back()">Back</button>
-</mat-toolbar>
-
-<div class="container">
+<opena3xx-dialog-wrapper [config]="wrapperConfig" (close)="onCancel()">
   <form [formGroup]="addHardwarePanelForm" (ngSubmit)="onSubmit()">
-
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{hardwarePanelNameFieldConfig.label}}</mat-label>
       <input matInput
@@ -23,8 +14,8 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{aircraftModelFieldConfig.label}}</mat-label>
-      <mat-select formControlName="aircraftModel">
-        <mat-option *ngFor="let option of aircraftModelFieldConfig.options" [value]="option.value">
+      <mat-select formControlName="aircraftModel" [disabled]="loadingAircraftModels">
+        <mat-option *ngFor="let option of aircraftModelFieldConfig.options" [value]="option.key">
           {{option.value}}
         </mat-option>
       </mat-select>
@@ -37,7 +28,7 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{cockpitAreaFieldConfig.label}}</mat-label>
       <mat-select formControlName="cockpitArea">
-        <mat-option *ngFor="let option of cockpitAreaFieldConfig.options" [value]="option.value">
+        <mat-option *ngFor="let option of cockpitAreaFieldConfig.options" [value]="option.key">
           {{option.value}}
         </mat-option>
       </mat-select>
@@ -50,7 +41,7 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{hardwarePanelOwnerFieldConfig.label}}</mat-label>
       <mat-select formControlName="hardwarePanelOwner">
-        <mat-option *ngFor="let option of hardwarePanelOwnerFieldConfig.options" [value]="option.value">
+        <mat-option *ngFor="let option of hardwarePanelOwnerFieldConfig.options" [value]="option.key">
           {{option.value}}
         </mat-option>
       </mat-select>
@@ -59,12 +50,13 @@
         Hardware Panel Owner is Required
       </mat-error>
     </mat-form-field>
-
-    <div class="button-container">
-      <button type="submit" mat-flat-button color="primary">
-        <mat-icon>save</mat-icon>
-        Save
-      </button>
-    </div>
   </form>
-</div>
+
+  <div dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="addHardwarePanelForm.invalid" (click)="onSubmit()">
+      <mat-icon>save</mat-icon>
+      Save
+    </button>
+  </div>
+</opena3xx-dialog-wrapper>

@@ -131,7 +131,7 @@
     .header-content {
       .header-title {
         .header-icon {
-          color: rgba(255, 255, 255, 0.7) !important;
+          color: var(--mat-primary-color, #1976d2);
         }
 
         .header-title-text {

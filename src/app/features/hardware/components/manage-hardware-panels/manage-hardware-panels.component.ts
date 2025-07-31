@@ -5,9 +5,11 @@ import {
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/core/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { HardwarePanelOverviewDto } from 'src/app/shared/models/models';
 import { DataTableConfig, TableColumnConfig, DataTableEvent } from 'src/app/shared/models/data-table.interface';
 import { PageHeaderAction } from 'src/app/shared/components/ui/page-header/page-header.component';
+import { AddHardwarePanelDialogComponent } from '../add-hardware-panel-dialog/add-hardware-panel-dialog.component';
 
 @Component({
     selector: 'opena3xx-manage-hardware-panels',
@@ -23,7 +25,8 @@ export class ManageHardwarePanelsComponent implements OnInit {
   constructor(
     private dataService: DataService,
     public router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -156,7 +159,28 @@ export class ManageHardwarePanelsComponent implements OnInit {
   }
 
   addHardwarePanel() {
-    this.router.navigateByUrl('/add/hardware-panel');
+    try {
+      console.log('Opening add hardware panel dialog');
+      const dialogRef = this.dialog.open(AddHardwarePanelDialogComponent, {
+        width: '600px',
+        maxHeight: '80vh',
+        disableClose: false
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result && result.action === 'added') {
+          this.loadData();
+          this._snackBar.open('Hardware panel added successfully', 'Close', {
+            duration: 2000
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error opening add hardware panel dialog:', error);
+      this._snackBar.open('Error opening hardware panel form', 'Close', {
+        duration: 3000
+      });
+    }
   }
 
   onTableEvent(event: DataTableEvent): void {

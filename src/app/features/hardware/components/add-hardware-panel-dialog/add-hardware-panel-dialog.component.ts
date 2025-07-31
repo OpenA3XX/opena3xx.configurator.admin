@@ -1,22 +1,27 @@
-
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from 'src/app/core/services/data.service';
 import { FieldConfig } from 'src/app/shared/models/field.interface';
+import { DialogWrapperConfig } from 'src/app/shared/components/ui/dialog-wrapper/dialog-wrapper.component';
+import { AircraftModelService } from 'src/app/features/aircraft-models/services/aircraft-model.service';
+import { AircraftModelDto } from 'src/app/shared/models/models';
 
 @Component({
-    selector: 'opena3xx-add-hardware-panel',
-    templateUrl: './add-hardware-panel.component.html',
-    styleUrls: ['./add-hardware-panel.component.scss'],
+    selector: 'opena3xx-add-hardware-panel-dialog',
+    templateUrl: './add-hardware-panel-dialog.component.html',
+    styleUrls: ['./add-hardware-panel-dialog.component.scss'],
     standalone: false
 })
-export class AddHardwarePanelComponent {
+export class AddHardwarePanelDialogComponent implements OnInit {
   addHardwarePanelForm: FormGroup;
+  wrapperConfig: DialogWrapperConfig;
+  aircraftModels: AircraftModelDto[] = [];
+  loadingAircraftModels = false;
 
-  // Your field configs remain the same
+  // Field configs remain the same
   public hardwarePanelNameFieldConfig: FieldConfig = {
     type: 'input',
     label: 'Hardware Panel Name',
@@ -94,7 +99,7 @@ export class AddHardwarePanelComponent {
       },
       {
         key: '1',
-        value: 'Co-Pilot',
+        value: 'CoPilot',
       },
       {
         key: '2',
@@ -112,56 +117,99 @@ export class AddHardwarePanelComponent {
   };
 
   constructor(
-    private router: Router,
+    private dialogRef: MatDialogRef<AddHardwarePanelDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private dataService: DataService,
+    private aircraftModelService: AircraftModelService,
   ) {
-    // ✅ Correct way to define FormControls in Angular 17
+    this.initializeForm();
+    this.initializeWrapperConfig();
+  }
+
+  private initializeForm(): void {
     this.addHardwarePanelForm = this.formBuilder.group({
       hardwarePanelName: ['', [Validators.required]],
       aircraftModel: ['', [Validators.required]],
       cockpitArea: ['', [Validators.required]],
       hardwarePanelOwner: ['', [Validators.required]],
     });
-
-    // Alternative syntax if you need updateOn strategy:
-    // this.addHardwarePanelForm = this.formBuilder.group({
-    //   hardwarePanelName: this.formBuilder.control('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    //   aircraftModel: this.formBuilder.control('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    //   cockpitArea: this.formBuilder.control('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    //   hardwarePanelOwner: this.formBuilder.control('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    // });
   }
 
-  back() {
-    this.router.navigateByUrl('/manage/hardware-panels');
+  private initializeWrapperConfig(): void {
+    this.wrapperConfig = {
+      title: 'Add Hardware Panel',
+      subtitle: 'Create a new hardware panel configuration',
+      icon: 'add_box',
+      size: 'medium',
+      showCloseButton: true,
+      showFooter: true
+    };
   }
 
-  onSave() {}
+  ngOnInit(): void {
+    this.loadAircraftModels();
+  }
 
-  onSubmit() {
+  private loadAircraftModels(): void {
+    this.loadingAircraftModels = true;
+
+    this.aircraftModelService.getAllAircraftModels().subscribe({
+      next: (aircraftModels) => {
+        this.aircraftModels = aircraftModels;
+        this.updateAircraftModelFieldConfig();
+        this.loadingAircraftModels = false;
+      },
+      error: (error) => {
+        console.error('Error loading aircraft models:', error);
+        this.loadingAircraftModels = false;
+        this.snackBar.open('Error loading aircraft models', 'Close', {
+          duration: 3000
+        });
+      }
+    });
+  }
+
+  private updateAircraftModelFieldConfig(): void {
+    this.aircraftModelFieldConfig = {
+      ...this.aircraftModelFieldConfig,
+      options: this.aircraftModels.map(model => ({
+        key: model.id.toString(),
+        value: `${model.name} - ${model.manufacturer}`
+      }))
+    };
+  }
+
+  onCancel(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmit(): void {
     if (this.addHardwarePanelForm.valid) {
-              firstValueFrom(this.dataService
-          .addHardwarePanel(this.addHardwarePanelForm.value))
-          .then(() => {
+      // Convert form values to match backend expectations
+      const formData = {
+        ...this.addHardwarePanelForm.value,
+        aircraftModel: parseInt(this.addHardwarePanelForm.value.aircraftModel, 10),
+        cockpitArea: parseInt(this.addHardwarePanelForm.value.cockpitArea, 10),
+        hardwarePanelOwner: parseInt(this.addHardwarePanelForm.value.hardwarePanelOwner, 10)
+      };
+
+      // Validate that all required numeric fields are valid numbers
+      if (isNaN(formData.aircraftModel) || isNaN(formData.cockpitArea) || isNaN(formData.hardwarePanelOwner)) {
+        this.snackBar.open('Please fill in all required fields with valid values', 'Ok', {
+          duration: 3000,
+        });
+        return;
+      }
+
+      firstValueFrom(this.dataService.addHardwarePanel(formData))
+        .then(() => {
           this.snackBar.open('Hardware Panel Added Successfully', 'Ok', {
             duration: 3000,
           });
-          // Navigate back after successful save
-          this.back();
+          // Close dialog with success result
+          this.dialogRef.close({ action: 'added', data: formData });
         })
         .catch((error) => {
           console.error('Error adding hardware panel:', error);
@@ -174,7 +222,7 @@ export class AddHardwarePanelComponent {
     }
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
       control?.markAsTouched({ onlySelf: true });

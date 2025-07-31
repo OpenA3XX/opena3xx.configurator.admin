@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 // Hardware Components
 import { AddHardwareInputTypeComponent } from './features/hardware/components/add-hardware-input-type/add-hardware-input-type.component';
 import { AddHardwareOutputTypeComponent } from './features/hardware/components/add-hardware-output-type/add-hardware-output-type.component';
-import { AddHardwarePanelComponent } from './features/hardware/components/add-hardware-panel/add-hardware-panel.component';
+
 import { EditHardwareInputTypeComponent } from './features/hardware/components/edit-hardware-input-type/edit-hardware-input-type.component';
 import { EditHardwareOutputTypeComponent } from './features/hardware/components/edit-hardware-output-type/edit-hardware-output-type.component';
 import { EditHardwarePanelComponent } from './features/hardware/components/edit-hardware-panel/edit-hardware-panel.component';
@@ -48,10 +48,7 @@ const routes: Routes = [
     path: 'manage/hardware-panels',
     component: ManageHardwarePanelsComponent,
   },
-  {
-    path: 'add/hardware-panel',
-    component: AddHardwarePanelComponent,
-  },
+
   {
     path: 'edit/hardware-panel',
     component: EditHardwarePanelComponent,

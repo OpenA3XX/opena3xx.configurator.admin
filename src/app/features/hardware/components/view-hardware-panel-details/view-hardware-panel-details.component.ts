@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -13,6 +13,8 @@ import { HardwareInputDto, HardwareOutputDto, HardwarePanelDto } from 'src/app/s
 import { DataService } from 'src/app/core/services/data.service';
 import { DeleteHardwareInputDialogComponent } from '../delete-hardware-input-dialog/delete-hardware-input-dialog.component';
 import { PageHeaderAction } from 'src/app/shared/components/ui/page-header/page-header.component';
+import { ThemeService } from 'src/app/core/services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'opena3xx-view-hardware-panel-details',
@@ -32,14 +34,23 @@ export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit,
   showHardwareOutputs: boolean = false;
   headerActions: PageHeaderAction[] = [];
 
+  // Theme support
+  isDarkMode: boolean = false;
+  private themeSubscription: Subscription = new Subscription();
+
   @ViewChild('inputSort') inputSort: MatSort;
   @ViewChild('outputSort') outputSort: MatSort;
+
+  @HostBinding('class.dark-theme') get darkThemeClass() {
+    return this.isDarkMode;
+  }
 
   constructor(
     private dataService: DataService,
     private router: Router,
     public viewHardwareInputOutputSelectorsDialog: MatDialog,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private themeService: ThemeService
   ) {}
 
   ngOnDestroy(): void {
@@ -50,6 +61,11 @@ export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit,
     if (this.outputsDataSource) {
       this.outputsDataSource.disconnect();
     }
+
+    // Clean up theme subscription
+    if (this.themeSubscription) {
+      this.themeSubscription.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
@@ -59,6 +75,13 @@ export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit,
     });
     this.initializeHeaderActions();
     this.fetchData();
+
+    // Subscribe to theme changes
+    if (this.themeService) {
+      this.themeSubscription = this.themeService.isDarkMode$.subscribe(isDark => {
+        this.isDarkMode = isDark;
+      });
+    }
   }
 
   private initializeHeaderActions(): void {
@@ -181,6 +204,12 @@ export class ViewHardwarePanelDetailsComponent implements OnInit, AfterViewInit,
       data: data,
       width: '900px',
     });
+  }
+
+  linkOutputSelector(data: HardwareInputDto) {
+    // TODO: Implement link output selector functionality
+    console.log('Link Output Selector clicked for:', data);
+    // This would typically open a dialog similar to linkInputSelector
   }
 
   deleteHardwareInput(hardwareInput: HardwareInputDto) {

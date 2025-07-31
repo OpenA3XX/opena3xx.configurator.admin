@@ -163,8 +163,8 @@
               (click)="mapInputSelector(input)"
               *ngIf="input.hardwareInputSelectors[0].isHardwareInputSelectorMappedWithHardware === true"
               mat-raised-button
-              color="accent"
-              class="action-button">
+              color="warn"
+              class="action-button edit-button">
               <mat-icon>link</mat-icon>
               Edit Map
             </button>
@@ -172,8 +172,8 @@
               (click)="linkInputSelector(input)"
               *ngIf="input.hardwareInputSelectors[0].simulatorEventDto !== null"
               mat-raised-button
-              color="accent"
-              class="action-button">
+              color="warn"
+              class="action-button edit-button">
               <mat-icon>laptop</mat-icon>
               Edit Link
             </button>
@@ -259,6 +259,7 @@
             </button>
             <button
               (click)="mapOutputSelector(output)"
+              *ngIf="output.hardwareOutputSelectors[0]?.isHardwareOutputSelectorMappedWithHardware === false"
               mat-raised-button
               color="primary"
               class="action-button">
@@ -267,6 +268,25 @@
             </button>
             <button
               (click)="mapOutputSelector(output)"
+              *ngIf="output.hardwareOutputSelectors[0]?.isHardwareOutputSelectorMappedWithHardware === true"
+              mat-raised-button
+              color="warn"
+              class="action-button edit-button">
+              <mat-icon>link</mat-icon>
+              Edit Map
+            </button>
+            <button
+              (click)="linkOutputSelector(output)"
+              *ngIf="output.hardwareOutputSelectors[0]?.simulatorEventDto !== null"
+              mat-raised-button
+              color="warn"
+              class="action-button edit-button">
+              <mat-icon>laptop</mat-icon>
+              Edit Link
+            </button>
+            <button
+              (click)="linkOutputSelector(output)"
+              *ngIf="output.hardwareOutputSelectors[0]?.simulatorEventDto === null"
               mat-raised-button
               color="primary"
               class="action-button">
