@@ -1,72 +1,25 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-height: 80vh;
-  overflow: hidden;
+.content-area {
+  padding: 0;
 }
 
-h1 {
-  padding: 16px 24px;
-  margin: 0 0 24px 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: #1976d2;
-  border-bottom: 2px solid #e3f2fd;
-  padding-bottom: 12px;
-}
+.form-section {
+  margin-bottom: 24px;
 
-.loading-container,
-.error-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  text-align: center;
-
-  p {
-    margin: 16px 0 0 0;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 16px;
-  }
-
-  button {
-    margin-top: 16px;
-  }
-}
-
-.error-container {
-  mat-icon {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
-    margin-bottom: 16px;
-  }
-}
-
-.add-form {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 8px;
-
-  form {
+  .section-title {
     display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1976d2;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e3f2fd;
 
-  mat-expansion-panel {
-    margin-bottom: 24px;
-    padding: 16px 24px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-    ::ng-deep .mat-expansion-panel-body {
-      padding: 24px;
-    }
-
-    ::ng-deep .mat-expansion-panel-content {
-      overflow: visible;
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
     }
   }
 
@@ -111,94 +64,22 @@ h1 {
       }
     }
   }
-
-  .dialog-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: auto;
-    padding-top: 24px;
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
-
-    button {
-      min-width: 120px;
-
-      mat-spinner {
-        margin-right: 8px;
-      }
-    }
-  }
 }
 
-// Dark theme support
-:host.dark-theme {
-  h1 {
-    color: #90caf9;
-    border-bottom-color: #1e3a5f;
-  }
-
-  .loading-container,
-  .error-container {
-    p {
-      color: rgba(255, 255, 255, 0.7);
+// Dark theme support for form elements
+::ng-deep body.dark-theme {
+  .form-section {
+    .section-title {
+      color: rgba(255, 255, 255, 0.9) !important;
+      border-bottom-color: #404040 !important;
     }
-  }
 
-  .add-form {
     .form-fields {
       .toggle-field {
         .toggle-description {
-          color: rgba(255, 255, 255, 0.7);
+          color: rgba(255, 255, 255, 0.7) !important;
         }
       }
-    }
-
-    .dialog-actions {
-      border-top-color: rgba(255, 255, 255, 0.12);
-    }
-  }
-}
-
-// Responsive design
-@media (max-width: 768px) {
-  h1 {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  .add-form {
-    .form-fields {
-      gap: 16px;
-    }
-
-    .dialog-actions {
-      flex-direction: column;
-      gap: 8px;
-
-      button {
-        width: 100%;
-      }
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 18px;
-    margin-bottom: 16px;
-  }
-
-  .add-form {
-    padding-right: 4px;
-
-    mat-expansion-panel {
-      ::ng-deep .mat-expansion-panel-body {
-        padding: 16px;
-      }
-    }
-
-    .form-fields {
-      gap: 12px;
     }
   }
 }

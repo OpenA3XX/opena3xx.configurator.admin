@@ -15,6 +15,7 @@ import { ManageAircraftModelsComponent } from './components/manage-aircraft-mode
 import { ViewAircraftModelDialogComponent } from './components/view-aircraft-model-dialog/view-aircraft-model-dialog.component';
 import { EditAircraftModelDialogComponent } from './components/edit-aircraft-model-dialog/edit-aircraft-model-dialog.component';
 import { AddAircraftModelDialogComponent } from './components/add-aircraft-model-dialog/add-aircraft-model-dialog.component';
+import { DeleteAircraftModelDialogComponent } from './components/delete-aircraft-model-dialog/delete-aircraft-model-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddAircraftModelDialogComponent } from './components/add-aircraft-model
     // Aircraft Models Dialog Components
     ViewAircraftModelDialogComponent,
     EditAircraftModelDialogComponent,
-    AddAircraftModelDialogComponent
+    AddAircraftModelDialogComponent,
+    DeleteAircraftModelDialogComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { AddAircraftModelDialogComponent } from './components/add-aircraft-model
     // Aircraft Models Dialog Components
     ViewAircraftModelDialogComponent,
     EditAircraftModelDialogComponent,
-    AddAircraftModelDialogComponent
+    AddAircraftModelDialogComponent,
+    DeleteAircraftModelDialogComponent
   ],
   providers: [
     AircraftModelService

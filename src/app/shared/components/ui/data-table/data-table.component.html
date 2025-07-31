@@ -91,6 +91,7 @@
       <mat-paginator
         *ngIf="config.paginationEnabled !== false"
         [pageSizeOptions]="config.pageSizeOptions || [5, 10, 25, 100]"
+        [pageSize]="config.pageSize || 10"
         aria-label="Select page">
       </mat-paginator>
 

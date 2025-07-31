@@ -1,82 +1,75 @@
-<h1>Add Aircraft Model</h1>
+<opena3xx-dialog-wrapper
+  [config]="wrapperConfig"
+  [showLoading]="loading"
+  [showError]="error"
+  (close)="onCancel()">
 
-<div *ngIf="loading" class="loading-container">
-  <mat-spinner diameter="50"></mat-spinner>
-  <p>Adding aircraft model...</p>
-</div>
-
-<div *ngIf="error" class="error-container">
-  <mat-icon color="warn">error</mat-icon>
-  <p>Error adding aircraft model</p>
-  <button mat-raised-button color="primary" (click)="onSubmit()">
-    <mat-icon>refresh</mat-icon>
-    Retry
-  </button>
-</div>
-
-<div *ngIf="!loading && !error" class="add-form">
-  <form [formGroup]="aircraftModelForm" (ngSubmit)="onSubmit()">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
+  <div class="content-area" *ngIf="!loading && !error">
+    <form [formGroup]="aircraftModelForm" (ngSubmit)="onSubmit()">
+      <div class="form-section">
+        <h3 class="section-title">
           <mat-icon>flight</mat-icon>
           Basic Information
-        </mat-panel-title>
-      </mat-expansion-panel-header>
+        </h3>
 
-      <div class="form-fields">
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Name *</mat-label>
-          <input matInput formControlName="name" placeholder="e.g., Boeing 737-800">
-          <mat-error *ngIf="isFieldInvalid('name')">
-            {{ getErrorMessage('name') }}
-          </mat-error>
-        </mat-form-field>
+        <div class="form-fields">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Name *</mat-label>
+            <input matInput formControlName="name" placeholder="e.g., Boeing 737-800">
+            <mat-error *ngIf="isFieldInvalid('name')">
+              {{ getErrorMessage('name') }}
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Manufacturer *</mat-label>
-          <input matInput formControlName="manufacturer" placeholder="e.g., Boeing">
-          <mat-error *ngIf="isFieldInvalid('manufacturer')">
-            {{ getErrorMessage('manufacturer') }}
-          </mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Manufacturer *</mat-label>
+            <input matInput formControlName="manufacturer" placeholder="e.g., Boeing">
+            <mat-error *ngIf="isFieldInvalid('manufacturer')">
+              {{ getErrorMessage('manufacturer') }}
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Type *</mat-label>
-          <input matInput formControlName="type" placeholder="e.g., Commercial Airliner">
-          <mat-error *ngIf="isFieldInvalid('type')">
-            {{ getErrorMessage('type') }}
-          </mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Type *</mat-label>
+            <input matInput formControlName="type" placeholder="e.g., Commercial Airliner">
+            <mat-error *ngIf="isFieldInvalid('type')">
+              {{ getErrorMessage('type') }}
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" rows="3"
-                    placeholder="Optional description of the aircraft model"></textarea>
-          <mat-error *ngIf="isFieldInvalid('description')">
-            {{ getErrorMessage('description') }}
-          </mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows="3"
+                      placeholder="Optional description of the aircraft model"></textarea>
+            <mat-error *ngIf="isFieldInvalid('description')">
+              {{ getErrorMessage('description') }}
+            </mat-error>
+          </mat-form-field>
 
-        <div class="toggle-field">
-          <mat-slide-toggle formControlName="isActive" color="primary">
-            Active
-          </mat-slide-toggle>
-          <span class="toggle-description">
-            Set whether this aircraft model is active and available for use
-          </span>
+          <div class="toggle-field">
+            <mat-slide-toggle formControlName="isActive" color="primary">
+              Active
+            </mat-slide-toggle>
+            <span class="toggle-description">
+              Set whether this aircraft model is active and available for use
+            </span>
+          </div>
         </div>
       </div>
-    </mat-expansion-panel>
+    </form>
+  </div>
 
-    <div class="dialog-actions">
-      <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
-        Cancel
-      </button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="loading || aircraftModelForm.invalid">
-        <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
-        <span *ngIf="!loading">Add Aircraft Model</span>
-      </button>
-    </div>
-  </form>
-</div>
+  <div dialog-actions>
+    <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
+      <mat-icon>close</mat-icon>
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" type="submit"
+            [disabled]="loading || aircraftModelForm.invalid"
+            (click)="onSubmit()">
+      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+      <mat-icon *ngIf="!loading">add</mat-icon>
+      <span *ngIf="!loading">Add Aircraft Model</span>
+    </button>
+  </div>
+</opena3xx-dialog-wrapper>

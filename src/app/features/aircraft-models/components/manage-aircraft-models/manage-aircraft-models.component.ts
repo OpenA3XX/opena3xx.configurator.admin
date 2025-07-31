@@ -7,6 +7,7 @@ import { AircraftModelService } from '../../services/aircraft-model.service';
 import { ViewAircraftModelDialogComponent } from '../view-aircraft-model-dialog/view-aircraft-model-dialog.component';
 import { EditAircraftModelDialogComponent } from '../edit-aircraft-model-dialog/edit-aircraft-model-dialog.component';
 import { AddAircraftModelDialogComponent } from '../add-aircraft-model-dialog/add-aircraft-model-dialog.component';
+import { DeleteAircraftModelDialogComponent } from '../delete-aircraft-model-dialog/delete-aircraft-model-dialog.component';
 import { DataTableConfig, TableColumnConfig, TableAction, DataTableEvent } from 'src/app/shared/models/data-table.interface';
 import { PageHeaderAction } from 'src/app/shared/components/ui/page-header/page-header.component';
 
@@ -248,21 +249,48 @@ export class ManageAircraftModelsComponent implements OnInit {
   }
 
   onDeleteAircraftModel(id: number): void {
-    // TODO: Add confirmation dialog
-    this.aircraftModelService.deleteAircraftModel(id).subscribe({
-      next: () => {
-        this.snackBar.open('Aircraft model deleted successfully', 'Close', {
-          duration: 2000
-        });
-        this.loadAircraftModels(); // Reload the data
-      },
-      error: (error) => {
-        console.error('Error deleting aircraft model:', error);
-        this.snackBar.open('Error deleting aircraft model', 'Close', {
+    try {
+      // Find the aircraft model to get its name for the dialog
+      const aircraftModel = this.tableConfig.data.find(model => model.id === id);
+      if (!aircraftModel) {
+        this.snackBar.open('Aircraft model not found', 'Close', {
           duration: 3000
         });
+        return;
       }
-    });
+
+      console.log('Opening delete dialog for aircraft model:', aircraftModel);
+      const dialogRef = this.dialog.open(DeleteAircraftModelDialogComponent, {
+        width: '500px',
+        disableClose: false
+      });
+      dialogRef.componentInstance.aircraftModel = aircraftModel;
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === true) {
+          // User confirmed deletion
+          this.aircraftModelService.deleteAircraftModel(id).subscribe({
+            next: () => {
+              this.snackBar.open('Aircraft model deleted successfully', 'Close', {
+                duration: 2000
+              });
+              this.loadAircraftModels(); // Reload the data
+            },
+            error: (error) => {
+              console.error('Error deleting aircraft model:', error);
+              this.snackBar.open('Error deleting aircraft model', 'Close', {
+                duration: 3000
+              });
+            }
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error opening delete dialog:', error);
+      this.snackBar.open('Error opening delete confirmation', 'Close', {
+        duration: 3000
+      });
+    }
   }
 
   getStatusIcon(isActive: boolean): string {

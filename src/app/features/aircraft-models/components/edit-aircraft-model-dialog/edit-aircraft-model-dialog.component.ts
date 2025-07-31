@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AircraftModelDto, UpdateAircraftModelDto } from 'src/app/shared/models/models';
 import { AircraftModelService } from '../../services/aircraft-model.service';
+import { DialogWrapperConfig } from 'src/app/shared/components/ui/dialog-wrapper/dialog-wrapper.component';
 
 @Component({
   selector: 'opena3xx-edit-aircraft-model-dialog',
@@ -16,6 +17,7 @@ export class EditAircraftModelDialogComponent implements OnInit {
   aircraftModelForm: FormGroup;
   loading = false;
   error = false;
+  wrapperConfig: DialogWrapperConfig;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { id: number },
@@ -28,6 +30,7 @@ export class EditAircraftModelDialogComponent implements OnInit {
       console.error('Invalid dialog data provided');
       this.dialogRef.close();
     }
+    this.initializeWrapperConfig();
     this.aircraftModelForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       manufacturer: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -46,6 +49,26 @@ export class EditAircraftModelDialogComponent implements OnInit {
     }
   }
 
+  private initializeWrapperConfig(): void {
+    this.wrapperConfig = {
+      title: 'Edit Aircraft Model',
+      subtitle: 'Update aircraft model information',
+      icon: 'edit',
+      size: 'large',
+      showCloseButton: true,
+      showFooter: true
+    };
+  }
+
+  private updateWrapperConfig(): void {
+    if (this.aircraftModel) {
+      this.wrapperConfig = {
+        ...this.wrapperConfig,
+        title: `Edit Aircraft Model - ${this.aircraftModel.name}`
+      };
+    }
+  }
+
   loadAircraftModel(): void {
     this.loading = true;
     this.error = false;
@@ -60,6 +83,7 @@ export class EditAircraftModelDialogComponent implements OnInit {
           description: aircraftModel.description || '',
           isActive: aircraftModel.isActive
         });
+        this.updateWrapperConfig();
         this.loading = false;
       },
       error: (error) => {

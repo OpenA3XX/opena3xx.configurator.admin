@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AircraftModelService } from '../../services/aircraft-model.service';
 import { AddAircraftModelDto } from 'src/app/shared/models/models';
+import { DialogWrapperConfig } from 'src/app/shared/components/ui/dialog-wrapper/dialog-wrapper.component';
 
 @Component({
   selector: 'opena3xx-add-aircraft-model-dialog',
@@ -15,6 +16,7 @@ export class AddAircraftModelDialogComponent implements OnInit {
   aircraftModelForm: FormGroup;
   loading = false;
   error = false;
+  wrapperConfig: DialogWrapperConfig;
 
   constructor(
     private aircraftModelService: AircraftModelService,
@@ -32,18 +34,54 @@ export class AddAircraftModelDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Component initialized - no additional setup required
+    this.initializeWrapperConfig();
+  }
+
+  private initializeWrapperConfig(): void {
+    this.wrapperConfig = {
+      title: 'Add Aircraft Model',
+      subtitle: 'Create a new aircraft model configuration',
+      icon: 'flight',
+      size: 'medium',
+      showCloseButton: true,
+      showFooter: true
+    };
+  }
+
+  private updateWrapperConfig(): void {
+    if (this.loading) {
+      this.wrapperConfig = {
+        ...this.wrapperConfig,
+        title: 'Adding Aircraft Model...',
+        subtitle: 'Please wait while we create the aircraft model'
+      };
+    } else if (this.error) {
+      this.wrapperConfig = {
+        ...this.wrapperConfig,
+        title: 'Error Adding Aircraft Model',
+        subtitle: 'There was an error creating the aircraft model'
+      };
+    } else {
+      this.wrapperConfig = {
+        ...this.wrapperConfig,
+        title: 'Add Aircraft Model',
+        subtitle: 'Create a new aircraft model configuration'
+      };
+    }
   }
 
   onSubmit(): void {
     if (this.aircraftModelForm.valid) {
       this.loading = true;
       this.error = false;
+      this.updateWrapperConfig();
       const aircraftModel: AddAircraftModelDto = this.aircraftModelForm.value;
 
       this.aircraftModelService.addAircraftModel(aircraftModel).subscribe({
         next: (result) => {
           this.loading = false;
+          this.error = false;
+          this.updateWrapperConfig();
           this.snackBar.open('Aircraft model added successfully', 'Close', {
             duration: 3000
           });
@@ -52,6 +90,7 @@ export class AddAircraftModelDialogComponent implements OnInit {
         error: (error) => {
           this.loading = false;
           this.error = true;
+          this.updateWrapperConfig();
           console.error('Error adding aircraft model:', error);
           this.snackBar.open('Error adding aircraft model', 'Close', {
             duration: 3000

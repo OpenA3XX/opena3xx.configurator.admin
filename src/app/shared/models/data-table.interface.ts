@@ -36,6 +36,7 @@ export interface DataTableConfig {
   searchEnabled?: boolean;
   paginationEnabled?: boolean;
   pageSizeOptions?: number[];
+  pageSize?: number;
   sortEnabled?: boolean;
   rowHover?: boolean;
   elevation?: number;
