@@ -2,6 +2,21 @@
 
 A modern, enterprise-ready Angular 17 application for configuring and managing OpenA3XX hardware panels, simulator events, and real-time monitoring.
 
+
+## 🤝 Support the Project
+
+If you find this project helpful and would like to support its development, consider sponsoring us:
+
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor%20on%20GitHub-red?style=for-the-badge&logo=github)](https://github.com/sponsors/OpenA3XX)
+
+Or support us through other platforms:
+- [Buy Me a Coffee](https://www.buymeacoffee.com/opena3xx)
+- [Patreon](https://www.patreon.com/opena3xx)
+
+Your support helps us maintain and improve this project! ❤️
+
+
+
 ## 📋 Table of Contents
 
 - [Features](#features)
